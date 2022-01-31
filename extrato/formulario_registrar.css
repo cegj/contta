@@ -1,0 +1,15 @@
+#caixa-registrar{
+  background-color: #ffeeec;
+}
+
+.container-edicao-parcelas {
+}
+
+.container-edicao-parcelas {
+  grid-column: 1 / 3;
+}
+
+#valor {
+  background-color: #ad2f1b;
+  color: #fff;
+}

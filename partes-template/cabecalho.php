@@ -1,0 +1,1 @@
+<img class="logo" height="80px" src="/img/controlesimples_logo.png"/>

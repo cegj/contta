@@ -1,0 +1,18 @@
+#limpar-selecao {
+  display: none;
+  cursor: pointer;
+}
+
+.container-exibir::before {
+  content:"";
+  background-image: url(/img/icos/mostrar.svg);
+  background-repeat: no-repeat;
+  background-size:contain;
+  background-position: center;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  margin-left: 10px;
+  position: relative;
+  top: 2px;
+}

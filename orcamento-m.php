@@ -1,0 +1,389 @@
+<script>
+  if (screen.width > 640) {
+    window.location.href = '/orcamento.php';
+  }
+</script>
+
+<?php include('partes-template/includesiniciais.php'); ?>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Informações do head -->
+  <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/head.php'); ?>
+  <link rel="stylesheet" href="/orcamento/orcamento.css">
+</head>
+
+<body>
+
+  <?php //Valida se o usuário está logado
+  if (isset($login_cookie)) : ?>
+
+    <!-- Cabeçalho -->
+    <header>
+      <?php include('partes-template/cabecalho.php') ?>
+      <!-- Menu principal -->
+      <?php include('partes-template/menu.php') ?>
+      <link rel="stylesheet" href="/css/orcamento.css">
+    </header>
+
+    <main class="orcamento-container">
+
+      <?php
+
+      if (isset($_POST['campo-categoria']) && isset($_POST['campo-mes']) && isset($_POST['campo-valor'])) {
+        $catEmEdicao = $_POST['campo-categoria'];
+        $mesEmEdicao = $_POST['campo-mes'];
+        $novoValor = $_POST['campo-valor'];
+
+        alterar_valor_orcamento($bdConexao, $catEmEdicao, $mesEmEdicao, $novoValor);
+      }
+
+      ?>
+
+      <script type="text/javascript">
+        var ultimaIdEditada;
+
+        function abrirEdicao(id) {
+
+          if (ultimaIdEditada != undefined) {
+            ultimaIdEditada.classList.remove('em-edicao');
+          }
+
+          var idEmEdicao = document.getElementById(id);
+          var idArray = id.split('/');
+          var categoriaId = idArray[0];
+          var categoriaNome = document.getElementById(categoriaId).innerText;;
+          var mes = idArray[1];
+          var valorString = document.getElementById(id).innerText;
+          var valor = valorString.replace(/\./g, "");
+
+          var valorExecutado = document.getElementById(id+"-executado").innerText;
+          var campoValorExecutado = document.getElementById('campo-valor-executado');
+
+          var formAlteracao = document.getElementById('form-alteracao');
+          var campoCategoria = document.getElementById('campo-categoria');
+          var campoMes = document.getElementById('campo-mes');
+          var campoValor = document.getElementById('campo-valor');
+          var botaoCancelar = document.getElementById('botao-cancelar');
+          var containerFormAlteracao = document.getElementById('container-alteracao-orcamento');
+
+          formAlteracao.setAttribute("action", "#" + id);
+          campoCategoria.value = categoriaId;
+          campoMes.value = mes;
+          campoValorExecutado.value = valorExecutado;
+          campoValor.value = valor;
+          formAlteracao.style.display = "inline-block";
+          botaoCancelar.style.display = "inline-block";
+
+          document.getElementById('nome-cat-label').innerText = categoriaNome;
+          document.getElementById('mes-label').innerText = mes;
+          containerFormAlteracao.style.display = "block";
+          idEmEdicao.classList.add('em-edicao');
+
+          ultimaIdEditada = idEmEdicao;
+
+          campoValor.focus();
+        }
+
+        function fecharEdicao() {
+          var formAlteracao = document.getElementById('form-alteracao');
+          var botaoCancelar = document.getElementById('botao-cancelar');
+          var containerFormAlteracao = document.getElementById('container-alteracao-orcamento');
+
+          containerFormAlteracao.style.display = "none";
+
+          if (ultimaIdEditada != undefined) {
+            ultimaIdEditada.classList.remove('em-edicao');
+          }
+
+        }
+
+        function copiarValorExecutado(){
+          var campoValor = document.getElementById('campo-valor');
+          var valorExecutadoString = document.getElementById('campo-valor-executado').value;
+          var valorExecutado = valorExecutadoString.replace(/\./g, "");
+
+          campoValor.value = valorExecutado;
+        }
+      </script>
+
+      <!-- Formulário do ano -->
+      <div class="container-form-mes-ano">
+        <!-- Formulário de definição de mês e ano -->
+        <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/form_mes_ano.php'); ?>
+      </div>
+
+      <div class="botao-menu-secundario" id="container-alteracao-orcamento">
+        <form style="display:none" class="form-alteracao-orcamento" id="form-alteracao" method="POST">
+          <input style='display: none' type="number" id="campo-categoria" name="campo-categoria" readonly />
+          <input style='display: none' type="text" id="campo-mes" name="campo-mes" readonly />
+          <input style='display: none' type="text" id="campo-valor-executado" readonly />
+          <img src="/img/icone-editar.svg" class="icone-editar" alt="Editar">
+          <label for="valor">Alterar o valor de <span id="nome-cat-label"></span> no mês de <span id=mes-label></span>:</label>
+          <input type="number" step="any" id="campo-valor" name="campo-valor" />
+          <button class="botao-acao-secundario" type="submit">Alterar</button>
+        </form>
+        <button class="botao-acao-secundario copiar" onclick="copiarValorExecutado()" class="botao-copiar" id="botao-copiar">Copiar executado</button>
+        <button class="botao-acao-secundario cancelar" onclick="fecharEdicao()" class="botao-cancelar" id="botao-cancelar" style="display:none">Cancelar</button>
+        <p><strong>Importante:</strong> a previsão de despesas deve ser informada em valores negativos.</p>
+      </div>
+      <div class="botao-menu-secundario" id="dica-edicao">
+        <p id="dica-edicao">💡 Dica: toque em algum valor previsto para alterá-lo.</p>
+      </div>
+
+
+      <div id="caixa-orcamento" class="caixa">
+        <h2>Orçamento de valores previstos e executados</h2>
+
+        <table class="tabela orcamento-mobile">
+
+          <!-- PRIMEIRA PARTE DA TABELA (PRIMEIRO SEMESTRE)   -->
+
+          <?php $i = $mes - 1; ?>
+
+          <thead>
+            <tr>
+              <th rowspan="2">Cat.</th>
+              <th rowspan="2">Res.</th>
+              <?php $meses = array('janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'); ?>
+              <th colspan="2"><?php echo $meses[$i]; ?></th>
+            </tr>
+            <tr>
+              <th>Prev.</th>
+              <th>Exec.</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+          </tbody>
+
+          <?php
+
+          $categoriasPrincipais = buscar_cat_principal($bdConexao);
+
+          $linha = ['total' => 0, 'parcial' => 0];
+
+          foreach ($categoriasPrincipais as $categoriaPrincipal) :
+            $dadosOrcamento = busca_orcamento($bdConexao, $categoriaPrincipal['nome_cat']);
+
+            foreach ($dadosOrcamento as $dadoOrcamento) : ?>
+              <tr <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
+                    echo 'class="linha cat-principal"';
+                  } else {
+                    echo 'class="linha"';
+                  } ?>>
+                <td id="<?php echo $dadoOrcamento['id_cat']; ?>" class="<?php if ($dadoOrcamento['eh_cat_principal'] == true) {echo "cat-principal";} ?>">
+
+                <?php if ($dadoOrcamento['eh_cat_principal'] == false) : ?>
+
+                <a class="filtrar" href="/categorias.php?categoria=<?php echo $dadoOrcamento['id_cat'] ?>">
+
+                <?php endif; ?>
+
+                  <?php echo $dadoOrcamento['nome_cat']; ?>
+
+                  <?php if ($dadoOrcamento['eh_cat_principal'] == false) : ?>
+
+                  <img class='icone-filtrar' src='/img/icos/filtrar.svg'>
+
+                </a>
+
+                <?php endif; ?>
+
+                </td>
+                <td class="valor-resultado <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
+                                              echo "cat-principal";
+                                            } ?>" name="<?php echo $linha['total']; ?>"></td>
+                <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
+                    $previstoMesCat = somar_gasto_previsto($bdConexao, $meses[$i], $dadoOrcamento['nome_cat']);
+                  } else {
+                    $previstoMesCat = $dadoOrcamento[$meses[$i]];
+                  }
+                  ?>
+                  <td class="valor-previsto <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
+                                              echo "cat-principal";
+                                            } ?> <?php if ($previstoMesCat == 0) {
+                                                          echo "zerado";
+                                                        } ?>" name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" id="<?php echo $dadoOrcamento['id_cat'] . "/" . $meses[$i] ?>" <?php if ($dadoOrcamento['eh_cat_principal'] != true) : ?> onclick="abrirEdicao('<?php echo $dadoOrcamento['id_cat'] . '/' . $meses[$i]; ?>')" <?php endif; ?>>
+
+                    <?php echo formata_valor($previstoMesCat); ?>
+                  </td>
+                  <?php
+                  if ($dadoOrcamento['eh_cat_principal'] == true) {
+                    $mesNum = $i + 1;
+                    $resultadoMesCat = calcula_resultado($bdConexao, $mesNum, $ano, 'OCP', null, $dadoOrcamento['nome_cat']);
+                  } else {
+                    $mesNum = $i + 1;
+                    $resultadoMesCat = calcula_resultado($bdConexao, $mesNum, $ano, 'ESM', null, $dadoOrcamento['id_cat']);
+                  }
+                  ?>
+
+                  <td id="<?php echo $dadoOrcamento['id_cat'] . "/" . $meses[$i] . "-executado" ?>" class="valor-executado <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
+                                                echo "cat-principal";
+                                              } ?> <?php if ($resultadoMesCat == 0) {
+                                                            echo "zerado";
+                                                          } ?>" name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>">
+                    <?php echo formata_valor($resultadoMesCat); ?>
+                  </td>
+              </tr>
+
+              <?php $linha['total']++;
+              $linha['parcial']++; ?>
+
+            <?php endforeach; ?>
+
+          <?php endforeach; ?>
+
+          <tr class="linha resultado">
+            <td>Resultado mês:</td>
+            <td class="valor-resultado" name="<?php echo "{$linha['total']}"; ?>"></td>
+              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-previsto"><?php echo formata_valor(somar_gasto_previsto($bdConexao, $meses[$i])) ?></td>
+              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-executado"><?php echo formata_valor(calcula_resultado($bdConexao, $i + 1, $ano, 'ESM')) ?></td>
+            <?php 
+            $linha['total']++;
+            $linha['parcial']++; ?>
+          </tr>
+          <tr class="linha resultado">
+            <td>Acumulado ano:</td>
+            <td class="valor-resultado" name="<?php echo "{$linha['total']}"; ?>"></td>
+              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-previsto"><?php echo formata_valor(somar_gasto_previsto($bdConexao, $meses[$i])) ?></td>
+              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-executado"><?php echo formata_valor(calcula_resultado($bdConexao, $i + 1, $ano, 'EAM')) ?></td>
+            <?php 
+            $linha['total']++; ?>
+          </tr>
+
+        </table>
+      </div>
+
+      <!-- Calcular e exibir a diferença entre previsto e executado via javascript -->
+      <script type="text/javascript">
+        function converteNumeroParaMes(num) {
+          var mesExtenso;
+
+          switch (num) {
+            case '01':
+              mesExtenso = 'janeiro';
+              break;
+            case '02':
+              mesExtenso = 'fevereiro';
+              break;
+            case '03':
+              mesExtenso = 'março';
+              break;
+            case '04':
+              mesExtenso = 'abril';
+              break;
+            case '05':
+              mesExtenso = 'maio';
+              break;
+            case '06':
+              mesExtenso = 'junho';
+              break;
+            case '07':
+              mesExtenso = 'julho';
+              break;
+            case '08':
+              mesExtenso = 'agosto';
+              break;
+            case '09':
+              mesExtenso = 'setembro';
+              break;
+            case '10':
+              mesExtenso = 'outubro';
+              break;
+            case '11':
+              mesExtenso = 'novembro';
+              break;
+            case '12':
+              mesExtenso = 'dezembro';
+              break;
+          }
+
+          return mesExtenso;
+        }
+
+        window.mes = '<?= $mes ?>';
+
+        var mesSelecionado = converteNumeroParaMes(window.mes);
+
+        var linhasOrcamento = document.getElementsByClassName('linha');
+
+        if (mes <= 6) {
+          linhaOrcamento = 0;
+        } else {
+          linhaOrcamento = <?php echo $linha['parcial']; ?>
+        }
+
+        for (linhaOrcamento; linhaOrcamento <= linhasOrcamento.length; linhaOrcamento++) {
+
+          var nameHtml = mesSelecionado + "-" + linhaOrcamento;
+
+          var valores = document.getElementsByName(nameHtml);
+          var celulaResultado = document.getElementsByName(linhaOrcamento);
+
+          if (valores[0] != undefined) {
+
+            var valorPrevistoString = (valores[0].innerText).replace(/\./g,'').replace(/\,/g,'.');
+            var valorExecutadoString = (valores[1].innerText).replace(/\./g,'').replace(/\,/g,'.');
+
+
+            var valorPrevisto = parseFloat(valorPrevistoString).toFixed(2);
+            var valorExecutado = parseFloat(valorExecutadoString).toFixed(2);
+
+
+            if (valorExecutado <= 0) {
+              var resultado = Math.abs(valorPrevisto) - Math.abs(valorExecutado);
+            } else if (valorExecutado > 0) {
+              var resultado = Math.abs(valorExecutado) - Math.abs(valorPrevisto);
+            }
+
+            var resultadoConvertido = Intl.NumberFormat('pt-BR', { style: 'decimal', currency: 'BRL', minimumFractionDigits: '2' }).format(resultado)
+
+
+            celulaResultado[0].innerText = resultadoConvertido;
+
+            if (resultado > 0) {
+              celulaResultado[0].style.color = "green";
+            } else if (resultado < 0) {
+              celulaResultado[0].style.color = "red";
+            } else {
+              celulaResultado[0].style.color = "lightgray";
+            }
+          }
+
+        }
+      </script>
+
+    </main>
+
+    </main>
+    <!-- Rodapé -->
+    <footer>
+      <?php include('partes-template/rodape.php') ?>
+    </footer>
+
+  <?php //Caso o usuário não esteja logado, exibe o conteúdo abaixo em vez da página. 
+  else :
+
+    //SE NÃO EXISTEM TABELAS NO BD, DIRECIONADA PARA O SETUP INICIAL (SETUP.PHP). CASO CONTRÁRIO, INCLUI A PÁGINA PARA LOGIN.
+    if (nao_existem_tabelas($bdConexao)) {
+      echo "<script language='javascript' type='text/javascript'>
+      alert('É necessário fazer a configuração inicial.');window.location
+      .href='/setup/setup.php';</script>";
+      die();
+    } else {
+      echo "
+    <div class='alerta-necessidade-login'>
+    <p>Para continuar, é necessário fazer login.</p>
+    </div>
+    ";
+      include 'login.php';
+    }
+  ?>
+  <?php endif ?>
+
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+.main-login, .main-cadastro{
+  display: grid;
+  max-width: 800px;
+  grid-template-columns: 1fr;
+  margin: auto;
+}
+
+.main-cadastro{
+  grid-template-columns: 1fr 1fr;
+}
+
+.login {
+  max-width: 400px;
+  justify-self: center;
+}
+
+.login form {
+  display: grid;
+  gap: 5px;
+  grid-template-columns: 1fr 2fr;
+  font-size: 1.2rem;
+}
+
+.login form label {
+  grid-column: 1;
+  align-self: center;
+}
+
+.login form input {
+  grid-column: 2;
+  height: 30px;
+  align-self: center;
+}
+
+.container-botao-entrar {
+  display: flex;
+  grid-column: 1 / -1;
+  justify-content: center;
+}
+
+.text-cadastro {
+  display: flex;
+  grid-column: 1 / -1;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.botao-entrar {
+  width: 50%;
+  height: 40px !important;
+  margin: 10px 0px;
+  padding: 10px;
+  background-color: #021329;
+  color: #fff;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+}
+
+.botao-entrar:hover {
+  background-color: #052856;
+}
+
+.text-apresentacao {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  border-bottom: 1px solid #c7c7c7;
+}
+
+.input-lista-padrao-categorias {
+  grid-column: 1 / 3;
+}

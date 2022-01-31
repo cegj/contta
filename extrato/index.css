@@ -1,0 +1,12 @@
+.ultimo-registro {
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+.ultimo-registro p {
+  color: #333  
+}
+
+.ultimo-registro strong {
+  color: #222; 
+}

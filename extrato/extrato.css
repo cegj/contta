@@ -1,0 +1,39 @@
+.resultado-extrato {
+  font-size: 1.3rem;
+}
+
+.checkbox-hidden {
+  display: none;
+}
+
+.opcoes-extras-extrato {
+  display: flex;
+  align-items: center;
+  margin: 20px;
+  gap: 20px;
+}
+
+.linha-resultado-dia-extrato, .linha-resultado-dia-extrato td {
+  background-color: #f3f3f3;
+  padding: 2px 8px;
+  font-size: 0.9rem;
+  color: #333333;
+}
+
+.titulo-resultado-diario-extrato {
+  text-align: right;
+}
+
+.container-edicao-parcelas::before {
+  content:"";
+  background-image: url(/img/icos/seguinte.svg);
+  background-repeat: no-repeat;
+  background-size:contain;
+  background-position: center;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  margin-left: 10px;
+  position: relative;
+  top: 2px;
+}

@@ -1,0 +1,118 @@
+@media (max-width: 400px) {
+  header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .menu-principal ul {
+    justify-content: center;
+  }
+
+  .container-principal {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .caixa.extrato-categorias, .caixa.extrato-contas {
+    order: -1;
+  }
+
+  .container-form-mes-ano {
+    width: inherit;
+  }
+
+  .caixa {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    max-width: 100%;
+    margin: 15px;
+    padding: 5px;
+    align-self: unset;
+  }
+
+  .caixa form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  footer {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 0.8rem;
+  }
+
+  .container-botao-acao-principal {
+    margin-top: 8px;
+  }
+
+  .tabela-responsiva {
+    margin: 0px;
+    padding: 0px;
+  }
+
+  .tabela-responsiva tr {
+    padding: 0px;
+  }
+
+  .tabela-responsiva {
+    display: block;
+    position: relative;
+    width: 100%;
+  }
+
+  .tabela-responsiva thead,
+  .tabela-responsiva tbody,
+  .tabela-responsiva th,
+  .tabela-responsiva td,
+  .tabela-responsiva tr {
+    display: block;
+  }
+
+  .tabela-responsiva td,
+  .tabela-responsiva th {
+    height: 20px;
+  }
+
+  .tabela-responsiva thead {
+    float: left;
+  }
+
+  .tabela-responsiva tbody {
+    width: auto;
+    position: relative;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+
+  .tabela-responsiva tbody tr {
+    display: inline-block;
+  }
+
+  #container-alteracao-orcamento {
+    top: 10px;
+    bottom: unset;
+    border: 3px solid #447327;
+    box-shadow: #447327 3px 3px;
+    z-index: 1;
+  }
+
+  .form-alteracao-orcamento {
+    margin: 0px;
+  }
+
+  .tabela.orcamento-mobile {
+    table-layout: fixed;
+    width: 100%;
+  }
+}
+
+.tabela.orcamento-mobile {
+  word-wrap: break-word;
+}
+
+form {
+  grid-template-columns: 100%;
+}

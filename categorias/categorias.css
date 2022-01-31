@@ -1,0 +1,49 @@
+
+.td-cat-principal {
+  color: #001128;
+  text-transform: uppercase;
+}
+
+.td-cat-secundaria {
+  padding-left: 30px;
+}
+
+.categorias  {
+  display: grid !important;
+}
+
+.input-nome-categoria {
+  grid-column: 1 / -1;
+}
+
+.input-eh-cat-categoria {
+  grid-column: 1;
+  grid-row: 2;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  height: 100%;
+}
+
+.select-cat-principal {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.botao-acao-principal {
+  grid-column: 1 / -1;
+}
+
+.input-eh-cat-categoria::before {
+  content:"";
+  background-image: url(/img/icos/estrela.svg);
+  background-repeat: no-repeat;
+  background-size:contain;
+  background-position: center;
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  margin-left: 10px;
+  position: relative;
+  top: 2px;
+}
