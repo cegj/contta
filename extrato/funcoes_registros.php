@@ -232,20 +232,8 @@ function cadastrar_registro($bdConexao, $registro, $edicao, $id_reg, $editarParc
 
 //BUSCAR CONTAS
 
-function buscar_registros($bdConexao, $dia, $mes, $ano, $tudo, $ultimo=null, $id_cat=null, $id_con=null, $extratoConta=false)
+function buscar_registros($bdConexao, $dia, $mes, $ano, $tudo=null, $ultimo=null, $id_cat=null, $id_con=null)
 {
-
-  if (isset($id_cat)) {
-    $busqueCategoriaEspecifica = "and categorias.id_cat = {$id_cat}";
-  } else {
-    $busqueCategoriaEspecifica = "";
-  }
-
-  if (isset($id_con)) {
-    $busqueContaEspecifica = "and contas.id_con = {$id_con}";
-  } else {
-    $busqueContaEspecifica = "";
-  }
 
   if(isset($dia) && $dia != null){
     $filtraDia = "DAY(data) = '{$dia}' and";
@@ -253,47 +241,60 @@ function buscar_registros($bdConexao, $dia, $mes, $ano, $tudo, $ultimo=null, $id
     $filtraDia = "";
   }
 
+  if (isset($id_cat)) {
+    $busqueCategoriaEspecifica = "and categorias.id_cat = {$id_cat}";
+  } else {
+    $busqueCategoriaEspecifica = "";
+  }
+
+  $filtrarContasOcultas = "and contas.exibir = 1";
+
+  if (isset($id_con)) {
+    $busqueContaEspecifica = "and contas.id_con = {$id_con}";
+    $filtrarContasOcultas = "";
+  } else {
+    $busqueContaEspecifica = "";
+  }
+
+  $filtrarMesAno = "
+  MONTH(data) = '{$mes}'
+  and YEAR(data) = '{$ano}'
+  and
+  ";
 
   if ($tudo == true) {
-    $bdBuscar = "
-    SELECT id, tipo, data, descricao, valor, id_categoria, nome_cat, id_con, conta FROM extrato 
-    LEFT JOIN categorias ON extrato.id_categoria = categorias.id_cat
-    LEFT JOIN contas ON extrato.id_conta = contas.id_con
-    WHERE contas.exibir = 1 or id_conta IS NULL 
-    ORDER BY data DESC, data_insert DESC;
-    ";
-  } else {
-    $bdBuscar = "
-    SELECT id, tipo, data, descricao, valor, id_categoria, nome_cat, id_con, conta FROM extrato
-    LEFT JOIN categorias ON extrato.id_categoria = categorias.id_cat
-    LEFT JOIN contas ON extrato.id_conta = contas.id_con
-    WHERE {$filtraDia} MONTH(data) = '{$mes}' and YEAR(data) = '{$ano}' and tipo != 'SI' {$busqueCategoriaEspecifica} {$busqueContaEspecifica} and contas.exibir = 1
-        or {$filtraDia} MONTH(data) = '{$mes}' and YEAR(data) = '{$ano}' and tipo != 'SI' {$busqueCategoriaEspecifica} {$busqueContaEspecifica} and id_conta IS NULL
-    ORDER BY data ASC, data_insert ASC;
-  ";
+    $filtrarMesAno = "";
   }
-
-  if ($extratoConta == true){
-    $bdBuscar = "
-    SELECT id, tipo, data, descricao, valor, id_categoria, nome_cat, id_con, conta FROM extrato
-    LEFT JOIN categorias ON extrato.id_categoria = categorias.id_cat
-    LEFT JOIN contas ON extrato.id_conta = contas.id_con
-    WHERE MONTH(data) = '{$mes}' and YEAR(data) = '{$ano}' {$busqueCategoriaEspecifica} {$busqueContaEspecifica}
-    ORDER BY data DESC, data_insert DESC;
-  ";
 
   if ($ultimo == true){
-    $bdBuscar = "
-    SELECT id, tipo, data, descricao, valor, id_categoria, nome_cat, id_con, conta FROM extrato
-    LEFT JOIN categorias ON extrato.id_categoria = categorias.id_cat
-    LEFT JOIN contas ON extrato.id_conta = contas.id_con
-    WHERE {$filtraDia} MONTH(data) = '{$mes}' and YEAR(data) = '{$ano}' and tipo != 'SI' {$busqueCategoriaEspecifica} {$busqueContaEspecifica} and contas.exibir = 1
-        or {$filtraDia} MONTH(data) = '{$mes}' and YEAR(data) = '{$ano}' and tipo != 'SI' {$busqueCategoriaEspecifica} {$busqueContaEspecifica} and id_conta IS NULL
-    ORDER BY data DESC, data_insert DESC LIMIT 1;
-  ";
+    $limiteAoUltimo = "LIMIT 1";
+  } else {
+    $limiteAoUltimo = "";
   }
 
-  }
+
+  $bdBuscar = "
+  SELECT id, tipo, data, descricao, valor, id_categoria, nome_cat, id_con, conta FROM extrato
+  LEFT JOIN categorias ON extrato.id_categoria = categorias.id_cat
+  LEFT JOIN contas ON extrato.id_conta = contas.id_con
+  WHERE
+    {$filtraDia}
+    {$filtrarMesAno}
+    tipo != 'SI'
+    {$busqueCategoriaEspecifica}
+    {$busqueContaEspecifica}
+    {$filtrarContasOcultas}
+    or
+    {$filtraDia}
+    MONTH(data) = '{$mes}'
+    and YEAR(data) = '{$ano}'
+    and tipo != 'SI'
+    {$busqueCategoriaEspecifica}
+    {$busqueContaEspecifica}
+    {$filtrarContasOcultas} 
+    and id_conta IS NULL
+  ORDER BY data ASC, data_insert ASC {$limiteAoUltimo};
+";
 
   $resultado = mysqli_query($bdConexao, $bdBuscar);
 
@@ -410,7 +411,7 @@ function apagar_registro($bdConexao, $registro, $id_reg, $editarParcelas=false)
 
 //CALCULAR RESULTADO DO EXTRATO
 
-function calcula_resultado($bdConexao, $mes, $ano, $tipo, $conta=null, $categoriaSecundaria=null, $categoriaPrincipal=null, $dia=null)
+function calcula_resultado($bdConexao, $mes, $ano, $tipo, $conta=null, $categoriaSecundaria=null, $categoriaPrincipal=null, $dia=null, $soMesAtual = false)
 {
 
   // TIPOS: SSM (saldo só mês), SAM (saldo acumulado até o mês) e SAG (saldo acumulado geral)
@@ -442,13 +443,20 @@ function calcula_resultado($bdConexao, $mes, $ano, $tipo, $conta=null, $categori
   // Se for informado um dia específico, filtrar pelo dia
   if (isset($dia)){
     if ($tipo == 'SSM'){
-      $filtraDia = "and DAY(data) = '{$dia}'";
+      $filtraDia = "and data = '{$ano}-{$mes}-{$dia}'";
     } else if ($tipo == 'SAM') {
-      $filtraDia = "and DAY(data) <= '{$dia}'";
+      $filtraDia = "and data <= '{$ano}-{$mes}-{$dia}'";
     }}
     else {
       $filtraDia = '';
     }
+
+  // Se o valor acumulado deve considerar só o mês atual no cálculo do tipo SAM (saldo acumulado mês)
+  if ($soMesAtual == true){
+    $filtraMesAcum = "MONTH(data) = '{$mes}'";
+  } else {
+    $filtraMesAcum = "MONTH(data) <= '{$mes}'";
+  }
 
   //SSM - Saldo Só Mês: só do mês selecionado
 
@@ -476,7 +484,7 @@ function calcula_resultado($bdConexao, $mes, $ano, $tipo, $conta=null, $categori
       SELECT sum(valor) FROM extrato
       LEFT JOIN categorias ON extrato.id_categoria = categorias.id_cat
       INNER JOIN contas ON extrato.id_conta = contas.id_con
-      WHERE MONTH(data) <= '{$mes}'
+      WHERE {$filtraMesAcum}
             and YEAR(data) <= '{$ano}'
             {$filtraDia}
             and {$filtraConta}

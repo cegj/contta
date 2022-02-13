@@ -104,8 +104,9 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
 
                 $resultadoDia = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SSM', null, null, null, $dia));
 
-                $resultadoDiaAcumulado = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SAM', null, null, null, $dia));
+                $resultadoDiaAcumuladoMes = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SAM', null, null, null, $dia, true));
 
+                $resultadoDiaAcumuladoTotal = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SAM', null, null, null, $dia));
 
                 foreach ($registros as $registro) :
 
@@ -132,10 +133,10 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
                   }
                 endforeach;
                 echo "
-              <tr>
-              <td colspan='7' class='linha-resultado-dia-extrato'> Resultado diário: R$ {$resultadoDia} | Resultado acumulado: R$ {$resultadoDiaAcumulado}</td>
-              </tr>
-              ";
+                <tr>
+                <td class='linha-resultado-dia-extrato' colspan='7' class='linha-resultado-dia-extrato'> <span class='valor-resultado-dia-extrato'>Resultado diário: R$ {$resultadoDia}</span> <span class='valor-resultado-dia-extrato'>Acumulado mês: {$resultadoDiaAcumuladoMes}</span> <span class='valor-resultado-dia-extrato'>Acumulado total: R$ {$resultadoDiaAcumuladoTotal}</span> </td>
+                </tr>
+                ";
 
               endif;
 

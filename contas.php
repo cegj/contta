@@ -52,7 +52,7 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
     <!-- Opções -->
     <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/opcoes.php'); ?>
 
-    <div class="container duas-colunas <?php if($configuracao == false) : ?>com-extrato<?php endif; ?>">
+    <div class="container duas-colunas <?php if($configuracao == false) : ?>com-extrato<?php else : ?>sem-bg<?php endif;?>">
 
     <?php if ($configuracao != true) : ?>
     <div class="item-grid-principal">
@@ -92,7 +92,10 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
       </div>
 
       <div class="caixa extrato-contas">
-        <?php if(isset($_GET['conta']) && isset($mes) && isset($ano)) : ?>
+
+        <?php 
+        
+        if(isset($_GET['conta']) && isset($mes) && isset($ano)) : ?>
 
           <?php $contaSelecionada = buscar_conta_especifica($bdConexao, $_GET['conta']); ?>
 
@@ -100,7 +103,7 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
           <h3><?php echo $contaSelecionada['conta']?></h3>
 
           <div class="container-tabela">
-          <table class="tabela extrato">
+          <table class="tabela extrato compacto">
             <thead>
               <tr>
                 <th class="linha-fixa">Tipo</th>
@@ -108,11 +111,26 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
                 <th class="linha-fixa">Descrição</th>
                 <th class="linha-fixa">Valor</th>
                 <th class="linha-fixa">Categoria</th>
-                <th class="linha-fixa">Editar</th>
+                <th class="linha-fixa">Ações</th>
               </tr>
             </thead>
             <tr>
-            <?php $registros = buscar_registros($bdConexao, null, $mes, $ano, false, null, null, $_GET['conta'], true);
+            <?php 
+            
+            $totalDiasMes = days_in_month($mes, $ano);
+
+            for ($dia = 1; $dia <= $totalDiasMes; $dia++) :
+
+            $registros = buscar_registros($bdConexao, $dia, $mes, $ano, null, null, null, $_GET['conta']);
+
+            if (sizeof($registros) != 0) :
+
+              $resultadoDia = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SSM', $_GET['conta'], null, null, $dia));
+
+              $resultadoDiaAcumuladoMes = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SAM', $_GET['conta'], null, null, $dia, true));
+
+              $resultadoDiaAcumuladoTotal = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SAM', $_GET['conta'], null, null, $dia));
+
 
             foreach ($registros as $registro) :
 
@@ -125,7 +143,7 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
             <td>{$registro['descricao']}</td>
             <td class='linha-extrato-valor'>R$ {$valor}</td>
             <td>{$registro['nome_cat']}</td>
-            <td>";
+            <td class='coluna-acoes'>";
               if ($registro['tipo'] == 'T' && $registro['valor'] > 0 or $registro['tipo'] == 'SI') {
                 echo "";
               } else {
@@ -136,10 +154,22 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
             ";
               }
             endforeach;
+
+            echo "
+            <tr>
+            <td class='linha-resultado-dia-extrato' colspan='6' class='linha-resultado-dia-extrato'> <span class='valor-resultado-dia-extrato'>Resultado diário: R$ {$resultadoDia}</span> <span class='valor-resultado-dia-extrato'>Acumulado mês: {$resultadoDiaAcumuladoMes}</span> <span class='valor-resultado-dia-extrato'>Acumulado total: R$ {$resultadoDiaAcumuladoTotal}</span> </td>
+            </tr>
+            ";
+
+            endif;
+
+            endfor;
+
             ?>
             </tr>
             </table>
             </div>
+
             <?php else : ?>
             <p class="instrucao">Escolha uma conta para ver o seu histórico no mês selecionado.</p>
             <?php endif; ?>
@@ -184,7 +214,7 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
           </table>
             </div>
 
-          <div class="box-formulario" id="box-formulario">
+          <div class="box formulario" id="box-formulario">
         <?php if ($edicao == false) :
         ?>
           <h2 class="titulo-box">Cadastrar conta</h2>

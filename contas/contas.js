@@ -1,6 +1,6 @@
-  radioApagar = document.getElementsByClassName['apagar']
-  botaoLimparSelecao = document.getElementById['limpar-selecao']
-  alertaApagar = document.getElementById['alerta-apagar']
+  radioApagar = document.getElementsByClassName('apagar')
+  botaoLimparSelecao = document.getElementById('limpar-selecao')
+  alertaApagar = document.getElementById('alerta-apagar')
 
   radioApagar[0].addEventListener('change', function(){
     if (radioApagar[0].checked){

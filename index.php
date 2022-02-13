@@ -25,7 +25,7 @@
       <!-- Opções -->
       <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/opcoes.php'); ?>
 
-      <div class="container duas-colunas">
+      <div class="container duas-colunas sem-bg">
 
       <div id="caixa-registrar" class="box formulario">
         <h2 class="titulo-box">Fazer registro</h2>

@@ -116,3 +116,5 @@ VMasker(document.querySelector("#saldoinicial")).maskMoney({
 });
 
 </script>
+
+<script src="/contas/contas.js"></script>
