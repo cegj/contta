@@ -6,12 +6,19 @@
 }
 
 .caixa-saldo {
-  background: linear-gradient(#389638, #307230);
   width: 250px;
   padding: 12px 20px;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
   cursor: default;
+}
+
+.caixa-saldo.positivo {
+  background: linear-gradient(#389638, #307230);
+}
+
+.caixa-saldo.negativo {
+  background: linear-gradient(#963838, #723030);
 }
 
 .caixa-saldo h3 {
