@@ -237,23 +237,17 @@ if (isset($_POST['data']) && $_POST['data'] != '') {
   if (isset($_POST['apagar']) && $_POST['apagar'] == true) {
     apagar_registro($bdConexao, $registro, $id_reg, $editarParcelas);
     echo "<script>
-    if (window.location.pathname == '/extrato.php') {
-    window.location.replace('/extrato.php');} else {
-      window.location.replace('/index.php'); }
+    window.location.replace('{$url}');} 
     </script>";
   } else if ($edicao == true) {
     cadastrar_registro($bdConexao, $registro, $edicao, $id_reg, $editarParcelas);
     echo "<script>
-          if (window.location.pathname == '/extrato.php') {
-          window.location.replace('/extrato.php');} else {
-            window.location.replace('/index.php'); }
-          </script>";
+    window.location.replace('{$url}');} 
+    </script>";
   } else {
     cadastrar_registro($bdConexao, $registro, $edicao, null);
     echo "<script>
-    if (window.location.pathname == '/extrato.php') {
-    window.location.replace('/extrato.php');} else {
-      window.location.replace('/index.php'); }
+    window.location.replace('{$url}');} 
     </script>";
   }
 }
