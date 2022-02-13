@@ -213,10 +213,10 @@
                   <?php
                   if ($dadoOrcamento['eh_cat_principal'] == true) {
                     $mesNum = $i + 1;
-                    $resultadoMesCat = calcula_resultado($bdConexao, $mesNum, $ano, 'OCP', null, $dadoOrcamento['nome_cat']);
+                    $resultadoMesCat = calcula_resultado($bdConexao, $mesNum, $ano, 'SSM', null, null, $dadoOrcamento['nome_cat']);
                   } else {
                     $mesNum = $i + 1;
-                    $resultadoMesCat = calcula_resultado($bdConexao, $mesNum, $ano, 'ESM', null, $dadoOrcamento['id_cat']);
+                    $resultadoMesCat = calcula_resultado($bdConexao, $mesNum, $ano, 'SSM', null, $dadoOrcamento['id_cat']);
                   }
                   ?>
 
@@ -240,7 +240,7 @@
             <td>Resultado mês:</td>
             <td class="valor-resultado" name="<?php echo "{$linha['total']}"; ?>"></td>
               <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-previsto"><?php echo formata_valor(somar_gasto_previsto($bdConexao, $meses[$i])) ?></td>
-              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-executado"><?php echo formata_valor(calcula_resultado($bdConexao, $i + 1, $ano, 'ESM')) ?></td>
+              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-executado"><?php echo formata_valor(calcula_resultado($bdConexao, $i + 1, $ano, 'SSM')) ?></td>
             <?php 
             $linha['total']++;
             $linha['parcial']++; ?>
@@ -249,7 +249,7 @@
             <td>Acumulado ano:</td>
             <td class="valor-resultado" name="<?php echo "{$linha['total']}"; ?>"></td>
               <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-previsto"><?php echo formata_valor(somar_gasto_previsto($bdConexao, $meses[$i])) ?></td>
-              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-executado"><?php echo formata_valor(calcula_resultado($bdConexao, $i + 1, $ano, 'EAM')) ?></td>
+              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-executado"><?php echo formata_valor(calcula_resultado($bdConexao, $i + 1, $ano, 'SAM')) ?></td>
             <?php 
             $linha['total']++; ?>
           </tr>

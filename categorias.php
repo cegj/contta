@@ -74,7 +74,7 @@ if (isset($_GET['editar']) && $_GET['editar'] == true) {
 
               foreach ($categoriasPrincipais as $categoriaPrincipal) :
 
-                $saldoMesCatPrincipal = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'OCP', null, $categoriaPrincipal['nome_cat']));
+                $saldoMesCatPrincipal = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SSM', null, null,  $categoriaPrincipal['nome_cat']));
 
 
                 echo "<tr class='cat-principal'>
@@ -92,7 +92,7 @@ if (isset($_GET['editar']) && $_GET['editar'] == true) {
 
                 foreach ($categoriasSecundarias as $categoriaSecundaria) :
 
-                  $saldoMes = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'ESM', null, $categoriaSecundaria['id_cat']));
+                  $saldoMes = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SSM', null, $categoriaSecundaria['id_cat']));
 
                   echo "<tr>
           <td class='td-cat-secundaria'><a class='filtrar' href='categorias.php?categoria={$categoriaSecundaria['id_cat']}'>{$categoriaSecundaria['nome_cat']} <img class='icone-filtrar' src='/img/icos/filtrar.svg'></a></td>

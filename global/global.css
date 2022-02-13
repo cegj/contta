@@ -30,7 +30,24 @@ input[type="number"]::-webkit-inner-spin-button {
 input[type="number"] {
     -moz-appearance: textfield;
 }
+
 /* [FIM] REMOVE O SELETOR DOS INPUTS TYPE NUMBER */
+
+dl {
+  margin: 7px 0;
+}
+
+dt, dd {
+  margin: 0px;
+}
+
+dt,dd {
+  display: inline-block;
+}
+
+dd {
+  font-weight: bold;
+}
 
 .container-principal {
   max-width: 1200px;

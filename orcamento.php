@@ -254,10 +254,10 @@ $edicao = false; ?>
 
                 <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
                       $mesNum = $i + 1;
-                      $resultadoMesCat = calcula_resultado($bdConexao, $mesNum, $ano, 'OCP', null, $dadoOrcamento['nome_cat']);
+                      $resultadoMesCat = calcula_resultado($bdConexao, $mesNum, $ano, 'SSM', null, null, $dadoOrcamento['nome_cat']);
                   } else {
                     $mesNum = $i + 1;
-                    $resultadoMesCat = calcula_resultado($bdConexao, $mesNum, $ano, 'ESM', null, $dadoOrcamento['id_cat']);
+                    $resultadoMesCat = calcula_resultado($bdConexao, $mesNum, $ano, 'SSM', null, $dadoOrcamento['id_cat']);
                   }
                   ?>
 
@@ -318,7 +318,7 @@ $edicao = false; ?>
                   <?php if (verificaMesSelecionado($meses[$i], $mes)) {echo "mes-selecionado";} ?>"
             >
 
-              <?php echo formata_valor(calcula_resultado($bdConexao, $i + 1, $ano, 'ESM')) ?>
+              <?php echo formata_valor(calcula_resultado($bdConexao, $i + 1, $ano, 'SSM')) ?>
 
             </td>
 
@@ -360,7 +360,7 @@ $edicao = false; ?>
               class="resultado-executado"
               >
               
-                <?php echo formata_valor(calcula_resultado($bdConexao, $i + 1, $ano, 'EAM')) ?>
+                <?php echo formata_valor(calcula_resultado($bdConexao, $i + 1, $ano, 'SAM')) ?>
             
               </td>
 
@@ -493,10 +493,10 @@ $edicao = false; ?>
             <?php
             if ($dadoOrcamento['eh_cat_principal'] == true) {
                 $mesNum = $i + 1;
-                $resultadoMesCat = calcula_resultado($bdConexao, $mesNum, $ano, 'OCP', null, $dadoOrcamento['nome_cat']);
+                $resultadoMesCat = calcula_resultado($bdConexao, $mesNum, $ano, 'SSM', null, null, $dadoOrcamento['nome_cat']);
                 } else {
                   $mesNum = $i + 1;
-                  $resultadoMesCat = calcula_resultado($bdConexao, $mesNum, $ano, 'ESM', null, $dadoOrcamento['id_cat']);
+                  $resultadoMesCat = calcula_resultado($bdConexao, $mesNum, $ano, 'SSM', null, $dadoOrcamento['id_cat']);
                   }
             ?>
 
@@ -552,7 +552,7 @@ $edicao = false; ?>
                   <?php if (verificaMesSelecionado($meses[$i], $mes)) {echo "mes-selecionado";} ?>"
             >
             
-              <?php echo formata_valor(calcula_resultado($bdConexao, $i + 1, $ano, 'ESM')) ?>
+              <?php echo formata_valor(calcula_resultado($bdConexao, $i + 1, $ano, 'SSM')) ?>
             
             </td>
 
@@ -593,7 +593,7 @@ $edicao = false; ?>
             class="resultado-executado <?php if (verificaMesSelecionado($meses[$i], $mes)) {echo "mes-selecionado";} ?>"
             >
             
-              <?php echo formata_valor(calcula_resultado($bdConexao, $i + 1, $ano, 'EAM')) ?>
+              <?php echo formata_valor(calcula_resultado($bdConexao, $i + 1, $ano, 'SAM')) ?>
           
             </td>
             

@@ -102,9 +102,9 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
 
               if (sizeof($registros) != 0) :
 
-                $resultadoDia = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SDM', null, null, $dia));
+                $resultadoDia = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SSM', null, null, null, $dia));
 
-                $resultadoDiaAcumulado = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'ADM', null, null, $dia));
+                $resultadoDiaAcumulado = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SAM', null, null, null, $dia));
 
 
                 foreach ($registros as $registro) :

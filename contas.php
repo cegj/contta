@@ -69,8 +69,8 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
 
         foreach ($contas as $conta) :
           $exibir = traduz_boolean($conta['exibir'], 'Sim', 'Não');
-          $saldoMes = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'CSM', $conta['id_con']));
-          $saldoAcumulado = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'CAM', $conta['id_con']));
+          $saldoMes = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SSM', $conta['id_con']));
+          $saldoAcumulado = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SAM', $conta['id_con']));
 
           if ($saldoMes == 0) {
             $saldoMes = "0,00";

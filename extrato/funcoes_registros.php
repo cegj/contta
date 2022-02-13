@@ -410,10 +410,13 @@ function apagar_registro($bdConexao, $registro, $id_reg, $editarParcelas=false)
 
 //CALCULAR RESULTADO DO EXTRATO
 
-function calcula_resultado($bdConexao, $mes, $ano, $tipo, $conta=null, $categoria=null, $dia=null)
+function calcula_resultado($bdConexao, $mes, $ano, $tipo, $conta=null, $categoriaSecundaria=null, $categoriaPrincipal=null, $dia=null)
 {
 
+  // TIPOS: SSM (saldo só mês), SAM (saldo acumulado até o mês) e SAG (saldo acumulado geral)
+
   // Se conta estiver definida, filtrar pela conta
+  //Recebe o ID da conta
   if (isset($conta)){
     $filtraConta = "contas.id_con = '{$conta}'";
     } else {
@@ -421,11 +424,31 @@ function calcula_resultado($bdConexao, $mes, $ano, $tipo, $conta=null, $categori
     }
   
   // Se categoria estiver definida, filtrar pela categoria
-  if (isset($categoria)){
-    $filtraCategoria = "and categorias.id_cat = '{$categoria}'";
+
+  //Recebe o ID da cat. secundária
+  if (isset($categoriaSecundaria)){
+    $filtraCategoriaSec = "and categorias.id_cat = {$categoriaSecundaria}";
     } else {
-      $filtraCategoria = "";
+      $filtraCategoriaSec = "";
     }  
+
+    //Recebe o nome da cat. principal
+    if (isset($categoriaPrincipal)){
+      $filtraCategoriaPri = "and categorias.cat_principal = '{$categoriaPrincipal}'";
+      } else {
+        $filtraCategoriaPri = "";
+      }  
+
+  // Se for informado um dia específico, filtrar pelo dia
+  if (isset($dia)){
+    if ($tipo == 'SSM'){
+      $filtraDia = "and DAY(data) = '{$dia}'";
+    } else if ($tipo == 'SAM') {
+      $filtraDia = "and DAY(data) <= '{$dia}'";
+    }}
+    else {
+      $filtraDia = '';
+    }
 
   //SSM - Saldo Só Mês: só do mês selecionado
 
@@ -436,9 +459,11 @@ function calcula_resultado($bdConexao, $mes, $ano, $tipo, $conta=null, $categori
       LEFT JOIN categorias ON extrato.id_categoria = categorias.id_cat
       INNER JOIN contas ON extrato.id_conta = contas.id_con
       WHERE MONTH(data) = '{$mes}'
-            and YEAR(data) = '{$ano}' and
-            {$filtraConta}
-            {$filtraCategoria}
+            and YEAR(data) = '{$ano}'
+            {$filtraDia}
+            and {$filtraConta}
+            {$filtraCategoriaSec}
+            {$filtraCategoriaPri}
       ORDER BY data ASC;
       ";
   }
@@ -452,9 +477,11 @@ function calcula_resultado($bdConexao, $mes, $ano, $tipo, $conta=null, $categori
       LEFT JOIN categorias ON extrato.id_categoria = categorias.id_cat
       INNER JOIN contas ON extrato.id_conta = contas.id_con
       WHERE MONTH(data) <= '{$mes}'
-            and YEAR(data) <= '{$ano}' and
-            {$filtraConta}
-            {$filtraCategoria}
+            and YEAR(data) <= '{$ano}'
+            {$filtraDia}
+            and {$filtraConta}
+            {$filtraCategoriaSec}
+            {$filtraCategoriaPri}
       ORDER BY data ASC;
       ";
   }
@@ -468,109 +495,8 @@ function calcula_resultado($bdConexao, $mes, $ano, $tipo, $conta=null, $categori
     LEFT JOIN categorias ON extrato.id_categoria = categorias.id_cat
     INNER JOIN contas ON extrato.id_conta = contas.id_con
     WHERE {$filtraConta}
-          {$filtraCategoria}
-    ORDER BY data ASC;
-    ";
-  }
-
-
-  //A função recebe os seguintes tipos:
-  //VTG (valor total geral) = Calcula o resultado acumulado total, independentemente de mês
-  //SDM (só dia mês) = Calcula o resultado do dia indicado no mês/ano indicado
-  //ADM (até dia mês) = Calcula o resultado acumulado até o dia indicado no mês/ano indicado
-  //ESM (extrato só mês) = Calcula somente o resultado do mês/ano indicado
-  //EAM (extrato até mês) = Calcula o resultado até o mês/ano indicado 
-  //CSM (conta só mês) = Apura resultado da conta indicada como parâmetro só no mês/ano indicado
-  //CAM (conta até mês) = Apura resultado da conta indicada como parâmetro até o mês/ano indicado
-  //CTO (conta total) = Apura resultado da conta indicada como parâmetro no total
-  //OCP (orçamento categoria principal) == Apura a soma de determinada categoria principal no mês
-
-  if (isset($categoria)){
-    $incluiCatEspecifica = "and id_cat = '{$categoria}'";
-  } else {
-    $incluiCatEspecifica = "";
-  }
-
-  if ($tipo == 'VTG'){
-    $bdSomar = "
-    SELECT sum(valor) FROM extrato
-    LEFT JOIN categorias ON extrato.id_categoria = categorias.id_cat
-    INNER JOIN contas ON extrato.id_conta = contas.id_con
-    WHERE contas.exibir = 1 {$incluiCatEspecifica}
-    ORDER BY data ASC;  
-    ";
-  }
-
-  if ($tipo == 'SDM') {
-
-    $bdSomar = "
-  SELECT sum(valor) FROM extrato
-  LEFT JOIN categorias ON extrato.id_categoria = categorias.id_cat
-  INNER JOIN contas ON extrato.id_conta = contas.id_con
-  WHERE DAY(data) = '{$dia}' and MONTH(data) = '{$mes}' and YEAR(data) = '{$ano}' and contas.exibir = 1 {$incluiCatEspecifica}
-  ORDER BY data ASC;
-  ";
-  }
-
-  if ($tipo == 'ADM') {
-
-    $bdSomar = "
-  SELECT sum(valor) FROM extrato
-  LEFT JOIN categorias ON extrato.id_categoria = categorias.id_cat
-  INNER JOIN contas ON extrato.id_conta = contas.id_con
-  WHERE DAY(data) <= '{$dia}' and MONTH(data) <= '{$mes}' and YEAR(data) <= '{$ano}' and contas.exibir = 1 {$incluiCatEspecifica}
-  ORDER BY data ASC;
-  ";
-  }
-
-  if ($tipo == 'ESM') {
-
-    $bdSomar = "
-  SELECT sum(valor) FROM extrato
-  LEFT JOIN categorias ON extrato.id_categoria = categorias.id_cat
-  INNER JOIN contas ON extrato.id_conta = contas.id_con
-  WHERE MONTH(data) = '{$mes}' and YEAR(data) = '{$ano}' and contas.exibir = 1 {$incluiCatEspecifica}
-  ORDER BY data ASC;
-  ";
-  }
-
-  if ($tipo == 'EAM') {
-    $bdSomar = "
-    SELECT sum(valor) FROM extrato
-    LEFT JOIN categorias ON extrato.id_categoria = categorias.id_cat
-    INNER JOIN contas ON extrato.id_conta = contas.id_con
-    WHERE MONTH(data) <= '{$mes}' and YEAR(data) <= '{$ano}' and contas.exibir = 1 {$incluiCatEspecifica}
-    ORDER BY data ASC;
-    ";
-  }
-
-  if ($tipo == 'CSM') {
-    $bdSomar = "
-  SELECT id, tipo, data, descricao, sum(valor), nome_cat, conta FROM extrato
-  LEFT JOIN categorias ON extrato.id_categoria = categorias.id_cat
-  INNER JOIN contas ON extrato.id_conta = contas.id_con
-  WHERE MONTH(data) = '{$mes}' and YEAR(data) = '{$ano}' and id_con = '{$conta}'
-  ORDER BY data ASC;
-  ";
-  }
-
-  if ($tipo == 'CAM') {
-    $bdSomar = "
-    SELECT sum(valor) FROM extrato
-    LEFT JOIN categorias ON extrato.id_categoria = categorias.id_cat
-    INNER JOIN contas ON extrato.id_conta = contas.id_con
-    WHERE MONTH(data) <= '{$mes}' and YEAR(data) <= '{$ano}' and id_con = '{$conta}'
-    ORDER BY data ASC;
-    ";
-  }
-
-  if ($tipo == 'CTO') {
-    $bdSomar = "
-    SELECT id, tipo, data, descricao, sum(valor), conta, nome_cat, conta FROM extrato
-    LEFT JOIN categorias ON extrato.id_categoria = categorias.id_cat
-    INNER JOIN contas ON extrato.id_conta = contas.id_con
-    WHERE conta = '{$conta}'
-    GROUP BY id, tipo, data, descricao, conta, nome_cat, conta
+          {$filtraCategoriaSec}
+          {$filtraCategoriaPri}
     ORDER BY data ASC;
     ";
   }
@@ -581,7 +507,7 @@ function calcula_resultado($bdConexao, $mes, $ano, $tipo, $conta=null, $categori
   SELECT sum(valor) FROM extrato
   LEFT JOIN categorias ON extrato.id_categoria = categorias.id_cat
   INNER JOIN contas ON extrato.id_conta = contas.id_con
-  WHERE MONTH(data) = '{$mes}' and YEAR(data) = '{$ano}' and contas.exibir = 1 and categorias.cat_principal = '{$categoria}'
+  WHERE MONTH(data) = '{$mes}' and YEAR(data) = '{$ano}' and contas.exibir = 1 and categorias.cat_principal = '{$categoriaPrincipal}'
   ORDER BY data ASC;
   ";
   }
