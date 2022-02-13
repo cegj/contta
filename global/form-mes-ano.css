@@ -1,0 +1,83 @@
+.container-seletor-mes-ano {
+  position: relative;
+  z-index: 2;
+}
+
+.seletor-mes-ano {
+  background-color: #011128;
+  color: white;
+  padding: 20px 30px;
+  display: none;
+  position: absolute;
+  top: 5px;
+  left: 15px;
+  box-shadow: 5px 5px 10px #999999;
+  border-radius: 4px;
+  background-image: linear-gradient(#011b43, #011128);
+}
+
+.container-form-mes-ano {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.form-mes-ano {
+  display: flex;
+  align-items: center;
+  margin: 0px;
+}
+
+.form-mes-ano::before {
+  content:"";
+  background-image: url(/img/icos/calendar-branco-edit.svg);
+  background-repeat: no-repeat;
+  background-size:contain;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  position: relative;
+  padding-right: 7px;
+}
+
+.form-mes-ano-campo-mes, .form-mes-ano-campo-ano {
+  font-size: 1.2rem;
+  color: #c5ddff;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.form-mes-ano-campo-mes {
+  width: 25px;
+}
+
+.form-mes-ano-campo-ano {
+  width: 50px;
+}
+
+.form-mes-ano button {
+  border: 1px solid #002864;
+  border-radius: 4px;
+  background-color: #011b43;
+  color: white;
+  height: 25px;
+}
+
+.seletor-mes {
+  display: block;
+  padding-top: 10px;
+}
+
+.seletor-mes button {
+  background-color: #071d41; 
+  color: #dbdbdb;
+  border: none;
+  padding: 7px;
+  cursor: pointer;
+}
+
+.exibir {
+  display: block;
+}

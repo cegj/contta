@@ -133,7 +133,7 @@ $logarray = $array['login'];
             icon: 'success',
             confirmButtonText: 'Fazer login',
             didClose: function(){
-              window.location.href='/login.php';
+              window.location.href='/index.php';
               }
           });
           </script>

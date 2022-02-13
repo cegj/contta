@@ -1,0 +1,7 @@
+.opcoes {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding-bottom: 5px;
+  gap: 10px;
+}

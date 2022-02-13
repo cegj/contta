@@ -1,0 +1,37 @@
+.icone-editar, .icone-filtrar {
+  height: 20px;
+}
+
+.icone-filtrar {
+  display: none;
+  width: auto;
+  height: 20px;
+  margin-left: 3px;
+  position: absolute;
+}
+
+.filtrar {
+  display: inline-block;
+  position: relative;
+}
+
+.filtrar:hover {
+  color:#00314d;
+}
+
+.filtrar:hover .icone-filtrar {
+  display: inline-block;
+}
+
+.filtrar-titulo::after {
+  content:"";
+  background-image: url(/img/icos/filtrar.svg);
+  background-repeat: no-repeat;
+  background-size:contain;
+  display: inline-block;
+  width: 30px;
+  height: 20px;
+  margin-left: 5px;
+  position: relative;
+  top: 4px;
+}

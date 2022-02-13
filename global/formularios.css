@@ -1,0 +1,91 @@
+.box.formulario {
+  background-image: linear-gradient(#ffffd4, #ffffb3);
+}
+
+.form-cadastrar-editar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.form-cadastrar-editar input {
+  width: calc(100% - 22px);
+  height: 20px;
+  padding: 10px 0px;
+  font-size: 1.2rem;
+  background-color: #fff;
+  border: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-family: "Roboto", sans-serif;
+  border: 1px solid #ececa6;
+  border-radius: 4px;
+}
+
+/* Select com campo de busca */
+.form-cadastrar-editar .choices__inner {
+  width: calc(100% - 2px);
+  font-family: "Roboto", sans-serif;
+  border: 1px solid #ececa6;
+  border-radius: 4px;
+}
+
+input[type="checkbox"], input[type="radio"]{
+  flex-basis: 30px;
+}
+
+.form-cadastrar-editar select {
+  width: 100%;
+  height: 41px;
+  font-size: 1.2rem;
+  border: 0px;
+  background-color: #fff;
+  border: 1px solid #ececa6;
+  border-radius: 4px;
+  font-family: "Roboto", sans-serif;
+}
+
+.form-cadastrar-editar label {
+  font-size: 1.3rem;
+  color: #262626;
+}
+
+.div-checkbox, .div-radio {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  min-height: 69px;
+  border: 1px solid #ececa6;
+  border-radius: 4px;
+  font-family: "Roboto", sans-serif;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.div-checkbox label, .div-radio label {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.1rem;
+  margin-left: 3px;
+}
+
+.container-apagar::before {
+  content:"";
+  background-image: url(/img/icos/apagar.svg);
+  background-repeat: no-repeat;
+  background-size:contain;
+  background-position: center;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  margin-left: 10px;
+  position: relative;
+  top: 2px;
+}
+
+.campo-id-edicao {
+  display: none !important;
+}
+
+.form-cadastrar-editar .botao-acao-principal {
+  margin: 15px 0px;
+}

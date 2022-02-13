@@ -4,7 +4,13 @@
   }
 </script>
 
-<?php include('partes-template/includesiniciais.php'); ?>
+<head>
+<?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php'); 
+
+$edicao = false; ?>
+<link rel="stylesheet" href="/orcamento/orcamento.css">
+
+</head>
 
 <!DOCTYPE html>
 <html>
@@ -12,7 +18,7 @@
 <head>
   <!-- Informações do head -->
   <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/head.php'); ?>
-  <link rel="stylesheet" href="/orcamento/orcamento.css">
+  <link rel="stylesheet" href="/extrato/extrato.css">
 </head>
 
 <body>
@@ -21,13 +27,15 @@
   if (isset($login_cookie)) : ?>
 
     <!-- Cabeçalho -->
-    <header>
-      <?php include('partes-template/cabecalho.php') ?>
-      <!-- Menu principal -->
-      <?php include('partes-template/menu.php') ?>
-    </header>
+    <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/header.php') ?>
 
-    <main class="orcamento-container">
+    <main class="container-principal">
+
+      <!-- Caixas de saldos -->
+      <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/saldos.php'); ?>
+
+      <!-- Opções -->
+      <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/opcoes.php'); ?>
 
       <?php
 
@@ -109,12 +117,6 @@
         }
       </script>
 
-      <!-- Formulário do ano -->
-      <div class="container-form-mes-ano">
-        <!-- Formulário de definição de mês e ano -->
-        <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/form_mes_ano.php'); ?>
-      </div>
-
       <div class="botao-menu-secundario" id="container-alteracao-orcamento">
         <form style="display:none" class="form-alteracao-orcamento" id="form-alteracao" method="POST">
           <input style='display: none' type="number" id="campo-categoria" name="campo-categoria" readonly />
@@ -129,13 +131,9 @@
         <button onclick="fecharEdicao()" class="botao-acao-secundario cancelar" id="botao-cancelar" style="display:none">Cancelar</button>
         <p><strong>Importante:</strong> a previsão de despesas deve ser informada em valores negativos.</p>
       </div>
-      <div class="botao-menu-secundario" id="dica-edicao">
-        <p id="dica-edicao">💡 Dica: dê um clique-duplo em algum valor previsto para alterá-lo.</p>
-      </div>
 
-
-      <div id="caixa-orcamento" class="caixa">
-        <h2>Orçamento de valores previstos e executados</h2>
+      <div class="container uma-coluna">
+        <h2 class="titulo-container">Orçamento</h2>
 
         <table class="tabela orcamento">
 
@@ -709,10 +707,9 @@
     </main>
 
     </main>
+    
     <!-- Rodapé -->
-    <footer>
-      <?php include('partes-template/rodape.php') ?>
-    </footer>
+    <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/footer.php') ?>
 
   <?php //Caso o usuário não esteja logado, exibe o conteúdo abaixo em vez da página. 
   else :

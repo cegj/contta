@@ -7,19 +7,19 @@
   <link rel="stylesheet" href="/setup/login-cadastro-setup.css">
 </head>
 
+
 <body>
-  <!-- Cabeçalho -->
-  <header>
-    <?php include('partes-template/cabecalho.php') ?>
-  </header>
-  <main class="main-cadastro">
-  <div class="caixa login">
+<!-- Cabeçalho (barra superior) -->
+<?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/header.php') ?>
+
+<main class="main-cadastro">
+  <div class="box login">
     <form method="POST" action="cadastro_valida.php">
-      <label>Usuário:</label><input type="text" name="login" id="login"><br>
-      <label>Senha:</label><input type="password" name="senha" id="senha"><br>
-      <label>Código de autorização:</label><input type="password" name="cod_autorizacao" id="cod_autorizacao"><br>
+      <label>Usuário:</label><input type="text" name="login" id="login">
+      <label>Senha:</label><input type="password" name="senha" id="senha">
+      <label>Código de autorização:</label><input type="password" name="cod_autorizacao" id="cod_autorizacao">
       <div class="container-botao-entrar">
-      <input class="botao-entrar" type="submit" value="Cadastrar" id="cadastrar" name="cadastrar">
+      <input class="botao-acao-principal entrar" type="submit" value="Cadastrar" id="cadastrar" name="cadastrar">
       </div>
       <p class="text-cadastro"><a href="/login.php">Já tem um cadastro? Faça login.</a></p>
     </form>

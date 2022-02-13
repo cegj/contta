@@ -1,5 +1,11 @@
-<?php include('partes-template/includesiniciais.php');
+<?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
 
+
+if (isset($_GET['configurar']) && $_GET['configurar'] == true){
+  $configuracao = true;
+} else {
+  $configuracao = false;
+}
 
 if (isset($_GET['editar']) && $_GET['editar'] == true) {
   $edicao = true;
@@ -29,7 +35,6 @@ if (isset($_GET['editar']) && $_GET['editar'] == true) {
   <!-- Informações do head -->
   <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/head.php'); ?>
   <link rel="stylesheet" href="/categorias/categorias.css">
-  <!-- <link rel="stylesheet" href="/extrato/formulario_registrar.css"> -->
 </head>
 
 <body>
@@ -37,30 +42,31 @@ if (isset($_GET['editar']) && $_GET['editar'] == true) {
   <?php //Valida se o usuário está logado
   if (isset($login_cookie)) : ?>
 
-    <!-- Cabeçalho -->
-    <header>
-      <?php include('partes-template/cabecalho.php') ?>
-            <!-- Menu principal -->
-            <?php include('partes-template/menu.php') ?>
-    </header>
+    <!-- Cabeçalho (barra superior) -->
+    <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/header.php') ?>
 
-    <div class="container-form-mes-ano">
-        <!-- Formulário de definição de mês e ano -->
-        <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/form_mes_ano.php'); ?>
-      </div>
+    <main class="container-principal">
 
-    <main class="container-principal categorias-container">
+      <!-- Caixas de saldos -->
+      <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/saldos.php'); ?>
 
-    <?php if (tabela_nao_esta_vazia($bdConexao, 'categorias')) :
+      <!-- Opções -->
+      <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/opcoes.php'); ?>
+
+    <div class="container duas-colunas <?php if($configuracao == false) : ?>com-extrato<?php endif; ?>">
+
+      <?php if (tabela_nao_esta_vazia($bdConexao, 'categorias')) :
         ?>
-        <div class="caixa categorias-cadastradas">
-          <h2 class="inline-block">Categorias</h2><span class="botao-ver-ocultar">Ver / ocultar</span>
+        <div class="item-grid-principal">
+          <h2 class="titulo-container">Categorias</h2>
           <div class="container-tabela">
-          <table class="tabela categorias-cadastradas" id="tabela-categorias-cadastradas">
+          <table class="tabela">
             <tr>
-              <th class="linha-fixa filtrar-titulo">Categorias</th>
-              <th class="linha-fixa">Saldo (mês)</th>
-              <th class="linha-fixa">Editar</th>
+              <th <?php if ($configuracao != true) : ?> class="filtrar-titulo" <?php endif?>>
+                Título da categoria
+              </th>
+              <th >Saldo (mês)</th>
+              <?php if ($configuracao == true) : ?><th class='coluna-acoes'>Editar</th> <?php endif; ?>
             </tr>
             <tr>
               <?php
@@ -73,10 +79,14 @@ if (isset($_GET['editar']) && $_GET['editar'] == true) {
 
                 echo "<tr class='cat-principal'>
           <td class='td-cat-principal'>{$categoriaPrincipal['nome_cat']}</td>
-          <td>R$ {$saldoMesCatPrincipal}</td>
-          <td><a href='categorias.php?id={$categoriaPrincipal['id_cat']}&editar=true#form-categoria'><img class='icone-editar' alt='Editar' src='/img/icos/editar.svg'/></a>
-          </tr>
-          ";
+          <td>R$ {$saldoMesCatPrincipal}</td>";
+
+          if ($configuracao == true) {
+            echo "
+          <td class='coluna-acoes'><a href='categorias.php?id={$categoriaPrincipal['id_cat']}&configurar=true&editar=true#box-formulario'><img class='icone-editar' alt='Editar' src='/img/icos/editar.svg'/></a>";
+          }
+          
+          echo "</tr>";
 
                 $categoriasSecundarias = buscar_cat_secundaria($bdConexao, $categoriaPrincipal);
 
@@ -86,9 +96,13 @@ if (isset($_GET['editar']) && $_GET['editar'] == true) {
 
                   echo "<tr>
           <td class='td-cat-secundaria'><a class='filtrar' href='categorias.php?categoria={$categoriaSecundaria['id_cat']}'>{$categoriaSecundaria['nome_cat']} <img class='icone-filtrar' src='/img/icos/filtrar.svg'></a></td>
-          <td>R$ {$saldoMes}</td>
-          <td><a href='categorias.php?id={$categoriaSecundaria['id_cat']}&editar=true#form-categoria'><img class='icone-editar' alt='Editar' src='img/icos/editar.svg'/></a>
-          </tr>";
+          <td>R$ {$saldoMes}</td>";
+
+          if ($configuracao == true) {
+            echo "
+          <td class='coluna-acoes'><a href='categorias.php?id={$categoriaSecundaria['id_cat']}&configurar=true&editar=true#box-formulario'><img class='icone-editar' alt='Editar' src='img/icos/editar.svg'/></a></td>";
+          }
+          echo "</tr>";
                 endforeach;
 
               endforeach;
@@ -97,22 +111,24 @@ if (isset($_GET['editar']) && $_GET['editar'] == true) {
           </table>
           </div>
         <?php else : ?>
-
-          <p>Não há categorias cadastradas</p>
-
+          <div>
+            <p>Não há categorias cadastradas</p>
+          <div>
         <?php endif; ?>
       </div>
-
-    <div class="caixa extrato-categorias">
+    
+    <?php if ($configuracao != true) : ?>
+    <div class="extrato">
         <?php if(isset($_GET['categoria']) && isset($mes) && isset($ano)) : ?>
 
           <?php $catSelecionada = buscar_cat_especifica($bdConexao, $_GET['categoria']); 
           
           ?>
-
-          <h2 class="titulo extrato com-subtitulo">Extrato da categoria</h2>
-          <h3><?php echo $catSelecionada['nome_cat']?></h3>
-          <table class="tabela tabela-responsiva">
+          <div class="titulo extrato com-subtitulo">
+            <h2 class="titulo-container">Extrato da categoria</h2>
+            <h3><?php echo $catSelecionada['nome_cat']?></h3>
+          </div>
+          <table class="tabela extrato">
             <thead>
               <tr>
                 <th>Tipo</th>
@@ -155,26 +171,28 @@ if (isset($_GET['editar']) && $_GET['editar'] == true) {
             <p class="instrucao">Escolha uma categoria para ver o seu histórico no mês selecionado.</p>
           <?php endif; ?>
       </div>
+      <?php endif; ?>
 
+      <?php if ($configuracao == true) : ?>
       <div>
-      <div class="caixa cadastrar-categorias">
-        <?php if ($edicao == false) : 
-        ?>
-        <h2 class="titulo cadastrar">Cadastrar categorias</h2>
-        <?php else : ?>
-          <h2 class="titulo editar com-subtitulo">Editar categoria</h2>
-          <h3><?php echo $cat_edicao_nome; ?></h3>
-        <?php endif; ?>
-        <!-- Formulário -->
-        <?php include('categorias/formulario_cat.php') ?>
+        <div class="box-formulario" id="box-formulario">
+          <?php if ($edicao == false) : 
+          ?>
+          <h2 class="titulo-box">Cadastrar categorias</h2>
+          <?php else : ?>
+              <h2 class="titulo-box">Editar categoria</h2>
+              <h3><?php echo $cat_edicao_nome; ?></h3>
+          <?php endif; ?>
+          <!-- Formulário -->
+          <?php include('categorias/formulario_cat.php') ?>
       </div>
-        
+      <?php endif; ?>
+
         </div>
     </main>
-    <!-- Rodapé -->
-    <footer>
-      <?php include('partes-template/rodape.php') ?>
-    </footer>
+
+        <!-- Rodapé -->
+        <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/footer.php') ?>
 
   <?php //Caso o usuário não esteja logado, exibe o conteúdo abaixo em vez da página. 
   else :

@@ -1,0 +1,20 @@
+footer {
+  position: relative;
+  bottom: 0px;
+  margin-top: 40px;
+  text-align: center;
+}
+
+.menu-secundario ul {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+
+footer {
+  background-color: #f1f1f1;
+}
+
+.rodape {
+  padding: 10px 0px;
+}

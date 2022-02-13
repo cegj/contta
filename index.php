@@ -1,4 +1,4 @@
-<?php include('partes-template/includesiniciais.php'); ?>
+<?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php'); ?>
 
 <!DOCTYPE html>
 <html>
@@ -6,7 +6,7 @@
 <head>
   <!-- Informações do head -->
   <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/head.php'); ?>
-  <link rel="stylesheet" href="/extrato/index.css">
+  <link rel="stylesheet" href="/contas/contas.css">
 </head>
 
 <body>
@@ -14,29 +14,28 @@
   <?php //Valida se o usuário está logado
   if (isset($login_cookie)) : ?>
 
-    <!-- Cabeçalho -->
-    <header>
-      <?php include('partes-template/cabecalho.php') ?>
-      <!-- Menu principal -->
-      <?php include('partes-template/menu.php') ?>
-    </header>
-
-    <div class="container-form-mes-ano">
-        <!-- Formulário de definição de mês e ano -->
-        <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/form_mes_ano.php'); ?>
-      </div>
+    <!-- Cabeçalho (barra superior) -->
+    <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/header.php') ?>
 
     <main class="container-principal">
 
-      <div id="caixa-registrar" class="caixa registrar">
-        <h2 class="caixa-formulario-titulo titulo cadastrar">Fazer registro</h2>
+      <!-- Caixas de saldos -->
+      <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/saldos.php'); ?>
+
+      <!-- Opções -->
+      <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/opcoes.php'); ?>
+
+      <div class="container duas-colunas">
+
+      <div id="caixa-registrar" class="box formulario">
+        <h2 class="titulo-box">Fazer registro</h2>
         <!-- Formulário -->
         <?php
         $edicao = false;
         include($_SERVER["DOCUMENT_ROOT"] . '/extrato/formulario_registrar.php') ?>
       </div>
 
-      <div class="caixa ultimo-registro">
+      <div class="box informacoes">
       <?php $buscaUltimoRegistro = buscar_registros($bdConexao, null, $mes, $ano, false, true);
 
       if ($buscaUltimoRegistro != null) :
@@ -45,7 +44,7 @@
         $ultimoregistro = $registro; 
       }      
       ?>
-      <h2>Último registro efetuado</h2>
+      <h2 class="titulo-box">Último registro efetuado</h2>
       <dl>
         <dt>📝 Descrição:</dt>
         <dd><?php echo $ultimoregistro['descricao'] ?></dd>
@@ -74,9 +73,8 @@
     </main>
 
     <!-- Rodapé -->
-    <footer>
-      <?php include('partes-template/rodape.php') ?>
-    </footer>
+    <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/footer.php') ?>
+
 
   <?php //Caso o usuário não esteja logado, exibe o conteúdo abaixo em vez da página. 
   else :

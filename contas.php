@@ -1,4 +1,10 @@
-<?php include('partes-template/includesiniciais.php');
+<?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
+
+if (isset($_GET['configurar']) && $_GET['configurar'] == true) {
+  $configuracao = true;
+} else {
+  $configuracao = false;
+}
 
 if (isset($_GET['editar']) && $_GET['editar'] = true) {
   $edicao = true;
@@ -35,28 +41,26 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
   <?php //Valida se o usuário está logado
   if (isset($login_cookie)) : ?>
 
-    <!-- Cabeçalho -->
-    <header>
-      <?php include('partes-template/cabecalho.php') ?>
-      <!-- Menu principal -->
-      <?php include('partes-template/menu.php') ?>
-    </header>
+    <!-- Cabeçalho (barra superior) -->
+    <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/header.php') ?>
 
-    <div class="container-form-mes-ano">
-        <!-- Formulário de definição de mês e ano -->
-        <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/form_mes_ano.php'); ?>
-      </div>
+    <main class="container-principal">
 
-    <main class="container-principal contas-container">
+    <!-- Caixas de saldos -->
+    <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/saldos.php'); ?>
 
-    <div class="caixa visao-geral-contas">
-      <h2 class="caixa-formulario-titulo">Contas</h2>
+    <!-- Opções -->
+    <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/opcoes.php'); ?>
+
+    <div class="container duas-colunas <?php if($configuracao == false) : ?>com-extrato<?php endif; ?>">
+
+    <?php if ($configuracao != true) : ?>
+    <div class="item-grid-principal">
+      <h2 class="titulo-container">Contas</h2>
+      <div class="container-tabela">
       <table class="tabela">
         <tr>
-        <th class="filtrar-titulo" rowspan="2">Conta</th>
-        <th colspan="2">Saldo</th>
-        </tr>
-        <tr>
+          <th class="filtrar-titulo">Conta</th>
           <th>Mês</th>
           <th>Acumulado</th>
         </tr>
@@ -85,34 +89,18 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
         ?>
       </table>
       </div>
+      </div>
 
-    <div class="caixa extrato-contas">
+      <div class="caixa extrato-contas">
         <?php if(isset($_GET['conta']) && isset($mes) && isset($ano)) : ?>
 
           <?php $contaSelecionada = buscar_conta_especifica($bdConexao, $_GET['conta']); ?>
 
-          <h2 class="titulo extrato com-subtitulo">Extrato da conta</h2>
+          <h2 class="titulo-container">Extrato da conta</h2>
           <h3><?php echo $contaSelecionada['conta']?></h3>
 
-          <div class="dentro-caixa">
-          <span class="resultado-extrato">Resultado do mês: <strong>
-              <?php
-              $resultadoMes = calcula_resultado($bdConexao, $mes, $ano, 'CSM', $_GET['conta']);
-              echo "R$ " . $resultadoMes;
-              ?>
-            </strong>
-          </span>
-          <br>
-          <span class="resultado-extrato">Resultado acumulado: <strong>
-              <?php
-              $resultadoTotal = calcula_resultado($bdConexao, $mes, $ano, 'CAM', $_GET['conta']);
-              echo "R$ " . $resultadoTotal;
-              ?>
-            </strong>
-          </span>
-        </div>
           <div class="container-tabela">
-          <table class="tabela tabela-responsiva">
+          <table class="tabela extrato">
             <thead>
               <tr>
                 <th class="linha-fixa">Tipo</th>
@@ -156,22 +144,13 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
             <p class="instrucao">Escolha uma conta para ver o seu histórico no mês selecionado.</p>
             <?php endif; ?>
             </div>
-
-      <div class="caixa">
-        <?php if ($edicao == false) :
-        ?>
-          <h2 class="titulo cadastrar">Cadastrar conta</h2>
-        <?php else : ?>
-          <h2 class="titulo editar com-subtitulo">Editar conta:</h2>
-          <h3><?php echo $conta_edicao_nome; ?></h3>
         <?php endif; ?>
-        <!-- Formulário -->
-        <?php include($_SERVER["DOCUMENT_ROOT"] . '/contas/formulario_contas.php') ?>
-      </div>
-      <div class="caixa">
+
+    <?php if ($configuracao == true) : ?>
+      <div class="item-grid-principal">
         <?php if (tabela_nao_esta_vazia($bdConexao, 'contas')) :
         ?>
-          <h2 class="inline-block">Detalhes das contas</h2><span class="botao-ver-ocultar">Ver / ocultar</span>
+          <h2 class="titulo inline-block">Detalhes das contas</h2>
           <table class="tabela tabela-responsiva" id="tabela-contas-cadastradas">
             <thead>
               <tr>
@@ -195,7 +174,7 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
           <td class='td-conta'>{$conta['tipo_conta']}</td>
           <td class='td-conta'>R$ {$saldoInicialFormatado}</td>
           <td class='td-conta'>{$exibir}</td>
-          <td><a href='contas.php?id={$conta['id_con']}&editar=true#form-contas'><img class='icone-editar' alt='Editar' src='/img/icos/editar.svg'/></a>
+          <td><a href='contas.php?id={$conta['id_con']}&configurar=true&editar=true#box-formulario'><img class='icone-editar' alt='Editar' src='/img/icos/editar.svg'/></a>
           </tr>
           ";
 
@@ -203,6 +182,19 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
               ?>
             </tbody>
           </table>
+            </div>
+
+          <div class="box-formulario" id="box-formulario">
+        <?php if ($edicao == false) :
+        ?>
+          <h2 class="titulo-box">Cadastrar conta</h2>
+        <?php else : ?>
+          <h2 class="titulo-box">Editar conta:</h2>
+          <h3><?php echo $conta_edicao_nome; ?></h3>
+        <?php endif; ?>
+        <!-- Formulário -->
+        <?php include($_SERVER["DOCUMENT_ROOT"] . '/contas/formulario_contas.php') ?>
+      </div>
 
         <?php else : ?>
 
@@ -210,11 +202,11 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
 
         <?php endif; ?>
       </div>
+      <?php endif; ?>
     </main>
+    
     <!-- Rodapé -->
-    <footer>
-      <?php include('partes-template/rodape.php') ?>
-    </footer>
+    <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/footer.php') ?>
 
   <?php //Caso o usuário não esteja logado, exibe o conteúdo abaixo em vez da página. 
   else :
@@ -229,9 +221,7 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
 
   <script src="/contas/contas.js" defer></script>
 
-</body>
-
-<script type="text/javascript">
+  <script type="text/javascript">
   //Pinta o valor conforme o tipo de transação no extrato
 
   var extratoTipo = document.getElementsByClassName('linha-extrato-tipo');
@@ -247,5 +237,9 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
     }
   }
 </script>
+
+<script src="/contas/contas.js" type="text/javascript"></script>
+
+</body>
 
 </html>

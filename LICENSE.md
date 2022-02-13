@@ -1,1 +1,0 @@
-Todos os direitos reservados. O [autor](https://github.com/cegj) permite a instalação da aplicação, a utilização para fins pessoais e a modificação do código para uso pessoal, mas não permite: o uso comercial da aplicação e a distribuição de versões modificadas.

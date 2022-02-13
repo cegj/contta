@@ -1,24 +1,26 @@
 .main-login, .main-cadastro{
-  display: grid;
+  display: flex;
   max-width: 800px;
-  grid-template-columns: 1fr;
-  margin: auto;
+  margin: 0 auto;
+  justify-content: center;
+  gap: 40px;
 }
 
-.main-cadastro{
+/* .main-cadastro{
   grid-template-columns: 1fr 1fr;
-}
+} */
 
 .login {
   max-width: 400px;
-  justify-self: center;
+  background-image: linear-gradient(#ffffff, #e0ffcd);
 }
 
 .login form {
   display: grid;
-  gap: 5px;
+  gap: 20px;
   grid-template-columns: 1fr 2fr;
   font-size: 1.2rem;
+  align-items: center;
 }
 
 .login form label {
@@ -30,6 +32,8 @@
   grid-column: 2;
   height: 30px;
   align-self: center;
+  border: 1px solid #7ca860;
+  border-radius: 4px;
 }
 
 .container-botao-entrar {
@@ -43,17 +47,17 @@
   grid-column: 1 / -1;
   justify-content: center;
   text-decoration: none;
+  margin: 0;
 }
 
-.botao-entrar {
+.botao-acao-principal.entrar {
   width: 50%;
   height: 40px !important;
   margin: 10px 0px;
   padding: 10px;
-  background-color: #021329;
-  color: #fff;
   font-size: 1.1rem;
   text-transform: uppercase;
+  border: none;
 }
 
 .botao-entrar:hover {

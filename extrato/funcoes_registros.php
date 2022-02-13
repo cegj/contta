@@ -410,8 +410,69 @@ function apagar_registro($bdConexao, $registro, $id_reg, $editarParcelas=false)
 
 //CALCULAR RESULTADO DO EXTRATO
 
-function calcula_resultado($bdConexao, $mes, $ano, $tipo, $conta=null, $catEspecifica=null, $dia=null)
+function calcula_resultado($bdConexao, $mes, $ano, $tipo, $conta=null, $categoria=null, $dia=null)
 {
+
+  // Se conta estiver definida, filtrar pela conta
+  if (isset($conta)){
+    $filtraConta = "contas.id_con = '{$conta}'";
+    } else {
+      $filtraConta = "contas.exibir = 1";
+    }
+  
+  // Se categoria estiver definida, filtrar pela categoria
+  if (isset($categoria)){
+    $filtraCategoria = "and categorias.id_cat = '{$categoria}'";
+    } else {
+      $filtraCategoria = "";
+    }  
+
+  //SSM - Saldo Só Mês: só do mês selecionado
+
+  if ($tipo == 'SSM') {
+
+    $bdSomar = "
+      SELECT sum(valor) FROM extrato
+      LEFT JOIN categorias ON extrato.id_categoria = categorias.id_cat
+      INNER JOIN contas ON extrato.id_conta = contas.id_con
+      WHERE MONTH(data) = '{$mes}'
+            and YEAR(data) = '{$ano}' and
+            {$filtraConta}
+            {$filtraCategoria}
+      ORDER BY data ASC;
+      ";
+  }
+
+  //SAM - Saldo Acumulado Mês: todos os meses até o atual
+
+  if ($tipo == 'SAM') {
+
+    $bdSomar = "
+      SELECT sum(valor) FROM extrato
+      LEFT JOIN categorias ON extrato.id_categoria = categorias.id_cat
+      INNER JOIN contas ON extrato.id_conta = contas.id_con
+      WHERE MONTH(data) <= '{$mes}'
+            and YEAR(data) <= '{$ano}' and
+            {$filtraConta}
+            {$filtraCategoria}
+      ORDER BY data ASC;
+      ";
+  }
+
+  //SAG - Saldo Acumulado Geral: saldo total incluindo todos os valores passados e futuros
+
+  if ($tipo == 'SAG'){
+
+    $bdSomar = "
+    SELECT sum(valor) FROM extrato
+    LEFT JOIN categorias ON extrato.id_categoria = categorias.id_cat
+    INNER JOIN contas ON extrato.id_conta = contas.id_con
+    WHERE {$filtraConta}
+          {$filtraCategoria}
+    ORDER BY data ASC;
+    ";
+  }
+
 
   //A função recebe os seguintes tipos:
   //VTG (valor total geral) = Calcula o resultado acumulado total, independentemente de mês
@@ -424,8 +485,8 @@ function calcula_resultado($bdConexao, $mes, $ano, $tipo, $conta=null, $catEspec
   //CTO (conta total) = Apura resultado da conta indicada como parâmetro no total
   //OCP (orçamento categoria principal) == Apura a soma de determinada categoria principal no mês
 
-  if (isset($catEspecifica)){
-    $incluiCatEspecifica = "and id_cat = '{$catEspecifica}'";
+  if (isset($categoria)){
+    $incluiCatEspecifica = "and id_cat = '{$categoria}'";
   } else {
     $incluiCatEspecifica = "";
   }
@@ -520,7 +581,7 @@ function calcula_resultado($bdConexao, $mes, $ano, $tipo, $conta=null, $catEspec
   SELECT sum(valor) FROM extrato
   LEFT JOIN categorias ON extrato.id_categoria = categorias.id_cat
   INNER JOIN contas ON extrato.id_conta = contas.id_con
-  WHERE MONTH(data) = '{$mes}' and YEAR(data) = '{$ano}' and contas.exibir = 1 and categorias.cat_principal = '{$catEspecifica}'
+  WHERE MONTH(data) = '{$mes}' and YEAR(data) = '{$ano}' and contas.exibir = 1 and categorias.cat_principal = '{$categoria}'
   ORDER BY data ASC;
   ";
   }

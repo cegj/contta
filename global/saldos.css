@@ -1,0 +1,28 @@
+.caixas-saldos {
+  display: flex;
+  gap: 30px;
+  justify-content: space-around;
+  padding: 40px 0px;
+}
+
+.caixa-saldo {
+  background: linear-gradient(#389638, #307230);
+  width: 250px;
+  padding: 12px 20px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  cursor: default;
+}
+
+.caixa-saldo h3 {
+  font-family: 'Open Sans';
+  color: #fafafa;
+  font-style: italic;
+  font-size: 1rem;
+}
+
+.caixa-saldo .valor {
+  font-size: 2rem;
+  color: #ffffff;
+}
+

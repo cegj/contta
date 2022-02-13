@@ -1,12 +1,6 @@
-botaoVerOcultar = document.getElementsByClassName('botao-ver-ocultar');
-tabelaContasCadastradas = document.getElementById('tabela-contas-cadastradas');
-radioApagar = document.getElementsByClassName('apagar');
-alertaApagar = document.getElementById('alerta-apagar');
-botaoLimparSelecao = document.getElementById('limpar-selecao');
-
-tabelaContasCadastradas.style.display = "none";
-
-botaoVerOcultar[0].addEventListener('click',function(){mostrarOcultar(tabelaContasCadastradas)})
+  radioApagar = document.getElementsByClassName['apagar']
+  botaoLimparSelecao = document.getElementById['limpar-selecao']
+  alertaApagar = document.getElementById['alerta-apagar']
 
   radioApagar[0].addEventListener('change', function(){
     if (radioApagar[0].checked){

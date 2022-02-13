@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Open+Sans:ital,wght@0,300;0,400;0,700;1,300&family=Roboto:wght@400;500&family=Ubuntu:wght@300;400&display=swap');
+
+@import url("/global/global.css");
+@import url("/global/header.css");
+@import url("/global/saldos.css");
+@import url("/global/opcoes.css");
+@import url("/global/form-mes-ano.css");
+@import url("/global/tabelas.css");
+@import url("/global/icones.css");
+@import url("/global/titulos.css");
+@import url("/global/footer.css");
+@import url("/global/formularios.css");
+@import url("/global/botoes.css");
+@import url("/extrato/formulario_registrar.css");

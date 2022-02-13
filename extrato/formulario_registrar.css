@@ -2,7 +2,18 @@
   background-color: #ffeeec;
 }
 
-.container-edicao-parcelas {
+.container-edicao-parcelas::before {
+  content:"";
+  background-image: url(/img/icos/seguinte.svg);
+  background-repeat: no-repeat;
+  background-size:contain;
+  background-position: center;
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  margin-left: 10px;
+  position: relative;
+  top: 2px;
 }
 
 .container-edicao-parcelas {
@@ -12,4 +23,20 @@
 #valor {
   background-color: #ad2f1b;
   color: #fff;
+}
+
+.container-formulario-registrar-transacao-opcoes {
+  position: relative;
+  z-index: 2;
+  display: none;
+}
+
+.box.formulario.modal {
+  position: absolute;
+  left: 60px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+}
+
+.exibir {
+  display: block;
 }

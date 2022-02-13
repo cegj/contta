@@ -8,7 +8,6 @@
   }
 </script>
 
-<!-- Mudar classe das tags form quando for estilizar -->
 <form id="form-categoria" class="form-cadastrar-editar" action="" method="POST">
   <?php if($edicao == true){
     echo "<input class='campo-id-edicao' type='text' name='id' value='{$id_cat}' class='input-id' readonly>";

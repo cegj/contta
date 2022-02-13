@@ -20,24 +20,23 @@ if (nao_existem_tabelas($bdConexao)) :
 ?>
 
 
-    <!-- Cabeçalho -->
-    <header>
-      <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/cabecalho.php') ?>
-    </header>
+<!-- Cabeçalho (barra superior) -->
+<?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/header.php') ?>
+
     <main class="main-cadastro">
-    <div class="caixa login">
+    <div class="box login">
       <p class="text-apresentacao"><strong>Configurar usuário administrador</strong><br/>
       Antes de começar, precisamos fazer uma rápida configuração inicial, que consiste na criação do seu nome de usuário, senha e código de autorização para o cadastro posterior de novos usuários.</p>
       <form method="POST" action="setup_validar.php">
-        <label>Usuário:</label><input type="text" name="usuario" id="usuario"><br>
-        <label>Senha:</label><input type="password" name="senha" id="senha"><br>
-        <label>Código de autorização:</label><input type="password" name="cod_autorizacao" id="cod_autorizacao"><br>
+        <label>Usuário:</label><input type="text" name="usuario" id="usuario">
+        <label>Senha:</label><input type="password" name="senha" id="senha">
+        <label>Código de autorização:</label><input type="password" name="cod_autorizacao" id="cod_autorizacao">
         <div class='div-checkbox input-lista-padrao-categorias'>
-          <input type='checkbox' name='preConfigurarCats' value='true'>
+          <input type='checkbox' name='preConfigurarCats' id="preConfigurarCats" value='true'>
           <label for='preConfigurarCats'>Pré-configurar lista de categorias <a href="">(entenda)</a></label>
         </div>
         <div class="container-botao-entrar">
-        <input class="botao-entrar" type="submit" value="Cadastrar" id="cadastrar" name="cadastrar">
+        <input class="botao-acao-principal entrar" type="submit" value="Cadastrar" id="cadastrar" name="cadastrar">
         </div>
       </form>
     </div>

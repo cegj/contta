@@ -1,0 +1,41 @@
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  cursor:default;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td, tr {
+  padding: 11px;
+  margin: 0px;
+}
+
+th {
+  text-align: left;
+}
+
+
+/* tr:nth-child(even) {background: #fafafa}
+tr:nth-child(odd) {background: #f8f8f8} */
+
+tr:hover{
+  background-color: #f8f8f8;
+}
+
+.tabela {
+  width: 100%;
+  cursor:default;
+}
+
+.coluna-acoes {
+  text-align: center;
+}
+
+.extrato {
+  font-family: 'Roboto', sans-serif;
+}

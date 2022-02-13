@@ -15,7 +15,7 @@ $login_cookie = $_COOKIE['login'];
 $mesHoje = date('m');
 $anoHoje = date('Y');
 
-if (isset($_POST['tudo']) && $_POST['tudo'] == true){
+if (isset($_GET['tudo']) && $_GET['tudo'] == true){
   $tudo = true;
   $mes = "";
   $ano = "";

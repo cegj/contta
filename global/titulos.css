@@ -1,0 +1,71 @@
+h1, h2, h3 {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.titulo-box {
+  padding-bottom: 15px;
+}
+
+.titulo-container {
+  padding-left: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+/* .titulo.cadastrar::before{
+  content:"";
+  background-image: url(/img/icos/cadastrar.svg);
+  background-repeat: no-repeat;
+  background-size:contain;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  position: relative;
+  top: 2px;
+} */
+
+/* .titulo.cadastrar.com-subtitulo::before{
+  top: 13px;
+}
+
+/* .titulo.editar::before{
+  content:"";
+  background-image: url(/img/icos/editar.svg);
+  background-repeat: no-repeat;
+  background-size:contain;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  position: relative;
+  top: 2px;
+} */
+
+/* .titulo.extrato::before{
+  content:"";
+  background-image: url(/img/icos/extrato.svg);
+  background-repeat: no-repeat;
+  background-size:contain;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  position: relative;
+  top: 2px;
+} */
+
+/* .titulo.editar.com-subtitulo, .titulo.extrato.com-subtitulo {
+  position: relative; 
+}
+
+/* .titulo.editar.com-subtitulo::before,
+.titulo.extrato.com-subtitulo::before{
+  position: absolute;
+  top: 33px;
+  left: -13px;
+} */
+
+/* .com-subtitulo {
+  padding-bottom: 0px;
+} */

@@ -37,11 +37,11 @@
   <?php if ($edicao == true) : ?>
     <div class="div-radio container-apagar ocupar-todas-colunas">
       <input type='radio' id='apagar-remove' class='apagar' name='apagar' value='remove-registros' />
-      <label for='apagar-remove' class='label-apagar'>Apagar conta e <strong>remover</strong> todo o histórico</label>
+      <label for='apagar-remove' class='label-apagar'>Apagar conta e <strong>remover</strong> histórico</label>
   </div>
       <div class="div-radio container-apagar ocupar-todas-colunas">
       <input type='radio' id='apagar-mantem' class='apagar' name='apagar' value='mantem-registros' />
-      <label for='apagar-mantem' class='label-apagar'>Apagar conta, mas <strong>manter</strong> todo o histórico</label>
+      <label for='apagar-mantem' class='label-apagar'>Apagar conta e <strong>manter</strong> histórico</label>
     </div>
   <?php endif; ?>
 
@@ -50,7 +50,7 @@
     <button class="botao-acao-principal" type="submit">Confirmar alteração</button>
     </div>
 
-    <span class="info-box formulario" id="alerta-apagar">Cuidado: apagar uma conta é um procedimento irreversível. Caso queira somente deixar de exibir a conta e suas movimentações, desmarque a opção "Exibir" em vez de apagar. <br>
+    <span class="info-box formulario" id="alerta-apagar"><strong>Cuidado:</strong> apagar uma conta é irreversível. Caso queira somente deixar de exibir a conta e suas movimentações, desmarque a opção "Exibir conta" em vez de apagar. <br>
     <span id="limpar-selecao" class="botao-acao-secundario cancelar">Limpar seleção</span></span>
 
     <?php else : ?>

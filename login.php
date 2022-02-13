@@ -8,17 +8,17 @@
 </head>
 
 <body>
-  <!-- Cabeçalho -->
-  <header>
-    <?php include('partes-template/cabecalho.php') ?>
-  </header>
-  <main class="main-login">
-    <div class="caixa login">
+
+<!-- Cabeçalho (barra superior) -->
+    <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/header.php') ?>
+
+    <main class="main-login">
+    <div class="box login">
       <form method="POST" action="login_valida.php">
-        <label>Usuário:</label><input type="text" name="login" id="login"><br>
-        <label>Senha:</label><input type="password" name="senha" id="senha"><br>
+        <label>Usuário:</label><input type="text" name="login" id="login">
+        <label>Senha:</label><input type="password" name="senha" id="senha">
         <div class="container-botao-entrar">
-          <input class="botao-entrar" type="submit" value="Entrar" id="entrar" name="entrar"><br>
+          <input class="botao-acao-principal entrar" type="submit" value="Entrar" id="entrar" name="entrar"><br>
         </div>
         <p class="text-cadastro"><a href="/cadastro.php">Tem um código de autorização? Cadastre-se.</a></p>
       </form>

@@ -3,28 +3,15 @@
 include 'bd.php';
 
 
-$bdBuscarId = "
-SELECT id_cat FROM categorias ORDER BY id_cat
-";
+$usuarios = buscar_usuarios($bdConexao);
 
-$resultado = mysqli_query($bdConexao, $bdBuscarId);
-
-$idCats = array();
-
-while ($idCat = mysqli_fetch_assoc($resultado)) {
-  $idCats[] = $idCat;
+foreach ($usuarios as $usuario){
+  echo $usuario['login'];
+  echo $usuario['administrador'];
 }
 
-echo count($idCats);
+$protocolo = (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS']=="on") ? "https" : "http");
+$url = $_SERVER['SCRIPT_NAME'].'?'.$_SERVER['QUERY_STRING'];
 
-// $linhas[] = mysqli_fetch_assoc($resultado);
-
-// foreach ($linhas as $linha) {
-//   $idCats[] = $linha['id_cat'];
-// }
-
-foreach ($idCats as $idCat){
-  echo $idCat['id_cat'];
-}
-
+echo $url; 
 ?>
