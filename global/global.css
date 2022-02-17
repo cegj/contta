@@ -175,3 +175,7 @@ dd {
 .extrato{
   width: 100%;
 }
+
+.choices {
+  font-family: "Roboto", sans-serif !important;
+}

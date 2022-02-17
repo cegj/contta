@@ -4,13 +4,8 @@
   }
 </script>
 
-<head>
 <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php'); 
-
 $edicao = false; ?>
-<link rel="stylesheet" href="/orcamento/orcamento.css">
-
-</head>
 
 <!DOCTYPE html>
 <html>
@@ -18,7 +13,7 @@ $edicao = false; ?>
 <head>
   <!-- Informações do head -->
   <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/head.php'); ?>
-  <link rel="stylesheet" href="/extrato/extrato.css">
+  <link rel="stylesheet" href="/orcamento/orcamento.css">
 </head>
 
 <body>
@@ -164,6 +159,8 @@ $edicao = false; ?>
 
             </tr>
             <tr>
+
+              <?php $acumuladoAnoPrevisto = 0; ?>
 
               <?php for ($i = 1; $i <= 6; $i++) : ?>
 
@@ -350,16 +347,22 @@ $edicao = false; ?>
 
               <td
               name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>"
-              class="resultado-previsto"
+              class="resultado-previsto
+                    <?php if (verificaMesSelecionado($meses[$i], $mes)) {echo "mes-selecionado";} ?>"
               >
               
-               <?php echo formata_valor(somar_gasto_previsto($bdConexao, $meses[$i])) ?>
+               <?php $acumuladoAnoPrevisto = $acumuladoAnoPrevisto + somar_gasto_previsto($bdConexao, $meses[$i]);
+               
+               echo formata_valor($acumuladoAnoPrevisto); 
+               
+               ?>
               
               </td>
 
               <td
               name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>"
-              class="resultado-executado"
+              class="resultado-executado
+                     <?php if (verificaMesSelecionado($meses[$i], $mes)) {echo "mes-selecionado";} ?>"
               >
               
                 <?php echo formata_valor(calcula_resultado($bdConexao, $i + 1, $ano, 'SAM')) ?>
@@ -586,13 +589,16 @@ $edicao = false; ?>
                   <?php if (verificaMesSelecionado($meses[$i], $mes)) {echo "mes-selecionado";} ?>"
             >
             
-              <?php echo formata_valor(somar_gasto_previsto($bdConexao, $meses[$i])) ?>
+            <?php $acumuladoAnoPrevisto = $acumuladoAnoPrevisto + somar_gasto_previsto($bdConexao, $meses[$i]);
+               
+               echo formata_valor($acumuladoAnoPrevisto);  ?>
           
             </td>
 
             <td
             name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>"
-            class="resultado-executado <?php if (verificaMesSelecionado($meses[$i], $mes)) {echo "mes-selecionado";} ?>"
+            class="resultado-executado
+            <?php if (verificaMesSelecionado($meses[$i], $mes)) {echo "mes-selecionado";} ?>"
             >
             
               <?php echo formata_valor(calcula_resultado($bdConexao, $i + 1, $ano, 'SAM')) ?>

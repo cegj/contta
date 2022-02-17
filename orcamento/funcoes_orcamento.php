@@ -33,7 +33,7 @@ function alterar_valor_orcamento($bdConexao, $catEmEdicao, $mesEmEdicao, $novoVa
   $resultado = mysqli_query($bdConexao, $bdAlterar);
 }
 
-function somar_gasto_previsto($bdConexao, $mes, $catEspecifica = null)
+function somar_gasto_previsto($bdConexao, $mes, $catEspecifica = null, $acumulado = false)
 {
 
   if (isset($catEspecifica)) {
