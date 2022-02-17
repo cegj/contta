@@ -58,11 +58,6 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
     <div class="item-grid-principal">
       <h2 class="titulo-container">Contas</h2>
       <table class="tabela">
-        <tr>
-          <th class="filtrar-titulo">Conta</th>
-          <th>Mês</th>
-          <th>Acumulado</th>
-        </tr>
         <?php
         $contas = buscar_contas($bdConexao);
 
@@ -79,7 +74,6 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
 
           echo "<tr>
           <td class='td-conta'><a class='filtrar' href='/contas.php?conta={$conta['id_con']}'>{$conta['conta']} <img class='icone-filtrar' src='/img/icos/filtrar.svg'></a></td>
-          <td class='td-conta'>R$ {$saldoMes}</td>
           <td class='td-conta'>R$ {$saldoAcumulado}</td>
           </tr>
           ";
@@ -89,17 +83,17 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
       </table>
       </div>
 
-      <div class="caixa extrato-contas">
+      <div class="item-grid-secundario">
 
         <?php 
         
         if(isset($_GET['conta']) && isset($mes) && isset($ano)) : ?>
 
           <?php $contaSelecionada = buscar_conta_especifica($bdConexao, $_GET['conta']); ?>
-
-          <h2 class="titulo-container">Extrato da conta</h2>
-          <h3><?php echo $contaSelecionada['conta']?></h3>
-
+          <div class="container-titulo-subtitulo">
+            <h2 class="titulo-container titulo-extrato com-subtitulo">Extrato da conta</h2>
+            <h3 class="subtitulo-container"><?php echo $contaSelecionada['conta']?></h3>
+        </div>
           <table class="tabela extrato compacto tabela-responsiva">
             <thead>
               <tr>
@@ -176,7 +170,7 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
       <div class="item-grid-principal">
         <?php if (tabela_nao_esta_vazia($bdConexao, 'contas')) :
         ?>
-          <h2 class="titulo inline-block">Detalhes das contas</h2>
+          <h2 class="titulo-container">Configuração das contas</h2>
           <table class="tabela tabela-responsiva" id="tabela-contas-cadastradas">
             <thead>
               <tr>
@@ -184,7 +178,7 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
                 <th>Tipo</th>
                 <th>Saldo inicial</th>
                 <th>Exibir</th>
-                <th>Editar</th>
+                <th class="coluna-acoes">Ações</th>
               </tr>
             </thead>
             <tbody>
@@ -196,11 +190,11 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
                 $saldoInicialFormatado = formata_valor($conta['saldo_inicial']);
 
                 echo "<tr>
-          <td class='td-conta'><a href='/contas.php?conta={$conta['id_con']}'>{$conta['conta']}</a></td>
+          <td class='td-conta'>{$conta['conta']}</td>
           <td class='td-conta'>{$conta['tipo_conta']}</td>
           <td class='td-conta'>R$ {$saldoInicialFormatado}</td>
           <td class='td-conta'>{$exibir}</td>
-          <td><a href='contas.php?id={$conta['id_con']}&configurar=true&editar=true#box-formulario'><img class='icone-editar' alt='Editar' src='/img/icos/editar.svg'/></a>
+          <td class='coluna-acoes'><a href='contas.php?id={$conta['id_con']}&configurar=true&editar=true#header'><img class='icone-editar' alt='Editar' src='/img/icos/editar.svg'/></a>
           </tr>
           ";
 
@@ -213,10 +207,12 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
           <div class="box formulario" id="box-formulario">
         <?php if ($edicao == false) :
         ?>
-          <h2 class="titulo-box">Cadastrar conta</h2>
+           <h2 class="titulo-box cadastrar">Cadastrar conta</h2>
         <?php else : ?>
-          <h2 class="titulo-box">Editar conta:</h2>
-          <h3><?php echo $conta_edicao_nome; ?></h3>
+        <div class="container-titulo-subtitulo">
+          <h2 class="titulo-container titulo-editar com-subtitulo">Editar conta:</h2>
+          <h3 class="subtitulo-container"><?php echo $conta_edicao_nome; ?></h3>
+        </div>
         <?php endif; ?>
         <!-- Formulário -->
         <?php include($_SERVER["DOCUMENT_ROOT"] . '/contas/formulario_contas.php') ?>

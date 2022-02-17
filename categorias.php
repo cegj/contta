@@ -58,16 +58,21 @@ if (isset($_GET['editar']) && $_GET['editar'] == true) {
       <?php if (tabela_nao_esta_vazia($bdConexao, 'categorias')) :
         ?>
         <div class="item-grid-principal">
+        <?php if ($configuracao == true) : ?>
+          <h2 class="titulo-container">Configuração das categorias</h2>
+        <?php else: ?>
           <h2 class="titulo-container">Categorias</h2>
+        <?php endif; ?>
           <div class="container-tabela">
           <table class="tabela">
-            <tr>
-              <th <?php if ($configuracao != true) : ?> class="filtrar-titulo" <?php endif?>>
-                Título da categoria
-              </th>
-              <th >Saldo (mês)</th>
-              <?php if ($configuracao == true) : ?><th class='coluna-acoes'>Editar</th> <?php endif; ?>
-            </tr>
+          <?php if($configuracao == true) : ?>
+          <thead>
+          <tr>
+            <th>Título da categoria</th>
+            <th class="coluna-acoes">Ações</th>
+          </tr>
+          </thead>
+          <?php endif; ?>
             <tr>
               <?php
               $categoriasPrincipais = buscar_cat_principal($bdConexao);
@@ -78,29 +83,46 @@ if (isset($_GET['editar']) && $_GET['editar'] == true) {
 
 
                 echo "<tr class='cat-principal'>
-          <td class='td-cat-principal'>{$categoriaPrincipal['nome_cat']}</td>
-          <td>R$ {$saldoMesCatPrincipal}</td>";
+          <td class='td-cat-principal'>{$categoriaPrincipal['nome_cat']}</td>";
+
+          if ($configuracao != true) :
+
+          echo "<td>R$ {$saldoMesCatPrincipal}</td>";
+          
+          endif; 
 
           if ($configuracao == true) {
             echo "
-          <td class='coluna-acoes'><a href='categorias.php?id={$categoriaPrincipal['id_cat']}&configurar=true&editar=true#box-formulario'><img class='icone-editar' alt='Editar' src='/img/icos/editar.svg'/></a>";
+          <td class='coluna-acoes'><a href='categorias.php?id={$categoriaPrincipal['id_cat']}&configurar=true&editar=true#header'><img class='icone-editar' alt='Editar' src='/img/icos/editar.svg'/></a>";
           }
           
           echo "</tr>";
-
+            
                 $categoriasSecundarias = buscar_cat_secundaria($bdConexao, $categoriaPrincipal);
 
                 foreach ($categoriasSecundarias as $categoriaSecundaria) :
 
                   $saldoMes = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SSM', null, $categoriaSecundaria['id_cat']));
 
-                  echo "<tr>
-          <td class='td-cat-secundaria'><a class='filtrar' href='categorias.php?categoria={$categoriaSecundaria['id_cat']}'>{$categoriaSecundaria['nome_cat']} <img class='icone-filtrar' src='/img/icos/filtrar.svg'></a></td>
-          <td>R$ {$saldoMes}</td>";
+                  echo "<tr>";
+
+          if ($configuracao != true) :
+            echo "<td class='td-cat-secundaria'><a class='filtrar' href='categorias.php?categoria={$categoriaSecundaria['id_cat']}'>{$categoriaSecundaria['nome_cat']} <img class='icone-filtrar' src='/img/icos/filtrar.svg'></a></td>";
+          
+          else:
+            echo "<td class='td-cat-secundaria'>{$categoriaSecundaria['nome_cat']}</td>";
+
+          endif;
+
+          if ($configuracao != true) :
+
+          echo "<td>R$ {$saldoMes}</td>";
+
+          endif;
 
           if ($configuracao == true) {
             echo "
-          <td class='coluna-acoes'><a href='categorias.php?id={$categoriaSecundaria['id_cat']}&configurar=true&editar=true#box-formulario'><img class='icone-editar' alt='Editar' src='img/icos/editar.svg'/></a></td>";
+          <td class='coluna-acoes'><a href='categorias.php?id={$categoriaSecundaria['id_cat']}&configurar=true&editar=true#header'><img class='icone-editar' alt='Editar' src='img/icos/editar.svg'/></a></td>";
           }
           echo "</tr>";
                 endforeach;
@@ -118,15 +140,15 @@ if (isset($_GET['editar']) && $_GET['editar'] == true) {
       </div>
     
     <?php if ($configuracao != true) : ?>
-    <div class="extrato">
+      <div class="item-grid-secundario">
         <?php if(isset($_GET['categoria']) && isset($mes) && isset($ano)) : ?>
 
           <?php $catSelecionada = buscar_cat_especifica($bdConexao, $_GET['categoria']); 
           
           ?>
-          <div class="titulo extrato com-subtitulo">
-            <h2 class="titulo-container">Extrato da categoria</h2>
-            <h3><?php echo $catSelecionada['nome_cat']?></h3>
+          <div class="container-titulo-subtitulo">
+            <h2 class="titulo-container titulo-extrato com-subtitulo">Extrato da categoria</h2>
+            <h3 class="subtitulo-container"><?php echo $catSelecionada['nome_cat']?></h3>
           </div>
           <div class="container-tabela">
           <table class="tabela extrato compacto tabela-responsiva">
@@ -204,10 +226,12 @@ if (isset($_GET['editar']) && $_GET['editar'] == true) {
         <div class="box formulario" id="box-formulario">
           <?php if ($edicao == false) : 
           ?>
-          <h2 class="titulo-box">Cadastrar categoria</h2>
+          <h2 class="titulo-box cadastrar">Cadastrar categoria</h2>
           <?php else : ?>
-              <h2 class="titulo-box">Editar categoria</h2>
-              <h3><?php echo $cat_edicao_nome; ?></h3>
+            <div class="container-titulo-subtitulo">
+              <h2 class="titulo-container titulo-editar com-subtitulo">Editar categoria</h2>
+              <h3 class="subtitulo-container"><?php echo $cat_edicao_nome; ?></h3>
+          </div>
           <?php endif; ?>
           <!-- Formulário -->
           <?php include('categorias/formulario_cat.php') ?>

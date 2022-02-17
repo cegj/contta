@@ -28,7 +28,7 @@
       <div class="container duas-colunas sem-bg">
 
       <div id="caixa-registrar" class="box formulario">
-        <h2 class="titulo-box">Fazer registro</h2>
+        <h2 class="titulo-box cadastrar">Registrar transação</h2>
         <!-- Formulário -->
         <?php
         $edicao = false;
@@ -44,7 +44,7 @@
         $ultimoregistro = $registro; 
       }      
       ?>
-      <h2 class="titulo-box">Último registro efetuado</h2>
+      <h2 class="titulo-box ultimo">Último registro efetuado</h2>
       <dl>
         <dt>📝 Descrição:</dt>
         <dd><?php echo $ultimoregistro['descricao'] ?></dd>

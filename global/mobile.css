@@ -1,15 +1,17 @@
 @media(max-width: 410px) {
-    header, .menu-principal {
+    header {
         flex-direction: column;
         height: unset;
     }
 
+    .menu-principal {
+        height: unset;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 0px;
+        gap: 25px;
 
-.menu-principal {
-    padding: 0px;
-    align-items: center;
-    gap: 25px;
-}
+    }
 
 .menu-principal a {
     background-color: #dfdfdf;
@@ -69,10 +71,6 @@ footer {
 
 .container.duas-colunas.com-extrato {
     flex-direction: column-reverse;
-}
-
-.titulo-container {
-    display: none;
 }
 
 .container.duas-colunas .instrucao {
@@ -164,4 +162,26 @@ footer {
     margin: 5px auto;
 }
 
+.titulo-container, .titulo-container.com-subtitulo {
+    padding-left: 0px;
+    padding-bottom: 0px;
+    text-align: center;
+    padding-top: 0px;
+}
+
+.subtitulo-container{
+    text-align: center;
+    padding-left: 0px;
+    padding-bottom: 0px;
+} 
+
+.titulo-container.titulo-extrato.com-subtitulo::before, .titulo-container.titulo-editar.com-subtitulo::before {
+    display: none;    
+}
+
+#form-contas, #form-categoria{
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
+}
 }

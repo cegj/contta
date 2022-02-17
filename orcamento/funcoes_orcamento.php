@@ -36,6 +36,7 @@ function alterar_valor_orcamento($bdConexao, $catEmEdicao, $mesEmEdicao, $novoVa
 function somar_gasto_previsto($bdConexao, $mes, $catEspecifica = null, $acumulado = false)
 {
 
+
   if (isset($catEspecifica)) {
     $bdSomar = "
       SELECT sum({$mes}) FROM orcamento

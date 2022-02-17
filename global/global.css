@@ -1,7 +1,7 @@
 body, h1, h2, h3 {
   margin: 0px;
   padding: 0px;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: #0b0b0b;
 }
 
@@ -45,8 +45,12 @@ dt,dd {
   display: inline-block;
 }
 
+dt {
+  color:#252525;
+}
+
 dd {
-  font-weight: bold;
+  font-weight: normal;
 }
 
 .container-principal {
@@ -62,6 +66,7 @@ dd {
 
 .container.uma-coluna {
   grid-template-columns: 1fr;
+  padding-top: 15px;
 }
 
 .container.duas-colunas {
@@ -75,11 +80,19 @@ dd {
 }
 
 .container.com-extrato {
-  grid-template-columns: 0.8fr 1.2fr;
+  grid-template-columns: 0.7fr 1.3fr;
 }
 
 .item-grid-principal {
   background-color: #f0f0f0;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.item-grid-secundario {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  width: 100%;
 }
 
 .box {
