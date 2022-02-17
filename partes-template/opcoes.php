@@ -10,6 +10,8 @@
   <a class="botao-opcoes botao-novo" id="opcao-registrar-transacao">Registrar transação</a>
   <?php endif; ?>
 
+  <a class="botao-opcoes botao-final-pagina" href="#footer">Descer tudo</a>
+
   <!-- Opções de Extrato -->
   <?php if($url == '/extrato.php') :  ?>
     <?php if ($tudo == true) : ?>

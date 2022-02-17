@@ -1,4 +1,4 @@
-<footer>
+<footer id="footer">
 
   <div class="rodape">
       <?php   if(isset($login_cookie)) {
@@ -9,6 +9,7 @@
       ?>
       <nav class="menu-secundario">
         <ul>
+          <li><a href="#header">Subir tudo</a></li>
           <li><a href="/usuarios.php">Gerenciar usuários</a></li>
           <li><a href="#">Documentação de ajuda</a></li>
           <li><a href="?sair=true">Sair</a></li>

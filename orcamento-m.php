@@ -4,7 +4,8 @@
   }
 </script>
 
-<?php include('partes-template/includesiniciais.php'); ?>
+<?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php'); 
+$edicao = false; ?>
 
 <!DOCTYPE html>
 <html>
@@ -21,14 +22,16 @@
   if (isset($login_cookie)) : ?>
 
     <!-- Cabeçalho -->
-    <header>
-      <?php include('partes-template/cabecalho.php') ?>
-      <!-- Menu principal -->
-      <?php include('partes-template/menu.php') ?>
-      <link rel="stylesheet" href="/css/orcamento.css">
-    </header>
+    <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/header.php') ?>
 
-    <main class="orcamento-container">
+    <main class="container-principal">
+
+      <!-- Caixas de saldos -->
+      <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/saldos.php'); ?>
+
+      <!-- Opções --> 
+      <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/opcoes.php'); ?>
+
 
       <?php
 
@@ -44,7 +47,7 @@
 
       <script type="text/javascript">
         var ultimaIdEditada;
-
+                        //ID = 28/janeiro
         function abrirEdicao(id) {
 
           if (ultimaIdEditada != undefined) {
@@ -109,37 +112,28 @@
         }
       </script>
 
-      <!-- Formulário do ano -->
-      <div class="container-form-mes-ano">
-        <!-- Formulário de definição de mês e ano -->
-        <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/form_mes_ano.php'); ?>
-      </div>
-
-      <div class="botao-menu-secundario" id="container-alteracao-orcamento">
-        <form style="display:none" class="form-alteracao-orcamento" id="form-alteracao" method="POST">
-          <input style='display: none' type="number" id="campo-categoria" name="campo-categoria" readonly />
-          <input style='display: none' type="text" id="campo-mes" name="campo-mes" readonly />
-          <input style='display: none' type="text" id="campo-valor-executado" readonly />
-          <img src="/img/icone-editar.svg" class="icone-editar" alt="Editar">
-          <label for="valor">Alterar o valor de <span id="nome-cat-label"></span> no mês de <span id=mes-label></span>:</label>
-          <input type="number" step="any" id="campo-valor" name="campo-valor" />
-          <button class="botao-acao-secundario" type="submit">Alterar</button>
-        </form>
-        <button class="botao-acao-secundario copiar" onclick="copiarValorExecutado()" class="botao-copiar" id="botao-copiar">Copiar executado</button>
-        <button class="botao-acao-secundario cancelar" onclick="fecharEdicao()" class="botao-cancelar" id="botao-cancelar" style="display:none">Cancelar</button>
-        <p><strong>Importante:</strong> a previsão de despesas deve ser informada em valores negativos.</p>
-      </div>
-      <div class="botao-menu-secundario" id="dica-edicao">
-        <p id="dica-edicao">💡 Dica: toque em algum valor previsto para alterá-lo.</p>
-      </div>
+        <div class="box formulario" id="container-alteracao-orcamento">
+          <div class="container-form-botoes">
+            <form style="display:none" class="form-alteracao-orcamento" id="form-alteracao" method="POST">
+              <input style='display: none' type="number" id="campo-categoria" name="campo-categoria" readonly />
+              <input style='display: none' type="text" id="campo-mes" name="campo-mes" readonly />
+              <input style='display: none' type="text" id="campo-valor-executado" readonly />
+              <img src="/img/icos/editar.svg" class="icone-editar" alt="Editar">
+              <label for="valor">Alterar o valor de <span id="nome-cat-label"></span> no mês de <span id=mes-label></span>:</label>
+              <input type="number" step="any" id="campo-valor" name="campo-valor" />
+              <button class="botao-acao-secundario confirmar" type="submit">Alterar</button>
+            </form>
+            <button onclick="copiarValorExecutado()" class="botao-acao-secundario neutro" id="botao-copiar">Copiar executado</button>
+            <button onclick="fecharEdicao()" class="botao-acao-secundario cancelar" id="botao-cancelar" style="display:none">Cancelar</button>
+          </div>
+          <p><strong>Importante:</strong> a previsão de despesas deve ser informada em valores negativos.</p>
+        </div>
 
 
-      <div id="caixa-orcamento" class="caixa">
-        <h2>Orçamento de valores previstos e executados</h2>
+        <div class="container uma-coluna">
+          <h2 class="titulo-container">Orçamento</h2>
 
-        <table class="tabela orcamento-mobile">
-
-          <!-- PRIMEIRA PARTE DA TABELA (PRIMEIRO SEMESTRE)   -->
+          <table class="tabela orcamento">
 
           <?php $i = $mes - 1; ?>
 
@@ -360,9 +354,7 @@
 
     </main>
     <!-- Rodapé -->
-    <footer>
-      <?php include('partes-template/rodape.php') ?>
-    </footer>
+    <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/footer.php') ?>
 
   <?php //Caso o usuário não esteja logado, exibe o conteúdo abaixo em vez da página. 
   else :

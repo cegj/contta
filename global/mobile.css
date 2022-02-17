@@ -64,7 +64,12 @@ footer {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    align-items: center;
 } 
+
+.container.duas-colunas.com-extrato {
+    flex-direction: column-reverse;
+}
 
 .titulo-container {
     display: none;
@@ -131,6 +136,32 @@ footer {
 
 .item-grid-principal{
     width: 100%;
+}
+
+.box.formulario {
+    order: -1;
+}
+
+.container-form-botoes{
+    flex-direction: column;
+}
+
+.form-alteracao-orcamento{
+    text-align: center;
+}
+
+.form-alteracao-orcamento label{
+    display: block;
+}
+
+.form-alteracao-orcamento input{
+    display: block;
+    margin: 15px auto;
+}
+
+.container-form-botoes .botao-acao-secundario{
+    display: block;
+    margin: 5px auto;
 }
 
 }

@@ -1,5 +1,5 @@
 <?php if (isset($login_cookie)) : ?>
-<header>
+<header id="header">
 
 <img class="logo" height="70px" src="/img/controlesimples_logo.png" alt="ControleSimples"/>
 <nav aria-label="menu-principal">

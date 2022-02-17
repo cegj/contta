@@ -201,11 +201,10 @@ if (isset($_GET['editar']) && $_GET['editar'] == true) {
       <?php endif; ?>
 
       <?php if ($configuracao == true) : ?>
-      <div>
         <div class="box formulario" id="box-formulario">
           <?php if ($edicao == false) : 
           ?>
-          <h2 class="titulo-box">Cadastrar categorias</h2>
+          <h2 class="titulo-box">Cadastrar categoria</h2>
           <?php else : ?>
               <h2 class="titulo-box">Editar categoria</h2>
               <h3><?php echo $cat_edicao_nome; ?></h3>
@@ -215,7 +214,6 @@ if (isset($_GET['editar']) && $_GET['editar'] == true) {
       </div>
       <?php endif; ?>
 
-        </div>
     </main>
 
         <!-- Rodapé -->

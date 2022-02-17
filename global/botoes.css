@@ -170,3 +170,16 @@
   top: 8px;
 }
 
+.botao-final-pagina::before {
+  content:"";
+  background-image: url(/img/icos/descer.svg);
+  background-repeat: no-repeat;
+  background-size:contain;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  left: 12px;
+  top: 8px;
+}
+
