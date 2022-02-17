@@ -1,10 +1,15 @@
 #container-alteracao-orcamento {
   display: none;
   position: fixed;
-  top: 0px;
-  border: 3px solid #447327;
-  box-shadow: #447327 3px 3px;
+  top: 5px;
   z-index: 10;
+  padding: 20px;
+}
+
+#container-alteracao-orcamento p {
+  padding-top: 15px;
+  margin: 0px;
+  text-align: center;
 }
 
 .valor-previsto, .valor-executado, .valor-resultado {
@@ -21,8 +26,15 @@
   background-color: rgb(255, 250, 153, 0.4);
 }
 
+.form-alteracao-orcamento, .container-form-botoes {
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .form-alteracao-orcamento label {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 
 }
 
@@ -32,11 +44,12 @@
 }
 
 .form-alteracao-orcamento input {
-  font-size: 1.5rem;
-  height: 25px;
+  font-size: 1.2rem;
+  padding: 5px;
   max-width: 100px;
-  background-color: #e5ffd6;
-  border: 1px solid #9ee376;
+  background-color: #ffffff;
+  border: 1px solid #ececa6;
+  border-radius: 4px;
 }
 
 .form-alteracao-orcamento button {

@@ -81,7 +81,7 @@ $edicao = false; ?>
           campoMes.value = mes;
           campoValorExecutado.value = valorExecutado;
           campoValor.value = valor;
-          formAlteracao.style.display = "inline-block";
+          formAlteracao.style.display = "flex";
           botaoCancelar.style.display = "inline-block";
 
           document.getElementById('nome-cat-label').innerText = categoriaNome;
@@ -117,18 +117,20 @@ $edicao = false; ?>
         }
       </script>
 
-      <div class="botao-menu-secundario" id="container-alteracao-orcamento">
-        <form style="display:none" class="form-alteracao-orcamento" id="form-alteracao" method="POST">
-          <input style='display: none' type="number" id="campo-categoria" name="campo-categoria" readonly />
-          <input style='display: none' type="text" id="campo-mes" name="campo-mes" readonly />
-          <input style='display: none' type="text" id="campo-valor-executado" readonly />
-          <img src="/img/icone-editar.svg" class="icone-editar" alt="Editar">
-          <label for="valor">Alterar o valor de <span id="nome-cat-label"></span> no mês de <span id=mes-label></span>:</label>
-          <input type="number" step="any" id="campo-valor" name="campo-valor" />
-          <button class="botao-acao-secundario" type="submit">Alterar</button>
-        </form>
-        <button onclick="copiarValorExecutado()" class="botao-acao-secundario copiar" id="botao-copiar">Copiar executado</button>
-        <button onclick="fecharEdicao()" class="botao-acao-secundario cancelar" id="botao-cancelar" style="display:none">Cancelar</button>
+      <div class="box formulario" id="container-alteracao-orcamento">
+        <div class="container-form-botoes">
+          <form style="display:none" class="form-alteracao-orcamento" id="form-alteracao" method="POST">
+            <input style='display: none' type="number" id="campo-categoria" name="campo-categoria" readonly />
+            <input style='display: none' type="text" id="campo-mes" name="campo-mes" readonly />
+            <input style='display: none' type="text" id="campo-valor-executado" readonly />
+            <img src="/img/icos/editar.svg" class="icone-editar" alt="Editar">
+            <label for="valor">Alterar o valor de <span id="nome-cat-label"></span> no mês de <span id=mes-label></span>:</label>
+            <input type="number" step="any" id="campo-valor" name="campo-valor" />
+            <button class="botao-acao-secundario confirmar" type="submit">Alterar</button>
+          </form>
+          <button onclick="copiarValorExecutado()" class="botao-acao-secundario neutro" id="botao-copiar">Copiar executado</button>
+          <button onclick="fecharEdicao()" class="botao-acao-secundario cancelar" id="botao-cancelar" style="display:none">Cancelar</button>
+        </div>
         <p><strong>Importante:</strong> a previsão de despesas deve ser informada em valores negativos.</p>
       </div>
 

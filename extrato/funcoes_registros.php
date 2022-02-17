@@ -14,9 +14,12 @@ function cadastrar_registro($bdConexao, $registro, $edicao, $id_reg, $editarParc
 
     if ($registro['tipo'] == 'T') {
 
+      $contaOrigem = buscar_conta_especifica($bdConexao, $registro['conta'], null);
       $contaDestino = buscar_conta_especifica($bdConexao, $registro['contadestino'], null);
+      
 
-      if ($contaDestino['exibir'] == 0) {
+      //Se a conta origem ou conta destino for oculta, colocar na categoria "Contas ocultas" (para orçamento)
+      if ($contaDestino['exibir'] == 0 or $contaOrigem['exibir'] == 0) {
         $catContasOcultas = buscar_cat_especifica($bdConexao, null, 'Contas ocultas');
         $idCatContasOcultas = "'{$catContasOcultas['id_cat']}'";
       } else {
@@ -235,23 +238,29 @@ function cadastrar_registro($bdConexao, $registro, $edicao, $id_reg, $editarParc
 function buscar_registros($bdConexao, $dia, $mes, $ano, $tudo=null, $ultimo=null, $id_cat=null, $id_con=null)
 {
 
+  //Se o dia está definido, inclui o filtro de dia no where da query
   if(isset($dia) && $dia != null){
     $filtraDia = "DAY(data) = '{$dia}' and";
   } else {
     $filtraDia = "";
   }
-
+  //Se o parâmetro categoria está definido, inclui o filtro de categoria no where da query
   if (isset($id_cat)) {
     $busqueCategoriaEspecifica = "and categorias.id_cat = {$id_cat}";
   } else {
     $busqueCategoriaEspecifica = "";
   }
-
+  //Por padrão, não busca os registros de contas ocultas
   $filtrarContasOcultas = "and contas.exibir = 1";
 
+  //Por padrão, não busca os registros do tipo "Saldo inicial"
+  $filtraSaldoInicial = "and tipo != 'SI'";
+
+  //Se o parâmetro conta está definido, inclui o filtro de conta no where da query, exibe os valores de contas ocultas e exibe os registros de saldo inicial
   if (isset($id_con)) {
     $busqueContaEspecifica = "and contas.id_con = {$id_con}";
     $filtrarContasOcultas = "";
+    $filtraSaldoInicial = "";
   } else {
     $busqueContaEspecifica = "";
   }
@@ -259,7 +268,6 @@ function buscar_registros($bdConexao, $dia, $mes, $ano, $tudo=null, $ultimo=null
   $filtrarMesAno = "
   MONTH(data) = '{$mes}'
   and YEAR(data) = '{$ano}'
-  and
   ";
 
   if ($tudo == true) {
@@ -267,9 +275,9 @@ function buscar_registros($bdConexao, $dia, $mes, $ano, $tudo=null, $ultimo=null
   }
 
   if ($ultimo == true){
-    $limiteAoUltimo = "LIMIT 1";
+    $ordemRegistros = "data_insert DESC LIMIT 1;";
   } else {
-    $limiteAoUltimo = "";
+    $ordemRegistros = "data ASC, data_insert ASC;";
   }
 
 
@@ -280,20 +288,20 @@ function buscar_registros($bdConexao, $dia, $mes, $ano, $tudo=null, $ultimo=null
   WHERE
     {$filtraDia}
     {$filtrarMesAno}
-    tipo != 'SI'
+    {$filtraSaldoInicial}
     {$busqueCategoriaEspecifica}
     {$busqueContaEspecifica}
     {$filtrarContasOcultas}
     or
     {$filtraDia}
-    MONTH(data) = '{$mes}'
-    and YEAR(data) = '{$ano}'
-    and tipo != 'SI'
+    {$filtrarMesAno}
+    {$filtraSaldoInicial}
     {$busqueCategoriaEspecifica}
     {$busqueContaEspecifica}
     {$filtrarContasOcultas} 
     and id_conta IS NULL
-  ORDER BY data ASC, data_insert ASC {$limiteAoUltimo};
+  ORDER BY
+    {$ordemRegistros};
 ";
 
   $resultado = mysqli_query($bdConexao, $bdBuscar);

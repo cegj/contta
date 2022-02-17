@@ -85,7 +85,7 @@ dd {
 .box {
   margin: 10px;
   padding: 15px;
-  box-shadow: 5px 5px 5px lightgray;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
   background-image: linear-gradient(#f5f5f5, #dbdbdb);
 }
@@ -154,7 +154,6 @@ dd {
 }
 
 .linha-resultado-dia-extrato, .linha-resultado-dia-extrato td {
-  background-color: #f5f5f5;
   padding: 2px 8px;
   font-size: 0.9rem;
   color: #333333;
@@ -164,7 +163,7 @@ dd {
 
 .valor-resultado-dia-extrato{
   padding: 5px 10px;
-  background-color: #ebebeb;
+  background-color: #f5f5f5;
 }
 
 .tabela.extrato.compacto {
