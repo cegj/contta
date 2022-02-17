@@ -16,3 +16,7 @@
   position: relative;
   top: 2px;
 }
+
+.caixa.extrato-contas {
+  width: 100%;
+}

@@ -129,7 +129,7 @@ if (isset($_GET['editar']) && $_GET['editar'] == true) {
             <h3><?php echo $catSelecionada['nome_cat']?></h3>
           </div>
           <div class="container-tabela">
-          <table class="tabela extrato compacto">
+          <table class="tabela extrato compacto tabela-responsiva">
             <thead>
               <tr>
                 <th>Tipo</th>

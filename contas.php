@@ -57,7 +57,6 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
     <?php if ($configuracao != true) : ?>
     <div class="item-grid-principal">
       <h2 class="titulo-container">Contas</h2>
-      <div class="container-tabela">
       <table class="tabela">
         <tr>
           <th class="filtrar-titulo">Conta</th>
@@ -89,7 +88,6 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
         ?>
       </table>
       </div>
-      </div>
 
       <div class="caixa extrato-contas">
 
@@ -102,16 +100,15 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
           <h2 class="titulo-container">Extrato da conta</h2>
           <h3><?php echo $contaSelecionada['conta']?></h3>
 
-          <div class="container-tabela">
-          <table class="tabela extrato compacto">
+          <table class="tabela extrato compacto tabela-responsiva">
             <thead>
               <tr>
-                <th class="linha-fixa">Tipo</th>
-                <th class="linha-fixa">Data</th>
-                <th class="linha-fixa">Descrição</th>
-                <th class="linha-fixa">Valor</th>
-                <th class="linha-fixa">Categoria</th>
-                <th class="linha-fixa">Ações</th>
+                <th>Tipo</th>
+                <th>Data</th>
+                <th>Descrição</th>
+                <th>Valor</th>
+                <th>Categoria</th>
+                <th>Ações</th>
               </tr>
             </thead>
             <tr>
@@ -157,7 +154,7 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
 
             echo "
             <tr>
-            <td class='linha-resultado-dia-extrato' colspan='6' class='linha-resultado-dia-extrato'> <span class='valor-resultado-dia-extrato'>Resultado diário: R$ {$resultadoDia}</span> <span class='valor-resultado-dia-extrato'>Acumulado mês: {$resultadoDiaAcumuladoMes}</span> <span class='valor-resultado-dia-extrato'>Acumulado total: R$ {$resultadoDiaAcumuladoTotal}</span> </td>
+            <td class='linha-resultado-dia-extrato' colspan='6'> <span class='valor-resultado-dia-extrato'>Resultado diário: R$ {$resultadoDia}</span> <span class='valor-resultado-dia-extrato'>Acumulado mês: {$resultadoDiaAcumuladoMes}</span> <span class='valor-resultado-dia-extrato'>Acumulado total: R$ {$resultadoDiaAcumuladoTotal}</span> </td>
             </tr>
             ";
 
@@ -168,7 +165,6 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
             ?>
             </tr>
             </table>
-            </div>
 
             <?php else : ?>
             <p class="instrucao">Escolha uma conta para ver o seu histórico no mês selecionado.</p>

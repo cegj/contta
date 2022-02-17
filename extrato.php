@@ -77,7 +77,7 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
         ?>
 
         <h2 class="titulo-container">Extrato</h2>
-        <table class="tabela extrato">
+        <table class="tabela extrato tabela-responsiva">
           <thead>
             <tr>
               <th>Tipo</th>
@@ -134,7 +134,7 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
                 endforeach;
                 echo "
                 <tr>
-                <td class='linha-resultado-dia-extrato' colspan='7' class='linha-resultado-dia-extrato'> <span class='valor-resultado-dia-extrato'>Resultado diário: R$ {$resultadoDia}</span> <span class='valor-resultado-dia-extrato'>Acumulado mês: {$resultadoDiaAcumuladoMes}</span> <span class='valor-resultado-dia-extrato'>Acumulado total: R$ {$resultadoDiaAcumuladoTotal}</span> </td>
+                <td class='linha-resultado-dia-extrato' colspan='7'> <span class='valor-resultado-dia-extrato'>Resultado diário: R$ {$resultadoDia}</span> <span class='valor-resultado-dia-extrato'>Acumulado mês: {$resultadoDiaAcumuladoMes}</span> <span class='valor-resultado-dia-extrato'>Acumulado total: R$ {$resultadoDiaAcumuladoTotal}</span> </td>
                 </tr>
                 ";
 

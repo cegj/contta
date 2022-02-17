@@ -1,0 +1,136 @@
+@media(max-width: 410px) {
+    header, .menu-principal {
+        flex-direction: column;
+        height: unset;
+    }
+
+
+.menu-principal {
+    padding: 0px;
+    align-items: center;
+    gap: 25px;
+}
+
+.menu-principal a {
+    background-color: #dfdfdf;
+    border-radius: 4px;
+    padding: 7px 14px;
+    font-size: 1rem;
+}
+
+.caixas-saldos {
+    flex-direction: column;
+    padding: 20px 0;
+    align-items: center;
+}
+
+.caixa-saldo h3 {
+    font-size: 0.8rem;
+}
+
+.mes-ano-selecionado {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background-color: #f1f1f1;
+    color: #011739;
+    padding: 10px;
+}
+
+.opcoes {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 16px;
+}
+
+footer {
+    font-size: 0.8rem;
+}
+
+.menu-secundario ul {
+    flex-direction: column;
+    gap: 20px;
+    padding: 0px;
+}
+
+.menu-secundario a {
+    background-color: #dfdfdf;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+}
+
+.container.duas-colunas {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+} 
+
+.titulo-container {
+    display: none;
+}
+
+.container.duas-colunas .instrucao {
+    text-align: center;
+    line-height: 1.3;
+    margin-bottom: 0px;
+} 
+
+.tabela-responsiva thead {
+    display: none;
+}
+
+.tabela-responsiva {
+    display: flex;
+    flex-direction: column;
+}
+
+.tabela-responsiva tr {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    border-bottom: 2px solid #f0f0f0;
+    font-size: 0.9rem;
+}
+
+.tabela-responsiva th, .tabela-responsiva td {
+    padding: 0px;
+    margin: 0px;
+} 
+
+.linha-extrato-tipo {
+    display: none;
+}
+
+.linha-resultado-dia-extrato {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.linha-resultado-dia-extrato {
+    height: auto;
+}
+
+.tabela.extrato.compacto {
+    padding: 0px;
+}
+
+.form-cadastrar-editar {
+    grid-template-columns: 1fr;
+}
+
+.seletor-mes-ano{
+    left: unset;
+}
+
+.box.formulario.modal{
+    left: unset !important;
+}
+
+.item-grid-principal{
+    width: 100%;
+}
+
+}

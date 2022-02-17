@@ -39,3 +39,7 @@ tr:hover{
 .extrato {
   font-family: 'Roboto', sans-serif;
 }
+
+.container-tabela {
+  width: 100%;
+}
