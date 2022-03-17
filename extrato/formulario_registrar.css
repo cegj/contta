@@ -1,12 +1,12 @@
-#caixa-registrar{
+#caixa-registrar {
   background-color: #ffeeec;
 }
 
 .container-edicao-parcelas::before {
-  content:"";
+  content: "";
   background-image: url(/img/icos/seguinte.svg);
   background-repeat: no-repeat;
-  background-size:contain;
+  background-size: contain;
   background-position: center;
   display: inline-block;
   width: 35px;
@@ -31,12 +31,7 @@
   display: none;
 }
 
-.box.formulario.modal {
-  position: absolute;
-  left: 60px;
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
-}
-
-.exibir {
-  display: block;
+.box.formulario.oculto .form-cadastrar-editar {
+  padding: 10px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }

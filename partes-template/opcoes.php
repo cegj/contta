@@ -53,7 +53,7 @@
 
   <div class="container-formulario-registrar-transacao-opcoes" id="janela-registrar-transacao" <?php if (filter_input(INPUT_GET, 'id_transacao', FILTER_VALIDATE_INT)) : ?> style="display: block !important" <?php endif; ?>>
 
-    <div id="caixa-registrar-modal" class="box formulario modal">
+    <div id="caixa-registrar-modal" class="box formulario oculto">
       <?php include($_SERVER["DOCUMENT_ROOT"] . '/extrato/formulario_registrar.php'); ?>
     </div>
   </div>
@@ -67,17 +67,27 @@
   janelaRegistroTransacao = document.getElementById('janela-registrar-transacao')
 
   botaoAbrirRegistroTransacao.addEventListener('click', function() {
-    if (janelaRegistroTransacao.classList.contains('exibir')) {
-      janelaRegistroTransacao.classList.remove('exibir');
+    if (janelaRegistroTransacao.classList.contains('show')) {
+      janelaRegistroTransacao.classList.remove('show');
+      janelaRegistroTransacao.classList.add('hide');
       botaoAbrirRegistroTransacao.classList.remove('botao-sair');
       botaoAbrirRegistroTransacao.classList.add('botao-novo');
     } else {
-      janelaRegistroTransacao.classList.add('exibir');
+      janelaRegistroTransacao.classList.add('show');
+      janelaRegistroTransacao.classList.remove('hide');
       botaoAbrirRegistroTransacao.classList.remove('botao-novo');
       botaoAbrirRegistroTransacao.classList.add('botao-sair');
     }
-
   })
+
+  janelaRegistroTransacao.addEventListener('animationend', function() {
+    console.log("Disparou!")
+    if (janelaRegistroTransacao.classList.contains('hide')) {
+      console.log("Entrou no if!")
+      janelaRegistroTransacao.style.display = "none";
+    }
+  });
+
 
   // FECHAR COM ESC
 
