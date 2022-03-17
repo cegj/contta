@@ -2,16 +2,9 @@
 
 include 'bd.php';
 
+$origin = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH);
 
-$usuarios = buscar_usuarios($bdConexao);
-
-foreach ($usuarios as $usuario){
-  echo $usuario['login'];
-  echo $usuario['administrador'];
-}
-
-$protocolo = (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS']=="on") ? "https" : "http");
-$url = $_SERVER['SCRIPT_NAME'].'?'.$_SERVER['QUERY_STRING'];
-
-echo $url; 
 ?>
+<form action='' method='POST'>
+  <input type='submit' name="valor" value="ok">
+</form>
