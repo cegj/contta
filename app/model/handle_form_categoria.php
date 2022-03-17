@@ -7,8 +7,9 @@ $origin = explode('?', $origin)[0];
 
 $edicao = filter_input(INPUT_POST, 'editar', FILTER_VALIDATE_BOOLEAN);
 
+$id_cat = filter_input(INPUT_POST, 'id_cat', FILTER_VALIDATE_INT);
+
 if ($edicao) {
-    $id_cat = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
     $cat_especifica = buscar_cat_especifica($bdConexao, $id_cat);
     $cat_edicao_nome = $cat_especifica['nome_cat'];
     $cat_edicao_cat_principal = $cat_especifica['cat_principal'];

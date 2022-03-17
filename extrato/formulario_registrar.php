@@ -1,23 +1,52 @@
 <?php
 $tiposRegistro = array('D', 'R', 'T');
 $hoje = date('Y-m-d');
+
+$edicao = filter_input(INPUT_GET, 'editar', FILTER_VALIDATE_BOOL);
+
+$id_transacao = filter_input(INPUT_GET, 'id_transacao', FILTER_VALIDATE_INT);
+
+if ($edicao) {
+  $transacao_especifica = buscar_reg_especifico($bdConexao, $id_transacao);
+
+  foreach ($transacao_especifica as $transacao_em_edicao) :
+    $transacao_edicao_tipo = $transacao_em_edicao['tipo'];
+    $transacao_edicao_data = $transacao_em_edicao['data'];
+    $transacao_edicao_descricao = $transacao_em_edicao['descricao'];
+    $transacao_edicao_valor = formata_valor(abs($transacao_em_edicao['valor']), 2, ',', '.');
+    $transacao_edicao_categoria = $transacao_em_edicao['id_categoria'];
+    $transacao_edicao_conta = $transacao_em_edicao['id_conta'];
+    $transacao_edicao_parcela = $transacao_em_edicao['parcela'];
+    $transacao_edicao_total_parcelas = $transacao_em_edicao['total_parcelas'];
+  endforeach;
+} else {
+  $transacao_edicao_tipo = '';
+  $transacao_edicao_data = '';
+  $transacao_edicao_descricao = '';
+  $transacao_edicao_valor = '';
+  $transacao_edicao_categoria = '';
+  $transacao_edicao_conta = '';
+  $transacao_edicao_parcela = '';
+  $transacao_edicao_total_parcelas = '';
+}
+
 ?>
 
 <link rel="stylesheet" href="/extrato/formulario_registrar.css">
 
 <form class="form-cadastrar-editar" action="/app/model/handle_form_transacao.php" method="POST">
 
-  <?php if ($edicao == true) {
-    echo "<input class='edicao' type='text' name='edicao' value='{$edicao}' class='input-id' readonly>";
-    echo "<input class='campo-id-edicao' type='text' name='id' value='{$id_reg}' class='input-id' readonly>";
-    echo "<input class='campo-id-edicao' type='text' name='parcela' value='{$reg_edicao_parcela}' class='input-id' readonly>";
-    echo "<input class='campo-id-edicao' type='text' name='total-parcelas' value='{$reg_edicao_total_parcelas}' class='input-id' readonly>";
+  <?php if ($edicao) {
+    echo "<input class='campo-id-edicao' type='text' name='editar' value='{$edicao}' class='input-id' readonly>";
+    echo "<input class='campo-id-edicao' type='text' name='id_transacao' value='{$id_transacao}' class='input-id' readonly>";
+    echo "<input class='campo-id-edicao' type='text' name='parcela' value='{$transacao_edicao_parcela}' class='input-id' readonly>";
+    echo "<input class='campo-id-edicao' type='text' name='total-parcelas' value='{$transacao_edicao_total_parcelas}' class='input-id' readonly>";
   }
   ?>
 
   <div>
     <label for="tipo">Tipo:</label>
-    <select name="tipo" id="tipo" <?php if ($edicao == true && $reg_edicao_tipo == 'T') {
+    <select name="tipo" id="tipo" <?php if ($edicao == true && $transacao_edicao_tipo == 'T') {
                                     echo 'disabled';
                                   } ?>>
 
@@ -27,7 +56,7 @@ $hoje = date('Y-m-d');
 
         $tipoRegistroExtenso = traduz_registro($tipoRegistro);
 
-        if ($edicao == true && $tipoRegistro == $reg_edicao_tipo) {
+        if ($edicao == true && $tipoRegistro == $transacao_edicao_tipo) {
 
           echo "<option value='{$tipoRegistro}' selected>{$tipoRegistroExtenso}</option>";
         } else {
@@ -40,7 +69,7 @@ $hoje = date('Y-m-d');
   <div>
     <label for="data">Data:</label>
     <input type="date" id="data" name="data" <?php if ($edicao == true) {
-                                                echo "value='{$reg_edicao_data}'";
+                                                echo "value='{$transacao_edicao_data}'";
                                               } else {
                                                 echo "value='{$hoje}'";
                                               } ?> required />
@@ -48,18 +77,18 @@ $hoje = date('Y-m-d');
   <div>
     <label for="valor">Valor:</label>
     <input id="valor" type="text" inputmode="numeric" id="valor" name="valor" <?php if ($edicao == true) {
-                                                                                echo "value='{$reg_edicao_valor}'";
+                                                                                echo "value='{$transacao_edicao_valor}'";
                                                                               } ?> required />
   </div>
   <div>
     <label for="descricao">Descrição:</label>
     <input type="text" id="descricao" name="descricao" <?php if ($edicao == true) {
-                                                          echo "value='{$reg_edicao_descricao}'";
+                                                          echo "value='{$transacao_edicao_descricao}'";
                                                         } ?> required />
   </div>
 
   <?php
-  if ($edicao == true && $reg_edicao_tipo == 'T') : ?>
+  if ($edicao == true && $transacao_edicao_tipo == 'T') : ?>
     <div>
       <p>As contas de origem e de destino de uma transferência não podem ser editadas. Se for necessário alterá-las, você deve excluir o registro atual e cadastrá-lo novamente.</p>
     </div>
@@ -82,7 +111,7 @@ $hoje = date('Y-m-d');
 
             if ($conta['tipo_conta'] == $tiposConta[$i]) {
 
-              if ($edicao == true && $conta['id_con'] == $reg_edicao_conta) {
+              if ($edicao == true && $conta['id_con'] == $transacao_edicao_conta) {
                 echo "<option value='{$conta['id_con']}' selected>{$conta['conta']}</option>";
               } else {
                 echo "<option value='{$conta['id_con']}'>{$conta['conta']}</option>";
@@ -113,7 +142,7 @@ $hoje = date('Y-m-d');
 
             if ($conta['tipo_conta'] == $tiposConta[$i]) {
 
-              if ($edicao == true && $conta['id_con'] == $reg_edicao_conta) {
+              if ($edicao == true && $conta['id_con'] == $transacao_edicao_conta) {
                 echo "<option value='{$conta['id_con']}' selected>{$conta['conta']}</option>";
               } else {
                 echo "<option value='{$conta['id_con']}'>{$conta['conta']}</option>";
@@ -144,7 +173,7 @@ $hoje = date('Y-m-d');
 
           foreach ($categoriasSecundarias as $categoriaSecundaria) {
 
-            if ($edicao == true && $categoriaSecundaria['id_cat'] == $reg_edicao_categoria) {
+            if ($edicao == true && $categoriaSecundaria['id_cat'] == $transacao_edicao_categoria) {
 
               echo "<option value='{$categoriaSecundaria['id_cat']}' selected>{$categoriaSecundaria['nome_cat']}</option>";
             } else {
@@ -171,7 +200,7 @@ $hoje = date('Y-m-d');
       <label class='label-apagar' for='apagar'>Apagar registro</label>
     </div>
   <?php endif; ?>
-  <?php if ($edicao == true && $reg_edicao_parcela != null) : ?>
+  <?php if ($edicao == true && $transacao_edicao_parcela != null) : ?>
     <div class="container-edicao-parcelas div-checkbox">
       <input type='checkbox' id='editar-parcelas' name='editar-parcelas' value='true' />
       <label class='label-apagar' for='editar-parcelas'>Aplicar mudanças às parcelas seguintes<br></label>

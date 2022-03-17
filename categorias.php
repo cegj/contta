@@ -1,27 +1,9 @@
 <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
 
 
-if (isset($_GET['configurar']) && $_GET['configurar'] == true) {
-  $configuracao = true;
-} else {
-  $configuracao = false;
-}
+$configuracao = filter_input(INPUT_GET, 'configurar', FILTER_VALIDATE_BOOL);
 
-if (isset($_GET['editar']) && $_GET['editar'] == true) {
-  $edicao = true;
-  $id_cat = $_GET['id'];
-
-  $cat_especifica = buscar_cat_especifica($bdConexao, $id_cat);
-  $cat_edicao_nome = $cat_especifica['nome_cat'];
-  $cat_edicao_cat_principal = $cat_especifica['cat_principal'];
-  $cat_edicao_eh_cat_principal = $cat_especifica['eh_cat_principal'];
-} else {
-  $edicao = false;
-  $cat_edicao_nome = "";
-  $cat_edicao_cat_principal = "";
-  $cat_edicao_eh_cat_principal = "";
-}
-
+$edicao = filter_input(INPUT_GET, 'editar', FILTER_VALIDATE_BOOL);
 
 ?>
 
@@ -90,7 +72,7 @@ if (isset($_GET['editar']) && $_GET['editar'] == true) {
 
                     if ($configuracao == true) {
                       echo "
-          <td class='coluna-acoes'><a href='categorias.php?id={$categoriaPrincipal['id_cat']}&configurar=true&editar=true#header'><img class='icone-editar' alt='Editar' src='/img/icos/editar.svg'/></a>";
+                      <td class='coluna-acoes'><a href='categorias.php?id_cat={$categoriaPrincipal['id_cat']}&configurar=true&editar=true#header'><img class='icone-editar' alt='Editar' src='/img/icos/editar.svg'/></a>";
                     }
 
                     echo "</tr>";
@@ -119,7 +101,7 @@ if (isset($_GET['editar']) && $_GET['editar'] == true) {
 
                       if ($configuracao == true) {
                         echo "
-          <td class='coluna-acoes'><a href='categorias.php?id={$categoriaSecundaria['id_cat']}&configurar=true&editar=true#header'><img class='icone-editar' alt='Editar' src='img/icos/editar.svg'/></a></td>";
+                            <td class='coluna-acoes'><a href='categorias.php?id_cat={$categoriaSecundaria['id_cat']}&configurar=true&editar=true#header'><img class='icone-editar' alt='Editar' src='img/icos/editar.svg'/></a></td>";
                       }
                       echo "</tr>";
                     endforeach;
@@ -221,15 +203,6 @@ if (isset($_GET['editar']) && $_GET['editar'] == true) {
 
               <?php if ($configuracao == true) : ?>
                 <div class="box formulario" id="box-formulario">
-                  <?php if ($edicao == false) :
-                  ?>
-                    <h2 class="titulo-box cadastrar">Cadastrar categoria</h2>
-                  <?php else : ?>
-                    <div class="container-titulo-subtitulo">
-                      <h2 class="titulo-container titulo-editar com-subtitulo">Editar categoria</h2>
-                      <h3 class="subtitulo-container"><?php echo $cat_edicao_nome; ?></h3>
-                    </div>
-                  <?php endif; ?>
                   <!-- Formulário -->
                   <?php include('categorias/formulario_cat.php') ?>
                 </div>

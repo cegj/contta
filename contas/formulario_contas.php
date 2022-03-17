@@ -1,9 +1,34 @@
-<?php $tiposConta = buscar_tipos_conta(); ?>
+<?php $tiposConta = buscar_tipos_conta();
+
+if ($edicao) {
+  $conta_em_edicao = buscar_conta_especifica($bdConexao, $id_conta);
+  $conta_edicao_nome = $conta_em_edicao['conta'];
+  $conta_edicao_tipo = $conta_em_edicao['tipo_conta'];
+  $conta_edicao_saldo_inicial = $conta_em_edicao['saldo_inicial'];
+  $conta_edicao_exibir = $conta_em_edicao['exibir'];
+} else {
+  $conta_edicao_nome = "";
+  $conta_edicao_tipo = "";
+  $conta_edicao_saldo_inicial = "";
+  $conta_edicao_exibir = "";
+}
+
+?>
+
+<?php if ($edicao == false) :
+?>
+  <h2 class="titulo-box cadastrar">Cadastrar conta</h2>
+<?php else : ?>
+  <div class="container-titulo-subtitulo">
+    <h2 class="titulo-container titulo-editar com-subtitulo">Editar conta:</h2>
+    <h3 class="subtitulo-container"><?php echo $conta_edicao_nome; ?></h3>
+  </div>
+<?php endif; ?>
 
 <form id="form-contas" class="form-cadastrar-editar" action="app\model\handle_form_contas.php" method="POST">
   <?php if ($edicao == true) {
     echo "<input class='campo-id-edicao' type='text' name='editar' value='{$edicao}' class='input-id' readonly>";
-    echo "<input class='campo-id-edicao' type='text' name='id' value='{$_GET['id']}' class='input-id' readonly>";
+    echo "<input class='campo-id-edicao' type='text' name='id_conta' value='{$_GET['id_conta']}' class='input-id' readonly>";
   }
   ?>
   <div>

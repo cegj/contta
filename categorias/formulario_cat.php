@@ -1,7 +1,34 @@
+<?php
+
+if ($edicao) {
+  $id_cat = $_GET['id_cat'];
+  $cat_especifica = buscar_cat_especifica($bdConexao, $id_cat);
+  $cat_edicao_nome = $cat_especifica['nome_cat'];
+  $cat_edicao_cat_principal = $cat_especifica['cat_principal'];
+  $cat_edicao_eh_cat_principal = $cat_especifica['eh_cat_principal'];
+} else {
+  $cat_edicao_nome = "";
+  $cat_edicao_cat_principal = "";
+  $cat_edicao_eh_cat_principal = "";
+}
+
+?>
+
+<?php if ($edicao == false) :
+?>
+  <h2 class="titulo-box cadastrar">Cadastrar categoria</h2>
+<?php else : ?>
+  <div class="container-titulo-subtitulo">
+    <h2 class="titulo-container titulo-editar com-subtitulo">Editar categoria</h2>
+    <h3 class="subtitulo-container"><?php echo $cat_edicao_nome; ?></h3>
+  </div>
+<?php endif; ?>
+
+
 <form id="form-categoria" class="form-cadastrar-editar" action="/app/model/handle_form_categoria.php" method="POST">
   <?php if (isset($_GET['editar']) && $_GET['editar'] == true) {
     echo "<input class='campo-id-edicao' type='text' name='editar' value='{$_GET['editar']}' class='input-id' readonly>";
-    echo "<input class='campo-id-edicao' type='text' name='id' value='{$_GET['id']}' class='input-id' readonly>";
+    echo "<input class='campo-id-edicao' type='text' name='id_cat' value='{$_GET['id_cat']}' class='input-id' readonly>";
   }
   ?>
   <div class="input-nome-categoria">

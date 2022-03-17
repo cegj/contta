@@ -1,30 +1,11 @@
 <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
 
-if (filter_input(INPUT_GET, 'configurar', FILTER_VALIDATE_BOOL)) {
-  $configuracao = true;
-} else {
-  $configuracao = false;
-}
+$configuracao = filter_input(INPUT_GET, 'configurar', FILTER_VALIDATE_BOOL);
 
-if (isset($_GET['editar']) && $_GET['editar'] = true) {
-  $edicao = true;
+$edicao = filter_input(INPUT_GET, 'editar', FILTER_VALIDATE_BOOL);
 
-  $id_conta = $_GET['id'];
+$id_conta = filter_input(INPUT_GET, 'id_conta', FILTER_VALIDATE_INT);
 
-  $conta_em_edicao = buscar_conta_especifica($bdConexao, $id_conta);
-
-  $conta_edicao_nome = $conta_em_edicao['conta'];
-  $conta_edicao_tipo = $conta_em_edicao['tipo_conta'];
-  $conta_edicao_saldo_inicial = $conta_em_edicao['saldo_inicial'];
-  $conta_edicao_exibir = $conta_em_edicao['exibir'];
-} else {
-  $edicao = false;
-
-  $conta_edicao_nome = "";
-  $conta_edicao_tipo = "";
-  $conta_edicao_saldo_inicial = "";
-  $conta_edicao_exibir = "";
-}
 ?>
 
 <!DOCTYPE html>
@@ -195,7 +176,7 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
                       <td class='td-conta'>{$conta['tipo_conta']}</td>
                       <td class='td-conta'>R$ {$saldoInicialFormatado}</td>
                       <td class='td-conta'>{$exibir}</td>
-                      <td class='coluna-acoes'><a href='contas.php?id={$conta['id_con']}&configurar=true&editar=true#header'><img class='icone-editar' alt='Editar' src='/img/icos/editar.svg'/></a>
+                      <td class='coluna-acoes'><a href='contas.php?id_conta={$conta['id_con']}&configurar=true&editar=true#header'><img class='icone-editar' alt='Editar' src='/img/icos/editar.svg'/></a>
                       </tr>
                       ";
 
@@ -214,15 +195,6 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
     <?php endif; ?>
 
     <div class="box formulario" id="box-formulario">
-      <?php if ($edicao == false) :
-      ?>
-        <h2 class="titulo-box cadastrar">Cadastrar conta</h2>
-      <?php else : ?>
-        <div class="container-titulo-subtitulo">
-          <h2 class="titulo-container titulo-editar com-subtitulo">Editar conta:</h2>
-          <h3 class="subtitulo-container"><?php echo $conta_edicao_nome; ?></h3>
-        </div>
-      <?php endif; ?>
       <!-- Formulário -->
       <?php include($_SERVER["DOCUMENT_ROOT"] . '/contas/formulario_contas.php') ?>
     </div>

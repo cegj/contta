@@ -7,7 +7,7 @@ $origin = explode('?', $origin)[0];
 
 $edicao = filter_input(INPUT_POST, 'editar', FILTER_VALIDATE_BOOLEAN);
 
-$id_conta = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+$id_conta = filter_input(INPUT_POST, 'id_conta', FILTER_VALIDATE_INT);
 
 //Guardar os dados na variável $categoria para inserir no BD
 
