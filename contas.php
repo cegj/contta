@@ -1,6 +1,6 @@
 <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
 
-if (isset($_GET['configurar']) && $_GET['configurar'] == true) {
+if (filter_input(INPUT_GET, 'configurar', FILTER_VALIDATE_BOOL)) {
   $configuracao = true;
 } else {
   $configuracao = false;
@@ -209,27 +209,27 @@ if (isset($_GET['editar']) && $_GET['editar'] = true) {
         <?php else : ?>
 
           <p>Não há contas cadastradas</p>
-
-        <?php endif; ?>
-
-      </div>
-
-
-      <div class="box formulario" id="box-formulario">
-        <?php if ($edicao == false) :
-        ?>
-          <h2 class="titulo-box cadastrar">Cadastrar conta</h2>
-        <?php else : ?>
-          <div class="container-titulo-subtitulo">
-            <h2 class="titulo-container titulo-editar com-subtitulo">Editar conta:</h2>
-            <h3 class="subtitulo-container"><?php echo $conta_edicao_nome; ?></h3>
-          </div>
-        <?php endif; ?>
-        <!-- Formulário -->
-        <?php include($_SERVER["DOCUMENT_ROOT"] . '/contas/formulario_contas.php') ?>
       </div>
 
     <?php endif; ?>
+
+    <div class="box formulario" id="box-formulario">
+      <?php if ($edicao == false) :
+      ?>
+        <h2 class="titulo-box cadastrar">Cadastrar conta</h2>
+      <?php else : ?>
+        <div class="container-titulo-subtitulo">
+          <h2 class="titulo-container titulo-editar com-subtitulo">Editar conta:</h2>
+          <h3 class="subtitulo-container"><?php echo $conta_edicao_nome; ?></h3>
+        </div>
+      <?php endif; ?>
+      <!-- Formulário -->
+      <?php include($_SERVER["DOCUMENT_ROOT"] . '/contas/formulario_contas.php') ?>
+    </div>
+
+    </div>
+
+  <?php endif; ?>
     </main>
 
     <!-- Rodapé -->

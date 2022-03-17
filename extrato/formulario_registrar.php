@@ -5,7 +5,7 @@ $hoje = date('Y-m-d');
 
 <link rel="stylesheet" href="/extrato/formulario_registrar.css">
 
-<form class="form-cadastrar-editar" action="/app/extrato/handle_transacao.php" method="POST">
+<form class="form-cadastrar-editar" action="/app/model/handle_form_transacao.php" method="POST">
 
   <?php if ($edicao == true) {
     echo "<input class='edicao' type='text' name='edicao' value='{$edicao}' class='input-id' readonly>";
