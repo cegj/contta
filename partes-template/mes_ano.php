@@ -1,4 +1,4 @@
-<div class="container-seletor-mes-ano">
+<div id="container-seletor-mes-ano" class="container-seletor-mes-ano hide">
   <div class="seletor-mes-ano" id="seletor-mes-ano">
     <form id="for-mes-ano" class="form-mes-ano" action="" method="POST">
       <input id="seletor-campo-mes" class="form-mes-ano-campo-mes" type="number" name="mes" min="1" max="12" value=<?php echo $mes ?> required> / <input class="form-mes-ano-campo-ano" type="number" name="ano" min="1900" value=<?php echo $ano ?> required></input>
@@ -70,25 +70,6 @@
   });
   botoes[11].addEventListener('click', function() {
     selecionarMesEIr(botoes[11])
-  });
-
-  // ABRIR E FECHAR O SELETOR DE MÊS E ANO AO CLICAR NO BOTÃO
-
-  botaoAbrirMesAno = document.getElementById('selecionar-mes-ano')
-  seletorMesAno = document.getElementById('seletor-mes-ano')
-
-  botaoAbrirMesAno.addEventListener('click', function() {
-    if (seletorMesAno.classList.contains('show')) {
-      seletorMesAno.classList.remove('show');
-      seletorMesAno.classList.add('hide');
-      botaoAbrirMesAno.classList.remove('botao-sair');
-      botaoAbrirMesAno.classList.add('botao-mes-ano');
-    } else {
-      seletorMesAno.classList.add('show');
-      seletorMesAno.classList.remove('hide');
-      botaoAbrirMesAno.classList.remove('botao-mes-ano');
-      botaoAbrirMesAno.classList.add('botao-sair');
-    }
   });
 
   // FECHAR COM ESC

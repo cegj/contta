@@ -6,42 +6,37 @@
   gap: 10px;
 }
 
+.hide {
+  display: none;
+}
+
 .show {
   display: block !important;
-  animation: show 0.5s forwards;
+  animation: show 0.3s forwards;
 }
 
 .hide {
-  animation: hide 0.5s forwards;
+  animation: hide 0.3s forwards;
 }
 
 @keyframes show {
   from {
     opacity: 0;
-    max-height: 0px;
+    transform: translateY(-20px);
   }
   to {
     opacity: 1;
-    max-height: 400px;
+    transform: translateY(0px);
   }
 }
 
 @keyframes hide {
   from {
     opacity: 1;
-    max-height: 400px;
+    transform: translateY(0px);
   }
   to {
-    opacity: 0.3;
-    max-height: 0px;
+    opacity: 0;
+    transform: translateY(-20px);
   }
-}
-
-.box.formulario.oculto {
-  margin: 0px;
-  margin-bottom: 10px;
-  padding: 10px;
-  box-shadow: unset;
-  z-index: 0;
-  border: 2px solid #e2e2e2;
 }

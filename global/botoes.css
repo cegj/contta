@@ -1,5 +1,5 @@
 .botao-acao-principal {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   background-color: #052856;
   padding: 15px 30px;
   color: #fff;
@@ -22,7 +22,7 @@
 }
 
 .botao-acao-secundario {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   background-color: #052856;
   padding: 7px 12px;
   color: #fff;
@@ -47,7 +47,6 @@
   background-color: #127a08;
 }
 
-
 .botao-acao-secundario.cancelar {
   background-color: #6b0606;
 }
@@ -56,7 +55,6 @@
   background-color: #860a0a;
 }
 
-
 .botao-acao-secundario.neutro {
   background-color: #313131;
 }
@@ -64,7 +62,6 @@
 .botao-acao-secundario.neutro:hover {
   background-color: #4d4d4d;
 }
-
 
 .botao-opcoes {
   padding-top: 10px;
@@ -80,10 +77,10 @@
 }
 
 .botao-mes-ano::before {
-  content:"";
+  content: "";
   background-image: url(/img/icos/calendario.svg);
   background-repeat: no-repeat;
-  background-size:contain;
+  background-size: contain;
   display: inline-block;
   width: 22px;
   height: 22px;
@@ -93,10 +90,10 @@
 }
 
 .botao-configurar::before {
-  content:"";
+  content: "";
   background-image: url(/img/icos/configuracoes.svg);
   background-repeat: no-repeat;
-  background-size:contain;
+  background-size: contain;
   display: inline-block;
   width: 22px;
   height: 22px;
@@ -106,10 +103,10 @@
 }
 
 .botao-sair::before {
-  content:"";
-  background-image: url(/img/icos/cancelar.svg);
+  content: "";
+  background-image: url(/img/icos/cancelar.svg) !important;
   background-repeat: no-repeat;
-  background-size:contain;
+  background-size: contain;
   display: inline-block;
   width: 22px;
   height: 22px;
@@ -119,10 +116,10 @@
 }
 
 .botao-extrato::before {
-  content:"";
+  content: "";
   background-image: url(/img/icos/extrato.svg);
   background-repeat: no-repeat;
-  background-size:contain;
+  background-size: contain;
   display: inline-block;
   width: 22px;
   height: 22px;
@@ -132,10 +129,10 @@
 }
 
 .botao-extrato-outlined::before {
-  content:"";
+  content: "";
   background-image: url(/img/icos/extrato_outl.svg);
   background-repeat: no-repeat;
-  background-size:contain;
+  background-size: contain;
   display: inline-block;
   width: 22px;
   height: 22px;
@@ -145,10 +142,10 @@
 }
 
 .botao-exportar::before {
-  content:"";
+  content: "";
   background-image: url(/img/icos/exportar.svg);
   background-repeat: no-repeat;
-  background-size:contain;
+  background-size: contain;
   display: inline-block;
   width: 22px;
   height: 22px;
@@ -158,10 +155,10 @@
 }
 
 .botao-novo::before {
-  content:"";
+  content: "";
   background-image: url(/img/icos/novo.svg);
   background-repeat: no-repeat;
-  background-size:contain;
+  background-size: contain;
   display: inline-block;
   width: 22px;
   height: 22px;
@@ -171,10 +168,10 @@
 }
 
 .botao-final-pagina::before {
-  content:"";
+  content: "";
   background-image: url(/img/icos/descer.svg);
   background-repeat: no-repeat;
-  background-size:contain;
+  background-size: contain;
   display: inline-block;
   width: 22px;
   height: 22px;
@@ -182,4 +179,3 @@
   left: 12px;
   top: 8px;
 }
-

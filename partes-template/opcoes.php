@@ -4,11 +4,9 @@
     <span class="mes-ano-selecionado"><?php echo ($mes . '/' . $ano) ?></span>
   <?php endif; ?>
 
-  <a class="botao-opcoes botao-mes-ano" id="selecionar-mes-ano">Alterar mês/ano</a>
+  <a class="botao-opcoes botao-mes-ano" id="opcao-selecionar-mes-ano">Alterar mês/ano</a>
 
-  <?php if ($url != '/index.php') :  ?>
-    <a class="botao-opcoes botao-novo" id="opcao-registrar-transacao">Registrar transação</a>
-  <?php endif; ?>
+  <a class="botao-opcoes botao-novo" id="opcao-registrar-transacao">Registrar transação</a>
 
   <a class="botao-opcoes botao-final-pagina" href="#footer">Descer tudo</a>
 
@@ -48,45 +46,62 @@
 <!-- Formulário de mês e ano -->
 <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/mes_ano.php'); ?>
 
-<!-- Formulário de registrar transação (modal) -->
-<?php if ($url != '/index.php') :  ?>
+<!-- Formulário de registrar transação -->
 
-  <div class="container-formulario-registrar-transacao-opcoes" id="janela-registrar-transacao" <?php if (filter_input(INPUT_GET, 'id_transacao', FILTER_VALIDATE_INT)) : ?> style="display: block !important" <?php endif; ?>>
+<div id="caixa-registrar-modal" class="box formulario hide" <?php if (filter_input(INPUT_GET, 'id_transacao', FILTER_VALIDATE_INT)) : ?> style="display: block !important" <?php endif; ?>>
+  <?php include($_SERVER["DOCUMENT_ROOT"] . '/extrato/formulario_registrar.php'); ?>
 
-    <div id="caixa-registrar-modal" class="box formulario oculto">
-      <?php include($_SERVER["DOCUMENT_ROOT"] . '/extrato/formulario_registrar.php'); ?>
-    </div>
-  </div>
-
-<?php endif; ?>
+</div>
+</div>
 
 <script>
-  // ABRIR E FECHAR O SELETOR DE MÊS E ANO AO CLICAR NO BOTÃO
+  function mostrarOcultar(btn, box) {
+    btn.classList.toggle('botao-sair');
+    box.classList.toggle('show');
+    box.classList.toggle('hide');
+    box.addEventListener('animationend', function() {
+      if (box.classList.contains('hide')) {
+        box.style.display = "none";
+      } else {
+        box.style.display = "block";
+      }
+    });
 
-  botaoAbrirRegistroTransacao = document.getElementById('opcao-registrar-transacao')
-  janelaRegistroTransacao = document.getElementById('janela-registrar-transacao')
+  }
 
-  botaoAbrirRegistroTransacao.addEventListener('click', function() {
-    if (janelaRegistroTransacao.classList.contains('show')) {
-      janelaRegistroTransacao.classList.remove('show');
-      janelaRegistroTransacao.classList.add('hide');
-      botaoAbrirRegistroTransacao.classList.remove('botao-sair');
-      botaoAbrirRegistroTransacao.classList.add('botao-novo');
-    } else {
-      janelaRegistroTransacao.classList.add('show');
-      janelaRegistroTransacao.classList.remove('hide');
-      botaoAbrirRegistroTransacao.classList.remove('botao-novo');
-      botaoAbrirRegistroTransacao.classList.add('botao-sair');
-    }
+  btnRegistrarTransacao = document.getElementById('opcao-registrar-transacao')
+  boxRegistrarTransacao = document.getElementById('caixa-registrar-modal')
+
+  btnRegistrarTransacao.addEventListener('click', function() {
+    mostrarOcultar(this, boxRegistrarTransacao)
   })
 
-  janelaRegistroTransacao.addEventListener('animationend', function() {
-    console.log("Disparou!")
-    if (janelaRegistroTransacao.classList.contains('hide')) {
-      console.log("Entrou no if!")
-      janelaRegistroTransacao.style.display = "none";
-    }
-  });
+  btnAlterarMes = document.getElementById('opcao-selecionar-mes-ano')
+  boxAlterarMes = document.getElementById('container-seletor-mes-ano')
+
+  btnAlterarMes.addEventListener('click', function() {
+    mostrarOcultar(this, boxAlterarMes)
+  })
+
+
+  // ABRIR E FECHAR O SELETOR DE MÊS E ANO AO CLICAR NO BOTÃO
+
+  // botaoAbrirRegistroTransacao = document.getElementById('opcao-registrar-transacao')
+  // janelaRegistroTransacao = document.getElementById('caixa-registrar-modal')
+
+  // botaoAbrirRegistroTransacao.addEventListener('click', function() {
+  //   if (janelaRegistroTransacao.classList.contains('show')) {
+  //     janelaRegistroTransacao.classList.remove('show');
+  //     janelaRegistroTransacao.classList.add('hide');
+  //     botaoAbrirRegistroTransacao.classList.remove('botao-sair');
+  //     botaoAbrirRegistroTransacao.classList.add('botao-novo');
+  //   } else {
+  //     janelaRegistroTransacao.classList.add('show');
+  //     janelaRegistroTransacao.classList.remove('hide');
+  //     botaoAbrirRegistroTransacao.classList.remove('botao-novo');
+  //     botaoAbrirRegistroTransacao.classList.add('botao-sair');
+  //   }
+  // })
 
 
   // FECHAR COM ESC
