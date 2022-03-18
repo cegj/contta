@@ -1,7 +1,10 @@
-body, h1, h2, h3 {
+body,
+h1,
+h2,
+h3 {
   margin: 0px;
   padding: 0px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   color: #0b0b0b;
 }
 
@@ -16,7 +19,8 @@ a {
   color: #0b0b0b;
 }
 
-ul, li {
+ul,
+li {
   list-style: none;
 }
 
@@ -24,11 +28,11 @@ ul, li {
 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 input[type="number"] {
-    -moz-appearance: textfield;
+  -moz-appearance: textfield;
 }
 
 /* [FIM] REMOVE O SELETOR DOS INPUTS TYPE NUMBER */
@@ -37,16 +41,18 @@ dl {
   margin: 7px 0;
 }
 
-dt, dd {
+dt,
+dd {
   margin: 0px;
 }
 
-dt,dd {
+dt,
+dd {
   display: inline-block;
 }
 
 dt {
-  color:#252525;
+  color: #252525;
 }
 
 dd {
@@ -60,7 +66,7 @@ dd {
 
 .container {
   display: grid;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-top: 3px solid #cccccc;
 }
 
@@ -103,14 +109,14 @@ dd {
   background-image: linear-gradient(#f5f5f5, #dbdbdb);
 }
 
-.box.informacoes{
-  background-image: linear-gradient(#f5f5f5, #dbdbdb); 
+.box.informacoes {
+  background-image: linear-gradient(#f5f5f5, #dbdbdb);
 }
 
 /* INFO-BOX */
 
 .info-box {
-  display:inline-block;
+  display: inline-block;
   padding: 20px;
   max-width: 300px;
   height: max-content;
@@ -122,7 +128,7 @@ dd {
 }
 
 .info-box p {
-  display:inline-block;
+  display: inline-block;
   line-height: 1.3;
   color: #363d27;
   font-size: 1rem;
@@ -138,9 +144,9 @@ dd {
 }
 
 .info-box p::before {
-  content:"";
+  content: "";
   display: block;
-  background-image:url(/img/icone-info.svg);
+  background-image: url(/img/icone-info.svg);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -166,7 +172,8 @@ dd {
   margin: 0 auto;
 }
 
-.linha-resultado-dia-extrato, .linha-resultado-dia-extrato td {
+.linha-resultado-dia-extrato,
+.linha-resultado-dia-extrato td {
   padding: 2px 8px;
   font-size: 0.9rem;
   color: #333333;
@@ -174,7 +181,7 @@ dd {
   text-align: center;
 }
 
-.valor-resultado-dia-extrato{
+.valor-resultado-dia-extrato {
   padding: 5px 10px;
   background-color: #f5f5f5;
 }
@@ -185,10 +192,32 @@ dd {
   padding: 8px;
 }
 
-.extrato{
+.extrato {
   width: 100%;
 }
 
 .choices {
   font-family: "Roboto", sans-serif !important;
+}
+
+.info-tabela-vazia {
+  display: inline-block;
+  padding-left: 8px;
+  height: 20px;
+  color: rgb(146, 58, 0);
+  font-size: 1rem;
+}
+
+.info-tabela-vazia::before {
+  content: "";
+  position: relative;
+  top: 3px;
+  margin-right: 5px;
+  display: inline-block;
+  background-image: url(/img/icos/exclamacao.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 20px;
+  width: 20px;
 }

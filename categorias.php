@@ -112,7 +112,7 @@ $id_cat = filter_input(INPUT_GET, 'id_cat', FILTER_VALIDATE_INT);
             </div>
           <?php else : ?>
             <div>
-              <p>Não há categorias cadastradas</p>
+              <p class="info-tabela-vazia">Não há categorias cadastradas</p>
               <div>
               <?php endif; ?>
               </div>

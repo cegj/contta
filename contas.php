@@ -36,31 +36,41 @@ $id_conta = filter_input(INPUT_GET, 'id_conta', FILTER_VALIDATE_INT);
         <?php if ($configuracao != true) : ?>
           <div class="item-grid-principal">
             <h2 class="titulo-container">Contas</h2>
-            <table class="tabela">
-              <?php
-              $contas = buscar_contas($bdConexao);
 
-              foreach ($contas as $conta) :
-                $exibir = traduz_boolean($conta['exibir'], 'Sim', 'Não');
-                $saldoMes = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SSM', $conta['id_con']));
-                $saldoAcumulado = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SAM', $conta['id_con']));
+            <?php if (tabela_nao_esta_vazia($bdConexao, 'contas')) : ?>
 
-                if ($saldoMes == 0) {
-                  $saldoMes = "0,00";
-                }
-                if ($saldoAcumulado == 0) {
-                  $saldoAcumulado = "0,00";
-                }
+              <table class="tabela">
+                <?php
+                $contas = buscar_contas($bdConexao);
 
-                echo "<tr>
-                      <td class='td-conta'><a class='filtrar' href='?conta={$conta['id_con']}'>{$conta['conta']} <img class='icone-filtrar' src='/img/icos/filtrar.svg'></a></td>
-                      <td class='td-conta'>R$ {$saldoAcumulado}</td>
-                      </tr>
-                      ";
+                foreach ($contas as $conta) :
+                  $exibir = traduz_boolean($conta['exibir'], 'Sim', 'Não');
+                  $saldoMes = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SSM', $conta['id_con']));
+                  $saldoAcumulado = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SAM', $conta['id_con']));
 
-              endforeach;
-              ?>
-            </table>
+                  if ($saldoMes == 0) {
+                    $saldoMes = "0,00";
+                  }
+                  if ($saldoAcumulado == 0) {
+                    $saldoAcumulado = "0,00";
+                  }
+
+                  echo "<tr>
+                        <td class='td-conta'><a class='filtrar' href='?conta={$conta['id_con']}'>{$conta['conta']} <img class='icone-filtrar' src='/img/icos/filtrar.svg'></a></td>
+                        <td class='td-conta'>R$ {$saldoAcumulado}</td>
+                        </tr>
+                        ";
+
+                endforeach;
+                ?>
+              </table>
+
+            <?php else : ?>
+
+              <p class="info-tabela-vazia">Não há contas cadastradas</p>
+
+            <?php endif; ?>
+
           </div>
 
           <div class="item-grid-secundario">
