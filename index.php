@@ -27,48 +27,50 @@
 
       <div class="container duas-colunas sem-bg">
 
-      <div id="caixa-registrar" class="box formulario">
-        <h2 class="titulo-box cadastrar">Registrar transação</h2>
+
+        <!-- <div id="caixa-registrar" class="box formulario">
+        <h2 class="titulo-box cadastrar">Registrar transação</h2> -->
         <!-- Formulário -->
         <?php
-        $edicao = false;
-        include($_SERVER["DOCUMENT_ROOT"] . '/extrato/formulario_registrar.php') ?>
-      </div>
+        // $edicao = false;
+        // include($_SERVER["DOCUMENT_ROOT"] . '/extrato/formulario_registrar.php') 
+        ?>
+        <!-- </div> -->
 
-      <div class="box informacoes">
-      <?php $buscaUltimoRegistro = buscar_registros($bdConexao, null, $mes, $ano, false, true);
+        <div class="box informacoes">
+          <?php $buscaUltimoRegistro = buscar_registros($bdConexao, null, $mes, $ano, false, true);
 
-      if ($buscaUltimoRegistro != null) :
+          if ($buscaUltimoRegistro != null) :
 
-      foreach ($buscaUltimoRegistro as $registro){
-        $ultimoregistro = $registro; 
-      }      
-      ?>
-      <h2 class="titulo-box ultimo">Último registro efetuado</h2>
-      <dl>
-        <dt>📝 Descrição:</dt>
-        <dd><?php echo $ultimoregistro['descricao'] ?></dd>
-      </dl>
-      <dl>
-        <dt>📅 Data:</dt>
-        <dd><?php echo traduz_data_para_br($ultimoregistro['data']) ?></dd>
-      </dl>
-      <dl>
-        <dt>💵 Valor:</dt>
-        <dd>R$ <?php echo formata_valor($ultimoregistro['valor']) ?></dd>
-      </dl>
-      <dl>
-        <dt>🏷️ Categoria:</dt>
-        <dd><?php echo $ultimoregistro['nome_cat'] ?></dd>
-      </dl>
-      <dl>
-        <dt>🏦 Conta:</dt>
-        <dd><?php echo $ultimoregistro['conta'] ?></dd>
-      </dl>
-      <?php else : ?>
-        <p>Não há registros cadastrados no mês.</p>
-      <?php endif; ?>
-      </div>
+            foreach ($buscaUltimoRegistro as $registro) {
+              $ultimoregistro = $registro;
+            }
+          ?>
+            <h2 class="titulo-box ultimo">Último registro efetuado</h2>
+            <dl>
+              <dt>📝 Descrição:</dt>
+              <dd><?php echo $ultimoregistro['descricao'] ?></dd>
+            </dl>
+            <dl>
+              <dt>📅 Data:</dt>
+              <dd><?php echo traduz_data_para_br($ultimoregistro['data']) ?></dd>
+            </dl>
+            <dl>
+              <dt>💵 Valor:</dt>
+              <dd>R$ <?php echo formata_valor($ultimoregistro['valor']) ?></dd>
+            </dl>
+            <dl>
+              <dt>🏷️ Categoria:</dt>
+              <dd><?php echo $ultimoregistro['nome_cat'] ?></dd>
+            </dl>
+            <dl>
+              <dt>🏦 Conta:</dt>
+              <dd><?php echo $ultimoregistro['conta'] ?></dd>
+            </dl>
+          <?php else : ?>
+            <p>Não há registros cadastrados no mês.</p>
+          <?php endif; ?>
+        </div>
 
     </main>
 
@@ -76,7 +78,7 @@
     <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/footer.php') ?>
 
 
-  <?php //Caso o usuário não esteja logado, exibe o conteúdo abaixo em vez da página. 
+    <?php //Caso o usuário não esteja logado, exibe o conteúdo abaixo em vez da página. 
   else :
 
     //SE NÃO EXISTEM TABELAS NO BD, DIRECIONADA PARA O SETUP INICIAL (SETUP.PHP). CASO CONTRÁRIO, INCLUI A PÁGINA PARA LOGIN.
@@ -90,8 +92,8 @@
           text: 'Para começar a utilizar o ControleSimples, é necessário fazer uma rápida configuração inicial. Vamos começar?',
           // icon: 'info',
           confirmButtonText: 'Iniciar configuração',
-          didClose: function(){
-            window.location.href='/setup/setup.php';
+          didClose: function() {
+            window.location.href = '/setup/setup.php';
           }
         });
       </script>
@@ -99,9 +101,9 @@
       <?php die(); ?>
 
     <?php else : ?>
-      
+
       <div class='alerta-necessidade-login'>
-      <p>Para continuar, é necessário fazer login.</p>
+        <p>Para continuar, é necessário fazer login.</p>
       </div>
 
       <?php include $_SERVER["DOCUMENT_ROOT"] . '/login.php'; ?>

@@ -6,6 +6,11 @@
   gap: 10px;
 }
 
+.box-opcoes {
+  box-shadow: unset;
+  margin: 0px;
+}
+
 .hide {
   display: none;
 }

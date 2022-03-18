@@ -5,11 +5,9 @@ include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
 $origin = $_SERVER['HTTP_REFERER'];
 $origin = explode('?', $origin)[0];
 
-$edicao = filter_input(INPUT_POST, 'editar', FILTER_VALIDATE_BOOLEAN);
-
 $id_transacao = filter_input(INPUT_POST, 'id_transacao', FILTER_VALIDATE_INT);
 
-if ($edicao) {
+if ($id_transacao) {
     $transacao_especifica = buscar_reg_especifico($bdConexao, $id_transacao);
 
     foreach ($transacao_especifica as $transacao_em_edicao) :
@@ -38,7 +36,7 @@ if ($edicao) {
 
 $transacao = array();
 
-if ($edicao == true && $transacao_edicao_tipo == 'T') {
+if ($id_transacao && $transacao_edicao_tipo == 'T') {
     $transacao['tipo'] = $transacao_edicao_tipo;
 } else {
     $transacao['tipo'] = $_POST['tipo'];
@@ -61,21 +59,21 @@ if ($transacao['tipo'] == 'D' or $transacao['tipo'] == 'R') {
 } else {
     $transacao['categoria'] = null;
 }
-if ($edicao == true && $transacao_edicao_tipo == 'T') {
+if ($id_transacao && $transacao_edicao_tipo == 'T') {
     $transacao['conta'] = $transacao_edicao_conta;
 } else {
     $transacao['conta'] = $_POST['conta'];
 }
 
-if ($edicao == false && $transacao['tipo'] == 'T') {
+if (!$id_transacao && $transacao['tipo'] == 'T') {
     $transacao['contadestino'] = $_POST['contadestino'];
 } else {
     $transacao['contadestino'] = null;
 }
 
-if ($edicao == false && isset($_POST['parcelas'])) {
+if (!$id_transacao && isset($_POST['parcelas'])) {
     $transacao['parcelas'] = $_POST['parcelas'];
-} else if ($edicao == true && isset($_POST['parcela']) && isset($_POST['total-parcelas'])) {
+} else if ($id_transacao && isset($_POST['parcela']) && isset($_POST['total-parcelas'])) {
     $transacao['parcela'] = $_POST['parcela'];
     $transacao['total-parcelas'] = $_POST['total-parcelas'];
     $editarParcelas = $_POST['editar-parcelas'];
@@ -87,12 +85,12 @@ if (isset($_POST['apagar']) && $_POST['apagar'] == true) {
     apagar_registro($bdConexao, $transacao, $id_transacao, $editarParcelas);
     header('Location: ' . $origin);
     die();
-} else if ($edicao == true) {
-    cadastrar_registro($bdConexao, $transacao, $edicao, $id_transacao, $editarParcelas);
+} else if ($id_transacao) {
+    cadastrar_registro($bdConexao, $transacao, true, $id_transacao, $editarParcelas);
     header('Location: ' . $origin);
     die();
 } else {
-    cadastrar_registro($bdConexao, $transacao, $edicao, null);
+    cadastrar_registro($bdConexao, $transacao, false, null);
     header('Location: ' . $origin);
     die();
 }

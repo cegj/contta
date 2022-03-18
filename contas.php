@@ -2,8 +2,6 @@
 
 $configuracao = filter_input(INPUT_GET, 'configurar', FILTER_VALIDATE_BOOL);
 
-$edicao = filter_input(INPUT_GET, 'editar', FILTER_VALIDATE_BOOL);
-
 $id_conta = filter_input(INPUT_GET, 'id_conta', FILTER_VALIDATE_INT);
 
 ?>
@@ -55,7 +53,7 @@ $id_conta = filter_input(INPUT_GET, 'id_conta', FILTER_VALIDATE_INT);
                 }
 
                 echo "<tr>
-                      <td class='td-conta'><a class='filtrar' href='/contas.php?conta={$conta['id_con']}'>{$conta['conta']} <img class='icone-filtrar' src='/img/icos/filtrar.svg'></a></td>
+                      <td class='td-conta'><a class='filtrar' href='?conta={$conta['id_con']}'>{$conta['conta']} <img class='icone-filtrar' src='/img/icos/filtrar.svg'></a></td>
                       <td class='td-conta'>R$ {$saldoAcumulado}</td>
                       </tr>
                       ";
@@ -120,7 +118,7 @@ $id_conta = filter_input(INPUT_GET, 'id_conta', FILTER_VALIDATE_INT);
                         if ($registro['tipo'] == 'T' && $registro['valor'] > 0 or $registro['tipo'] == 'SI') {
                           echo "";
                         } else {
-                          echo "<a href='extrato.php?id={$registro['id']}&editar=true#caixa-registrar'><img class='icone-editar' alt='Editar' src='/img/icos/editar.svg'/></a>";
+                          echo "<a href='?{$urlQuery}&id_transacao={$registro['id']}'><img class='icone-editar' alt='Editar' src='/img/icos/editar.svg'/></a>";
                           echo "
             </td>
             </tr>
@@ -176,7 +174,7 @@ $id_conta = filter_input(INPUT_GET, 'id_conta', FILTER_VALIDATE_INT);
                       <td class='td-conta'>{$conta['tipo_conta']}</td>
                       <td class='td-conta'>R$ {$saldoInicialFormatado}</td>
                       <td class='td-conta'>{$exibir}</td>
-                      <td class='coluna-acoes'><a href='contas.php?id_conta={$conta['id_con']}&configurar=true&editar=true#header'><img class='icone-editar' alt='Editar' src='/img/icos/editar.svg'/></a>
+                      <td class='coluna-acoes'><a href='?{$urlQuery}&id_conta={$conta['id_con']}#header'><img class='icone-editar' alt='Editar' src='/img/icos/editar.svg'/></a>
                       </tr>
                       ";
 

@@ -3,8 +3,6 @@
   color: white;
   padding: 20px 30px;
   display: none;
-  box-shadow: 5px 5px 10px #999999;
-  border-radius: 4px;
   background-image: linear-gradient(#011b43, #011128);
   display: flex;
   gap: 20px;
@@ -57,16 +55,19 @@
   border-radius: 4px;
   background-color: #011b43;
   color: white;
-  height: 25px;
-}
-
-.seletor-mes {
-  display: block;
-  padding-top: 10px;
+  margin: 0px !important;
 }
 
 .seletor-mes button {
   background-color: #071d41;
+  color: #dbdbdb;
+  border: none;
+  padding: 7px;
+  cursor: pointer;
+}
+
+.seletor-mes button:hover {
+  background-color: #092655;
   color: #dbdbdb;
   border: none;
   padding: 7px;

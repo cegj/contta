@@ -1,4 +1,4 @@
-<div id="container-seletor-mes-ano" class="container-seletor-mes-ano hide">
+<div id="container-seletor-mes-ano" class="container-seletor-mes-ano box-opcoes hide">
   <div class="seletor-mes-ano" id="seletor-mes-ano">
     <form id="for-mes-ano" class="form-mes-ano" action="" method="POST">
       <input id="seletor-campo-mes" class="form-mes-ano-campo-mes" type="number" name="mes" min="1" max="12" value=<?php echo $mes ?> required> / <input class="form-mes-ano-campo-ano" type="number" name="ano" min="1900" value=<?php echo $ano ?> required></input>

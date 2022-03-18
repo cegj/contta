@@ -30,7 +30,8 @@
   border-radius: 4px;
 }
 
-input[type="checkbox"], input[type="radio"]{
+input[type="checkbox"],
+input[type="radio"] {
   flex-basis: 30px;
 }
 
@@ -50,7 +51,8 @@ input[type="checkbox"], input[type="radio"]{
   color: #262626;
 }
 
-.div-checkbox, .div-radio {
+.div-checkbox,
+.div-radio {
   display: flex;
   align-items: center;
   background-color: white;
@@ -62,17 +64,18 @@ input[type="checkbox"], input[type="radio"]{
   box-sizing: border-box;
 }
 
-.div-checkbox label, .div-radio label {
+.div-checkbox label,
+.div-radio label {
   font-family: "Roboto", sans-serif;
   font-size: 1.1rem;
   margin-left: 3px;
 }
 
 .container-apagar::before {
-  content:"";
+  content: "";
   background-image: url(/img/icos/apagar.svg);
   background-repeat: no-repeat;
-  background-size:contain;
+  background-size: contain;
   background-position: center;
   display: inline-block;
   width: 40px;

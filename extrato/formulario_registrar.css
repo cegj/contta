@@ -2,6 +2,11 @@
   background-color: #ffeeec;
 }
 
+#form-transacao {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  background-image: linear-gradient(#fffff3, #ffffe3);
+}
+
 .container-edicao-parcelas::before {
   content: "";
   background-image: url(/img/icos/seguinte.svg);

@@ -1,9 +1,8 @@
 <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
 
-
 $configuracao = filter_input(INPUT_GET, 'configurar', FILTER_VALIDATE_BOOL);
 
-$edicao = filter_input(INPUT_GET, 'editar', FILTER_VALIDATE_BOOL);
+$id_cat = filter_input(INPUT_GET, 'id_cat', FILTER_VALIDATE_INT);
 
 ?>
 
@@ -72,7 +71,7 @@ $edicao = filter_input(INPUT_GET, 'editar', FILTER_VALIDATE_BOOL);
 
                     if ($configuracao == true) {
                       echo "
-                      <td class='coluna-acoes'><a href='categorias.php?id_cat={$categoriaPrincipal['id_cat']}&configurar=true&editar=true#header'><img class='icone-editar' alt='Editar' src='/img/icos/editar.svg'/></a>";
+                      <td class='coluna-acoes'><a href='?{$urlQuery}&id_cat={$categoriaPrincipal['id_cat']}#header'><img class='icone-editar' alt='Editar' src='/img/icos/editar.svg'/></a>";
                     }
 
                     echo "</tr>";
@@ -101,7 +100,7 @@ $edicao = filter_input(INPUT_GET, 'editar', FILTER_VALIDATE_BOOL);
 
                       if ($configuracao == true) {
                         echo "
-                            <td class='coluna-acoes'><a href='categorias.php?id_cat={$categoriaSecundaria['id_cat']}&configurar=true&editar=true#header'><img class='icone-editar' alt='Editar' src='img/icos/editar.svg'/></a></td>";
+                            <td class='coluna-acoes'><a href='?{$urlQuery}&id_cat={$categoriaSecundaria['id_cat']}#header'><img class='icone-editar' alt='Editar' src='img/icos/editar.svg'/></a></td>";
                       }
                       echo "</tr>";
                     endforeach;
@@ -173,7 +172,7 @@ $edicao = filter_input(INPUT_GET, 'editar', FILTER_VALIDATE_BOOL);
                                 if ($registro['tipo'] == 'T' && $registro['valor'] > 0 or $registro['tipo'] == 'SI') {
                                   echo "";
                                 } else {
-                                  echo "<a href='extrato.php?id={$registro['id']}&editar=true#caixa-registrar'><img class='icone-editar' alt='Editar' src='/img/icos/editar.svg'/></a>";
+                                  echo "<a href='?{$urlQuery}&id_transacao={$registro['id']}'><img class='icone-editar' alt='Editar' src='/img/icos/editar.svg'/></a>";
                                   echo "
               </td>
               </tr>

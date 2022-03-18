@@ -1,6 +1,6 @@
 <?php $tiposConta = buscar_tipos_conta();
 
-if ($edicao) {
+if ($id_conta) {
   $conta_em_edicao = buscar_conta_especifica($bdConexao, $id_conta);
   $conta_edicao_nome = $conta_em_edicao['conta'];
   $conta_edicao_tipo = $conta_em_edicao['tipo_conta'];
@@ -15,7 +15,7 @@ if ($edicao) {
 
 ?>
 
-<?php if ($edicao == false) :
+<?php if (!$id_conta) :
 ?>
   <h2 class="titulo-box cadastrar">Cadastrar conta</h2>
 <?php else : ?>
@@ -26,14 +26,13 @@ if ($edicao) {
 <?php endif; ?>
 
 <form id="form-contas" class="form-cadastrar-editar" action="app\model\handle_form_contas.php" method="POST">
-  <?php if ($edicao == true) {
-    echo "<input class='campo-id-edicao' type='text' name='editar' value='{$edicao}' class='input-id' readonly>";
+  <?php if ($id_conta) {
     echo "<input class='campo-id-edicao' type='text' name='id_conta' value='{$_GET['id_conta']}' class='input-id' readonly>";
   }
   ?>
   <div>
     <label for="nomeconta">Nome da conta:</label>
-    <input type="text" id="nomeconta" name="nomeconta" <?php preencher_valor_atual('text', $edicao, $conta_edicao_nome); ?> required />
+    <input type="text" id="nomeconta" name="nomeconta" <?php preencher_valor_atual('text', true, $conta_edicao_nome); ?> required />
   </div>
   <div>
     <label for="tipoconta">Tipo de conta:</label>
@@ -43,7 +42,7 @@ if ($edicao) {
 
       foreach ($tiposConta as $tipoConta) {
 
-        if ($edicao == true && $tipoConta == $conta_edicao_tipo) {
+        if ($id_conta && $tipoConta == $conta_edicao_tipo) {
           echo "<option selected>{$tipoConta}</option>";
         } else {
           echo "<option>{$tipoConta}</option>";
@@ -54,17 +53,17 @@ if ($edicao) {
   </div>
   <div>
     <label for="saldoinicial">Saldo inicial:</label>
-    <input type="text" inputmode="numeric" id="saldoinicial" name="saldoinicial" <?php preencher_valor_atual('number', $edicao, $conta_edicao_saldo_inicial); ?> />
+    <input type="text" inputmode="numeric" id="saldoinicial" name="saldoinicial" <?php preencher_valor_atual('number', true, $conta_edicao_saldo_inicial); ?> />
   </div>
   <div class="div-checkbox container-exibir">
-    <input type="checkbox" id="exibirconta" name="exibirconta" value="1" <?php if ($edicao == true) {
-                                                                            preencher_valor_atual('checkbox', $edicao, $conta_edicao_exibir);
+    <input type="checkbox" id="exibirconta" name="exibirconta" value="1" <?php if ($id_conta) {
+                                                                            preencher_valor_atual('checkbox', true, $conta_edicao_exibir);
                                                                           } else {
                                                                             echo "checked";
                                                                           } ?> />
     <label for="exibirconta">Exibir conta</label>
   </div>
-  <?php if ($edicao == true) : ?>
+  <?php if ($id_conta) : ?>
     <div class="div-radio container-apagar ocupar-todas-colunas">
       <input type='radio' id='apagar-remove' class='apagar' name='apagar' value='remove-registros' />
       <label for='apagar-remove' class='label-apagar'>Apagar conta e <strong>remover</strong> histórico</label>
@@ -75,7 +74,7 @@ if ($edicao) {
     </div>
   <?php endif; ?>
 
-  <?php if ($edicao == true) : ?>
+  <?php if ($id_conta) : ?>
     <div class="container-botao-acao-principal">
       <button class="botao-acao-principal" type="submit">Confirmar alteração</button>
     </div>

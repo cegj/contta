@@ -99,7 +99,7 @@ $id_transacao = filter_input(INPUT_GET, 'id_transacao', FILTER_VALIDATE_INT);
                   if ($transacao['tipo'] == 'T' && $transacao['valor'] > 0 or $transacao['tipo'] == 'SI') {
                     echo "";
                   } else {
-                    echo "<a href='extrato.php?id_transacao={$transacao['id']}&editar=true#caixa-registrar'><img class='icone-editar' alt='Editar' src='img/icos/editar.svg'/></a>";
+                    echo "<a href='?id_transacao={$transacao['id']}'><img class='icone-editar' alt='Editar' src='img/icos/editar.svg'/></a>";
                     echo "
               </td>
               </tr>

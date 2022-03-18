@@ -3,13 +3,11 @@
 include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
 
 $origin = $_SERVER['HTTP_REFERER'];
-$origin = explode('?', $origin)[0];
-
-$edicao = filter_input(INPUT_POST, 'editar', FILTER_VALIDATE_BOOLEAN);
+$origin = explode('?', $origin)[0] . '?configurar=true';
 
 $id_cat = filter_input(INPUT_POST, 'id_cat', FILTER_VALIDATE_INT);
 
-if ($edicao) {
+if ($id_cat) {
     $cat_especifica = buscar_cat_especifica($bdConexao, $id_cat);
     $cat_edicao_nome = $cat_especifica['nome_cat'];
     $cat_edicao_cat_principal = $cat_especifica['cat_principal'];
@@ -42,12 +40,12 @@ if (isset($_POST['apagar']) && $_POST['apagar'] == true) {
     apagar_cat($bdConexao, $id_cat, $cat_edicao_nome, $cat_edicao_cat_principal);
     header('Location: ' . $origin);
     die();
-} else if ($edicao == true) {
-    cadastrar_cat($bdConexao, $categoria, $edicao, $id_cat, $cat_edicao_nome, $cat_edicao_cat_principal);
+} else if ($id_cat) {
+    cadastrar_cat($bdConexao, $categoria, true, $id_cat, $cat_edicao_nome, $cat_edicao_cat_principal);
     header('Location: ' . $origin);
     die();
 } else {
-    cadastrar_cat($bdConexao, $categoria, $edicao, null, null, null);
+    cadastrar_cat($bdConexao, $categoria, false, null, null, null);
     header('Location: ' . $origin);
     die();
 }

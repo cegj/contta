@@ -3,9 +3,7 @@
 include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
 
 $origin = $_SERVER['HTTP_REFERER'];
-$origin = explode('?', $origin)[0];
-
-$edicao = filter_input(INPUT_POST, 'editar', FILTER_VALIDATE_BOOLEAN);
+$origin = explode('?', $origin)[0] . '?configurar=true';
 
 $id_conta = filter_input(INPUT_POST, 'id_conta', FILTER_VALIDATE_INT);
 
@@ -36,12 +34,12 @@ if (isset($_POST['apagar'])) {
     apagar_conta($bdConexao, $id_conta, $_POST['apagar']);
     header('Location: ' . $origin);
     die();
-} else if ($edicao == true) {
-    cadastrar_conta($bdConexao, $conta, $edicao, $id_conta);
+} else if ($id_conta) {
+    cadastrar_conta($bdConexao, $conta, true, $id_conta);
     header('Location: ' . $origin);
     die();
 } else {
-    cadastrar_conta($bdConexao, $conta, $edicao, null);
+    cadastrar_conta($bdConexao, $conta, false, null);
     header('Location: ' . $origin);
     die();
 }
