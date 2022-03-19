@@ -42,7 +42,7 @@ if ($id_transacao) {
   ?>
 
   <div>
-    <input type="checkbox" id="fixar-tipo" class="checkbox-fixar"><label for="tipo">Tipo:</label>
+    <input type="checkbox" tabindex="-1" id="fixar-tipo" class="checkbox-fixar"><label for="tipo">Tipo:</label>
     <select name="tipo" id="tipo" <?php if ($id_transacao && $transacao_edicao_tipo == 'T') {
                                     echo 'disabled';
                                   } ?>>
@@ -64,7 +64,7 @@ if ($id_transacao) {
     </select>
   </div>
   <div>
-    <input type="checkbox" id="fixar-data" class="checkbox-fixar"><label for="data">Data:</label>
+    <input type="checkbox" tabindex="-1" id="fixar-data" class="checkbox-fixar"><label for="data">Data:</label>
     <input type="date" id="data" name="data" <?php if ($id_transacao) {
                                                 echo "value='{$transacao_edicao_data}'";
                                               } else {
@@ -72,13 +72,13 @@ if ($id_transacao) {
                                               } ?> required />
   </div>
   <div>
-    <input type="checkbox" id="fixar-valor" class="checkbox-fixar"><label for="valor">Valor:</label>
+    <input type="checkbox" tabindex="-1" id="fixar-valor" class="checkbox-fixar"><label for="valor">Valor:</label>
     <input id="valor" type="text" inputmode="numeric" id="valor" name="valor" <?php if ($id_transacao) {
                                                                                 echo "value='{$transacao_edicao_valor}'";
                                                                               } ?> required />
   </div>
   <div>
-    <input type="checkbox" id="fixar-descricao" class="checkbox-fixar"><label for="descricao">Descrição:</label>
+    <input type="checkbox" tabindex="-1" id="fixar-descricao" class="checkbox-fixar"><label for="descricao">Descrição:</label>
     <input type="text" id="descricao" name="descricao" <?php if ($id_transacao) {
                                                           echo "value='{$transacao_edicao_descricao}'";
                                                         } ?> required />
@@ -91,7 +91,7 @@ if ($id_transacao) {
     </div>
   <?php else : ?>
     <div>
-      <input type="checkbox" id="fixar-conta" class="checkbox-fixar"><label for="conta">Conta:</label>
+      <input type="checkbox" tabindex="-1" id="fixar-conta" class="checkbox-fixar"><label for="conta">Conta:</label>
 
       <select id="conta" name="conta">
         <option disabled selected value>Selecione uma conta</option>
@@ -122,7 +122,7 @@ if ($id_transacao) {
     </div>
 
     <div>
-      <input type="checkbox" id="fixar-contadestino" class="checkbox-fixar"><label for="contadestino">Conta de destino:</label>
+      <input type="checkbox" tabindex="-1" id="fixar-contadestino" class="checkbox-fixar"><label for="contadestino">Conta de destino:</label>
 
       <select id="contadestino" name="contadestino" disabled>
         <option disabled selected value>Selecione uma conta</option>
@@ -153,7 +153,7 @@ if ($id_transacao) {
     </div>
 
     <div>
-      <input type="checkbox" id="fixar-categoria" class="checkbox-fixar"><label for="categoria">Categoria:</label>
+      <input type="checkbox" tabindex="-1" id="fixar-categoria" class="checkbox-fixar"><label for="categoria">Categoria:</label>
 
       <select class="choice categoria" id="categoria" name="categoria" required>
 
@@ -185,7 +185,7 @@ if ($id_transacao) {
     </div>
     <?php if (!$id_transacao) : ?>
       <div>
-        <input type="checkbox" id="fixar-parcelas" class="checkbox-fixar"><label for="parcelas">Parcelas:</label>
+        <input type="checkbox" tabindex="-1" id="fixar-parcelas" class="checkbox-fixar"><label for="parcelas">Parcelas:</label>
         <input id="parcelas" type="number" inputmode="numerico" min="0" step="1" id="parcelas" name="parcelas">
       </div>
     <?php endif; ?>
