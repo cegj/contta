@@ -42,7 +42,7 @@ if ($id_transacao) {
   ?>
 
   <div>
-    <label for="tipo">Tipo:</label>
+    <input type="checkbox" id="fixar-tipo" class="checkbox-fixar"><label for="tipo">Tipo:</label>
     <select name="tipo" id="tipo" <?php if ($id_transacao && $transacao_edicao_tipo == 'T') {
                                     echo 'disabled';
                                   } ?>>
@@ -64,7 +64,7 @@ if ($id_transacao) {
     </select>
   </div>
   <div>
-    <label for="data">Data:</label>
+    <input type="checkbox" id="fixar-data" class="checkbox-fixar"><label for="data">Data:</label>
     <input type="date" id="data" name="data" <?php if ($id_transacao) {
                                                 echo "value='{$transacao_edicao_data}'";
                                               } else {
@@ -72,13 +72,13 @@ if ($id_transacao) {
                                               } ?> required />
   </div>
   <div>
-    <label for="valor">Valor:</label>
+    <input type="checkbox" id="fixar-valor" class="checkbox-fixar"><label for="valor">Valor:</label>
     <input id="valor" type="text" inputmode="numeric" id="valor" name="valor" <?php if ($id_transacao) {
                                                                                 echo "value='{$transacao_edicao_valor}'";
                                                                               } ?> required />
   </div>
   <div>
-    <label for="descricao">Descrição:</label>
+    <input type="checkbox" id="fixar-descricao" class="checkbox-fixar"><label for="descricao">Descrição:</label>
     <input type="text" id="descricao" name="descricao" <?php if ($id_transacao) {
                                                           echo "value='{$transacao_edicao_descricao}'";
                                                         } ?> required />
@@ -91,7 +91,7 @@ if ($id_transacao) {
     </div>
   <?php else : ?>
     <div>
-      <label for="conta">Conta:</label>
+      <input type="checkbox" id="fixar-conta" class="checkbox-fixar"><label for="conta">Conta:</label>
 
       <select id="conta" name="conta">
         <option disabled selected value>Selecione uma conta</option>
@@ -122,7 +122,7 @@ if ($id_transacao) {
     </div>
 
     <div>
-      <label for="contadestino">Conta de destino:</label>
+      <input type="checkbox" id="fixar-contadestino" class="checkbox-fixar"><label for="contadestino">Conta de destino:</label>
 
       <select id="contadestino" name="contadestino" disabled>
         <option disabled selected value>Selecione uma conta</option>
@@ -153,13 +153,12 @@ if ($id_transacao) {
     </div>
 
     <div>
-      <label for="categoria">Categoria:</label>
+      <input type="checkbox" id="fixar-categoria" class="checkbox-fixar"><label for="categoria">Categoria:</label>
 
       <select class="choice categoria" id="categoria" name="categoria" required>
 
-        <?php if ($id_transacao) : ?>
-          <option disabled selected value>Selecione uma categoria</option>
-        <?php endif; ?>
+        <option disabled selected value>Selecione uma categoria</option>
+
         <?php
         $categoriasPrincipais = buscar_cat_principal($bdConexao);
 
@@ -186,7 +185,7 @@ if ($id_transacao) {
     </div>
     <?php if (!$id_transacao) : ?>
       <div>
-        <label for="parcelas">Parcelas:</label>
+        <input type="checkbox" id="fixar-parcelas" class="checkbox-fixar"><label for="parcelas">Parcelas:</label>
         <input id="parcelas" type="number" inputmode="numerico" min="0" step="1" id="parcelas" name="parcelas">
       </div>
     <?php endif; ?>
@@ -205,15 +204,15 @@ if ($id_transacao) {
   <?php endif; ?>
   <div class="container-botao-acao-principal">
     <?php if ($id_transacao) : ?>
-      <button class="botao-acao-principal" type="submit">Confirmar alteração</button>
+      <button class="botao-acao-principal" id="botao-registrar-transacao" type="submit">Confirmar alteração</button>
     <?php else : ?>
-      <button class="botao-acao-principal" type="submit">Registrar transação</button>
+      <button class="botao-acao-principal" id="botao-registrar-transacao" type="submit">Registrar transação</button>
     <?php endif; ?>
   </div>
-  <?php if ($id_transacao) : ?>
-    <span class="info-box formulario" id="alerta-apagar">Atenção: apagar um registro é uma ação irreversível.
-    <?php endif; ?>
-    </span>
+  <div class="opcoes-formulario">
+    <span id="btn-limpar-form-transacao" class="botao-acao-secundario neutro">Limpar seleção</span>
+    <span id="btn-fixar-form-transacao" class="botao-acao-secundario neutro">Manter aberto</span>
+  </div>
 
 </form>
 

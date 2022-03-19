@@ -40,3 +40,13 @@
   padding: 10px;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
+
+.opcoes-formulario {
+  grid-column: 4;
+  justify-self: flex-end;
+}
+
+.checkbox-fixar {
+  display: inline-block;
+  width: unset !important;
+}
