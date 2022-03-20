@@ -89,7 +89,3 @@ input[type="radio"] {
 .campo-id-edicao {
   display: none !important;
 }
-
-.form-cadastrar-editar .botao-acao-principal {
-  margin: 15px 0px;
-}

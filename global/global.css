@@ -104,13 +104,13 @@ dd {
 .box {
   margin: 10px;
   padding: 15px;
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
   background-image: linear-gradient(#f5f5f5, #dbdbdb);
 }
 
 .box.informacoes {
-  background-image: linear-gradient(#f5f5f5, #dbdbdb);
+  background-image: linear-gradient(#f7f7f7, #f4f4f4);
 }
 
 /* INFO-BOX */

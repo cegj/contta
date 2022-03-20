@@ -83,7 +83,7 @@ function checkFormTransacaoFixado() {
 
 checkFormTransacaoFixado();
 
-const checkboxesFixar = document.querySelectorAll('.checkbox-fixar');
+const btnFixarValor = document.querySelectorAll('.checkbox-fixar');
 
 const inputsFormRegistrar = document.querySelectorAll('#form-transacao input');
 
@@ -99,21 +99,30 @@ const campoCategoria = document.getElementById('categoria');
 const campoParcelas = document.getElementById('parcelas');
 const btnRegistrarTransacaoForm = document.getElementById('botao-registrar-transacao');
 
+function checkSetBtnStorage(btn){
+  if (sessionStorage.getItem(btn.id) == 'true'){
+    document.getElementById(btn.id).classList.add('setted')
+  } else {
+    document.getElementById(btn.id).classList.remove('setted')
+  }};
+
+btnFixarValor.forEach(function(btn){
+  btn.addEventListener('click', () => {
+    if (sessionStorage.getItem(btn.id) == 'true'){
+      sessionStorage.setItem(btn.id, 'false');
+      checkSetBtnStorage(btn);     
+    } else {
+      sessionStorage.setItem(btn.id, 'true');
+      checkSetBtnStorage(btn);
+    }});
+    checkSetBtnStorage(btn);
+  });
 
 inputsFormRegistrar.forEach(function(input){
   input.addEventListener('change', function(){
-    if (input.type === 'checkbox'){
-      if(input.checked){
-        sessionStorage.setItem(input.id, 'true');
-      } else {
-        sessionStorage.setItem(input.id, 'false');
-      }
-    } else {
       sessionStorage.setItem(input.id, input.value);
-    }  
-  })
-
-})
+    })
+  });
 
   selectsFormRegistrar.forEach(function(select){
     select.addEventListener('change', function(){
@@ -135,14 +144,9 @@ botoesAcaoPrincipal.forEach(function(btn){
   })
 })
 
-// btnRegistrarTransacaoForm.addEventListener('click', function(){
-//   afundarBotaoClick(btnRegistrarTransacaoForm);
-// });
-
-checkboxesFixar.forEach(function(checkbox){
-  if (sessionStorage.getItem(checkbox.id) === 'true'){
-    checkbox.checked = true;
-    switch (checkbox.id){
+btnFixarValor.forEach(function(btnFixar){
+  if (sessionStorage.getItem(btnFixar.id) === 'true'){
+    switch (btnFixar.id){
       case 'fixar-tipo':
         campoTipo.value = sessionStorage.getItem('tipo');
         break;
@@ -171,19 +175,19 @@ checkboxesFixar.forEach(function(checkbox){
 
   function limparSelecao(elementArray){
     elementArray.forEach(function(element){
-      element.checked = false;
       sessionStorage.setItem(element.id, 'false');
+      checkSetBtnStorage(element);
     })
   }
 
   const btnLimparSelecao = document.getElementById('btn-limpar-form-transacao');
 
   btnLimparSelecao.addEventListener('click', function(){
-    limparSelecao(checkboxesFixar);
+    limparSelecao(btnFixarValor);
     afundarBotaoClick(btnLimparSelecao);
   });
 
   function afundarBotaoClick(botao){
     botao.classList.add('clicado');
-    setTimeout(function(){botao.classList.remove('clicado')}, 200);
+    setTimeout(function(){botao.classList.remove('clicado')}, 100);
   }

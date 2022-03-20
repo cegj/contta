@@ -42,7 +42,8 @@ if ($id_transacao) {
   ?>
 
   <div>
-    <input type="checkbox" tabindex="-1" id="fixar-tipo" class="checkbox-fixar"><label for="tipo">Tipo:</label>
+    <span class="checkbox-fixar" id="fixar-tipo"></span>
+    <label for="tipo">Tipo:</label>
     <select name="tipo" id="tipo" <?php if ($id_transacao && $transacao_edicao_tipo == 'T') {
                                     echo 'disabled';
                                   } ?>>
@@ -64,7 +65,8 @@ if ($id_transacao) {
     </select>
   </div>
   <div>
-    <input type="checkbox" tabindex="-1" id="fixar-data" class="checkbox-fixar"><label for="data">Data:</label>
+    <span class="checkbox-fixar" id="fixar-data"></span>
+    <label for="data">Data:</label>
     <input type="date" id="data" name="data" <?php if ($id_transacao) {
                                                 echo "value='{$transacao_edicao_data}'";
                                               } else {
@@ -72,13 +74,15 @@ if ($id_transacao) {
                                               } ?> required />
   </div>
   <div>
-    <input type="checkbox" tabindex="-1" id="fixar-valor" class="checkbox-fixar"><label for="valor">Valor:</label>
+    <span class="checkbox-fixar" id="fixar-valor"></span>
+    <label for="valor">Valor:</label>
     <input id="valor" type="text" inputmode="numeric" id="valor" name="valor" <?php if ($id_transacao) {
                                                                                 echo "value='{$transacao_edicao_valor}'";
                                                                               } ?> required />
   </div>
   <div>
-    <input type="checkbox" tabindex="-1" id="fixar-descricao" class="checkbox-fixar"><label for="descricao">Descrição:</label>
+    <span class="checkbox-fixar" id="fixar-descricao"></span>
+    <label for="descricao">Descrição:</label>
     <input type="text" id="descricao" name="descricao" <?php if ($id_transacao) {
                                                           echo "value='{$transacao_edicao_descricao}'";
                                                         } ?> required />
@@ -91,7 +95,8 @@ if ($id_transacao) {
     </div>
   <?php else : ?>
     <div>
-      <input type="checkbox" tabindex="-1" id="fixar-conta" class="checkbox-fixar"><label for="conta">Conta:</label>
+      <span class="checkbox-fixar" id="fixar-conta"></span>
+      <label for="conta">Conta:</label>
 
       <select id="conta" name="conta">
         <option disabled selected value>Selecione uma conta</option>
@@ -122,7 +127,8 @@ if ($id_transacao) {
     </div>
 
     <div>
-      <input type="checkbox" tabindex="-1" id="fixar-contadestino" class="checkbox-fixar"><label for="contadestino">Conta de destino:</label>
+      <span class="checkbox-fixar" id="fixar-contadestino"></span>
+      <label for="contadestino">Conta de destino:</label>
 
       <select id="contadestino" name="contadestino" disabled>
         <option disabled selected value>Selecione uma conta</option>
@@ -153,7 +159,8 @@ if ($id_transacao) {
     </div>
 
     <div>
-      <input type="checkbox" tabindex="-1" id="fixar-categoria" class="checkbox-fixar"><label for="categoria">Categoria:</label>
+      <span class="checkbox-fixar" id="fixar-categoria"></span>
+      <label for="categoria">Categoria:</label>
 
       <select class="choice categoria" id="categoria" name="categoria" required>
 
@@ -185,7 +192,8 @@ if ($id_transacao) {
     </div>
     <?php if (!$id_transacao) : ?>
       <div>
-        <input type="checkbox" tabindex="-1" id="fixar-parcelas" class="checkbox-fixar"><label for="parcelas">Parcelas:</label>
+        <span class="checkbox-fixar" id="fixar-parcelas"></span>
+        <label for="parcelas">Parcelas:</label>
         <input id="parcelas" type="number" inputmode="numerico" min="0" step="1" id="parcelas" name="parcelas">
       </div>
     <?php endif; ?>
@@ -210,8 +218,8 @@ if ($id_transacao) {
     <?php endif; ?>
   </div>
   <div class="opcoes-formulario">
-    <span id="btn-limpar-form-transacao" class="botao-acao-secundario neutro">Limpar seleção</span>
     <span id="btn-fixar-form-transacao" class="botao-acao-secundario neutro">Manter aberto</span>
+    <span id="btn-limpar-form-transacao" class="botao-acao-secundario neutro">Limpar fixadores</span>
   </div>
 
 </form>
