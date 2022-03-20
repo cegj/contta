@@ -51,7 +51,6 @@ function mostrarOcultar(btn, box) {
 
 function checkIdTransacaoNaUrl(){
     let url = window.location.search    
-    console.log(url.includes('id_transacao'))
     return url.includes('id_transacao')
 }
 

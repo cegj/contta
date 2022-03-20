@@ -1,3 +1,5 @@
+if (!!document.getElementsByClassName('apagar')[0]){
+
   radioApagar = document.getElementsByClassName('apagar')
   botaoLimparSelecao = document.getElementById('limpar-selecao')
   alertaApagar = document.getElementById('alerta-apagar')
@@ -39,3 +41,5 @@
     alertaApagar.style.boxShadow = "";  
     botaoLimparSelecao.style.display = "none";  
   })
+
+}

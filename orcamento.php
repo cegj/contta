@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <script>
   if (screen.width < 640) {
     window.location.href = '/orcamento-m.php';
@@ -7,7 +9,6 @@
 <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
 $edicao = false; ?>
 
-<!DOCTYPE html>
 <html>
 
 <head>
