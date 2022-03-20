@@ -11,17 +11,14 @@ Aplicativo web self-hosted (hospedado pelo próprio usuário) para gerenciamento
 ## Tecnologias utilizadas
 
 - PHP;
+- SQL;
 - HTML;
 - CSS;
 - Javascript.
 
----
-
 ## Para quem é?
 
 O ControleSimples foi desenvolvido, primeiramente, pensando em **privacidade**: o objetivo é permitir um controle financeiro fácil sem precisar hospedar suas informações financeiras (que são altamente sensíveis) em bancos de dados de terceiros. Além disso, o ControleSimples oferece um controle de finanças pessoais pela web e sem depender de planilhas de Excel e Google Docs.
-
----
 
 ## Como funciona?
 
@@ -42,8 +39,6 @@ Como o nome sugere, o aplicativo tem como objetivo oferecer uma solução simpli
 Por enquanto, é isso!
 
 O ControleSimples tem interface responsiva em celulares. Porém, o seu uso é melhor em telas grandes.
-
----
 
 ## Instalação
 
@@ -76,8 +71,6 @@ Atenção: todas as informações acima devem estar entre aspas simples '' e sã
 5. Pronto!
 
 Caso prefira, você pode instalar o ControleSimples em um servidor web local como o XAMPP/LAMPP. Nesse caso, você acessará a aplicação somente no computador em que o servidor foi instalado e deve criar uma rotina de backup do seu banco de dados.
-
----
 
 ## Funções planejadas
 
