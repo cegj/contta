@@ -88,14 +88,18 @@ const inputsFormRegistrar = document.querySelectorAll('#form-transacao input');
 
 const selectsFormRegistrar = document.querySelectorAll('#form-transacao select');
 
+const boxFormRegistrarTransacao = document.getElementById('caixa-registrar-modal');
 const campoTipo = document.getElementById('tipo');
 const campoData = document.getElementById('data');
 const campoValor = document.getElementById('valor');
 const campoDescricao = document.getElementById('descricao');
 const campoConta = choiceConta;
 const campoContaDestino = choiceContaDestino;
+const labelContaDestino = document.querySelector('label[for=contadestino]');
 const campoCategoria = choiceCategoria;
+const labelCategoria = document.querySelector('label[for=categoria]');
 const campoParcelas = document.getElementById('parcelas');
+const labelParcelas = document.querySelector('label[for=parcelas]');
 const btnRegistrarTransacaoForm = document.getElementById('botao-registrar-transacao');
 
 function checkSetBtnStorage(btn){
@@ -194,3 +198,48 @@ btnFixarValor.forEach(function(btnFixar){
     botao.classList.add('clicado');
     setTimeout(function(){botao.classList.remove('clicado')}, 100);
   }
+
+function ajustesFormTipoTransacao(value) {
+
+  if (value == "T") {
+    campoCategoria.disable();
+    labelCategoria.style.opacity = "0.3";
+    campoContaDestino.enable();
+    labelContaDestino.style.opacity = "unset";
+    campoParcelas.disabled = true;
+    labelParcelas.style.opacity = "0.3";
+    campoParcelas.style.cursor = "not-allowed";
+    campoParcelas.style.opacity = "0.3";
+  }
+    else if (value == "D" || value == "R") {
+    campoCategoria.enable();
+    labelCategoria.style.opacity = "unset";
+    campoContaDestino.disable();
+    labelContaDestino.style.opacity = "0.3";
+    campoParcelas.disabled = false;
+    labelParcelas.style.opacity = "unset";
+    campoParcelas.style.cursor = "auto";
+    campoParcelas.style.opacity = "unset";
+  }
+
+  if (value == "T") {
+    campoValor.style.backgroundColor = "#264b7f";
+    campoValor.style.borderColor = "#2b5794";
+    boxFormRegistrarTransacao.style.borderTop = "3px solid #264b7f";
+  } else if (value == "D") {
+    campoValor.style.backgroundColor = "#ad2f1b";
+    campoValor.style.borderColor = "#ad2f1b";
+    boxFormRegistrarTransacao.style.borderTop = "3px solid #ad2f1b";
+  } else if (value == "R") {
+    campoValor.style.backgroundColor = "#3e7f26";
+    campoValor.style.borderColor = "#3e7f26";
+    boxFormRegistrarTransacao.style.borderTop = "3px solid #3e7f26";
+  }
+
+};
+
+campoTipo.addEventListener('change', function() {
+  ajustesFormTipoTransacao(this.value)
+});
+
+ajustesFormTipoTransacao(campoTipo.value);

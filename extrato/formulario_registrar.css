@@ -84,3 +84,7 @@
   justify-self: start;
   gap: 15px;
 }
+
+#caixa-registrar-modal {
+  border-radius: 0px;
+}

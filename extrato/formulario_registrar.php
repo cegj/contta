@@ -240,52 +240,6 @@ if ($id_transacao) {
 </script>
 
 <script type="text/javascript">
-  function verifica(value) {
-    var categoria = document.getElementById("categoria");
-    var contadestino = document.getElementById("contadestino");
-    var campoValor = document.getElementById("valor");
-    var campoParcelas = document.getElementById("parcelas");
-    var caixaRegistrar = document.getElementById("caixa-registrar");
-
-    if (value == "T") {
-      categoria.disabled = true;
-      choiceCategoria.disable();
-      contadestino.disabled = false;
-      choiceContaDestino.enable();
-      <?php if (!$id_transacao) : ?>
-        parcelas.disabled = true;
-        parcelas.style.cursor = "not-allowed";
-      <?php endif; ?>
-    } else if (value == "D" || value == "R") {
-      categoria.disabled = false;
-      choiceCategoria.enable();
-      contadestino.disabled = true;
-      choiceContaDestino.disable();
-      <?php if (!$id_transacao) : ?>
-        parcelas.disabled = false;
-        parcelas.style.cursor = "auto";
-      <?php endif; ?>
-    }
-
-    if (value == "T") {
-      campoValor.style.backgroundColor = "#264b7f";
-      caixaRegistrar.style.backgroundColor = "#f4f8ff";
-    } else if (value == "D") {
-      campoValor.style.backgroundColor = "#ad2f1b";
-      caixaRegistrar.style.backgroundColor = "#ffeeec";
-    } else if (value == "R") {
-      campoValor.style.backgroundColor = "#3e7f26";
-      caixaRegistrar.style.backgroundColor = "#f1ffec";
-    }
-
-  };
-
-  var tipo = document.getElementById("tipo");
-
-  tipo.addEventListener('change', function() {
-    verifica(this.value)
-  });
-
   VMasker(document.querySelector("#valor")).maskMoney({
     precision: 2,
     separator: ',',
