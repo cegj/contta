@@ -184,8 +184,8 @@
     flex-direction: column;
     padding-top: 15px;
   }
-}
 
-.opcoes-formulario {
-  align-self: center;
+  .opcoes-formulario {
+    align-self: center !important;
+  }
 }
