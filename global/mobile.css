@@ -1,187 +1,191 @@
-@media(max-width: 410px) {
-    header {
-        flex-direction: column;
-        height: unset;
-    }
+@media (max-width: 410px) {
+  header {
+    flex-direction: column;
+    height: unset;
+  }
 
-    .menu-principal {
-        height: unset;
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 0px;
-        gap: 25px;
+  .menu-principal {
+    height: unset;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0px;
+    gap: 25px;
+  }
 
-    }
-
-.menu-principal a {
+  .menu-principal a {
     background-color: #dfdfdf;
     border-radius: 4px;
     padding: 7px 14px;
     font-size: 1rem;
-}
+  }
 
-.caixas-saldos {
+  .caixas-saldos {
     flex-direction: column;
     padding: 20px 0;
     align-items: center;
-}
+  }
 
-.caixa-saldo h3 {
+  .caixa-saldo h3 {
     font-size: 0.8rem;
-}
+  }
 
-.mes-ano-selecionado {
+  .mes-ano-selecionado {
     display: block;
     width: 100%;
     text-align: center;
     background-color: #f1f1f1;
     color: #011739;
     padding: 10px;
-}
+  }
 
-.opcoes {
+  .opcoes {
     flex-wrap: wrap;
     justify-content: center;
     padding-bottom: 16px;
-}
+  }
 
-footer {
+  footer {
     font-size: 0.8rem;
-}
+  }
 
-.menu-secundario ul {
+  .menu-secundario ul {
     flex-direction: column;
     gap: 20px;
     padding: 0px;
-}
+  }
 
-.menu-secundario a {
+  .menu-secundario a {
     background-color: #dfdfdf;
     border-radius: 4px;
     padding: 5px 10px;
     font-size: 0.8rem;
-}
+  }
 
-.container.duas-colunas {
+  .container.duas-colunas {
     display: flex;
     flex-direction: column;
     gap: 20px;
     align-items: center;
-} 
+  }
 
-.container.duas-colunas.com-extrato {
+  .container.duas-colunas.com-extrato {
     flex-direction: column-reverse;
-}
+  }
 
-.container.duas-colunas .instrucao {
+  .container.duas-colunas .instrucao {
     text-align: center;
     line-height: 1.3;
     margin-bottom: 0px;
-} 
+  }
 
-.tabela-responsiva thead {
+  .tabela-responsiva thead {
     display: none;
-}
+  }
 
-.tabela-responsiva {
+  .tabela-responsiva {
     display: flex;
     flex-direction: column;
-}
+  }
 
-.tabela-responsiva tr {
+  .tabela-responsiva tr {
     display: flex;
     flex-direction: column;
     gap: 12px;
     align-items: center;
     border-bottom: 2px solid #f0f0f0;
     font-size: 0.9rem;
-}
+  }
 
-.tabela-responsiva th, .tabela-responsiva td {
+  .tabela-responsiva th,
+  .tabela-responsiva td {
     padding: 0px;
     margin: 0px;
-} 
+  }
 
-.linha-extrato-tipo {
+  .linha-extrato-tipo {
     display: none;
-}
+  }
 
-.linha-resultado-dia-extrato {
+  .linha-resultado-dia-extrato {
     display: flex;
     flex-direction: column;
     gap: 5px;
-}
+  }
 
-.linha-resultado-dia-extrato {
+  .linha-resultado-dia-extrato {
     height: auto;
-}
+  }
 
-.tabela.extrato.compacto {
+  .tabela.extrato.compacto {
     padding: 0px;
-}
+  }
 
-.form-cadastrar-editar {
-    grid-template-columns: 1fr;
-}
-
-.seletor-mes-ano{
-    left: unset;
-}
-
-.box.formulario.modal{
-    left: unset !important;
-}
-
-.item-grid-principal{
-    width: 100%;
-}
-
-.box.formulario {
-    order: -1;
-}
-
-.container-form-botoes{
+  .form-cadastrar-editar {
+    display: flex;
     flex-direction: column;
-}
+  }
 
-.form-alteracao-orcamento{
+  .seletor-mes-ano {
+    left: unset;
+  }
+
+  .item-grid-principal {
+    width: 100%;
+  }
+
+  .box.formulario {
+    order: -1;
+  }
+
+  .container-form-botoes {
+    flex-direction: column;
+  }
+
+  .form-alteracao-orcamento {
     text-align: center;
-}
+  }
 
-.form-alteracao-orcamento label{
+  .form-alteracao-orcamento label {
     display: block;
-}
+  }
 
-.form-alteracao-orcamento input{
+  .form-alteracao-orcamento input {
     display: block;
     margin: 15px auto;
-}
+  }
 
-.container-form-botoes .botao-acao-secundario{
+  .container-form-botoes .botao-acao-secundario {
     display: block;
     margin: 5px auto;
-}
+  }
 
-.titulo-container, .titulo-container.com-subtitulo {
+  .titulo-container,
+  .titulo-container.com-subtitulo {
     padding-left: 0px;
     padding-bottom: 0px;
     text-align: center;
     padding-top: 0px;
-}
+  }
 
-.subtitulo-container{
+  .subtitulo-container {
     text-align: center;
     padding-left: 0px;
     padding-bottom: 0px;
-} 
+  }
 
-.titulo-container.titulo-extrato.com-subtitulo::before, .titulo-container.titulo-editar.com-subtitulo::before {
-    display: none;    
-}
+  .titulo-container.titulo-extrato.com-subtitulo::before,
+  .titulo-container.titulo-editar.com-subtitulo::before {
+    display: none;
+  }
 
-#form-contas, #form-categoria{
+  #form-contas,
+  #form-categoria {
     display: flex;
     flex-direction: column;
     padding-top: 15px;
+  }
 }
+
+.opcoes-formulario {
+  align-self: center;
 }
