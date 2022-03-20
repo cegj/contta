@@ -4,7 +4,7 @@ session_start();
 
 date_default_timezone_set('America/Sao_Paulo');
 
-include($_SERVER["DOCUMENT_ROOT"] . '/bd.php');
+include($_SERVER["DOCUMENT_ROOT"] . '/app/bd.php');
 include($_SERVER["DOCUMENT_ROOT"] . '/ajudantes.php');
 include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/sair.php');
 

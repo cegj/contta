@@ -92,9 +92,9 @@ const campoTipo = document.getElementById('tipo');
 const campoData = document.getElementById('data');
 const campoValor = document.getElementById('valor');
 const campoDescricao = document.getElementById('descricao');
-const campoConta = document.getElementById('conta');
-const campoContaDestino = document.getElementById('contadestino');
-const campoCategoria = document.getElementById('categoria');
+const campoConta = choiceConta;
+const campoContaDestino = choiceContaDestino;
+const campoCategoria = choiceCategoria;
 const campoParcelas = document.getElementById('parcelas');
 const btnRegistrarTransacaoForm = document.getElementById('botao-registrar-transacao');
 
@@ -125,13 +125,17 @@ inputsFormRegistrar.forEach(function(input){
 
   selectsFormRegistrar.forEach(function(select){
     select.addEventListener('change', function(){
-      if(select.nextSibling.innerText){
-        sessionStorage.setItem(select.id, select.nextSibling.innerText);
-        console.log(select.nextSibling.innerText)
+      if(select.id === 'conta'){
+        value = choiceConta.getValue().value
+      } else if (select.id === 'contadestino'){
+        value = choiceContaDestino.getValue().value
+      } else if (select.id === 'categoria'){
+        value = choiceCategoria.getValue().value
       } else {
-        sessionStorage.setItem(select.id, select.value);
-        console.log(select.value)
+        value = select.value;
       }
+
+      sessionStorage.setItem(select.id, value);
     })
   })
 
@@ -159,13 +163,13 @@ btnFixarValor.forEach(function(btnFixar){
         campoDescricao.value = sessionStorage.getItem('descricao');
         break;
       case 'fixar-conta':
-        campoConta.value = sessionStorage.getItem('conta');
+        campoConta.setChoiceByValue(sessionStorage.getItem('conta'));
         break;
       case 'fixar-contadestino':
-        campoContaDestino.nextSibling.value = sessionStorage.getItem('contadestino');
+        campoContaDestino.setChoiceByValue(sessionStorage.getItem('contadestino'));
         break;
       case 'fixar-categoria':
-        campoCategoria.nextSibling.value = sessionStorage.getItem('categoria');
+        campoCategoria.setChoiceByValue(sessionStorage.getItem('categoria'));
         break;
       case 'fixar-parcelas':
         campoParcelas.value = sessionStorage.getItem('parcelas');

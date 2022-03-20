@@ -9,12 +9,12 @@
 
 <body>
 
-<!-- Cabeçalho (barra superior) -->
-    <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/header.php') ?>
+  <!-- Cabeçalho (barra superior) -->
+  <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/header.php') ?>
 
-    <main class="main-login">
+  <main class="main-login">
     <div class="box login">
-      <form method="POST" action="login_valida.php">
+      <form method="POST" action="handle_login.php">
         <label>Usuário:</label><input type="text" name="login" id="login">
         <label>Senha:</label><input type="password" name="senha" id="senha">
         <div class="container-botao-entrar">
