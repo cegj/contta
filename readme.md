@@ -1,41 +1,53 @@
 #ControleSimples
+
 # ControleSimples (beta)
+
+![ControleSimples em uso](https://i.imgur.com/QYx8Jsd.gif)
 
 ## O que é?
 
-Aplicativo web self-hosted (hospedado pelo próprio usuário) para gerenciamento de finanças pessoais, desenvolvido em PHP com HTML, CSS e Javascript.
+Aplicativo web self-hosted (hospedado pelo próprio usuário) para gerenciamento de finanças pessoais.
 
----------------
+## Tecnologias utilizadas
+
+- PHP;
+- HTML;
+- CSS;
+- Javascript.
+
+---
 
 ## Para quem é?
 
-O ControleSimples foi desenvolvido, primeiramente, pensando em **privacidade**: o objetivo é permitir um controle financeiro acessível sem precisar hospedar suas informações financeiras (que são altamente sensíveis) em bancos de dados de terceiros. Além disso, o ControleSimples oferece um controle de finanças pessoais pela web e sem depender de planilhas de Excel e Google Docs, fornecendo, desse modo, flexibilidade e simplicidade.
+O ControleSimples foi desenvolvido, primeiramente, pensando em **privacidade**: o objetivo é permitir um controle financeiro fácil sem precisar hospedar suas informações financeiras (que são altamente sensíveis) em bancos de dados de terceiros. Além disso, o ControleSimples oferece um controle de finanças pessoais pela web e sem depender de planilhas de Excel e Google Docs.
 
----------------
+---
 
 ## Como funciona?
 
-Como o nome sugere, o aplicativo tem como objetivo oferecer uma solução simplificada. Assim, o aplicativo se baseia no seguinte:
+Como o nome sugere, o aplicativo tem como objetivo oferecer uma solução simplificada. Assim, o ControleSimples se baseia no seguinte:
 
-- Categorias: lista de categorias (ex.: automóvel, lazer, moradia etc) e subcategorias (gasolina, cinema, aluguel etc) às quais os registros serão associados.
+- Transações: são os registros de despesas, receitas e transferências do usuário, realizados manualmente.
 
-- Contas: lista de contas nas quais as despesas e receitas são registradas. Na concepção, são as contas bancárias (Banco do Brasil, Itaú etc), a carteira, os cartões de crédito etc - mas o usuário pode organizar como quiser.
-
-- Registros: a base do funcionamento é o registro, por parte do usuário, de suas transações financeiras (receitas, despesas e transferências entre as contas). Os registros são feitos manualmente.
+- Painel: área onde são exibidas informações sobre as transações registradas no aplicativo, de forma consolidada. No momento, exibe apenas a última transação registrada (planeja-se incluir outras informações relevantes, como gráficos de entradas e saídas).
 
 - Extrato: visualização de todos os registros efetuados em determinado mês, incluindo o resultado diário, mensal e acumulado.
 
 - Orçamento: permite informar um valor estipulado para cada categoria em cada mês do ano e acompanhar, a partir dos registros efetuados, os gastos efetivamente realizados (e a diferença entre o previsto e o realizado).
 
+- Categorias: lista de categorias (ex.: automóvel, lazer, moradia etc) e subcategorias (gasolina, cinema, aluguel etc) às quais as transações devem ser associadas.
+
+- Contas: lista de contas nas quais as despesas, receitas e transferências são registradas. Na concepção, são as contas bancárias (Banco do Brasil, Itaú etc), a carteira, os cartões de crédito etc - mas o usuário pode organizar como quiser.
+
 Por enquanto, é isso!
 
 O ControleSimples tem interface responsiva em celulares. Porém, o seu uso é melhor em telas grandes.
 
----------------
+---
 
 ## Instalação
 
-O projeto foi desenvolvido com o objetivo de ser facilmente instalável por quem tem algum conhecimento básico de informática. Basicamente, o usuário precisa de:
+Para instalar, é necessário:
 
 1. Um servidor web com suporte a PHP; e
 2. Um servidor de banco de dados MySQL ou MariaDB.
@@ -48,12 +60,12 @@ Então, o passo a passo para realizar a instalação é o seguinte:
 
 1. Criar um banco de dados MySQL/MariaDB no servidor de banco de dados - mas não crie nenhuma tabela, isso será feito automaticamente durante a configuração;
 
-2. Editar, com um editor de texto comum na sua máquina local, o arquivo *bd.php*, para incluir as seguintes informações:
+1. Editar, com um editor de texto comum na sua máquina local, o arquivo _bd.php_, para incluir as seguintes informações:
 
-- **$bdServidor** = *o endereço do servidor do banco de dados*;
-- **$bdUsuario** = *o nome de usuário no servidor do banco de dados*;
-- **$bdSenha** = *a senha do usuário no servidor do banco de dados*;
-- **$bdBanco** = *o nome do banco de dados criado no servidor*;
+- **$bdServidor** = _o endereço do servidor do banco de dados_;
+- **$bdUsuario** = _o nome de usuário no servidor do banco de dados_;
+- **$bdSenha** = _a senha do usuário no servidor do banco de dados_;
+- **$bdBanco** = _o nome do banco de dados criado no servidor_;
 
 Atenção: todas as informações acima devem estar entre aspas simples '' e são fornecidas pelo seu servidor de banco de dados.
 
@@ -65,7 +77,7 @@ Atenção: todas as informações acima devem estar entre aspas simples '' e sã
 
 Caso prefira, você pode instalar o ControleSimples em um servidor web local como o XAMPP/LAMPP. Nesse caso, você acessará a aplicação somente no computador em que o servidor foi instalado e deve criar uma rotina de backup do seu banco de dados.
 
----------------
+---
 
 ## Funções planejadas
 
@@ -78,4 +90,4 @@ O ControleSimples é um projeto em desenvolvimento. Dentro da perspectiva de man
 
 ## IMPORTANTE
 
-O ControleSimples é um aplicativo em desenvolvimento (beta) de um desenvolvedor iniciante. Isso significa que alguns comportamentos inesperados podem ocorrer. Embora eu já o utilize como meu único gestor de finanças pessoais, recomendo utilizá-lo em paralelo ao seu gestor de finanças atual nos primeiros meses para assegurar que ele atenderá às suas necessidades. 
+O ControleSimples é um projeto de um desenvolvedor iniciante. Isso significa que alguns comportamentos inesperados podem ocorrer. Embora eu já o utilize como meu único gestor de finanças pessoais, recomendo utilizá-lo em paralelo ao seu gestor de finanças atual nos primeiros meses para assegurar que ele atenderá às suas necessidades.
