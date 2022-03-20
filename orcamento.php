@@ -4,7 +4,7 @@
   }
 </script>
 
-<?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php'); 
+<?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
 $edicao = false; ?>
 
 <!DOCTYPE html>
@@ -46,7 +46,7 @@ $edicao = false; ?>
 
       <script type="text/javascript">
         var ultimaIdEditada;
-                        //ID = 28/janeiro
+        //ID = 28/janeiro
         function abrirEdicao(id) {
 
           if (ultimaIdEditada != undefined) {
@@ -61,7 +61,7 @@ $edicao = false; ?>
           var valorString = document.getElementById(id).innerText;
           var valor = valorString.replace(/\./g, "").replace(/,/g, ".");
 
-          var valorExecutado = document.getElementById(id+"-executado").innerText;
+          var valorExecutado = document.getElementById(id + "-executado").innerText;
           var campoValorExecutado = document.getElementById('campo-valor-executado');
 
           var formAlteracao = document.getElementById('form-alteracao');
@@ -102,7 +102,7 @@ $edicao = false; ?>
 
         }
 
-        function copiarValorExecutado(){
+        function copiarValorExecutado() {
           var campoValor = document.getElementById('campo-valor');
           var valorExecutadoString = document.getElementById('campo-valor-executado').value;
           var valorExecutado = valorExecutadoString.replace(/\./g, "");
@@ -134,7 +134,7 @@ $edicao = false; ?>
 
         <table class="tabela orcamento">
 
-        <?php $meses = array('janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'); ?>
+          <?php $meses = array('janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'); ?>
 
           <!-- PRIMEIRA PARTE DA TABELA (PRIMEIRO SEMESTRE)   -->
 
@@ -151,9 +151,9 @@ $edicao = false; ?>
 
               <?php for ($i = 0; $i < 6; $i++) : ?>
 
-              <th colspan="2">
-                <?php echo $meses[$i]; ?>
-              </th>
+                <th colspan="2">
+                  <?php echo $meses[$i]; ?>
+                </th>
 
               <?php endfor; ?>
 
@@ -189,85 +189,81 @@ $edicao = false; ?>
 
             foreach ($dadosOrcamento as $dadoOrcamento) : ?>
 
-              <tr
-               class="linha
-                      <?php if ($dadoOrcamento['eh_cat_principal'] == true) {echo 'cat-principal';}?>" 
-              >
+              <tr class="linha
+                      <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
+                        echo 'cat-principal';
+                      } ?>">
 
-                <td
-                id="<?php echo $dadoOrcamento['id_cat']; ?>"
-                class="nome-cat <?php if ($dadoOrcamento['eh_cat_principal'] == true) {echo "cat-principal";} ?>"
-                >
+                <td id="<?php echo $dadoOrcamento['id_cat']; ?>" class="nome-cat <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
+                                                                                    echo "cat-principal";
+                                                                                  } ?>">
 
                   <?php if ($dadoOrcamento['eh_cat_principal'] == false) : ?>
 
-                  <a
-                  class="filtrar"
-                  href="/categorias.php?categoria=<?php echo $dadoOrcamento['id_cat'] ?>"
-                  >
+                    <a class="filtrar" href="/categorias.php?categoria=<?php echo $dadoOrcamento['id_cat'] ?>">
 
-                  <?php endif; ?>
-                  
+                    <?php endif; ?>
+
                     <?php echo $dadoOrcamento['nome_cat']; ?>
 
-                  <?php if ($dadoOrcamento['eh_cat_principal'] == false) : ?>
+                    <?php if ($dadoOrcamento['eh_cat_principal'] == false) : ?>
 
-                    <img class='icone-filtrar' src='/img/icos/filtrar.svg'>
+                      <img class='icone-filtrar' src='/img/icos/filtrar.svg'>
 
-                  </a>
+                    </a>
 
                   <?php endif; ?>
 
                 </td>
-                <td
-                class="valor-resultado
-                      <?php if ($dadoOrcamento['eh_cat_principal'] == true) {echo "cat-principal";} ?>"
-                name="<?php echo $linha['total']; ?>"
-                >
+                <td class="valor-resultado
+                      <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
+                        echo "cat-principal";
+                      } ?>" name="<?php echo $linha['total']; ?>">
                 </td>
 
                 <?php for ($i = 0; $i < 6; $i++) : ?>
 
-                <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
-                      $previstoMesCat = somar_gasto_previsto($bdConexao, $meses[$i], $dadoOrcamento['nome_cat']);
+                  <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
+                    $previstoMesCat = somar_gasto_previsto($bdConexao, $meses[$i], $dadoOrcamento['nome_cat']);
                   } else {
                     $previstoMesCat = $dadoOrcamento[$meses[$i]];
                   }
-                ?>
+                  ?>
 
-                <td
-                class="valor-previsto
-                      <?php if ($dadoOrcamento['eh_cat_principal'] == true) {echo "cat-principal";} ?>
-                      <?php if (verificaMesSelecionado($meses[$i], $mes)) {echo "mes-selecionado";} ?>
-                      <?php if ($previstoMesCat == 0) { echo "zerado"; } ?>"
-                name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>"
-                id="<?php echo $dadoOrcamento['id_cat'] . "/" . $meses[$i] ?>"
-                <?php if ($dadoOrcamento['eh_cat_principal'] != true) : ?>
-                  ondblclick="abrirEdicao('<?php echo $dadoOrcamento['id_cat'] . '/' . $meses[$i] ?>')" 
-                <?php endif; ?>
-                >
+                  <td class="valor-previsto
+                      <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
+                        echo "cat-principal";
+                      } ?>
+                      <?php if (verificaMesSelecionado($meses[$i], $mes)) {
+                        echo "mes-selecionado";
+                      } ?>
+                      <?php if ($previstoMesCat == 0) {
+                        echo "zerado";
+                      } ?>" name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" id="<?php echo $dadoOrcamento['id_cat'] . "/" . $meses[$i] ?>" <?php if ($dadoOrcamento['eh_cat_principal'] != true) : ?> ondblclick="abrirEdicao('<?php echo $dadoOrcamento['id_cat'] . '/' . $meses[$i] ?>')" <?php endif; ?>>
 
-                  <?php echo formata_valor($previstoMesCat); ?>
+                    <?php echo formata_valor($previstoMesCat); ?>
 
-                </td>
+                  </td>
 
-                <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
-                      $mesNum = $i + 1;
-                      $resultadoMesCat = calcula_resultado($bdConexao, $mesNum, $ano, 'SSM', null, null, $dadoOrcamento['nome_cat']);
+                  <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
+                    $mesNum = $i + 1;
+                    $resultadoMesCat = calcula_resultado($bdConexao, $mesNum, $ano, 'SSM', null, null, $dadoOrcamento['nome_cat']);
                   } else {
                     $mesNum = $i + 1;
                     $resultadoMesCat = calcula_resultado($bdConexao, $mesNum, $ano, 'SSM', null, $dadoOrcamento['id_cat']);
                   }
                   ?>
 
-                  <td
-                  id="<?php echo $dadoOrcamento['id_cat'] . "/" . $meses[$i] . "-executado" ?>"
-                  class="valor-executado
-                        <?php if ($dadoOrcamento['eh_cat_principal'] == true) {echo "cat-principal";} ?>
-                        <?php if (verificaMesSelecionado($meses[$i], $mes)) {echo "mes-selecionado";} ?>
-                        <?php if ($resultadoMesCat == 0) {echo "zerado";} ?>"
-                  name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>"
-                  >
+                  <td id="<?php echo $dadoOrcamento['id_cat'] . "/" . $meses[$i] . "-executado" ?>" class="valor-executado
+                        <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
+                          echo "cat-principal";
+                        } ?>
+                        <?php if (verificaMesSelecionado($meses[$i], $mes)) {
+                          echo "mes-selecionado";
+                        } ?>
+                        <?php if ($resultadoMesCat == 0) {
+                          echo "zerado";
+                        } ?>" name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>">
 
                     <?php echo formata_valor($resultadoMesCat); ?>
 
@@ -285,41 +281,34 @@ $edicao = false; ?>
 
           <?php endforeach; ?>
 
-          <tr
-          class="linha resultado"
-          >
+          <tr class="linha resultado">
 
             <td>
               Resultado mês:
             </td>
 
-            <td
-            class="valor-resultado"
-            name="<?php echo "{$linha['total']}"; ?>"
-            >
+            <td class="valor-resultado" name="<?php echo "{$linha['total']}"; ?>">
             </td>
 
             <?php for ($i = 0; $i < 6; $i++) : ?>
 
-              <td
-              name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>"
-              class="resultado-previsto
-                    <?php if (verificaMesSelecionado($meses[$i], $mes)) {echo "mes-selecionado";} ?>"
-              >
+              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-previsto
+                    <?php if (verificaMesSelecionado($meses[$i], $mes)) {
+                      echo "mes-selecionado";
+                    } ?>">
 
-              <?php echo formata_valor(somar_gasto_previsto($bdConexao, $meses[$i])) ?>
+                <?php echo formata_valor(somar_gasto_previsto($bdConexao, $meses[$i])) ?>
 
-            </td>
+              </td>
 
-            <td
-            name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>"
-            class="resultado-executado
-                  <?php if (verificaMesSelecionado($meses[$i], $mes)) {echo "mes-selecionado";} ?>"
-            >
+              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-executado
+                  <?php if (verificaMesSelecionado($meses[$i], $mes)) {
+                    echo "mes-selecionado";
+                  } ?>">
 
-              <?php echo formata_valor(calcula_resultado($bdConexao, $i + 1, $ano, 'SSM')) ?>
+                <?php echo formata_valor(calcula_resultado($bdConexao, $i + 1, $ano, 'SSM')) ?>
 
-            </td>
+              </td>
 
             <?php
             endfor;
@@ -329,44 +318,37 @@ $edicao = false; ?>
 
           </tr>
 
-          <tr
-          class="linha resultado"
-          >
+          <tr class="linha resultado">
 
             <td>
               Acumulado ano:
             </td>
 
-            <td
-            class="valor-resultado"
-            name="<?php echo "{$linha['total']}"; ?>"
-            >
+            <td class="valor-resultado" name="<?php echo "{$linha['total']}"; ?>">
             </td>
 
             <?php for ($i = 0; $i < 6; $i++) : ?>
 
-              <td
-              name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>"
-              class="resultado-previsto
-                    <?php if (verificaMesSelecionado($meses[$i], $mes)) {echo "mes-selecionado";} ?>"
-              >
-              
-               <?php $acumuladoAnoPrevisto = $acumuladoAnoPrevisto + somar_gasto_previsto($bdConexao, $meses[$i]);
-               
-               echo formata_valor($acumuladoAnoPrevisto); 
-               
-               ?>
-              
+              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-previsto
+                    <?php if (verificaMesSelecionado($meses[$i], $mes)) {
+                      echo "mes-selecionado";
+                    } ?>">
+
+                <?php $acumuladoAnoPrevisto = $acumuladoAnoPrevisto + somar_gasto_previsto($bdConexao, $meses[$i]);
+
+                echo formata_valor($acumuladoAnoPrevisto);
+
+                ?>
+
               </td>
 
-              <td
-              name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>"
-              class="resultado-executado
-                     <?php if (verificaMesSelecionado($meses[$i], $mes)) {echo "mes-selecionado";} ?>"
-              >
-              
+              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-executado
+                     <?php if (verificaMesSelecionado($meses[$i], $mes)) {
+                        echo "mes-selecionado";
+                      } ?>">
+
                 <?php echo formata_valor(calcula_resultado($bdConexao, $i + 1, $ano, 'SAM')) ?>
-            
+
               </td>
 
             <?php
@@ -391,15 +373,15 @@ $edicao = false; ?>
 
               <th rowspan="2">
                 Resultado
-              </td>
+                </td>
 
-              <?php for ($i = 6; $i < 12; $i++) : ?>
+                <?php for ($i = 6; $i < 12; $i++) : ?>
 
               <th colspan="2">
                 <?php echo $meses[$i]; ?>
               </th>
 
-              <?php endfor; ?>
+            <?php endfor; ?>
 
             </tr>
 
@@ -432,99 +414,95 @@ $edicao = false; ?>
             foreach ($dadosOrcamento as $dadoOrcamento) :
           ?>
 
-          <tr
-          class="linha
-                <?php if ($dadoOrcamento['eh_cat_principal'] == true) {echo 'cat-principal';}?>" 
-          >
+              <tr class="linha
+                <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
+                  echo 'cat-principal';
+                } ?>">
 
-            <td
-            id="<?php echo $dadoOrcamento['id_cat']; ?>"
-            class="nome-cat <?php if ($dadoOrcamento['eh_cat_principal'] == true) {echo "cat-principal";} ?>"
-            >
-              <?php if ($dadoOrcamento['eh_cat_principal'] == false) : ?>
+                <td id="<?php echo $dadoOrcamento['id_cat']; ?>" class="nome-cat <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
+                                                                                    echo "cat-principal";
+                                                                                  } ?>">
+                  <?php if ($dadoOrcamento['eh_cat_principal'] == false) : ?>
 
-              <a
-              class="filtrar"
-              href="/categorias.php?categoria=<?php echo $dadoOrcamento['id_cat'] ?>"
-              >
-              
-              <?php endif; ?>
+                    <a class="filtrar" href="/categorias.php?categoria=<?php echo $dadoOrcamento['id_cat'] ?>">
 
-              <?php echo $dadoOrcamento['nome_cat']; ?>
+                    <?php endif; ?>
 
-                <?php if ($dadoOrcamento['eh_cat_principal'] == false) : ?>
+                    <?php echo $dadoOrcamento['nome_cat']; ?>
 
-                <img class='icone-filtrar' src='/img/icos/filtrar.svg'>
+                    <?php if ($dadoOrcamento['eh_cat_principal'] == false) : ?>
 
-              </a>
+                      <img class='icone-filtrar' src='/img/icos/filtrar.svg'>
 
-              <?php endif; ?>
+                    </a>
 
-            </td>
+                  <?php endif; ?>
 
-            <td
-            class="valor-resultado
-                  <?php if ($dadoOrcamento['eh_cat_principal'] == true) {echo "cat-principal";} ?>"
-            name="<?php echo $linha['total']; ?>"
-            >
-            </td>
+                </td>
 
-            <?php for ($i = 6; $i < 12; $i++) : ?>
+                <td class="valor-resultado
+                  <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
+                    echo "cat-principal";
+                  } ?>" name="<?php echo $linha['total']; ?>">
+                </td>
 
-            <?php
-            if ($dadoOrcamento['eh_cat_principal'] == true) {
-              $previstoMesCat = somar_gasto_previsto($bdConexao, $meses[$i], $dadoOrcamento['nome_cat']);
-              } else {
-                $previstoMesCat = $dadoOrcamento[$meses[$i]];
-              }
-            ?>
+                <?php for ($i = 6; $i < 12; $i++) : ?>
 
-            <td
-            class="valor-previsto
-                  <?php if ($dadoOrcamento['eh_cat_principal'] == true) {echo "cat-principal";} ?>
-                  <?php if (verificaMesSelecionado($meses[$i], $mes)) {echo "mes-selecionado";} ?>
-                  <?php if ($previstoMesCat == 0) {echo 'zerado';} ?>"
-            name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>"
-            id="<?php echo $dadoOrcamento['id_cat'] . "/" . $meses[$i] ?>"
-            <?php if ($dadoOrcamento['eh_cat_principal'] != true) : ?>
-              ondblclick="abrirEdicao('<?php echo $dadoOrcamento['id_cat'] . '/' . $meses[$i] ?>')" 
-            <?php endif; ?>
-            >
-
-              <?php echo formata_valor($previstoMesCat); ?>
-
-            </td>
-
-            <?php
-            if ($dadoOrcamento['eh_cat_principal'] == true) {
-                $mesNum = $i + 1;
-                $resultadoMesCat = calcula_resultado($bdConexao, $mesNum, $ano, 'SSM', null, null, $dadoOrcamento['nome_cat']);
-                } else {
-                  $mesNum = $i + 1;
-                  $resultadoMesCat = calcula_resultado($bdConexao, $mesNum, $ano, 'SSM', null, $dadoOrcamento['id_cat']);
+                  <?php
+                  if ($dadoOrcamento['eh_cat_principal'] == true) {
+                    $previstoMesCat = somar_gasto_previsto($bdConexao, $meses[$i], $dadoOrcamento['nome_cat']);
+                  } else {
+                    $previstoMesCat = $dadoOrcamento[$meses[$i]];
                   }
-            ?>
+                  ?>
 
-            <td
-            id="<?php echo $dadoOrcamento['id_cat'] . "/" . $meses[$i] . "-executado" ?>"
-            class="valor-executado
-                   <?php if ($dadoOrcamento['eh_cat_principal'] == true) {echo "cat-principal";} ?>
-                   <?php if (verificaMesSelecionado($meses[$i], $mes)) {echo "mes-selecionado";} ?>
-                   <?php if ($resultadoMesCat == 0) {echo "zerado";} ?>"
-            name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>"
-            >
+                  <td class="valor-previsto
+                  <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
+                    echo "cat-principal";
+                  } ?>
+                  <?php if (verificaMesSelecionado($meses[$i], $mes)) {
+                    echo "mes-selecionado";
+                  } ?>
+                  <?php if ($previstoMesCat == 0) {
+                    echo 'zerado';
+                  } ?>" name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" id="<?php echo $dadoOrcamento['id_cat'] . "/" . $meses[$i] ?>" <?php if ($dadoOrcamento['eh_cat_principal'] != true) : ?> ondblclick="abrirEdicao('<?php echo $dadoOrcamento['id_cat'] . '/' . $meses[$i] ?>')" <?php endif; ?>>
 
-             <?php echo formata_valor($resultadoMesCat); ?>
+                    <?php echo formata_valor($previstoMesCat); ?>
 
-            </td>
+                  </td>
+
+                  <?php
+                  if ($dadoOrcamento['eh_cat_principal'] == true) {
+                    $mesNum = $i + 1;
+                    $resultadoMesCat = calcula_resultado($bdConexao, $mesNum, $ano, 'SSM', null, null, $dadoOrcamento['nome_cat']);
+                  } else {
+                    $mesNum = $i + 1;
+                    $resultadoMesCat = calcula_resultado($bdConexao, $mesNum, $ano, 'SSM', null, $dadoOrcamento['id_cat']);
+                  }
+                  ?>
+
+                  <td id="<?php echo $dadoOrcamento['id_cat'] . "/" . $meses[$i] . "-executado" ?>" class="valor-executado
+                   <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
+                      echo "cat-principal";
+                    } ?>
+                   <?php if (verificaMesSelecionado($meses[$i], $mes)) {
+                      echo "mes-selecionado";
+                    } ?>
+                   <?php if ($resultadoMesCat == 0) {
+                      echo "zerado";
+                    } ?>" name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>">
+
+                    <?php echo formata_valor($resultadoMesCat); ?>
+
+                  </td>
 
                 <?php endfor; ?>
-          
-          </tr>
 
-          <?php $linha['total']++; ?>
+              </tr>
 
-          <?php endforeach; ?>
+              <?php $linha['total']++; ?>
+
+            <?php endforeach; ?>
 
           <?php endforeach; ?>
 
@@ -534,32 +512,28 @@ $edicao = false; ?>
               Resultado mês:
             </td>
 
-            <td
-            class="valor-resultado" name="<?php echo "{$linha['total']}"; ?>"
-            >
+            <td class="valor-resultado" name="<?php echo "{$linha['total']}"; ?>">
             </td>
 
             <?php for ($i = 6; $i < 12; $i++) : ?>
 
-            <td
-            name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>"
-            class="resultado-previsto
-                  <?php if (verificaMesSelecionado($meses[$i], $mes)) {echo "mes-selecionado";} ?>"
-            >
-            
-              <?php echo formata_valor(somar_gasto_previsto($bdConexao, $meses[$i])) ?>
-            
-            </td>
+              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-previsto
+                  <?php if (verificaMesSelecionado($meses[$i], $mes)) {
+                    echo "mes-selecionado";
+                  } ?>">
 
-            <td
-            name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>"
-            class="resultado-executado
-                  <?php if (verificaMesSelecionado($meses[$i], $mes)) {echo "mes-selecionado";} ?>"
-            >
-            
-              <?php echo formata_valor(calcula_resultado($bdConexao, $i + 1, $ano, 'SSM')) ?>
-            
-            </td>
+                <?php echo formata_valor(somar_gasto_previsto($bdConexao, $meses[$i])) ?>
+
+              </td>
+
+              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-executado
+                  <?php if (verificaMesSelecionado($meses[$i], $mes)) {
+                    echo "mes-selecionado";
+                  } ?>">
+
+                <?php echo formata_valor(calcula_resultado($bdConexao, $i + 1, $ano, 'SSM')) ?>
+
+              </td>
 
             <?php
             endfor;
@@ -575,37 +549,32 @@ $edicao = false; ?>
               Acumulado ano:
             </td>
 
-            <td
-            class="valor-resultado"
-            name="<?php echo "{$linha['total']}"; ?>"
-            >
+            <td class="valor-resultado" name="<?php echo "{$linha['total']}"; ?>">
             </td>
 
             <?php for ($i = 6; $i < 12; $i++) : ?>
 
-            <td
-            name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>"
-            class="resultado-previsto
-                  <?php if (verificaMesSelecionado($meses[$i], $mes)) {echo "mes-selecionado";} ?>"
-            >
-            
-            <?php $acumuladoAnoPrevisto = $acumuladoAnoPrevisto + somar_gasto_previsto($bdConexao, $meses[$i]);
-               
-               echo formata_valor($acumuladoAnoPrevisto);  ?>
-          
-            </td>
+              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-previsto
+                  <?php if (verificaMesSelecionado($meses[$i], $mes)) {
+                    echo "mes-selecionado";
+                  } ?>">
 
-            <td
-            name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>"
-            class="resultado-executado
-            <?php if (verificaMesSelecionado($meses[$i], $mes)) {echo "mes-selecionado";} ?>"
-            >
-            
-              <?php echo formata_valor(calcula_resultado($bdConexao, $i + 1, $ano, 'SAM')) ?>
-          
-            </td>
-            
-            <?php 
+                <?php $acumuladoAnoPrevisto = $acumuladoAnoPrevisto + somar_gasto_previsto($bdConexao, $meses[$i]);
+
+                echo formata_valor($acumuladoAnoPrevisto);  ?>
+
+              </td>
+
+              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-executado
+            <?php if (verificaMesSelecionado($meses[$i], $mes)) {
+                echo "mes-selecionado";
+              } ?>">
+
+                <?php echo formata_valor(calcula_resultado($bdConexao, $i + 1, $ano, 'SAM')) ?>
+
+              </td>
+
+            <?php
             endfor;
             $linha['total']++;
             ?>
@@ -683,8 +652,8 @@ $edicao = false; ?>
           var celulaResultado = document.getElementsByName(linhaOrcamento);
 
           if (valores[0] != undefined) {
-            var valorPrevistoString = (valores[0].innerText).replace(/\./g,'').replace(/\,/g,'.');
-            var valorExecutadoString = (valores[1].innerText).replace(/\./g,'').replace(/\,/g,'.');
+            var valorPrevistoString = (valores[0].innerText).replace(/\./g, '').replace(/\,/g, '.');
+            var valorExecutadoString = (valores[1].innerText).replace(/\./g, '').replace(/\,/g, '.');
 
             valorPrevisto = parseFloat(valorPrevistoString).toFixed(2);
             valorExecutado = parseFloat(valorExecutadoString).toFixed(2);
@@ -696,7 +665,11 @@ $edicao = false; ?>
               var resultado = Math.abs(valorExecutado) - Math.abs(valorPrevisto);
             }
 
-            var resultadoConvertido = Intl.NumberFormat('pt-BR', { style: 'decimal', currency: 'BRL', minimumFractionDigits: '2' }).format(resultado)
+            var resultadoConvertido = Intl.NumberFormat('pt-BR', {
+              style: 'decimal',
+              currency: 'BRL',
+              minimumFractionDigits: '2'
+            }).format(resultado)
 
             celulaResultado[0].innerText = resultadoConvertido;
 
@@ -715,7 +688,7 @@ $edicao = false; ?>
     </main>
 
     </main>
-    
+
     <!-- Rodapé -->
     <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/footer.php') ?>
 
@@ -742,15 +715,13 @@ $edicao = false; ?>
 </body>
 
 <script type="text/javascript">
+  document.querySelector('body').addEventListener('keydown', function(event) {
 
-document.querySelector('body').addEventListener('keydown', function(event) {
- 
-  if (event.key === 'Escape'){
-    fecharEdicao();
-  }
+    if (event.key === 'Escape') {
+      fecharEdicao();
+    }
 
-});
-
+  });
 </script>
 
 </html>

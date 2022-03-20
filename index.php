@@ -27,16 +27,6 @@
 
       <div class="container duas-colunas sem-bg">
 
-
-        <!-- <div id="caixa-registrar" class="box formulario">
-        <h2 class="titulo-box cadastrar">Registrar transação</h2> -->
-        <!-- Formulário -->
-        <?php
-        // $edicao = false;
-        // include($_SERVER["DOCUMENT_ROOT"] . '/extrato/formulario_registrar.php') 
-        ?>
-        <!-- </div> -->
-
         <div class="box informacoes">
           <?php $buscaUltimoRegistro = buscar_registros($bdConexao, null, $mes, $ano, false, true);
 

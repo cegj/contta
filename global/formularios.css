@@ -20,6 +20,7 @@
   font-family: "Roboto", sans-serif;
   border: 1px solid #ececa6;
   border-radius: 4px;
+  box-sizing: content-box;
 }
 
 /* Select com campo de busca */
