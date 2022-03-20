@@ -64,6 +64,15 @@ if ($id_transacao) {
       ?>
     </select>
   </div>
+
+  <div>
+    <span class="checkbox-fixar" id="fixar-valor"></span>
+    <label for="valor">Valor:</label>
+    <input id="valor" type="text" inputmode="numeric" id="valor" name="valor" <?php if ($id_transacao) {
+                                                                                echo "value='{$transacao_edicao_valor}'";
+                                                                              } ?> required />
+  </div>
+
   <div>
     <span class="checkbox-fixar" id="fixar-data"></span>
     <label for="data">Data:</label>
@@ -72,13 +81,6 @@ if ($id_transacao) {
                                               } else {
                                                 echo "value='{$hoje}'";
                                               } ?> required />
-  </div>
-  <div>
-    <span class="checkbox-fixar" id="fixar-valor"></span>
-    <label for="valor">Valor:</label>
-    <input id="valor" type="text" inputmode="numeric" id="valor" name="valor" <?php if ($id_transacao) {
-                                                                                echo "value='{$transacao_edicao_valor}'";
-                                                                              } ?> required />
   </div>
   <div>
     <span class="checkbox-fixar" id="fixar-descricao"></span>

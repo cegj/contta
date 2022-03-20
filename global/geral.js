@@ -230,17 +230,26 @@ function ajustesFormTipoTransacao(value) {
   }
 
   if (value == "T") {
-    campoValor.style.backgroundColor = "#264b7f";
-    campoValor.style.borderColor = "#2b5794";
-    boxFormRegistrarTransacao.style.borderTop = "3px solid #264b7f";
+    campoTipo.style.color = "white";
+    campoTipo.style.backgroundColor = "var(--cor-transferencia)";
+    campoTipo.style.borderColor = "var(--cor-transferencia)";
+    campoValor.style.backgroundColor = "var(--cor-transferencia)";
+    campoValor.style.borderColor = "var(--cor-transferencia)";
+    boxFormRegistrarTransacao.style.borderTop = "3px solid var(--cor-transferencia)";
   } else if (value == "D") {
-    campoValor.style.backgroundColor = "#ad2f1b";
-    campoValor.style.borderColor = "#ad2f1b";
-    boxFormRegistrarTransacao.style.borderTop = "3px solid #ad2f1b";
+    campoTipo.style.color = "white";
+    campoTipo.style.backgroundColor = "var(--cor-despesa)";
+    campoTipo.style.borderColor = "var(--cor-despesa)";
+    campoValor.style.backgroundColor = "var(--cor-despesa)";
+    campoValor.style.borderColor = "var(--cor-despesa)";
+    boxFormRegistrarTransacao.style.borderTop = "3px solid var(--cor-despesa)";
   } else if (value == "R") {
-    campoValor.style.backgroundColor = "#3e7f26";
-    campoValor.style.borderColor = "#3e7f26";
-    boxFormRegistrarTransacao.style.borderTop = "3px solid #3e7f26";
+    campoTipo.style.color = "white";
+    campoTipo.style.backgroundColor = "var(--cor-receita)";
+    campoTipo.style.borderColor = "var(--cor-receita)";
+    campoValor.style.backgroundColor = "var(--cor-receita)";
+    campoValor.style.borderColor = "var(--cor-receita)";
+    boxFormRegistrarTransacao.style.borderTop = "3px solid var(--cor-receita)";
   }
 
 };

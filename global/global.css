@@ -35,6 +35,14 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+/* DEFINE VARIÁVEIS DE CORES */
+
+:root {
+  --cor-receita: #3e7f26;
+  --cor-despesa: #ad2f1b;
+  --cor-transferencia: #264b7f;
+}
+
 /* [FIM] REMOVE O SELETOR DOS INPUTS TYPE NUMBER */
 
 dl {
