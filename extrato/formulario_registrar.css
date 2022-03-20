@@ -74,12 +74,13 @@
 
 #form-transacao .container-botao-acao-principal {
   grid-column: 4;
+  grid-row: 4;
 }
 
 #form-transacao .opcoes-formulario {
   display: flex;
   grid-column: 1 / 4;
-  grid-row: 3;
+  grid-row: 4;
   align-self: end;
   justify-self: start;
   gap: 15px;

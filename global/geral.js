@@ -82,25 +82,24 @@ function checkFormTransacaoFixado() {
 
 checkFormTransacaoFixado();
 
-const btnFixarValor = document.querySelectorAll('.checkbox-fixar');
-
-const inputsFormRegistrar = document.querySelectorAll('#form-transacao input');
-
-const selectsFormRegistrar = document.querySelectorAll('#form-transacao select');
-
-const boxFormRegistrarTransacao = document.getElementById('caixa-registrar-modal');
-const campoTipo = document.getElementById('tipo');
-const campoData = document.getElementById('data');
-const campoValor = document.getElementById('valor');
-const campoDescricao = document.getElementById('descricao');
-const campoConta = choiceConta;
-const campoContaDestino = choiceContaDestino;
-const labelContaDestino = document.querySelector('label[for=contadestino]');
-const campoCategoria = choiceCategoria;
-const labelCategoria = document.querySelector('label[for=categoria]');
-const campoParcelas = document.getElementById('parcelas');
-const labelParcelas = document.querySelector('label[for=parcelas]');
-const btnRegistrarTransacaoForm = document.getElementById('botao-registrar-transacao');
+  const btnFixarValor = document.querySelectorAll('.checkbox-fixar');
+  const inputsFormRegistrar = document.querySelectorAll('#form-transacao input');
+  const selectsFormRegistrar = document.querySelectorAll('#form-transacao select');
+  const boxFormRegistrarTransacao = document.getElementById('caixa-registrar-modal');
+  const campoTipo = document.getElementById('tipo');
+  const campoData = document.getElementById('data');
+  const campoValor = document.getElementById('valor');
+  const campoDescricao = document.getElementById('descricao');
+  const campoConta = choiceConta;
+  const campoContaDestino = choiceContaDestino;
+  const labelContaDestino = document.querySelector('label[for=contadestino]');
+  const campoCategoria = choiceCategoria;
+  const labelCategoria = document.querySelector('label[for=categoria]');
+  if (!!document.getElementById('parcelas')){
+    var campoParcelas = document.getElementById('parcelas');
+    var labelParcelas = document.querySelector('label[for=parcelas]');
+  }
+  const btnRegistrarTransacaoForm = document.getElementById('botao-registrar-transacao');
 
 function checkSetBtnStorage(btn){
   if (sessionStorage.getItem(btn.id) == 'true'){
@@ -151,53 +150,57 @@ botoesAcaoPrincipal.forEach(function(btn){
   })
 })
 
-btnFixarValor.forEach(function(btnFixar){
-  if (sessionStorage.getItem(btnFixar.id) === 'true'){
-    switch (btnFixar.id){
-      case 'fixar-tipo':
-        campoTipo.value = sessionStorage.getItem('tipo');
-        break;
-      case 'fixar-data':
-        campoData.value = sessionStorage.getItem('data');
-        break;
-      case 'fixar-valor':
-        campoValor.value = sessionStorage.getItem('valor');
-        break;
-      case 'fixar-descricao':
-        campoDescricao.value = sessionStorage.getItem('descricao');
-        break;
-      case 'fixar-conta':
-        campoConta.setChoiceByValue(sessionStorage.getItem('conta'));
-        break;
-      case 'fixar-contadestino':
-        campoContaDestino.setChoiceByValue(sessionStorage.getItem('contadestino'));
-        break;
-      case 'fixar-categoria':
-        campoCategoria.setChoiceByValue(sessionStorage.getItem('categoria'));
-        break;
-      case 'fixar-parcelas':
-        campoParcelas.value = sessionStorage.getItem('parcelas');
-        break;
-    }}});
+if (!checkIdTransacaoNaUrl()){
+  btnFixarValor.forEach(function(btnFixar){
+    if (sessionStorage.getItem(btnFixar.id) === 'true'){
+      switch (btnFixar.id){
+        case 'fixar-tipo':
+          campoTipo.value = sessionStorage.getItem('tipo');
+          break;
+        case 'fixar-data':
+          campoData.value = sessionStorage.getItem('data');
+          break;
+        case 'fixar-valor':
+          campoValor.value = sessionStorage.getItem('valor');
+          break;
+        case 'fixar-descricao':
+          campoDescricao.value = sessionStorage.getItem('descricao');
+          break;
+        case 'fixar-conta':
+          campoConta.setChoiceByValue(sessionStorage.getItem('conta'));
+          break;
+        case 'fixar-contadestino':
+          campoContaDestino.setChoiceByValue(sessionStorage.getItem('contadestino'));
+          break;
+        case 'fixar-categoria':
+          campoCategoria.setChoiceByValue(sessionStorage.getItem('categoria'));
+          break;
+        case 'fixar-parcelas':
+          if (!!campoParcelas){
+          campoParcelas.value = sessionStorage.getItem('parcelas');
+          break;
+          }
+      }}});
 
-  function limparSelecao(elementArray){
-    elementArray.forEach(function(element){
-      sessionStorage.setItem(element.id, 'false');
-      checkSetBtnStorage(element);
-    })
-  }
+    function limparSelecao(elementArray){
+      elementArray.forEach(function(element){
+        sessionStorage.setItem(element.id, 'false');
+        checkSetBtnStorage(element);
+      })
+    }
 
-  const btnLimparSelecao = document.getElementById('btn-limpar-form-transacao');
+    const btnLimparSelecao = document.getElementById('btn-limpar-form-transacao');
 
-  btnLimparSelecao.addEventListener('click', function(){
-    limparSelecao(btnFixarValor);
-    afundarBotaoClick(btnLimparSelecao);
-  });
+    btnLimparSelecao.addEventListener('click', function(){
+      limparSelecao(btnFixarValor);
+      afundarBotaoClick(btnLimparSelecao);
+    });
 
-  function afundarBotaoClick(botao){
-    botao.classList.add('clicado');
-    setTimeout(function(){botao.classList.remove('clicado')}, 100);
-  }
+    function afundarBotaoClick(botao){
+      botao.classList.add('clicado');
+      setTimeout(function(){botao.classList.remove('clicado')}, 100);
+    }
+}
 
 function ajustesFormTipoTransacao(value) {
 
@@ -206,20 +209,24 @@ function ajustesFormTipoTransacao(value) {
     labelCategoria.style.opacity = "0.3";
     campoContaDestino.enable();
     labelContaDestino.style.opacity = "unset";
+    if (!!campoParcelas){
     campoParcelas.disabled = true;
     labelParcelas.style.opacity = "0.3";
     campoParcelas.style.cursor = "not-allowed";
     campoParcelas.style.opacity = "0.3";
+    }
   }
     else if (value == "D" || value == "R") {
     campoCategoria.enable();
     labelCategoria.style.opacity = "unset";
     campoContaDestino.disable();
     labelContaDestino.style.opacity = "0.3";
+    if (!!campoParcelas){
     campoParcelas.disabled = false;
     labelParcelas.style.opacity = "unset";
     campoParcelas.style.cursor = "auto";
     campoParcelas.style.opacity = "unset";
+    }
   }
 
   if (value == "T") {
