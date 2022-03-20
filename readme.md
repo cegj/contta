@@ -1,6 +1,6 @@
-#ControleSimples
+# ControleSimples - Gestão de finanças pessoais
 
-# ControleSimples (beta)
+**_Beta_**
 
 ![ControleSimples em uso](https://i.imgur.com/QYx8Jsd.gif)
 
