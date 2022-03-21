@@ -127,6 +127,14 @@
 
   .seletor-mes-ano {
     left: unset;
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  .seletor-mes {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
   }
 
   .item-grid-principal {
