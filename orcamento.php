@@ -216,7 +216,7 @@ $edicao = false; ?>
                   <?php endif; ?>
 
                 </td>
-                <td class="valor-resultado
+                <td class="valor-resultado money
                       <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
                         echo "cat-principal";
                       } ?>" name="<?php echo $linha['total']; ?>">
@@ -231,7 +231,7 @@ $edicao = false; ?>
                   }
                   ?>
 
-                  <td class="valor-previsto
+                  <td class="valor-previsto money
                       <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
                         echo "cat-principal";
                       } ?>
@@ -255,7 +255,7 @@ $edicao = false; ?>
                   }
                   ?>
 
-                  <td id="<?php echo $dadoOrcamento['id_cat'] . "/" . $meses[$i] . "-executado" ?>" class="valor-executado
+                  <td id="<?php echo $dadoOrcamento['id_cat'] . "/" . $meses[$i] . "-executado" ?>" class="valor-executado money
                         <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
                           echo "cat-principal";
                         } ?>
@@ -288,12 +288,12 @@ $edicao = false; ?>
               Resultado mês:
             </td>
 
-            <td class="valor-resultado" name="<?php echo "{$linha['total']}"; ?>">
+            <td class="valor-resultado money" name="<?php echo "{$linha['total']}"; ?>">
             </td>
 
             <?php for ($i = 0; $i < 6; $i++) : ?>
 
-              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-previsto
+              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-previsto money
                     <?php if (verificaMesSelecionado($meses[$i], $mes)) {
                       echo "mes-selecionado";
                     } ?>">
@@ -302,7 +302,7 @@ $edicao = false; ?>
 
               </td>
 
-              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-executado
+              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-executado money
                   <?php if (verificaMesSelecionado($meses[$i], $mes)) {
                     echo "mes-selecionado";
                   } ?>">
@@ -325,12 +325,12 @@ $edicao = false; ?>
               Acumulado ano:
             </td>
 
-            <td class="valor-resultado" name="<?php echo "{$linha['total']}"; ?>">
+            <td class="valor-resultado money" name="<?php echo "{$linha['total']}"; ?>">
             </td>
 
             <?php for ($i = 0; $i < 6; $i++) : ?>
 
-              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-previsto
+              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-previsto money
                     <?php if (verificaMesSelecionado($meses[$i], $mes)) {
                       echo "mes-selecionado";
                     } ?>">
@@ -343,7 +343,7 @@ $edicao = false; ?>
 
               </td>
 
-              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-executado
+              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-executado money
                      <?php if (verificaMesSelecionado($meses[$i], $mes)) {
                         echo "mes-selecionado";
                       } ?>">
@@ -441,7 +441,7 @@ $edicao = false; ?>
 
                 </td>
 
-                <td class="valor-resultado
+                <td class="valor-resultado money
                   <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
                     echo "cat-principal";
                   } ?>" name="<?php echo $linha['total']; ?>">
@@ -457,7 +457,7 @@ $edicao = false; ?>
                   }
                   ?>
 
-                  <td class="valor-previsto
+                  <td class="valor-previsto money
                   <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
                     echo "cat-principal";
                   } ?>
@@ -482,7 +482,7 @@ $edicao = false; ?>
                   }
                   ?>
 
-                  <td id="<?php echo $dadoOrcamento['id_cat'] . "/" . $meses[$i] . "-executado" ?>" class="valor-executado
+                  <td id="<?php echo $dadoOrcamento['id_cat'] . "/" . $meses[$i] . "-executado" ?>" class="valor-executado money
                    <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
                       echo "cat-principal";
                     } ?>
@@ -513,12 +513,12 @@ $edicao = false; ?>
               Resultado mês:
             </td>
 
-            <td class="valor-resultado" name="<?php echo "{$linha['total']}"; ?>">
+            <td class="valor-resultado money" name="<?php echo "{$linha['total']}"; ?>">
             </td>
 
             <?php for ($i = 6; $i < 12; $i++) : ?>
 
-              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-previsto
+              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-previsto money
                   <?php if (verificaMesSelecionado($meses[$i], $mes)) {
                     echo "mes-selecionado";
                   } ?>">
@@ -527,7 +527,7 @@ $edicao = false; ?>
 
               </td>
 
-              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-executado
+              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-executado money
                   <?php if (verificaMesSelecionado($meses[$i], $mes)) {
                     echo "mes-selecionado";
                   } ?>">
@@ -550,12 +550,12 @@ $edicao = false; ?>
               Acumulado ano:
             </td>
 
-            <td class="valor-resultado" name="<?php echo "{$linha['total']}"; ?>">
+            <td class="valor-resultado money" name="<?php echo "{$linha['total']}"; ?>">
             </td>
 
             <?php for ($i = 6; $i < 12; $i++) : ?>
 
-              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-previsto
+              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-previsto money
                   <?php if (verificaMesSelecionado($meses[$i], $mes)) {
                     echo "mes-selecionado";
                   } ?>">
@@ -566,7 +566,7 @@ $edicao = false; ?>
 
               </td>
 
-              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-executado
+              <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-executado money
             <?php if (verificaMesSelecionado($meses[$i], $mes)) {
                 echo "mes-selecionado";
               } ?>">

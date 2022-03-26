@@ -229,3 +229,7 @@ dd {
   height: 20px;
   width: 20px;
 }
+
+.money {
+  opacity: 0;
+}

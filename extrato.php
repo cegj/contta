@@ -80,7 +80,7 @@ $id_transacao = filter_input(INPUT_GET, 'id_transacao', FILTER_VALIDATE_INT);
             <td class='linha-extrato-tipo'>{$transacao['tipo']}</td>
             <td>{$data}</td>
             <td>{$transacao['descricao']}</td>
-            <td class='linha-extrato-valor'>R$ {$valorFormatado}</td>
+            <td class='linha-extrato-valor'>R$ <span class='money'>{$valorFormatado}</span></td>
             <td><a class='filtrar' href='/categorias.php?categoria={$transacao['id_categoria']}'>{$transacao['nome_cat']} <img class='icone-filtrar' src='/img/icos/filtrar.svg'></a></td>
             <td><a class='filtrar' href='/contas.php?conta={$transacao['id_con']}'>{$transacao['conta']} <img class='icone-filtrar' src='/img/icos/filtrar.svg'></a></td>
             <td class='coluna-acoes'>";
@@ -96,7 +96,11 @@ $id_transacao = filter_input(INPUT_GET, 'id_transacao', FILTER_VALIDATE_INT);
                   endforeach;
                   echo "
                   <tr>
-                  <td class='linha-resultado-dia-extrato' colspan='7'> <span class='valor-resultado-dia-extrato'>Resultado diário: R$ {$resultadoDia}</span> <span class='valor-resultado-dia-extrato'>Acumulado mês: {$resultadoDiaAcumuladoMes}</span> <span class='valor-resultado-dia-extrato'>Acumulado total: R$ {$resultadoDiaAcumuladoTotal}</span> </td>
+                    <td class='linha-resultado-dia-extrato' colspan='7'>
+                      <span class='valor-resultado-dia-extrato'>Resultado diário: R$ <span class='money'>{$resultadoDia}</span></span>
+                      <span class='valor-resultado-dia-extrato'>Acumulado mês: R$ <span class='money'>{$resultadoDiaAcumuladoMes}</span></span>
+                      <span class='valor-resultado-dia-extrato'>Acumulado total: R$ <span class='money'>{$resultadoDiaAcumuladoTotal}</span></span>
+                    </td>
                   </tr>
                   ";
 
@@ -114,22 +118,23 @@ $id_transacao = filter_input(INPUT_GET, 'id_transacao', FILTER_VALIDATE_INT);
 
                 $valorFormatado = formata_valor($transacao['valor']);
 
-                echo "<tr class='linha-extrato'>
-            <td class='linha-extrato-tipo'>{$transacao['tipo']}</td>
-            <td>{$data}</td>
-            <td>{$transacao['descricao']}</td>
-            <td class='linha-extrato-valor'>R$ {$valorFormatado}</td>
-            <td><a href='/categorias.php?categoria={$transacao['id_categoria']}'>{$transacao['nome_cat']}</a></td>
-            <td><a href='/contas.php?conta={$transacao['id_con']}'>{$transacao['conta']}</a></td>
-            <td>";
+                echo "
+                  <tr class='linha-extrato'>
+                    <td class='linha-extrato-tipo'>{$transacao['tipo']}</td>
+                    <td>{$data}</td>
+                    <td>{$transacao['descricao']}</td>
+                    <td class='linha-extrato-valor'>R$ <span class='money'>{$valorFormatado}</span></td>
+                    <td><a href='/categorias.php?categoria={$transacao['id_categoria']}'>{$transacao['nome_cat']}</a></td>
+                    <td><a href='/contas.php?conta={$transacao['id_con']}'>{$transacao['conta']}</a></td>
+                    <td>";
                 if ($transacao['tipo'] == 'T' && $transacao['valor'] > 0 or $transacao['tipo'] == 'SI') {
                   echo "";
                 } else {
                   echo "<a href='extrato.php?id_transacao={$transacao['id']}&editar=true#caixa-registrar'><img class='icone-editar' alt='Editar' src='img/icone-editar.svg'/></a>";
                   echo "
-                </td>
-                </tr>
-            ";
+                          </td>
+                  </tr>
+                ";
                 }
               endforeach;
 

@@ -259,3 +259,40 @@ campoTipo.addEventListener('change', function() {
 });
 
 ajustesFormTipoTransacao(campoTipo.value);
+
+const btnHideMoney = document.getElementById('opcao-exibir-ocultar')
+
+function hideMoney(option){
+  const moneys = document.querySelectorAll('.money');
+  if (option == true){
+    moneys.forEach((money) => {
+    money.style.opacity = "0"});  
+    btnHideMoney.classList.add('active');
+    btnHideMoney.innerText = "Exibir valores";
+    } else if (option == false){
+      moneys.forEach((money) => {
+      money.style.opacity = "unset"});
+      btnHideMoney.classList.remove('active');
+      btnHideMoney.innerText = "Ocultar valores";
+    }};
+
+function handleBtnHideMoney(){
+  if (btnHideMoney.classList.contains('active')){
+    localStorage.setItem('hideMoney', "false");
+    hideMoney(false)
+  } else {
+    localStorage.setItem('hideMoney', "true");
+    hideMoney(true)
+  }};
+
+function checkHideMoneyOnLoad() {
+  if (localStorage.getItem('hideMoney') == "true") {
+    hideMoney(true)
+    } else {
+      hideMoney(false)
+    }
+  };
+
+checkHideMoneyOnLoad();
+
+btnHideMoney.addEventListener('click', handleBtnHideMoney);

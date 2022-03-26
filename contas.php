@@ -57,7 +57,7 @@ $id_conta = filter_input(INPUT_GET, 'id_conta', FILTER_VALIDATE_INT);
 
                   echo "<tr>
                         <td class='td-conta'><a class='filtrar' href='?conta={$conta['id_con']}'>{$conta['conta']} <img class='icone-filtrar' src='/img/icos/filtrar.svg'></a></td>
-                        <td class='td-conta'>R$ {$saldoAcumulado}</td>
+                        <td class='td-conta'>R$ <span class='money'>{$saldoAcumulado}</span></td>
                         </tr>
                         ";
 
@@ -122,7 +122,7 @@ $id_conta = filter_input(INPUT_GET, 'id_conta', FILTER_VALIDATE_INT);
             <td class='linha-extrato-tipo'>{$registro['tipo']}</td>
             <td>{$data}</td>
             <td>{$registro['descricao']}</td>
-            <td class='linha-extrato-valor'>R$ {$valor}</td>
+            <td class='linha-extrato-valor'>R$ <span class='money'>{$valor}</span></td>
             <td>{$registro['nome_cat']}</td>
             <td class='coluna-acoes'>";
                         if ($registro['tipo'] == 'T' && $registro['valor'] > 0 or $registro['tipo'] == 'SI') {
@@ -138,7 +138,11 @@ $id_conta = filter_input(INPUT_GET, 'id_conta', FILTER_VALIDATE_INT);
 
                       echo "
             <tr>
-            <td class='linha-resultado-dia-extrato' colspan='6'> <span class='valor-resultado-dia-extrato'>Resultado diário: R$ {$resultadoDia}</span> <span class='valor-resultado-dia-extrato'>Acumulado mês: {$resultadoDiaAcumuladoMes}</span> <span class='valor-resultado-dia-extrato'>Acumulado total: R$ {$resultadoDiaAcumuladoTotal}</span> </td>
+             <td class='linha-resultado-dia-extrato' colspan='6'>
+                <span class='valor-resultado-dia-extrato'>Resultado diário: R$ <span class='money'>{$resultadoDia}</span></span>
+                <span class='valor-resultado-dia-extrato'>Acumulado mês: R$ <span class='money'>{$resultadoDiaAcumuladoMes}</span></span>
+                <span class='valor-resultado-dia-extrato'>Acumulado total: R$ <span class='money'>{$resultadoDiaAcumuladoTotal}</span></span>
+              </td>
             </tr>
             ";
 
@@ -182,7 +186,7 @@ $id_conta = filter_input(INPUT_GET, 'id_conta', FILTER_VALIDATE_INT);
                     echo "<tr>
                       <td class='td-conta'>{$conta['conta']}</td>
                       <td class='td-conta'>{$conta['tipo_conta']}</td>
-                      <td class='td-conta'>R$ {$saldoInicialFormatado}</td>
+                      <td class='td-conta'>R$ <span class='money'>{$saldoInicialFormatado}</span></td>
                       <td class='td-conta'>{$exibir}</td>
                       <td class='coluna-acoes'><a href='?{$urlQuery}&id_conta={$conta['id_con']}#header'><img class='icone-editar' alt='Editar' src='/img/icos/editar.svg'/></a>
                       </tr>

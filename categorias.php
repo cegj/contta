@@ -65,7 +65,7 @@ $id_cat = filter_input(INPUT_GET, 'id_cat', FILTER_VALIDATE_INT);
 
                     if ($configuracao != true) :
 
-                      echo "<td>R$ {$saldoMesCatPrincipal}</td>";
+                      echo "<td>R$ <span class='money'>{$saldoMesCatPrincipal}</span></td>";
 
                     endif;
 
@@ -94,7 +94,7 @@ $id_cat = filter_input(INPUT_GET, 'id_cat', FILTER_VALIDATE_INT);
 
                       if ($configuracao != true) :
 
-                        echo "<td>R$ {$saldoMes}</td>";
+                        echo "<td>R$ <span class='money'>{$saldoMes}</span></td>";
 
                       endif;
 
@@ -166,7 +166,7 @@ $id_cat = filter_input(INPUT_GET, 'id_cat', FILTER_VALIDATE_INT);
           <td class='linha-extrato-tipo'>{$registro['tipo']}</td>
           <td>{$data}</td>
           <td>{$registro['descricao']}</td>
-          <td class='linha-extrato-valor'>R$ {$valor}</td>
+          <td class='linha-extrato-valor'>R$ <span class='money'>{$valor}</span></td>
           <td>{$registro['conta']}</td>
           <td class='coluna-acoes'>";
                                 if ($registro['tipo'] == 'T' && $registro['valor'] > 0 or $registro['tipo'] == 'SI') {
@@ -182,7 +182,11 @@ $id_cat = filter_input(INPUT_GET, 'id_cat', FILTER_VALIDATE_INT);
 
                               echo "
               <tr>
-              <td class='linha-resultado-dia-extrato' colspan='6' class='linha-resultado-dia-extrato'> <span class='valor-resultado-dia-extrato'>Resultado diário: R$ {$resultadoDia}</span> <span class='valor-resultado-dia-extrato'>Acumulado mês: {$resultadoDiaAcumuladoMes}</span> <span class='valor-resultado-dia-extrato'>Acumulado total: R$ {$resultadoDiaAcumuladoTotal}</span> </td>
+                <td class='linha-resultado-dia-extrato' colspan='6' class='linha-resultado-dia-extrato'>
+                  <span class='valor-resultado-dia-extrato'>Resultado diário: R$ <span class='money'>{$resultadoDia}</span></span>
+                  <span class='valor-resultado-dia-extrato'>Acumulado mês: R$ <span class='money'>{$resultadoDiaAcumuladoMes}</span></span>
+                  <span class='valor-resultado-dia-extrato'>Acumulado total: R$ <span class='money'>{$resultadoDiaAcumuladoTotal}</span></span>
+                </td>
               </tr>
               ";
 

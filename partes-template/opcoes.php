@@ -8,7 +8,9 @@
 
   <a class="botao-opcoes botao-novo" id="opcao-registrar-transacao">Registrar transação</a>
 
-  <a class="botao-opcoes botao-final-pagina" href="#footer">Descer tudo</a>
+  <a class="botao-opcoes botao-exibir-ocultar" id="opcao-exibir-ocultar">Ocultar valores</a>
+
+  <a class="botao-opcoes botao-final-pagina" id="opcao-fim-pagina" href="#footer">Descer tudo</a>
 
   <!-- Opções de Extrato -->
   <?php if ($urlPath == '/extrato.php') :  ?>

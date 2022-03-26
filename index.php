@@ -47,7 +47,7 @@
             </dl>
             <dl>
               <dt>💵 Valor:</dt>
-              <dd>R$ <?php echo formata_valor($ultimoregistro['valor']) ?></dd>
+              <dd>R$ <span class="money"><?php echo formata_valor($ultimoregistro['valor']) ?></span></dd>
             </dl>
             <dl>
               <dt>🏷️ Categoria:</dt>
