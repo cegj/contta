@@ -1,13 +1,14 @@
-<?php 
+<?php
 
 //CADASTRAR NOVA CATEGORIA OU EDITAR CATEGORIA CADASTRADA
 
-function cadastrar_cat($bdConexao, $categoria, $edicao = false, $id_cat = null, $cat_edicao_nome = null, $cat_edicao_cat_principal = null){
+function cadastrar_cat($bdConexao, $categoria, $edicao = false, $id_cat = null, $cat_edicao_nome = null, $cat_edicao_cat_principal = null)
+{
 
-if($edicao == false) {
+  if ($edicao == false) {
 
-if ($categoria['ehcatprincipal'] == 1) {
-  $bdGravar = "
+    if ($categoria['ehcatprincipal'] == 1) {
+      $bdGravar = "
   INSERT INTO categorias
   (eh_cat_principal, nome_cat)
   VALUES
@@ -17,11 +18,11 @@ if ($categoria['ehcatprincipal'] == 1) {
     )
   ";
 
-  mysqli_query($bdConexao, $bdGravar);
+      mysqli_query($bdConexao, $bdGravar);
 
-  adicionar_ultima_cat_ao_orcamento($bdConexao);
-  
-  $bdGravarOutros = "
+      adicionar_ultima_cat_ao_orcamento($bdConexao);
+
+      $bdGravarOutros = "
   INSERT INTO categorias
   (eh_cat_principal,nome_cat, cat_principal)
   VALUES
@@ -31,12 +32,11 @@ if ($categoria['ehcatprincipal'] == 1) {
     '{$categoria['nomecat']}'
     )
   ";
-  mysqli_query($bdConexao, $bdGravarOutros);
+      mysqli_query($bdConexao, $bdGravarOutros);
 
-  adicionar_ultima_cat_ao_orcamento($bdConexao);
-  
-} else {
-  $bdGravar = "
+      adicionar_ultima_cat_ao_orcamento($bdConexao);
+    } else {
+      $bdGravar = "
   INSERT INTO categorias
   (eh_cat_principal,nome_cat, cat_principal)
   VALUES
@@ -46,14 +46,12 @@ if ($categoria['ehcatprincipal'] == 1) {
     '{$categoria['catprincipal']}'
     )
   ";
-  mysqli_query($bdConexao, $bdGravar);
+      mysqli_query($bdConexao, $bdGravar);
 
-  adicionar_ultima_cat_ao_orcamento($bdConexao);
-}
-
-
-} else if ($edicao == true){
-  $bdAlterarSubCategoriasAssociadas = "
+      adicionar_ultima_cat_ao_orcamento($bdConexao);
+    }
+  } else if ($edicao == true) {
+    $bdAlterarSubCategoriasAssociadas = "
   UPDATE
   categorias
   SET
@@ -61,7 +59,7 @@ if ($categoria['ehcatprincipal'] == 1) {
   WHERE eh_cat_principal = 0 AND cat_principal = '{$cat_edicao_nome}';
   ";
 
-  $bdAlterarCategoria = "
+    $bdAlterarCategoria = "
   UPDATE
   categorias
   SET
@@ -71,14 +69,15 @@ if ($categoria['ehcatprincipal'] == 1) {
   WHERE `id_cat` = {$id_cat};
   ";
 
-  mysqli_query($bdConexao, $bdAlterarSubCategoriasAssociadas);
-  mysqli_query($bdConexao, $bdAlterarCategoria);
-}
+    mysqli_query($bdConexao, $bdAlterarSubCategoriasAssociadas);
+    mysqli_query($bdConexao, $bdAlterarCategoria);
+  }
 }
 
 //BUSCAR CATEGORIAS PRINCIPAIS
 
-function buscar_cat_principal($bdConexao){
+function buscar_cat_principal($bdConexao)
+{
 
   $bdBuscar = "
   SELECT * FROM categorias
@@ -94,13 +93,13 @@ function buscar_cat_principal($bdConexao){
     $categoriasPrincipais[] = $categoriaPrincipal;
   }
 
-    return $categoriasPrincipais;
-
+  return $categoriasPrincipais;
 }
 
 //BUSCAR CATEGORIAS SECUNDÁRIAS
 
-function buscar_cat_secundaria($bdConexao, $categoriaPrincipal){
+function buscar_cat_secundaria($bdConexao, $categoriaPrincipal)
+{
 
   $bdBuscar = "
   SELECT * FROM categorias
@@ -112,21 +111,21 @@ function buscar_cat_secundaria($bdConexao, $categoriaPrincipal){
 
   $categoriasSecundarias = array();
 
-  while ($categoriaSecundaria = mysqli_fetch_assoc($resultado)){
+  while ($categoriaSecundaria = mysqli_fetch_assoc($resultado)) {
     $categoriasSecundarias[] = $categoriaSecundaria;
   }
 
   return $categoriasSecundarias;
-
 }
 
 //BUSCAR INFORMAÇÕES DE UMA CATEGORIA ESPECÍFICA
 
-function buscar_cat_especifica($bdConexao, $id_cat=null, $nome_cat=null){
+function buscar_cat_especifica($bdConexao, $id_cat = null, $nome_cat = null)
+{
 
-  if (isset($id_cat)){
+  if (isset($id_cat)) {
     $parametroCat = "WHERE id_cat = {$id_cat}";
-  } else if (isset($nome_cat)){
+  } else if (isset($nome_cat)) {
     $parametroCat = "WHERE nome_cat = '{$nome_cat}'";
   }
 
@@ -145,14 +144,14 @@ function buscar_cat_especifica($bdConexao, $id_cat=null, $nome_cat=null){
   endforeach;
 
   return $catEspecifica;
-
 }
 
 //APAGAR UMA CATEGORIA E SUAS CATEGORIAS SECUNDÁRIAS (SE FOR PRINCIPAL)
 
-function apagar_cat($bdConexao, $id_cat, $nome_cat, $cat_principal){
-  
-  if ($cat_principal == null){
+function apagar_cat($bdConexao, $id_cat, $nome_cat, $cat_principal)
+{
+
+  if ($cat_principal == null) {
 
     apagar_cat_do_orcamento($bdConexao, $id_cat, $cat_principal);
 
@@ -164,13 +163,10 @@ function apagar_cat($bdConexao, $id_cat, $nome_cat, $cat_principal){
   }
 
   apagar_cat_do_orcamento($bdConexao, $id_cat, $cat_principal);
-  
+
   $bdGravar = "
   DELETE FROM categorias
   WHERE id_cat = {$id_cat}
   ";
   mysqli_query($bdConexao, $bdGravar);
-
 }
-
-?>

@@ -159,5 +159,4 @@ function verificaMesSelecionado($mes, $id)
   } else {
     return false;
   }
-
 }

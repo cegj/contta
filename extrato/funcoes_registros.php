@@ -1,11 +1,12 @@
 <?php
 
-function days_in_month($month, $year){
+function days_in_month($month, $year)
+{
   // Calcula o número de dias de um mês
   return $month == 2 ? ($year % 4 ? 28 : ($year % 100 ? 29 : ($year % 400 ? 28 : 29))) : (($month - 1) % 7 % 2 ? 30 : 31);
 }
 
-function cadastrar_registro($bdConexao, $registro, $edicao, $id_reg, $editarParcelas=false)
+function cadastrar_registro($bdConexao, $registro, $edicao, $id_reg, $editarParcelas = false)
 {
 
   $data_insert = date('Y-m-d H:i:s');
@@ -16,7 +17,7 @@ function cadastrar_registro($bdConexao, $registro, $edicao, $id_reg, $editarParc
 
       $contaOrigem = buscar_conta_especifica($bdConexao, $registro['conta'], null);
       $contaDestino = buscar_conta_especifica($bdConexao, $registro['contadestino'], null);
-      
+
 
       //Se a conta origem ou conta destino for oculta, colocar na categoria "Contas ocultas" (para orçamento)
       if ($contaDestino['exibir'] == 0 or $contaOrigem['exibir'] == 0) {
@@ -77,14 +78,14 @@ function cadastrar_registro($bdConexao, $registro, $edicao, $id_reg, $editarParc
         ";
 
       mysqli_query($bdConexao, $bdGravarDestino);
-    } else if(isset($registro['parcelas']) && $registro['parcelas'] > 1) {
-  
-        $partesData = explode('-', $registro['data']);
-        $dia = $partesData[2];
-        $mes = $partesData[1];
-        $ano = $partesData[0];
-            
-      for ($parcela = 1; $parcela <= $registro['parcelas']; $parcela++ ) {
+    } else if (isset($registro['parcelas']) && $registro['parcelas'] > 1) {
+
+      $partesData = explode('-', $registro['data']);
+      $dia = $partesData[2];
+      $mes = $partesData[1];
+      $ano = $partesData[0];
+
+      for ($parcela = 1; $parcela <= $registro['parcelas']; $parcela++) {
 
         $bdGravar = "
     INSERT INTO extrato
@@ -113,18 +114,16 @@ function cadastrar_registro($bdConexao, $registro, $edicao, $id_reg, $editarParc
       )
       ";
 
-      mysqli_query($bdConexao, $bdGravar);
+        mysqli_query($bdConexao, $bdGravar);
 
-      if ($mes < 12){
-        $mes++;
-      } else {
-        $mes = 1;
-        $ano = $ano + 1;
+        if ($mes < 12) {
+          $mes++;
+        } else {
+          $mes = 1;
+          $ano = $ano + 1;
+        }
       }
-
-      }
-
-    } else  {
+    } else {
 
       $bdGravar = "
     INSERT INTO extrato
@@ -179,7 +178,7 @@ function cadastrar_registro($bdConexao, $registro, $edicao, $id_reg, $editarParc
       ";
 
       mysqli_query($bdConexao, $bdGravarDestino);
-    } else if ($editarParcelas == true){
+    } else if ($editarParcelas == true) {
 
       $partesDescricao = explode('(', $registro['descricao']);
       $descricaoSemParcelas = $partesDescricao[0];
@@ -189,7 +188,7 @@ function cadastrar_registro($bdConexao, $registro, $edicao, $id_reg, $editarParc
       $mes = $partesData[1];
       $ano = $partesData[0];
 
-      for ($parcela = $registro['parcela']; $parcela <= $registro['total-parcelas']; $parcela++){
+      for ($parcela = $registro['parcela']; $parcela <= $registro['total-parcelas']; $parcela++) {
         $bdGravar = "
         UPDATE extrato
         SET
@@ -204,7 +203,7 @@ function cadastrar_registro($bdConexao, $registro, $edicao, $id_reg, $editarParc
 
         mysqli_query($bdConexao, $bdGravar);
 
-        if ($mes < 12){
+        if ($mes < 12) {
           $mes++;
         } else {
           $mes = 1;
@@ -212,9 +211,8 @@ function cadastrar_registro($bdConexao, $registro, $edicao, $id_reg, $editarParc
         }
 
         $id_reg++;
-  
-        }
-      } else {
+      }
+    } else {
 
       $bdGravar = "
     UPDATE extrato
@@ -235,11 +233,11 @@ function cadastrar_registro($bdConexao, $registro, $edicao, $id_reg, $editarParc
 
 //BUSCAR CONTAS
 
-function buscar_registros($bdConexao, $dia, $mes, $ano, $tudo=null, $ultimo=null, $id_cat=null, $id_con=null)
+function buscar_registros($bdConexao, $dia, $mes, $ano, $tudo = null, $ultimo = null, $id_cat = null, $id_con = null)
 {
 
   //Se o dia está definido, inclui o filtro de dia no where da query
-  if(isset($dia) && $dia != null){
+  if (isset($dia) && $dia != null) {
     $filtraDia = "DAY(data) = '{$dia}' and";
   } else {
     $filtraDia = "";
@@ -274,7 +272,7 @@ function buscar_registros($bdConexao, $dia, $mes, $ano, $tudo=null, $ultimo=null
     $filtrarMesAno = "";
   }
 
-  if ($ultimo == true){
+  if ($ultimo == true) {
     $ordemRegistros = "data_insert DESC LIMIT 1;";
   } else {
     $ordemRegistros = "data ASC, data_insert ASC;";
@@ -347,7 +345,7 @@ function buscar_reg_especifico($bdConexao, $id_reg)
 
 //APAGAR UM REGISTRO
 
-function apagar_registro($bdConexao, $registro, $id_reg, $editarParcelas=false)
+function apagar_registro($bdConexao, $registro, $id_reg, $editarParcelas = false)
 {
 
   if ($registro['tipo'] == 'T') {
@@ -366,20 +364,19 @@ function apagar_registro($bdConexao, $registro, $id_reg, $editarParcelas=false)
 
     mysqli_query($bdConexao, $bdApagarOrigem);
     mysqli_query($bdConexao, $bdApagarDestino);
+  } else if ($editarParcelas == true) {
 
-  } else if ($editarParcelas == true){
-
-    $novaUltimaParcela = $registro['parcela']-1;
-    $idPrimeiraParcela = $id_reg - ($registro['parcela']-1);
+    $novaUltimaParcela = $registro['parcela'] - 1;
+    $idPrimeiraParcela = $id_reg - ($registro['parcela'] - 1);
 
     $partesDescricao = explode('(', $registro['descricao']);
     $descricaoSemParcelas = $partesDescricao[0];
 
     $parcela = 1;
 
-    for ($idParcela = $idPrimeiraParcela; $idParcela < $id_reg; $idParcela++){
+    for ($idParcela = $idPrimeiraParcela; $idParcela < $id_reg; $idParcela++) {
 
-    $bdGravar = "
+      $bdGravar = "
     UPDATE extrato
     SET
     descricao='{$descricaoSemParcelas} ({$parcela} / {$novaUltimaParcela})',
@@ -387,24 +384,22 @@ function apagar_registro($bdConexao, $registro, $id_reg, $editarParcelas=false)
     WHERE id={$idParcela}
     ";
 
-    mysqli_query($bdConexao, $bdGravar);
+      mysqli_query($bdConexao, $bdGravar);
 
-    $parcela++;
-
+      $parcela++;
     }
 
-    for ($parcela = $registro['parcela']; $parcela <= $registro['total-parcelas']; $parcela++){
+    for ($parcela = $registro['parcela']; $parcela <= $registro['total-parcelas']; $parcela++) {
 
       $bdApagar = "
       DELETE FROM extrato
       WHERE id = {$id_reg}
     ";
 
-    mysqli_query($bdConexao, $bdApagar);
-      
-    $id_reg++;
+      mysqli_query($bdConexao, $bdApagar);
+
+      $id_reg++;
     }
-  
   } else {
 
     $bdApagar = "
@@ -414,53 +409,52 @@ function apagar_registro($bdConexao, $registro, $id_reg, $editarParcelas=false)
 
     mysqli_query($bdConexao, $bdApagar);
   }
-
 }
 
 //CALCULAR RESULTADO DO EXTRATO
 
-function calcula_resultado($bdConexao, $mes, $ano, $tipo, $conta=null, $categoriaSecundaria=null, $categoriaPrincipal=null, $dia=null, $soMesAtual = false)
+function calcula_resultado($bdConexao, $mes, $ano, $tipo, $conta = null, $categoriaSecundaria = null, $categoriaPrincipal = null, $dia = null, $soMesAtual = false)
 {
 
   // TIPOS: SSM (saldo só mês), SAM (saldo acumulado até o mês) e SAG (saldo acumulado geral)
 
   // Se conta estiver definida, filtrar pela conta
   //Recebe o ID da conta
-  if (isset($conta)){
+  if (isset($conta)) {
     $filtraConta = "contas.id_con = '{$conta}'";
-    } else {
-      $filtraConta = "contas.exibir = 1";
-    }
-  
+  } else {
+    $filtraConta = "contas.exibir = 1";
+  }
+
   // Se categoria estiver definida, filtrar pela categoria
 
   //Recebe o ID da cat. secundária
-  if (isset($categoriaSecundaria)){
+  if (isset($categoriaSecundaria)) {
     $filtraCategoriaSec = "and categorias.id_cat = {$categoriaSecundaria}";
-    } else {
-      $filtraCategoriaSec = "";
-    }  
+  } else {
+    $filtraCategoriaSec = "";
+  }
 
-    //Recebe o nome da cat. principal
-    if (isset($categoriaPrincipal)){
-      $filtraCategoriaPri = "and categorias.cat_principal = '{$categoriaPrincipal}'";
-      } else {
-        $filtraCategoriaPri = "";
-      }  
+  //Recebe o nome da cat. principal
+  if (isset($categoriaPrincipal)) {
+    $filtraCategoriaPri = "and categorias.cat_principal = '{$categoriaPrincipal}'";
+  } else {
+    $filtraCategoriaPri = "";
+  }
 
   // Se for informado um dia específico, filtrar pelo dia
-  if (isset($dia)){
-    if ($tipo == 'SSM'){
+  if (isset($dia)) {
+    if ($tipo == 'SSM') {
       $filtraDia = "and data = '{$ano}-{$mes}-{$dia}'";
     } else if ($tipo == 'SAM') {
       $filtraDia = "and data <= '{$ano}-{$mes}-{$dia}'";
-    }}
-    else {
-      $filtraDia = '';
     }
+  } else {
+    $filtraDia = '';
+  }
 
   // Se o valor acumulado deve considerar só o mês atual no cálculo do tipo SAM (saldo acumulado mês)
-  if ($soMesAtual == true){
+  if ($soMesAtual == true) {
     $filtraMesAcum = "MONTH(data) = '{$mes}'";
   } else {
     $filtraMesAcum = "MONTH(data) <= '{$mes}'";
@@ -504,7 +498,7 @@ function calcula_resultado($bdConexao, $mes, $ano, $tipo, $conta=null, $categori
 
   //SAG - Saldo Acumulado Geral: saldo total incluindo todos os valores passados e futuros
 
-  if ($tipo == 'SAG'){
+  if ($tipo == 'SAG') {
 
     $bdSomar = "
     SELECT sum(valor) FROM extrato
@@ -532,8 +526,8 @@ function calcula_resultado($bdConexao, $mes, $ano, $tipo, $conta=null, $categori
 
   $soma = mysqli_fetch_array($resultado);
 
-  if (isset($soma['sum(valor)'])){
-  return $soma['sum(valor)'];
+  if (isset($soma['sum(valor)'])) {
+    return $soma['sum(valor)'];
   } else {
     return "0.00";
   }
