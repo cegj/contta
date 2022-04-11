@@ -2,6 +2,9 @@
 
 **_Beta_**
 
+![Contta](https://i.imgur.com/k6izPqU.png)
+
+
 ![Contta em uso](https://i.imgur.com/QYx8Jsd.gif)
 
 ## O que é?
