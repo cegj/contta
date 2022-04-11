@@ -1,4 +1,4 @@
-# Contta - Personal finances management
+# Contta - Personal finance management
 
 # Contta - Gestão de finanças pessoais
 
@@ -15,7 +15,7 @@
 
 ## What is it?
 
-Self-hosted web app for personal finances management.
+Self-hosted web app for personal finance management.
 
 **Contta is only available in brazilian portuguese by now.**
 
@@ -29,7 +29,7 @@ Self-hosted web app for personal finances management.
 
 ## For whom is it?
 
-Contta is developed having **privacy** in mind: the goal is to provide an easy personal finances control without hosting your bank information (which is highly sensitive) em third parties databases. In addiction, Contta offers a family budget management over the web, without needing Excel or Google spreadsheets.
+Contta is developed having **privacy** in mind: the goal is to provide an easy personal finance control without hosting your bank information (which is highly sensitive) em third parties databases. In addiction, Contta offers a family budget management over the web, without needing Excel or Google spreadsheets.
 
 ## How does it work?
 
