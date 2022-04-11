@@ -1,12 +1,13 @@
 # Contta - Gestão de finanças pessoais
-**_Beta_**
+
+**_Beta_** - Created for leaning purposes
 
 <p align="center">
     <img src="https://i.imgur.com/k6izPqU.png" alt="Contta" height="70"/>
     <img src="https://i.imgur.com/QYx8Jsd.gif" alt="Contta demo"/>
 </p>
 
-____________
+---
 
 [ ENGLISH ]
 
@@ -16,7 +17,7 @@ Self-hosted web app for personal finances management.
 
 **Contta is only available in brazilian portuguese for now**
 
-## Stack 
+## Stack
 
 - PHP;
 - SQL;
@@ -44,7 +45,6 @@ The purpose of the app is to offer a simplified solution. So, Contta is based on
 
 - Accounts: list of accounts to where expenses, incomes and transfers should be associated. In conception, they are bank accounts, wallets, credit cards, etc. - but users can organize that as they want.
 
-
 That's all for now!
 
 Contta has a responsive interface for mobile, but it works better at big screens.
@@ -64,7 +64,7 @@ So, the steps to install Contta are as follows:
 
 2. Create a MySQL/MariaDB database — but you shouldn't create any table, it will be done automatically during the setup;
 
-3. Edit, with a text editor (such as Notepad), the _bd.php_ file to include the following information: 
+3. Edit, with a text editor (such as Notepad), the _bd.php_ file to include the following information:
 
 - **$bdServidor** = _the database server address_;
 - **$bdUsuario** = _the database username_;
@@ -94,7 +94,7 @@ Contta is a project in development. So, in the perspective of keeping the family
 
 Contta is a project of a beginning developer. It means that some bugs can happen (and probably will happen). Although I already use it as my only one personal finance manager, I recommend you to test it before adopting as your primary solution. I don't offer any support to the users — use it by your own risk.
 
-____________
+---
 
 [ BRAZILIAN PORTUGUESE ]
 
@@ -102,7 +102,7 @@ ____________
 
 Aplicativo web self-hosted para gerenciamento de finanças pessoais.
 
-## Tecnologias 
+## Tecnologias
 
 - PHP;
 - SQL;
@@ -124,7 +124,7 @@ O aplicativo tem como objetivo oferecer uma solução simplificada. Assim, Contt
 
 - Extrato: tabela com todos os registros de um determinado mês, incluindo o resultado diário, mensal e acumulado.
 
-- Orçamento: permite definir um valor monetário para cada categoria em cada mês do ano e acompanhar, a partir dos registros efetuados, a diferença entre os  gastos planejados e realizados.
+- Orçamento: permite definir um valor monetário para cada categoria em cada mês do ano e acompanhar, a partir dos registros efetuados, a diferença entre os gastos planejados e realizados.
 
 - Categorias: lista de categorias (ex.: automóvel, lazer, moradia etc) e subcategorias (gasolina, cinema, aluguel etc) às quais as transações devem ser associadas.
 
