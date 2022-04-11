@@ -57,7 +57,7 @@ For the app setup, it's required:
 - A web server with PHP support;
 - A MySQL or MariaDB database server.
 
-PS.: For your information's security, I STRONGLY recommend getting a host who offers traffic over HTTPS with SSL. [Let's Encrypt](https://letsencrypt.org/) provides free SSL certificates, so ask your host support how to install it.
+PS.: For your information's security, I STRONGLY recommend getting a host who offers traffic over HTTPS with SSL. [Let's Encrypt](https://letsencrypt.org/) provides free SSL certificates, so ask your host helpdesk how to install it.
 
 So, the steps to install Contta are as follows:
 
