@@ -76,10 +76,10 @@
 
       <script language='javascript' type='text/javascript'>
         Swal.fire({
-          imageUrl: '/img/controlesimples_logo.png',
+          imageUrl: '/img/Contta_logo.png',
           imageWidth: 300,
           title: 'Seja bem vindo!',
-          text: 'Para começar a utilizar o ControleSimples, é necessário fazer uma rápida configuração inicial. Vamos começar?',
+          text: 'Para começar a utilizar o Contta, é necessário fazer uma rápida configuração inicial. Vamos começar?',
           // icon: 'info',
           confirmButtonText: 'Iniciar configuração',
           didClose: function() {

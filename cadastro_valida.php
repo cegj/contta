@@ -129,7 +129,7 @@ $logarray = $array['login'];
           <script language='javascript' type='text/javascript'>
           Swal.fire({
             title: 'Usuário cadastrado com sucesso',
-            text: 'Faça login para começar a utilizar o ControleSimples',
+            text: 'Faça login para começar a utilizar o Contta',
             icon: 'success',
             confirmButtonText: 'Fazer login',
             didClose: function(){

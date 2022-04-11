@@ -25,7 +25,7 @@
       </form>
     </div>
     <div class="info-box">
-      <p>O ControleSimples é uma aplicação de uso pessoal. Por isso, para cadastrar-se, é necessário ter um <strong>código de autorização</strong>, que é fornecido pelo administrador do sistema. Caso você queira usar o ControleSimples para administrar suas finanças, faça a sua própria instalação. <a href="https://github.com/cegj/controlesimples/">Clique aqui para mais informações.</a></p>
+      <p>O Contta é uma aplicação de uso pessoal. Por isso, para cadastrar-se, é necessário ter um <strong>código de autorização</strong>, que é fornecido pelo administrador do sistema. Caso você queira usar o Contta para administrar suas finanças, faça a sua própria instalação. <a href="https://github.com/cegj/Contta/">Clique aqui para mais informações.</a></p>
     </div>
 </body>
 

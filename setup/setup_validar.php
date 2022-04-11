@@ -60,7 +60,7 @@ include($_SERVER["DOCUMENT_ROOT"] . '/setup/funcoes_setup.php');
       <script language='javascript' type='text/javascript'>
         Swal.fire({
           title: 'Configuração concluída!',
-          text: 'Faça login para começar a utilizar o ControleSimples',
+          text: 'Faça login para começar a utilizar o Contta',
           icon: 'success',
           confirmButtonText: 'Começar',
           didClose: function() {

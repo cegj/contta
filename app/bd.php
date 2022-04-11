@@ -5,7 +5,7 @@
 $bdServidor = '127.0.0.1';
 $bdUsuario = 'root';
 $bdSenha = '';
-$bdBanco = 'bdcs';
+$bdBanco = 'bdcontrolesimples';
 
 $bdConexao = mysqli_connect($bdServidor, $bdUsuario, $bdSenha, $bdBanco);
 

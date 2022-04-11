@@ -41,7 +41,7 @@ if (nao_existem_tabelas($bdConexao)) :
       </form>
     </div>
     <div class="info-box">
-      <p>Para que outras pessoas possam criar uma conta no seu ControleSimples e efetuar registros e consultas, você deve fornecer a elas o <b>código de autorização</b> que será criado agora. Guarde esse código com cuidado, pois qualquer pessoa que tenha acesso a ele poderá criar uma conta e visualizar as suas informações.</p>
+      <p>Para que outras pessoas possam criar uma conta no seu Contta e efetuar registros e consultas, você deve fornecer a elas o <b>código de autorização</b> que será criado agora. Guarde esse código com cuidado, pois qualquer pessoa que tenha acesso a ele poderá criar uma conta e visualizar as suas informações.</p>
     </div>
 </main>
   

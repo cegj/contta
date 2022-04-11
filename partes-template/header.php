@@ -1,7 +1,7 @@
 <?php if (isset($login_cookie)) : ?>
   <header id="header">
 
-    <img class="logo" height="70px" src="/img/controlesimples_logo.png" alt="ControleSimples" />
+    <img class="logo" height="70px" src="/img/contta.png" alt="Contta" />
     <nav aria-label="menu-principal">
       <ul class="menu-principal">
         <li><a class="botao-menu-principal" href="/index.php">Painel</a></li>
@@ -17,7 +17,7 @@
 
   <header class="nao-logado">
 
-    <img class="logo" height="70px" src="/img/controlesimples_logo.png" alt="ControleSimples" />
+    <img class="logo" height="70px" src="/img/Contta_logo.png" alt="Contta" />
 
   </header>
 

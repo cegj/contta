@@ -1,7 +1,7 @@
   <meta charset="UTF-8">
   <meta name="robots" content="noindex">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-  <title>ControleSimples</title>
+  <title>Contta</title>
 
   <link rel="stylesheet" href="/style.css">
   <link rel="shortcut icon" href="/img/favicon/favicon.png">
