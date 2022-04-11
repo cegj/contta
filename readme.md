@@ -1,5 +1,4 @@
 # Contta - Gestão de finanças pessoais
-
 **_Beta_**
 
 <p align="center">
@@ -93,7 +92,7 @@ Contta is a project in development. So, in the perspective of keeping the family
 
 ## IMPORTANT
 
-Contta is a beginning developer project. It means that some bugs can happen. Although I already use it as my only one personal finance manager, I recommend you to test it before adopting as your primary solution. As a personal open source project, I don't offer any support to the users — use it by your own risk.
+Contta is a project of a beginning developer. It means that some bugs can happen (and probably will happen). Although I already use it as my only one personal finance manager, I recommend you to test it before adopting as your primary solution. I don't offer any support to the users — use it by your own risk.
 
 ____________
 
@@ -178,4 +177,4 @@ O Contta é um projeto em desenvolvimento. Dentro da perspectiva de manter a ges
 
 ## IMPORTANTE
 
-O Contta é um projeto de um desenvolvedor iniciante. Isso significa que alguns comportamentos inesperados podem ocorrer. Embora eu já o utilize como meu único gestor de finanças pessoais, recomendo utilizá-lo em paralelo ao seu gestor de finanças atual nos primeiros meses para assegurar que ele atenderá às suas necessidades.
+Contta é um projeto de um desenvolvedor iniciante. Isso significa que alguns bugs podem ocorrer (e provavelmente ocorrerão). Embora eu já o utilize como meu único gerenciador de finanças pessoais, recomendo que você o teste antes de adotá-lo como sua solução principal. Eu não ofereço suporte ao usuários — use-o por sua conta e risco.
