@@ -7,37 +7,127 @@
 
 ![Contta em uso](https://i.imgur.com/QYx8Jsd.gif)
 
-## O que é?
+____________
 
-Aplicativo web self-hosted (hospedado pelo próprio usuário) para gerenciamento de finanças pessoais.
+[ ENGLISH ]
 
-## Tecnologias utilizadas
+## What is it?
+
+Self-hosted web app for personal finances management.
+
+**Contta is only available in brazilian portuguese for now**
+
+## Stack 
 
 - PHP;
 - SQL;
-- HTML;
+- Javascript;
 - CSS;
-- Javascript.
+- HTML.
+
+## For whom is it?
+
+Contta is developed having **privacy** in mind: the goal is to provide an easy personal finances control without hosting your bank information (which is highly sensitive) em third parties databases. In addiction, Contta offers a family budget management over the web, without needing Excel or Google spreadsheets.
+
+## How does it work?
+
+The purpose of the app is to offer a simplified solution. So, Contta is based on:
+
+- Transactions: the registry of incomes, expenses and money transfers made by the user, manually.
+
+- Panel: area which consolidated information about the transactions are shown. At this moment, it shows only the last transaction registered, bot it's planned to include other relevant information such as incomes and expenses charts.
+
+- Statement: table with all transactions of a setted month, including day's, month's and accumulated results.
+
+- Budget: allow the user to set an expected money value for each category in each month and to follow, from the transactions registered, the difference between the planned and the established expense.
+
+- Categories: list of categories (e.g. car, leisure, housing etc.) and subcategories (gas, movies, house rent etc.) to where transactions should be associated.
+
+- Accounts: list of accounts to where expenses, incomes and transfers should be associated. In conception, they are bank accounts, wallets, credit cards, etc. - but users can organize that as they want.
+
+
+That's all for now!
+
+Contta has a responsive interface for mobile, but it works better at big screens.
+
+## Setup
+
+For the app setup, it's required:
+
+- A web server with PHP support;
+- A MySQL or MariaDB database server.
+
+PS.: For your information's security, I STRONGLY recommend getting a host who offers traffic over HTTPS with SSL. [Let's Encrypt](https://letsencrypt.org/) provides free SSL certificates, so ask your host support how to install it.
+
+So, the steps to install Contta are as follows:
+
+1. Download a clone of the project from GitHub;
+
+2. Create a MySQL/MariaDB database — but you shouldn't create any table, it will be done automatically during the setup;
+
+3. Edit, with a text editor (such as Notepad), the _bd.php_ file to include the following information: 
+
+- **$bdServidor** = _the database server address_;
+- **$bdUsuario** = _the database username_;
+- **$bdSenha** = _the database password_;
+- **$bdBanco** = _the database name_;
+
+Pay attention: all above information should be between simple quotes '' and they are provided by your database server.
+
+5. After uploading the files, access your domain (e.g. www.yourname.com). Contta will notice that's a new installation and will start a quick setup.
+
+6. It's all done!
+
+If you prefer, you can install Contta in a local server such as XAMPP/LAMPP but, in this case, you will access the application only in your computer, and we really recommend you to create a backup routine for the database in this case.
+
+## Planned improvements
+
+Contta is a project in development. So, in the perspective of keeping the family finance management simplified, without a lot of options and unnecessary features, we planned, to the future, some improvements:
+
+- General statistics and charts at the panel;
+- Dedicated credit card management feature;
+- Improvements in users management;
+- Minor adjustments, such as: dark theme, design/layout improvements and others.
+
+## IMPORTANT
+
+Contta is a beginning developer project. It means that some bugs can happen. Although I already use it as my only one personal finance manager, I recommend you to test it before adopting as your primary solution. As a personal open source project, I don't offer any support to the users — use it by your own risk.
+
+____________
+
+[ BRAZILIAN PORTUGUESE ]
+
+## O que é?
+
+Aplicativo web self-hosted para gerenciamento de finanças pessoais.
+
+## Tecnologias 
+
+- PHP;
+- SQL;
+- Javascript;
+- CSS;
+- HTML.
 
 ## Para quem é?
 
-O Contta foi desenvolvido, primeiramente, pensando em **privacidade**: o objetivo é permitir um controle financeiro fácil sem precisar hospedar suas informações financeiras (que são altamente sensíveis) em bancos de dados de terceiros. Além disso, o Contta oferece um controle de finanças pessoais pela web e sem depender de planilhas de Excel e Google Docs.
+O Contta é desenvolvido pensando em **privacidade**: o objetivo é permitir um controle financeiro fácil sem precisar hospedar suas informações bancárias (que são altamente sensíveis) em bancos de dados de terceiros. Além disso, Contta oferece um gerenciamento de orçamento familiar pela web e sem depender de planilhas de Excel e Google Docs.
 
 ## Como funciona?
 
-Como o nome sugere, o aplicativo tem como objetivo oferecer uma solução simplificada. Assim, o Contta se baseia no seguinte:
+O aplicativo tem como objetivo oferecer uma solução simplificada. Assim, Contta se baseia no seguinte:
 
-- Transações: são os registros de despesas, receitas e transferências do usuário, realizados manualmente.
+- Transações: são os registros de despesas, receitas e transferências feitas pelo usuário manualmente.
 
 - Painel: área onde são exibidas informações sobre as transações registradas no aplicativo, de forma consolidada. No momento, exibe apenas a última transação registrada (planeja-se incluir outras informações relevantes, como gráficos de entradas e saídas).
 
-- Extrato: visualização de todos os registros efetuados em determinado mês, incluindo o resultado diário, mensal e acumulado.
+- Extrato: tabela com todos os registros de um determinado mês, incluindo o resultado diário, mensal e acumulado.
 
-- Orçamento: permite informar um valor estipulado para cada categoria em cada mês do ano e acompanhar, a partir dos registros efetuados, os gastos efetivamente realizados (e a diferença entre o previsto e o realizado).
+- Orçamento: permite definir um valor monetário para cada categoria em cada mês do ano e acompanhar, a partir dos registros efetuados, a diferença entre os  gastos planejados e realizados.
 
 - Categorias: lista de categorias (ex.: automóvel, lazer, moradia etc) e subcategorias (gasolina, cinema, aluguel etc) às quais as transações devem ser associadas.
 
-- Contas: lista de contas nas quais as despesas, receitas e transferências são registradas. Na concepção, são as contas bancárias (Banco do Brasil, Itaú etc), a carteira, os cartões de crédito etc - mas o usuário pode organizar como quiser.
+- Contas: lista de contas nas quais as despesas, receitas e transferências devem ser registradas. Na concepção, são as contas bancárias, carteiras, os cartões de crédito etc. - mas o usuário pode organizar como quiser.
 
 Por enquanto, é isso!
 
