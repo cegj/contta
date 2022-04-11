@@ -2,10 +2,10 @@
 
 **_Beta_**
 
-![Contta](https://i.imgur.com/k6izPqU.png)
-
-
-![Contta em uso](https://i.imgur.com/QYx8Jsd.gif)
+<p align="center">
+    <img src="https://i.imgur.com/k6izPqU.png" alt="Contta" height="70"/>
+    <img src="https://i.imgur.com/QYx8Jsd.gif" alt="Contta demo"/>
+</p>
 
 ____________
 
@@ -73,6 +73,8 @@ So, the steps to install Contta are as follows:
 - **$bdBanco** = _the database name_;
 
 Pay attention: all above information should be between simple quotes '' and they are provided by your database server.
+
+4. Upload all files to thw web server;
 
 5. After uploading the files, access your domain (e.g. www.yourname.com). Contta will notice that's a new installation and will start a quick setup.
 
@@ -146,9 +148,9 @@ Então, o passo a passo para realizar a instalação é o seguinte:
 
 1. Baixar uma cópia do projeto a partir do GitHub;
 
-1. Criar um banco de dados MySQL/MariaDB no servidor de banco de dados - mas não crie nenhuma tabela, isso será feito automaticamente durante a configuração;
+2. Criar um banco de dados MySQL/MariaDB no servidor de banco de dados - mas não crie nenhuma tabela, isso será feito automaticamente durante a configuração;
 
-1. Editar, com um editor de texto comum na sua máquina local, o arquivo _bd.php_, para incluir as seguintes informações:
+3. Editar, com um editor de texto comum na sua máquina local, o arquivo _bd.php_, para incluir as seguintes informações:
 
 - **$bdServidor** = _o endereço do servidor do banco de dados_;
 - **$bdUsuario** = _o nome de usuário no servidor do banco de dados_;
@@ -157,11 +159,11 @@ Então, o passo a passo para realizar a instalação é o seguinte:
 
 Atenção: todas as informações acima devem estar entre aspas simples '' e são fornecidas pelo seu servidor de banco de dados.
 
-3. Subir todos os arquivos para o seu servidor web com suporte a PHP. Em caso de dúvidas, consulte o suporte da sua hospedagem.
+4. Subir todos os arquivos para o seu servidor web com suporte a PHP. Em caso de dúvidas, consulte o suporte da sua hospedagem.
 
-4. Após subir todos os arquivos, faça o primeiro acesso no domínio contratado junto ao seu servidor (ex.: www.seunome.com.br). O Contta identificará que se trata de uma nova instalação e iniciará uma rápida configuração inicial.
+5. Após subir todos os arquivos, faça o primeiro acesso no domínio contratado junto ao seu servidor (ex.: www.seunome.com.br). O Contta identificará que se trata de uma nova instalação e iniciará uma rápida configuração inicial.
 
-5. Pronto!
+6. Pronto!
 
 Caso prefira, você pode instalar o Contta em um servidor web local como o XAMPP/LAMPP. Nesse caso, você acessará a aplicação somente no computador em que o servidor foi instalado e deve criar uma rotina de backup do seu banco de dados.
 
