@@ -1,3 +1,5 @@
+# Contta - Personal finances management
+
 # Contta - Gestão de finanças pessoais
 
 **_Beta_** - Created for leaning purposes
