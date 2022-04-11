@@ -15,7 +15,7 @@
 
 Self-hosted web app for personal finances management.
 
-**Contta is only available in brazilian portuguese for now**
+**Contta is only available in brazilian portuguese by now.**
 
 ## Stack
 
