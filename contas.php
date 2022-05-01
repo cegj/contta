@@ -1,4 +1,16 @@
-<?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
+<?php
+
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/database/table_is_not_empty.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/account/get_accounts.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/account/get_especific_account.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/utils/parse_boolean.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/utils/format_value.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/utils/get_days_in_month.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/utils/translate_date_to_br.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/statement/calculate_result.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/transaction/get_transactions.php');
+
+include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
 
 $configuracao = filter_input(INPUT_GET, 'configurar', FILTER_VALIDATE_BOOL);
 
@@ -37,16 +49,16 @@ $id_conta = filter_input(INPUT_GET, 'id_conta', FILTER_VALIDATE_INT);
           <div class="item-grid-principal">
             <h2 class="titulo-container">Contas</h2>
 
-            <?php if (tabela_nao_esta_vazia($bdConexao, 'contas')) : ?>
+            <?php if (table_is_not_empty($bdConexao, 'contas')) : ?>
 
               <table class="tabela">
                 <?php
-                $contas = buscar_contas($bdConexao);
+                $contas = get_accounts($bdConexao);
 
                 foreach ($contas as $conta) :
-                  $exibir = traduz_boolean($conta['exibir'], 'Sim', 'Não');
-                  $saldoMes = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SSM', $conta['id_con']));
-                  $saldoAcumulado = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SAM', $conta['id_con']));
+                  $exibir = parse_boolean($conta['exibir'], 'Sim', 'Não');
+                  $saldoMes = format_value(calculate_result($bdConexao, $mes, $ano, 'SSM', $conta['id_con']));
+                  $saldoAcumulado = format_value(calculate_result($bdConexao, $mes, $ano, 'SAM', $conta['id_con']));
 
                   if ($saldoMes == 0) {
                     $saldoMes = "0,00";
@@ -79,7 +91,7 @@ $id_conta = filter_input(INPUT_GET, 'id_conta', FILTER_VALIDATE_INT);
 
             if (isset($_GET['conta']) && isset($mes) && isset($ano)) : ?>
 
-              <?php $contaSelecionada = buscar_conta_especifica($bdConexao, $_GET['conta']); ?>
+              <?php $contaSelecionada = get_especific_account($bdConexao, $_GET['conta']); ?>
               <div class="container-titulo-subtitulo">
                 <h2 class="titulo-container titulo-extrato com-subtitulo">Extrato da conta</h2>
                 <h3 class="subtitulo-container"><?php echo $contaSelecionada['conta'] ?></h3>
@@ -98,25 +110,25 @@ $id_conta = filter_input(INPUT_GET, 'id_conta', FILTER_VALIDATE_INT);
                 <tr>
                   <?php
 
-                  $totalDiasMes = days_in_month($mes, $ano);
+                  $totalDiasMes = get_days_in_month($mes, $ano);
 
                   for ($dia = 1; $dia <= $totalDiasMes; $dia++) :
 
-                    $registros = buscar_registros($bdConexao, $dia, $mes, $ano, null, null, null, $_GET['conta']);
+                    $registros = get_transactions($bdConexao, $dia, $mes, $ano, null, null, null, $_GET['conta']);
 
                     if (sizeof($registros) != 0) :
 
-                      $resultadoDia = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SSM', $_GET['conta'], null, null, $dia));
+                      $resultadoDia = format_value(calculate_result($bdConexao, $mes, $ano, 'SSM', $_GET['conta'], null, null, $dia));
 
-                      $resultadoDiaAcumuladoMes = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SAM', $_GET['conta'], null, null, $dia, true));
+                      $resultadoDiaAcumuladoMes = format_value(calculate_result($bdConexao, $mes, $ano, 'SAM', $_GET['conta'], null, null, $dia, true));
 
-                      $resultadoDiaAcumuladoTotal = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SAM', $_GET['conta'], null, null, $dia));
+                      $resultadoDiaAcumuladoTotal = format_value(calculate_result($bdConexao, $mes, $ano, 'SAM', $_GET['conta'], null, null, $dia));
 
 
                       foreach ($registros as $registro) :
 
-                        $data = traduz_data_para_br($registro['data']);
-                        $valor = formata_valor($registro['valor']);
+                        $data = translate_date_to_br($registro['data']);
+                        $valor = format_value($registro['valor']);
 
                         echo "<tr class='linha-extrato'>
             <td class='linha-extrato-tipo'>{$registro['tipo']}</td>
@@ -162,7 +174,7 @@ $id_conta = filter_input(INPUT_GET, 'id_conta', FILTER_VALIDATE_INT);
 
         <?php if ($configuracao == true) : ?>
           <div class="item-grid-principal">
-            <?php if (tabela_nao_esta_vazia($bdConexao, 'contas')) :
+            <?php if (table_is_not_empty($bdConexao, 'contas')) :
             ?>
               <h2 class="titulo-container">Configuração das contas</h2>
               <table class="tabela tabela-responsiva" id="tabela-contas-cadastradas">
@@ -177,11 +189,11 @@ $id_conta = filter_input(INPUT_GET, 'id_conta', FILTER_VALIDATE_INT);
                 </thead>
                 <tbody>
                   <?php
-                  $contas = buscar_contas($bdConexao);
+                  $contas = get_accounts($bdConexao);
 
                   foreach ($contas as $conta) :
-                    $exibir = traduz_boolean($conta['exibir'], 'Sim', 'Não');
-                    $saldoInicialFormatado = formata_valor($conta['saldo_inicial']);
+                    $exibir = parse_boolean($conta['exibir'], 'Sim', 'Não');
+                    $saldoInicialFormatado = format_value($conta['saldo_inicial']);
 
                     echo "<tr>
                       <td class='td-conta'>{$conta['conta']}</td>
