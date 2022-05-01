@@ -1,4 +1,18 @@
-<?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
+<?php
+
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/database/table_is_not_empty.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/category/get_primary_categories.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/category/get_secundary_categories.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/category/get_especific_category.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/statement/calculate_result.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/transaction/get_transactions.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/utils/format_value.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/utils/get_days_in_month.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/utils/translate_date_to_br.php');
+
+
+
+include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
 
 $configuracao = filter_input(INPUT_GET, 'configurar', FILTER_VALIDATE_BOOL);
 
@@ -33,7 +47,7 @@ $id_cat = filter_input(INPUT_GET, 'id_cat', FILTER_VALIDATE_INT);
 
       <div class="container duas-colunas <?php if ($configuracao == false) : ?>com-extrato<?php else : ?>sem-bg<?php endif; ?>">
 
-        <?php if (tabela_nao_esta_vazia($bdConexao, 'categorias')) :
+        <?php if (table_is_not_empty($bdConexao, 'categorias')) :
         ?>
           <div class="item-grid-principal">
             <?php if ($configuracao == true) : ?>
@@ -53,11 +67,11 @@ $id_cat = filter_input(INPUT_GET, 'id_cat', FILTER_VALIDATE_INT);
                 <?php endif; ?>
                 <tr>
                   <?php
-                  $categoriasPrincipais = buscar_cat_principal($bdConexao);
+                  $categoriasPrincipais = get_primary_categories($bdConexao);
 
                   foreach ($categoriasPrincipais as $categoriaPrincipal) :
 
-                    $saldoMesCatPrincipal = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SSM', null, null,  $categoriaPrincipal['nome_cat']));
+                    $saldoMesCatPrincipal = format_value(calculate_result($bdConexao, $mes, $ano, 'SSM', null, null,  $categoriaPrincipal['nome_cat']));
 
 
                     echo "<tr class='cat-principal'>
@@ -76,11 +90,11 @@ $id_cat = filter_input(INPUT_GET, 'id_cat', FILTER_VALIDATE_INT);
 
                     echo "</tr>";
 
-                    $categoriasSecundarias = buscar_cat_secundaria($bdConexao, $categoriaPrincipal);
+                    $categoriasSecundarias = get_secundary_categories($bdConexao, $categoriaPrincipal);
 
                     foreach ($categoriasSecundarias as $categoriaSecundaria) :
 
-                      $saldoMes = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SSM', null, $categoriaSecundaria['id_cat']));
+                      $saldoMes = format_value(calculate_result($bdConexao, $mes, $ano, 'SSM', null, $categoriaSecundaria['id_cat']));
 
                       echo "<tr>";
 
@@ -121,7 +135,7 @@ $id_cat = filter_input(INPUT_GET, 'id_cat', FILTER_VALIDATE_INT);
                 <div class="item-grid-secundario">
                   <?php if (isset($_GET['categoria']) && isset($mes) && isset($ano)) : ?>
 
-                    <?php $catSelecionada = buscar_cat_especifica($bdConexao, $_GET['categoria']);
+                    <?php $catSelecionada = get_especific_category($bdConexao, $_GET['categoria']);
 
                     ?>
                     <div class="container-titulo-subtitulo">
@@ -143,24 +157,24 @@ $id_cat = filter_input(INPUT_GET, 'id_cat', FILTER_VALIDATE_INT);
                         <tr>
                           <?php
 
-                          $totalDiasMes = days_in_month($mes, $ano);
+                          $totalDiasMes = get_days_in_month($mes, $ano);
 
                           for ($dia = 1; $dia <= $totalDiasMes; $dia++) :
 
-                            $registros = buscar_registros($bdConexao, $dia, $mes, $ano, null, null, $_GET['categoria']);
+                            $registros = get_transactions($bdConexao, $dia, $mes, $ano, null, null, $_GET['categoria']);
 
                             if (sizeof($registros) != 0) :
 
-                              $resultadoDia = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SSM', null, $_GET['categoria'], null, $dia));
+                              $resultadoDia = format_value(calculate_result($bdConexao, $mes, $ano, 'SSM', null, $_GET['categoria'], null, $dia));
 
-                              $resultadoDiaAcumuladoMes = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SAM', null, $_GET['categoria'], null, $dia, true));
+                              $resultadoDiaAcumuladoMes = format_value(calculate_result($bdConexao, $mes, $ano, 'SAM', null, $_GET['categoria'], null, $dia, true));
 
-                              $resultadoDiaAcumuladoTotal = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SAM', null, $_GET['categoria'], null, $dia));
+                              $resultadoDiaAcumuladoTotal = format_value(calculate_result($bdConexao, $mes, $ano, 'SAM', null, $_GET['categoria'], null, $dia));
 
                               foreach ($registros as $registro) :
 
-                                $data = traduz_data_para_br($registro['data']);
-                                $valor = formata_valor($registro['valor']);
+                                $data = translate_date_to_br($registro['data']);
+                                $valor = format_value($registro['valor']);
 
                                 echo "<tr class='linha-extrato'>
           <td class='linha-extrato-tipo'>{$registro['tipo']}</td>
