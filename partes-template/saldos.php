@@ -104,11 +104,4 @@
   } else if (parseFloat(valorGeral.innerText) < 0) {
     caixaSaldoGeral.classList.add('negativo');
   }
-
-
-  // botaoAbrirRegistroTransacao.addEventListener('click', function() {
-  //     if (janelaRegistroTransacao.classList.contains('exibir')){
-  //       janelaRegistroTransacao.classList.remove('exibir');
-  //       botaoAbrirRegistroTransacao.classList.remove('botao-sair');
-  //       botaoAbrirRegistroTransacao.classList.add('botao-novo');
 </script>

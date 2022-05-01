@@ -1,4 +1,15 @@
-<?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php'); ?>
+<?php
+
+include_once($_SERVER["DOCUMENT_ROOT"] . './app/transaction/get_transactions.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . './app/utils/translate_date_to_br.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . './app/utils/format_value.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . './app/database/there_is_no_table.php');
+
+
+
+include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
+
+?>
 
 <!DOCTYPE html>
 <html>
@@ -28,7 +39,7 @@
       <div class="container duas-colunas sem-bg">
 
         <div class="box informacoes">
-          <?php $buscaUltimoRegistro = buscar_registros($bdConexao, null, $mes, $ano, false, true);
+          <?php $buscaUltimoRegistro = get_transactions($bdConexao, null, $mes, $ano, false, true);
 
           if ($buscaUltimoRegistro != null) :
 
@@ -43,11 +54,11 @@
             </dl>
             <dl>
               <dt>📅 Data:</dt>
-              <dd><?php echo traduz_data_para_br($ultimoregistro['data']) ?></dd>
+              <dd><?php echo translate_date_to_br($ultimoregistro['data']) ?></dd>
             </dl>
             <dl>
               <dt>💵 Valor:</dt>
-              <dd>R$ <span class="money"><?php echo formata_valor($ultimoregistro['valor']) ?></span></dd>
+              <dd>R$ <span class="money"><?php echo format_value($ultimoregistro['valor']) ?></span></dd>
             </dl>
             <dl>
               <dt>🏷️ Categoria:</dt>
@@ -72,7 +83,7 @@
   else :
 
     //SE NÃO EXISTEM TABELAS NO BD, DIRECIONADA PARA O SETUP INICIAL (SETUP.PHP). CASO CONTRÁRIO, INCLUI A PÁGINA PARA LOGIN.
-    if (nao_existem_tabelas($bdConexao)) : ?>
+    if (there_is_no_table($bdConexao)) : ?>
 
       <script language='javascript' type='text/javascript'>
         Swal.fire({
