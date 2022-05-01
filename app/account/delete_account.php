@@ -31,9 +31,3 @@ function delete_account($bdConexao, $id_conta, $removeMantemRegistros)
         mysqli_query($bdConexao, $bdApagarRegistros);
     }
 }
-
-function buscar_tipos_conta()
-{
-    $tiposConta = array('Conta bancária', 'Cartão de crédito', 'Carteira', 'Investimentos');
-    return $tiposConta;
-}

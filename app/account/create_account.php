@@ -1,18 +1,18 @@
 <?php
 
-//CADASTRAR NOVA CONTA OU EDITAR CONTA CADASTRADA
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/category/get_especific_category.php');
 
 function create_account($bdConexao, $conta, $edicao, $id_conta)
 {
     //FUNÇÃO PARA CADASTRAR/ALTERAR O SALDO INICIAL APÓS CADASTRAR/ALTERAR A CONTA
 
-    function gravar_saldo_inicial($bdConexao, $edicao, $saldoinicial, $id_conta)
+    function insert_openning_balance($bdConexao, $edicao, $saldoinicial, $id_conta)
     {
 
         $hoje = date('Y-m-d');
         $data_insert = date('Y-m-d H:i:s');
 
-        $catSaldoInicial = buscar_cat_especifica($bdConexao, null, 'Saldo inicial');
+        $catSaldoInicial = get_especific_category($bdConexao, null, 'Saldo inicial');
         $idCatSaldoInicial = $catSaldoInicial['id_cat'];
 
         if ($edicao == false) {
@@ -79,7 +79,7 @@ function create_account($bdConexao, $conta, $edicao, $id_conta)
 
         mysqli_query($bdConexao, $bdGravar);
 
-        gravar_saldo_inicial($bdConexao, $edicao, $conta['saldoinicial'], null);
+        insert_openning_balance($bdConexao, $edicao, $conta['saldoinicial'], null);
     } else if ($edicao == true) {
 
         $bdGravar = "
@@ -95,6 +95,6 @@ function create_account($bdConexao, $conta, $edicao, $id_conta)
 
         mysqli_query($bdConexao, $bdGravar);
 
-        gravar_saldo_inicial($bdConexao, $edicao, $conta['saldoinicial'], $id_conta);
+        insert_openning_balance($bdConexao, $edicao, $conta['saldoinicial'], $id_conta);
     }
 }

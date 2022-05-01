@@ -1,6 +1,6 @@
 <?php
 
-function buscar_reg_especifico($bdConexao, $id_reg)
+function get_especific_transaction($bdConexao, $id_reg)
 {
 
     $bdBuscar = "

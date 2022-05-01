@@ -1,5 +1,7 @@
 <?php
 
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/budget/add_last_category_to_budget.php');
+
 function create_category($bdConexao, $categoria, $edicao = false, $id_cat = null, $cat_edicao_nome = null, $cat_edicao_cat_principal = null)
 {
 
@@ -19,7 +21,7 @@ function create_category($bdConexao, $categoria, $edicao = false, $id_cat = null
 
             mysqli_query($bdConexao, $bdGravar);
 
-            adicionar_ultima_cat_ao_orcamento($bdConexao);
+            add_last_category_to_budget($bdConexao);
 
             $bdGravarOutros = "
             INSERT INTO categorias
@@ -34,7 +36,7 @@ function create_category($bdConexao, $categoria, $edicao = false, $id_cat = null
 
             mysqli_query($bdConexao, $bdGravarOutros);
 
-            adicionar_ultima_cat_ao_orcamento($bdConexao);
+            add_last_category_to_budget($bdConexao);
         } else {
             $bdGravar = "
             INSERT INTO categorias
@@ -49,7 +51,7 @@ function create_category($bdConexao, $categoria, $edicao = false, $id_cat = null
 
             mysqli_query($bdConexao, $bdGravar);
 
-            adicionar_ultima_cat_ao_orcamento($bdConexao);
+            add_last_category_to_budget($bdConexao);
         }
     } else if ($edicao == true) {
 

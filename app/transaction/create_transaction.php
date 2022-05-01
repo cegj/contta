@@ -1,5 +1,8 @@
 <?php
 
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/account/get_especific_account.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/category/get_especific_category.php');
+
 function create_transaction($bdConexao, $registro, $edicao, $id_reg, $editarParcelas = false)
 {
 
@@ -9,13 +12,13 @@ function create_transaction($bdConexao, $registro, $edicao, $id_reg, $editarParc
 
         if ($registro['tipo'] == 'T') {
 
-            $contaOrigem = buscar_conta_especifica($bdConexao, $registro['conta'], null);
-            $contaDestino = buscar_conta_especifica($bdConexao, $registro['contadestino'], null);
+            $contaOrigem = get_especific_account($bdConexao, $registro['conta'], null);
+            $contaDestino = get_especific_account($bdConexao, $registro['contadestino'], null);
 
 
             //Se a conta origem ou conta destino for oculta, colocar na categoria "Contas ocultas" (para orçamento)
             if ($contaDestino['exibir'] == 0 or $contaOrigem['exibir'] == 0) {
-                $catContasOcultas = buscar_cat_especifica($bdConexao, null, 'Contas ocultas');
+                $catContasOcultas = get_especific_category($bdConexao, null, 'Contas ocultas');
                 $idCatContasOcultas = "'{$catContasOcultas['id_cat']}'";
             } else {
                 $idCatContasOcultas = "null";

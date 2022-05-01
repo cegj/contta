@@ -1,11 +1,13 @@
 <?php
 
-function apagar_cat($bdConexao, $id_cat, $nome_cat, $cat_principal)
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/budget/delete_category_from_budget.php');
+
+function delete_category($bdConexao, $id_cat, $nome_cat, $cat_principal)
 {
 
     if ($cat_principal == null) {
 
-        apagar_cat_do_orcamento($bdConexao, $id_cat, $cat_principal);
+        delete_category_from_budget($bdConexao, $id_cat, $cat_principal);
 
         $bdGravar = "
         DELETE FROM categorias
@@ -14,7 +16,7 @@ function apagar_cat($bdConexao, $id_cat, $nome_cat, $cat_principal)
         mysqli_query($bdConexao, $bdGravar);
     }
 
-    apagar_cat_do_orcamento($bdConexao, $id_cat, $cat_principal);
+    delete_category_from_budget($bdConexao, $id_cat, $cat_principal);
 
     $bdGravar = "
     DELETE FROM categorias

@@ -1,5 +1,9 @@
 <?php
 
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/utils/translate_currency_to_br.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/account/delete_account.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/account/create_account.php');
+
 include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
 
 $origin = $_SERVER['HTTP_REFERER'];
@@ -16,7 +20,7 @@ $conta['nomeconta'] = $_POST['nomeconta'];
 $conta['tipoconta'] = $_POST['tipoconta'];
 
 if (isset($_POST['saldoinicial']) && $_POST['saldoinicial'] != "") {
-    $valorSemMascara = ajustaValorMoeda($_POST['saldoinicial']);
+    $valorSemMascara = translate_currency_to_br($_POST['saldoinicial']);
     $conta['saldoinicial'] = $valorSemMascara;
 } else {
     $conta['saldoinicial'] = 0;
@@ -31,15 +35,15 @@ if (isset($_POST['exibirconta']) && $_POST['exibirconta'] == 1) {
 //Chama as funções conforme o caso
 
 if (isset($_POST['apagar'])) {
-    apagar_conta($bdConexao, $id_conta, $_POST['apagar']);
+    delete_account($bdConexao, $id_conta, $_POST['apagar']);
     header('Location: ' . $origin);
     die();
 } else if ($id_conta) {
-    cadastrar_conta($bdConexao, $conta, true, $id_conta);
+    create_account($bdConexao, $conta, true, $id_conta);
     header('Location: ' . $origin);
     die();
 } else {
-    cadastrar_conta($bdConexao, $conta, false, null);
+    create_account($bdConexao, $conta, false, null);
     header('Location: ' . $origin);
     die();
 }

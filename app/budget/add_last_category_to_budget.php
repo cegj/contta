@@ -1,6 +1,6 @@
 <?php
 
-function add_last_category_budget($bdConexao)
+function add_last_category_to_budget($bdConexao)
 {
     $bdBuscarId = "
     SELECT id_cat FROM categorias ORDER BY id_cat DESC LIMIT 1
