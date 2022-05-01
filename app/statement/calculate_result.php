@@ -1,6 +1,6 @@
 <?php
 
-function calcula_resultado($bdConexao, $mes, $ano, $tipo, $conta = null, $categoriaSecundaria = null, $categoriaPrincipal = null, $dia = null, $soMesAtual = false)
+function calculate_result($bdConexao, $mes, $ano, $tipo, $conta = null, $categoriaSecundaria = null, $categoriaPrincipal = null, $dia = null, $soMesAtual = false)
 {
 
     // TIPOS: SSM (saldo só mês), SAM (saldo acumulado até o mês) e SAG (saldo acumulado geral)

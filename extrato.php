@@ -1,4 +1,16 @@
-<?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
+<?php
+
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/database/table_is_not_empty.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/utils/get_days_in_month.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/transaction/get_transactions.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/utils/format_value.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/statement/calculate_result.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/utils/translate_date_to_br.php');
+
+
+
+
+include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
 
 $edicao = filter_input(INPUT_GET, 'editar', FILTER_VALIDATE_BOOL);
 
@@ -37,7 +49,7 @@ $id_transacao = filter_input(INPUT_GET, 'id_transacao', FILTER_VALIDATE_INT);
 
         <h2 class="titulo-container">Extrato</h2>
 
-        <?php if (tabela_nao_esta_vazia($bdConexao, 'extrato')) : ?>
+        <?php if (table_is_not_empty($bdConexao, 'extrato')) : ?>
 
           <table class="tabela extrato tabela-responsiva">
             <thead>
@@ -56,25 +68,25 @@ $id_transacao = filter_input(INPUT_GET, 'id_transacao', FILTER_VALIDATE_INT);
 
             if ($tudo != true) :
 
-              $totalDiasMes = days_in_month($mes, $ano);
+              $totalDiasMes = get_days_in_month($mes, $ano);
 
               for ($dia = 1; $dia <= $totalDiasMes; $dia++) :
 
-                $transacoes = buscar_registros($bdConexao, $dia, $mes, $ano, $tudo);
+                $transacoes = get_transactions($bdConexao, $dia, $mes, $ano, $tudo);
 
                 if (sizeof($transacoes) != 0) :
 
-                  $resultadoDia = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SSM', null, null, null, $dia));
+                  $resultadoDia = format_value(calculate_result($bdConexao, $mes, $ano, 'SSM', null, null, null, $dia));
 
-                  $resultadoDiaAcumuladoMes = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SAM', null, null, null, $dia, true));
+                  $resultadoDiaAcumuladoMes = format_value(calculate_result($bdConexao, $mes, $ano, 'SAM', null, null, null, $dia, true));
 
-                  $resultadoDiaAcumuladoTotal = formata_valor(calcula_resultado($bdConexao, $mes, $ano, 'SAM', null, null, null, $dia));
+                  $resultadoDiaAcumuladoTotal = format_value(calculate_result($bdConexao, $mes, $ano, 'SAM', null, null, null, $dia));
 
                   foreach ($transacoes as $transacao) :
 
-                    $data = traduz_data_para_br($transacao['data']);
+                    $data = translate_date_to_br($transacao['data']);
 
-                    $valorFormatado = formata_valor($transacao['valor']);
+                    $valorFormatado = format_value($transacao['valor']);
 
                     echo "<tr class='linha-extrato'>
             <td class='linha-extrato-tipo'>{$transacao['tipo']}</td>
@@ -110,13 +122,13 @@ $id_transacao = filter_input(INPUT_GET, 'id_transacao', FILTER_VALIDATE_INT);
 
             else :
 
-              $transacoes = buscar_registros($bdConexao, null, null, null, $tudo);
+              $transacoes = get_transactions($bdConexao, null, null, null, $tudo);
 
               foreach ($transacoes as $transacao) :
 
-                $data = traduz_data_para_br($transacao['data']);
+                $data = translate_date_to_br($transacao['data']);
 
-                $valorFormatado = formata_valor($transacao['valor']);
+                $valorFormatado = format_value($transacao['valor']);
 
                 echo "
                   <tr class='linha-extrato'>
