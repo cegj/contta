@@ -6,7 +6,22 @@
   }
 </script>
 
-<?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
+<?php
+
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/budget/update_budget_value.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/budget/get_budget.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/budget/sum_budget_value.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/budget/check_selected_month_budget.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/category/get_primary_categories.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/category/get_secundary_categories.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/utils/format_value.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/statement/calculate_result.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/database/there_is_no_table.php');
+
+
+
+include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
+
 $edicao = false; ?>
 
 <html>
@@ -40,7 +55,7 @@ $edicao = false; ?>
         $mesEmEdicao = $_POST['campo-mes'];
         $novoValor = $_POST['campo-valor'];
 
-        alterar_valor_orcamento($bdConexao, $catEmEdicao, $mesEmEdicao, $novoValor);
+        update_budget_value($bdConexao, $catEmEdicao, $mesEmEdicao, $novoValor);
       }
 
       ?>
@@ -180,13 +195,13 @@ $edicao = false; ?>
 
           <?php
 
-          $categoriasPrincipais = buscar_cat_principal($bdConexao);
+          $categoriasPrincipais = get_primary_categories($bdConexao);
 
           $linha = ['total' => 0, 'parcial' => 0];
 
           foreach ($categoriasPrincipais as $categoriaPrincipal) :
 
-            $dadosOrcamento = busca_orcamento($bdConexao, $categoriaPrincipal['nome_cat']);
+            $dadosOrcamento = get_budget($bdConexao, $categoriaPrincipal['nome_cat']);
 
             foreach ($dadosOrcamento as $dadoOrcamento) : ?>
 
@@ -225,7 +240,7 @@ $edicao = false; ?>
                 <?php for ($i = 0; $i < 6; $i++) : ?>
 
                   <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
-                    $previstoMesCat = somar_gasto_previsto($bdConexao, $meses[$i], $dadoOrcamento['nome_cat']);
+                    $previstoMesCat = sum_budget_value($bdConexao, $meses[$i], $dadoOrcamento['nome_cat']);
                   } else {
                     $previstoMesCat = $dadoOrcamento[$meses[$i]];
                   }
@@ -235,23 +250,23 @@ $edicao = false; ?>
                       <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
                         echo "cat-principal";
                       } ?>
-                      <?php if (verificaMesSelecionado($meses[$i], $mes)) {
+                      <?php if (check_selected_month_budget($meses[$i], $mes)) {
                         echo "mes-selecionado";
                       } ?>
                       <?php if ($previstoMesCat == 0) {
                         echo "zerado";
                       } ?>" name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" id="<?php echo $dadoOrcamento['id_cat'] . "/" . $meses[$i] ?>" <?php if ($dadoOrcamento['eh_cat_principal'] != true) : ?> ondblclick="abrirEdicao('<?php echo $dadoOrcamento['id_cat'] . '/' . $meses[$i] ?>')" <?php endif; ?>>
 
-                    <?php echo formata_valor($previstoMesCat); ?>
+                    <?php echo format_value($previstoMesCat); ?>
 
                   </td>
 
                   <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
                     $mesNum = $i + 1;
-                    $resultadoMesCat = calcula_resultado($bdConexao, $mesNum, $ano, 'SSM', null, null, $dadoOrcamento['nome_cat']);
+                    $resultadoMesCat = calculate_result($bdConexao, $mesNum, $ano, 'SSM', null, null, $dadoOrcamento['nome_cat']);
                   } else {
                     $mesNum = $i + 1;
-                    $resultadoMesCat = calcula_resultado($bdConexao, $mesNum, $ano, 'SSM', null, $dadoOrcamento['id_cat']);
+                    $resultadoMesCat = calculate_result($bdConexao, $mesNum, $ano, 'SSM', null, $dadoOrcamento['id_cat']);
                   }
                   ?>
 
@@ -259,14 +274,14 @@ $edicao = false; ?>
                         <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
                           echo "cat-principal";
                         } ?>
-                        <?php if (verificaMesSelecionado($meses[$i], $mes)) {
+                        <?php if (check_selected_month_budget($meses[$i], $mes)) {
                           echo "mes-selecionado";
                         } ?>
                         <?php if ($resultadoMesCat == 0) {
                           echo "zerado";
                         } ?>" name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>">
 
-                    <?php echo formata_valor($resultadoMesCat); ?>
+                    <?php echo format_value($resultadoMesCat); ?>
 
                   </td>
 
@@ -294,20 +309,20 @@ $edicao = false; ?>
             <?php for ($i = 0; $i < 6; $i++) : ?>
 
               <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-previsto money
-                    <?php if (verificaMesSelecionado($meses[$i], $mes)) {
+                    <?php if (check_selected_month_budget($meses[$i], $mes)) {
                       echo "mes-selecionado";
                     } ?>">
 
-                <?php echo formata_valor(somar_gasto_previsto($bdConexao, $meses[$i])) ?>
+                <?php echo format_value(sum_budget_value($bdConexao, $meses[$i])) ?>
 
               </td>
 
               <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-executado money
-                  <?php if (verificaMesSelecionado($meses[$i], $mes)) {
+                  <?php if (check_selected_month_budget($meses[$i], $mes)) {
                     echo "mes-selecionado";
                   } ?>">
 
-                <?php echo formata_valor(calcula_resultado($bdConexao, $i + 1, $ano, 'SSM')) ?>
+                <?php echo format_value(calculate_result($bdConexao, $i + 1, $ano, 'SSM')) ?>
 
               </td>
 
@@ -331,24 +346,24 @@ $edicao = false; ?>
             <?php for ($i = 0; $i < 6; $i++) : ?>
 
               <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-previsto money
-                    <?php if (verificaMesSelecionado($meses[$i], $mes)) {
+                    <?php if (check_selected_month_budget($meses[$i], $mes)) {
                       echo "mes-selecionado";
                     } ?>">
 
-                <?php $acumuladoAnoPrevisto = $acumuladoAnoPrevisto + somar_gasto_previsto($bdConexao, $meses[$i]);
+                <?php $acumuladoAnoPrevisto = $acumuladoAnoPrevisto + sum_budget_value($bdConexao, $meses[$i]);
 
-                echo formata_valor($acumuladoAnoPrevisto);
+                echo format_value($acumuladoAnoPrevisto);
 
                 ?>
 
               </td>
 
               <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-executado money
-                     <?php if (verificaMesSelecionado($meses[$i], $mes)) {
+                     <?php if (check_selected_month_budget($meses[$i], $mes)) {
                         echo "mes-selecionado";
                       } ?>">
 
-                <?php echo formata_valor(calcula_resultado($bdConexao, $i + 1, $ano, 'SAM')) ?>
+                <?php echo format_value(calculate_result($bdConexao, $i + 1, $ano, 'SAM')) ?>
 
               </td>
 
@@ -406,11 +421,11 @@ $edicao = false; ?>
 
           <?php
 
-          $categoriasPrincipais = buscar_cat_principal($bdConexao);
+          $categoriasPrincipais = get_primary_categories($bdConexao);
 
           foreach ($categoriasPrincipais as $categoriaPrincipal) :
 
-            $dadosOrcamento = busca_orcamento($bdConexao, $categoriaPrincipal['nome_cat']);
+            $dadosOrcamento = get_budget($bdConexao, $categoriaPrincipal['nome_cat']);
 
             foreach ($dadosOrcamento as $dadoOrcamento) :
           ?>
@@ -451,7 +466,7 @@ $edicao = false; ?>
 
                   <?php
                   if ($dadoOrcamento['eh_cat_principal'] == true) {
-                    $previstoMesCat = somar_gasto_previsto($bdConexao, $meses[$i], $dadoOrcamento['nome_cat']);
+                    $previstoMesCat = sum_budget_value($bdConexao, $meses[$i], $dadoOrcamento['nome_cat']);
                   } else {
                     $previstoMesCat = $dadoOrcamento[$meses[$i]];
                   }
@@ -461,24 +476,24 @@ $edicao = false; ?>
                   <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
                     echo "cat-principal";
                   } ?>
-                  <?php if (verificaMesSelecionado($meses[$i], $mes)) {
+                  <?php if (check_selected_month_budget($meses[$i], $mes)) {
                     echo "mes-selecionado";
                   } ?>
                   <?php if ($previstoMesCat == 0) {
                     echo 'zerado';
                   } ?>" name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" id="<?php echo $dadoOrcamento['id_cat'] . "/" . $meses[$i] ?>" <?php if ($dadoOrcamento['eh_cat_principal'] != true) : ?> ondblclick="abrirEdicao('<?php echo $dadoOrcamento['id_cat'] . '/' . $meses[$i] ?>')" <?php endif; ?>>
 
-                    <?php echo formata_valor($previstoMesCat); ?>
+                    <?php echo format_value($previstoMesCat); ?>
 
                   </td>
 
                   <?php
                   if ($dadoOrcamento['eh_cat_principal'] == true) {
                     $mesNum = $i + 1;
-                    $resultadoMesCat = calcula_resultado($bdConexao, $mesNum, $ano, 'SSM', null, null, $dadoOrcamento['nome_cat']);
+                    $resultadoMesCat = calculate_result($bdConexao, $mesNum, $ano, 'SSM', null, null, $dadoOrcamento['nome_cat']);
                   } else {
                     $mesNum = $i + 1;
-                    $resultadoMesCat = calcula_resultado($bdConexao, $mesNum, $ano, 'SSM', null, $dadoOrcamento['id_cat']);
+                    $resultadoMesCat = calculate_result($bdConexao, $mesNum, $ano, 'SSM', null, $dadoOrcamento['id_cat']);
                   }
                   ?>
 
@@ -486,14 +501,14 @@ $edicao = false; ?>
                    <?php if ($dadoOrcamento['eh_cat_principal'] == true) {
                       echo "cat-principal";
                     } ?>
-                   <?php if (verificaMesSelecionado($meses[$i], $mes)) {
+                   <?php if (check_selected_month_budget($meses[$i], $mes)) {
                       echo "mes-selecionado";
                     } ?>
                    <?php if ($resultadoMesCat == 0) {
                       echo "zerado";
                     } ?>" name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>">
 
-                    <?php echo formata_valor($resultadoMesCat); ?>
+                    <?php echo format_value($resultadoMesCat); ?>
 
                   </td>
 
@@ -519,20 +534,20 @@ $edicao = false; ?>
             <?php for ($i = 6; $i < 12; $i++) : ?>
 
               <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-previsto money
-                  <?php if (verificaMesSelecionado($meses[$i], $mes)) {
+                  <?php if (check_selected_month_budget($meses[$i], $mes)) {
                     echo "mes-selecionado";
                   } ?>">
 
-                <?php echo formata_valor(somar_gasto_previsto($bdConexao, $meses[$i])) ?>
+                <?php echo format_value(sum_budget_value($bdConexao, $meses[$i])) ?>
 
               </td>
 
               <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-executado money
-                  <?php if (verificaMesSelecionado($meses[$i], $mes)) {
+                  <?php if (check_selected_month_budget($meses[$i], $mes)) {
                     echo "mes-selecionado";
                   } ?>">
 
-                <?php echo formata_valor(calcula_resultado($bdConexao, $i + 1, $ano, 'SSM')) ?>
+                <?php echo format_value(calculate_result($bdConexao, $i + 1, $ano, 'SSM')) ?>
 
               </td>
 
@@ -556,22 +571,22 @@ $edicao = false; ?>
             <?php for ($i = 6; $i < 12; $i++) : ?>
 
               <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-previsto money
-                  <?php if (verificaMesSelecionado($meses[$i], $mes)) {
+                  <?php if (check_selected_month_budget($meses[$i], $mes)) {
                     echo "mes-selecionado";
                   } ?>">
 
-                <?php $acumuladoAnoPrevisto = $acumuladoAnoPrevisto + somar_gasto_previsto($bdConexao, $meses[$i]);
+                <?php $acumuladoAnoPrevisto = $acumuladoAnoPrevisto + sum_budget_value($bdConexao, $meses[$i]);
 
-                echo formata_valor($acumuladoAnoPrevisto);  ?>
+                echo format_value($acumuladoAnoPrevisto);  ?>
 
               </td>
 
               <td name="<?php echo "{$meses[$i]}-{$linha['total']}"; ?>" class="resultado-executado money
-            <?php if (verificaMesSelecionado($meses[$i], $mes)) {
+            <?php if (check_selected_month_budget($meses[$i], $mes)) {
                 echo "mes-selecionado";
               } ?>">
 
-                <?php echo formata_valor(calcula_resultado($bdConexao, $i + 1, $ano, 'SAM')) ?>
+                <?php echo format_value(calculate_result($bdConexao, $i + 1, $ano, 'SAM')) ?>
 
               </td>
 
@@ -697,7 +712,7 @@ $edicao = false; ?>
   else :
 
     //SE NÃO EXISTEM TABELAS NO BD, DIRECIONADA PARA O SETUP INICIAL (SETUP.PHP). CASO CONTRÁRIO, INCLUI A PÁGINA PARA LOGIN.
-    if (nao_existem_tabelas($bdConexao)) {
+    if (there_is_no_table($bdConexao)) {
       echo "<script language='javascript' type='text/javascript'>
       alert('É necessário fazer a configuração inicial.');window.location
       .href='/setup/setup.php';</script>";
