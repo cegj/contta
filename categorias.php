@@ -2,7 +2,7 @@
 
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/database/table_is_not_empty.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/category/get_primary_categories.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/category/get_secundary_categories.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/category/get_secondary_categories.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/category/get_especific_category.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/statement/calculate_result.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/transaction/get_transactions.php');
@@ -90,7 +90,7 @@ $id_cat = filter_input(INPUT_GET, 'id_cat', FILTER_VALIDATE_INT);
 
                     echo "</tr>";
 
-                    $categoriasSecundarias = get_secundary_categories($bdConexao, $categoriaPrincipal);
+                    $categoriasSecundarias = get_secondary_categories($bdConexao, $categoriaPrincipal);
 
                     foreach ($categoriasSecundarias as $categoriaSecundaria) :
 

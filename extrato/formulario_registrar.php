@@ -5,7 +5,7 @@ include_once($_SERVER["DOCUMENT_ROOT"] . '/app/transaction/parse_transaction_typ
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/account/get_account_types.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/account/get_accounts.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/categoty/get_primary_categories.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/categoty/get_secundary_categories.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/categoty/get_secondary_categories.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/utils/format_value.php');
 
 
@@ -184,7 +184,7 @@ if ($id_transacao) {
         foreach ($categoriasPrincipais as $categoriaPrincipal) :
           echo "<optgroup label='{$categoriaPrincipal['nome_cat']}'>";
 
-          $categoriasSecundarias = get_secundary_categories($bdConexao, $categoriaPrincipal);
+          $categoriasSecundarias = get_secondary_categories($bdConexao, $categoriaPrincipal);
 
           foreach ($categoriasSecundarias as $categoriaSecundaria) {
 

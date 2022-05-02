@@ -1,6 +1,6 @@
 <?php
 
-function get_secundary_categories($bdConexao, $categoriaPrincipal)
+function get_secondary_categories($bdConexao, $categoriaPrincipal)
 {
 
     $bdBuscar = "
