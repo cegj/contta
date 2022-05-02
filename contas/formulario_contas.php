@@ -1,7 +1,13 @@
-<?php $tiposConta = buscar_tipos_conta();
+<?php
+
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/account/get_account_types.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/account/get_especific_account.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/utils/fill_current_value.php');
+
+$tiposConta = get_account_types();
 
 if ($id_conta) {
-  $conta_em_edicao = buscar_conta_especifica($bdConexao, $id_conta);
+  $conta_em_edicao = get_especific_account($bdConexao, $id_conta);
   $conta_edicao_nome = $conta_em_edicao['conta'];
   $conta_edicao_tipo = $conta_em_edicao['tipo_conta'];
   $conta_edicao_saldo_inicial = $conta_em_edicao['saldo_inicial'];
@@ -32,7 +38,7 @@ if ($id_conta) {
   ?>
   <div>
     <label for="nomeconta">Nome da conta:</label>
-    <input type="text" id="nomeconta" name="nomeconta" <?php preencher_valor_atual('text', true, $conta_edicao_nome); ?> required />
+    <input type="text" id="nomeconta" name="nomeconta" <?php fill_current_value('text', true, $conta_edicao_nome); ?> required />
   </div>
   <div>
     <label for="tipoconta">Tipo de conta:</label>
@@ -53,11 +59,11 @@ if ($id_conta) {
   </div>
   <div>
     <label for="saldoinicial">Saldo inicial:</label>
-    <input type="text" inputmode="numeric" id="saldoinicial" name="saldoinicial" <?php preencher_valor_atual('number', true, $conta_edicao_saldo_inicial); ?> />
+    <input type="text" inputmode="numeric" id="saldoinicial" name="saldoinicial" <?php fill_current_value('number', true, $conta_edicao_saldo_inicial); ?> />
   </div>
   <div class="div-checkbox container-exibir">
     <input type="checkbox" id="exibirconta" name="exibirconta" value="1" <?php if ($id_conta) {
-                                                                            preencher_valor_atual('checkbox', true, $conta_edicao_exibir);
+                                                                            fill_current_value('checkbox', true, $conta_edicao_exibir);
                                                                           } else {
                                                                             echo "checked";
                                                                           } ?> />
