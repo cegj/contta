@@ -1,17 +1,27 @@
 <?php
+
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/transaction/get_especific_transaction.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/transaction/parse_transaction_type.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/account/get_account_types.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/account/get_accounts.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/categoty/get_primary_categories.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/categoty/get_secundary_categories.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/utils/format_value.php');
+
+
 $tiposRegistro = array('D', 'R', 'T');
 $hoje = date('Y-m-d');
 
 $id_transacao = filter_input(INPUT_GET, 'id_transacao', FILTER_VALIDATE_INT);
 
 if ($id_transacao) {
-  $transacao_especifica = buscar_reg_especifico($bdConexao, $id_transacao);
+  $transacao_especifica = get_especific_transaction($bdConexao, $id_transacao);
 
   foreach ($transacao_especifica as $transacao_em_edicao) :
     $transacao_edicao_tipo = $transacao_em_edicao['tipo'];
     $transacao_edicao_data = $transacao_em_edicao['data'];
     $transacao_edicao_descricao = $transacao_em_edicao['descricao'];
-    $transacao_edicao_valor = formata_valor(abs($transacao_em_edicao['valor']), 2, ',', '.');
+    $transacao_edicao_valor = format_value(abs($transacao_em_edicao['valor']), 2, ',', '.');
     $transacao_edicao_categoria = $transacao_em_edicao['id_categoria'];
     $transacao_edicao_conta = $transacao_em_edicao['id_conta'];
     $transacao_edicao_parcela = $transacao_em_edicao['parcela'];
@@ -52,7 +62,7 @@ if ($id_transacao) {
 
       foreach ($tiposRegistro as $tipoRegistro) {
 
-        $tipoRegistroExtenso = traduz_registro($tipoRegistro);
+        $tipoRegistroExtenso = parse_transaction_type($tipoRegistro);
 
         if ($id_transacao == true && $tipoRegistro == $transacao_edicao_tipo) {
 
@@ -104,12 +114,12 @@ if ($id_transacao) {
         <option disabled selected value>Selecione uma conta</option>
         <?php
 
-        $tiposConta = buscar_tipos_conta();
+        $tiposConta = get_account_types();
 
         for ($i = 0; $i < sizeof($tiposConta); $i++) {
           echo "<optgroup label='{$tiposConta[$i]}'>";
 
-          $contas = buscar_contas($bdConexao);
+          $contas = get_accounts($bdConexao);
 
           foreach ($contas as $conta) {
 
@@ -136,12 +146,12 @@ if ($id_transacao) {
         <option disabled selected value>Selecione uma conta</option>
         <?php
 
-        $tiposConta = buscar_tipos_conta();
+        $tiposConta = get_account_types();
 
         for ($i = 0; $i < sizeof($tiposConta); $i++) {
           echo "<optgroup label='{$tiposConta[$i]}'>";
 
-          $contas = buscar_contas($bdConexao);
+          $contas = get_accounts($bdConexao);
 
           foreach ($contas as $conta) {
 
@@ -169,12 +179,12 @@ if ($id_transacao) {
         <option disabled selected value>Selecione uma categoria</option>
 
         <?php
-        $categoriasPrincipais = buscar_cat_principal($bdConexao);
+        $categoriasPrincipais = get_primary_categories($bdConexao);
 
         foreach ($categoriasPrincipais as $categoriaPrincipal) :
           echo "<optgroup label='{$categoriaPrincipal['nome_cat']}'>";
 
-          $categoriasSecundarias = buscar_cat_secundaria($bdConexao, $categoriaPrincipal);
+          $categoriasSecundarias = get_secundary_categories($bdConexao, $categoriaPrincipal);
 
           foreach ($categoriasSecundarias as $categoriaSecundaria) {
 
