@@ -1,7 +1,11 @@
 <?php
 
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/category/get_primary_categories.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/category/get_especific_category.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/utils/fill_current_value.php');
+
 if ($id_cat) {
-  $cat_especifica = buscar_cat_especifica($bdConexao, $id_cat);
+  $cat_especifica = get_especific_category($bdConexao, $id_cat);
   $cat_edicao_nome = $cat_especifica['nome_cat'];
   $cat_edicao_cat_principal = $cat_especifica['cat_principal'];
   $cat_edicao_eh_cat_principal = $cat_especifica['eh_cat_principal'];
@@ -31,17 +35,17 @@ if ($id_cat) {
   ?>
   <div class="input-nome-categoria">
     <label for="nomecat">Nome da categoria:</label>
-    <input type="text" id="nomecat" name="nomecat" <?php preencher_valor_atual('text', $id_cat, $cat_edicao_nome); ?> />
+    <input type="text" id="nomecat" name="nomecat" <?php fill_current_value('text', $id_cat, $cat_edicao_nome); ?> />
   </div>
   <div class="input-eh-cat-categoria div-checkbox">
-    <input type="checkbox" id="ehcatprincipal" name="ehcatprincipal" onclick="habilitar();" value="1" <?php preencher_valor_atual('checkbox', $id_cat, $cat_edicao_eh_cat_principal); ?> />
+    <input type="checkbox" id="ehcatprincipal" name="ehcatprincipal" onclick="habilitar();" value="1" <?php fill_current_value('checkbox', $id_cat, $cat_edicao_eh_cat_principal); ?> />
     <label for="ehcatprincipal">É categoria principal</label>
   </div>
   <div>
     <label for="catprincipal">Categoria principal:</label>
 
     <?php
-    if (buscar_cat_principal($bdConexao) == null) :
+    if (get_primary_categories($bdConexao) == null) :
     ?>
 
       <span>não há categorias principais cadastradas.</span>
@@ -53,7 +57,7 @@ if ($id_cat) {
       <select class="select-cat-principal" name="catprincipal" id="catprincipal" onclick="habilitar();" ?>>
 
         <?php
-        $categoriasPrincipais = buscar_cat_principal($bdConexao);
+        $categoriasPrincipais = get_primary_categories($bdConexao);
 
         foreach ($categoriasPrincipais as $categoriaPrincipal) :
 
