@@ -4,8 +4,8 @@ include_once($_SERVER["DOCUMENT_ROOT"] . '/app/transaction/get_especific_transac
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/transaction/parse_transaction_type.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/account/get_account_types.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/account/get_accounts.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/categoty/get_primary_categories.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/categoty/get_secondary_categories.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/category/get_primary_categories.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/category/get_secondary_categories.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/utils/format_value.php');
 
 
