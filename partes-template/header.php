@@ -17,7 +17,7 @@
 
   <header class="nao-logado">
 
-    <img class="logo" height="70px" src="/img/Contta_logo.png" alt="Contta" />
+    <img class="logo" height="70px" src="/img/contta.png" alt="Contta" />
 
   </header>
 
