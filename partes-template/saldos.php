@@ -1,7 +1,7 @@
 <?php
 
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/statement/calculate_result.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/utils/format_value.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/statement/calculate_result.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/format_value.php');
 
 
 $url = $_SERVER['SCRIPT_NAME']; ?>

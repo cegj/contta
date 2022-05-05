@@ -8,15 +8,15 @@
 
 <?php
 
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/budget/update_budget_value.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/budget/get_budget.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/budget/sum_budget_value.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/budget/check_selected_month_budget.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/category/get_primary_categories.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/category/get_secondary_categories.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/utils/format_value.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/statement/calculate_result.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/database/there_is_no_table.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/budget/update_budget_value.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/budget/get_budget.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/budget/sum_budget_value.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/budget/check_selected_month_budget.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/category/get_primary_categories.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/category/get_secondary_categories.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/format_value.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/statement/calculate_result.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/database/there_is_no_table.php');
 
 
 

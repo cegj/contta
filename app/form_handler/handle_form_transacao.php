@@ -1,10 +1,10 @@
 <?php
 
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/transaction/get_especific_transaction.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/utils/format_value.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/utils/translate_currency_to_br.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/transaction/delete_transaction.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/transaction/create_transaction.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/transaction/get_especific_transaction.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/format_value.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/translate_currency_to_br.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/transaction/delete_transaction.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/transaction/create_transaction.php');
 
 include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
 

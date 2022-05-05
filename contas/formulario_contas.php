@@ -1,8 +1,8 @@
 <?php
 
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/account/get_account_types.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/account/get_especific_account.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/utils/fill_current_value.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/account/get_account_types.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/account/get_especific_account.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/fill_current_value.php');
 
 $tiposConta = get_account_types();
 

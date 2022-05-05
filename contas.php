@@ -1,14 +1,14 @@
 <?php
 
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/database/table_is_not_empty.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/account/get_accounts.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/account/get_especific_account.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/utils/parse_boolean.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/utils/format_value.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/utils/get_days_in_month.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/utils/translate_date_to_br.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/statement/calculate_result.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/transaction/get_transactions.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/database/table_is_not_empty.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/account/get_accounts.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/account/get_especific_account.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/parse_boolean.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/format_value.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/get_days_in_month.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/translate_date_to_br.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/statement/calculate_result.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/transaction/get_transactions.php');
 
 include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
 

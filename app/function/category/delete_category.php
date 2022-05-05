@@ -1,6 +1,6 @@
 <?php
 
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/budget/delete_category_from_budget.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/budget/delete_category_from_budget.php');
 
 function delete_category($bdConexao, $id_cat, $nome_cat, $cat_principal)
 {

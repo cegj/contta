@@ -1,6 +1,6 @@
 <?php
 
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/category/get_especific_category.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/category/get_especific_category.php');
 
 function create_account($bdConexao, $conta, $edicao, $id_conta)
 {

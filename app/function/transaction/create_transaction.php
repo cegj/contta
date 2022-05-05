@@ -1,7 +1,7 @@
 <?php
 
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/account/get_especific_account.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/category/get_especific_category.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/account/get_especific_account.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/category/get_especific_category.php');
 
 function create_transaction($bdConexao, $registro, $edicao, $id_reg, $editarParcelas = false)
 {

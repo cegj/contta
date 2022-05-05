@@ -1,9 +1,9 @@
 <?php
 
-include_once($_SERVER["DOCUMENT_ROOT"] . './app/transaction/get_transactions.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . './app/utils/translate_date_to_br.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . './app/utils/format_value.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . './app/database/there_is_no_table.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . './app/function/transaction/get_transactions.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . './app/function/utils/translate_date_to_br.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . './app/function/utils/format_value.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . './app/function/database/there_is_no_table.php');
 
 include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
 

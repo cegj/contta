@@ -1,12 +1,12 @@
 <?php
 
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/transaction/get_especific_transaction.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/transaction/parse_transaction_type.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/account/get_account_types.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/account/get_accounts.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/category/get_primary_categories.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/category/get_secondary_categories.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/utils/format_value.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/transaction/get_especific_transaction.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/transaction/parse_transaction_type.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/account/get_account_types.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/account/get_accounts.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/category/get_primary_categories.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/category/get_secondary_categories.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/format_value.php');
 
 
 $tiposRegistro = array('D', 'R', 'T');
@@ -42,7 +42,7 @@ if ($id_transacao) {
 
 <link rel="stylesheet" href="/extrato/formulario_registrar.css">
 
-<form id="form-transacao" class="form-cadastrar-editar" action="/app/model/handle_form_transacao.php" method="POST">
+<form id="form-transacao" class="form-cadastrar-editar" action="/app/form_handler/handle_form_transacao.php" method="POST">
 
   <?php if ($id_transacao) {
     echo "<input class='campo-id-edicao' type='text' name='id_transacao' value='{$id_transacao}' class='input-id' readonly>";

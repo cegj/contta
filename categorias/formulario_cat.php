@@ -1,8 +1,8 @@
 <?php
 
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/category/get_primary_categories.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/category/get_especific_category.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/utils/fill_current_value.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/category/get_primary_categories.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/category/get_especific_category.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/fill_current_value.php');
 
 if ($id_cat) {
   $cat_especifica = get_especific_category($bdConexao, $id_cat);
@@ -28,7 +28,7 @@ if ($id_cat) {
 <?php endif; ?>
 
 
-<form id="form-categoria" class="form-cadastrar-editar" action="/app/model/handle_form_categoria.php" method="POST">
+<form id="form-categoria" class="form-cadastrar-editar" action="/app/form_handler/handle_form_categoria.php" method="POST">
   <?php if ($id_cat) {
     echo "<input class='campo-id-edicao' type='text' name='id_cat' value='{$id_cat}' class='input-id' readonly>";
   }
