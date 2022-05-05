@@ -1,5 +1,13 @@
-<?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
-include($_SERVER["DOCUMENT_ROOT"] . '/setup/funcoes_setup.php');
+<?php 
+
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/database/there_is_no_table.php');
+
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/setup/create_tables.php');
+
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/setup/create_initial_categories.php');
+
+include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
+
 ?>
 
 <html>
@@ -21,9 +29,9 @@ include($_SERVER["DOCUMENT_ROOT"] . '/setup/funcoes_setup.php');
     $senha = MD5($_POST['senha']);
     $cod_autorizacao = MD5($_POST['cod_autorizacao']);
 
-    if (nao_existem_tabelas($bdConexao)) :
+    if (there_is_no_table($bdConexao)) :
 
-      setup_criar_tabelas($bdConexao);
+      create_tables($bdConexao);
 
       if (isset($_POST['preConfigurarCats']) && $_POST['preConfigurarCats'] == true) {
         $preConfigurarCats = true;
@@ -31,7 +39,7 @@ include($_SERVER["DOCUMENT_ROOT"] . '/setup/funcoes_setup.php');
         $preConfigurarCats = false;
       }
 
-      setup_cadastrar_cats_iniciais($bdConexao, $preConfigurarCats);
+      create_initial_categories($bdConexao, $preConfigurarCats);
 
     else : ?>
 

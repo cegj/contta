@@ -1,5 +1,9 @@
-<?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php'); 
-      include ($_SERVER["DOCUMENT_ROOT"].'/setup/funcoes_setup.php');
+<?php 
+
+  include_once($_SERVER["DOCUMENT_ROOT"] . '../app/function/database/there_is_no_table.php');
+
+  include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php'); 
+
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +19,7 @@
 <body>
 <?php
 
-if (nao_existem_tabelas($bdConexao)) :
+if (there_is_no_table($bdConexao)) :
 
 ?>
 
@@ -27,7 +31,7 @@ if (nao_existem_tabelas($bdConexao)) :
     <div class="box login">
       <p class="text-apresentacao"><strong>Configurar usuário administrador</strong><br/>
       Antes de começar, precisamos fazer uma rápida configuração inicial, que consiste na criação do seu nome de usuário, senha e código de autorização para o cadastro posterior de novos usuários.</p>
-      <form method="POST" action="setup_validar.php">
+      <form method="POST" action="/app/form_handler/handle_setup.php">
         <label>Usuário:</label><input type="text" name="usuario" id="usuario">
         <label>Senha:</label><input type="password" name="senha" id="senha">
         <label>Código de autorização:</label><input type="password" name="cod_autorizacao" id="cod_autorizacao">
