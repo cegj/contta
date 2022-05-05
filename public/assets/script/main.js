@@ -1,5 +1,9 @@
 import Page from './page.js';
 import balanceBox from './balanceBox.js';
+import ContextOpenClose from './contextOpenClose.js';
+import MonthSelector from './monthSelector.js';
+
+
 
 //Fetch and load page
 
@@ -22,3 +26,15 @@ acumulatedBalance.setColor();
 const generalBalance = new balanceBox('#saldo-geral', '#valor-geral');
 
 generalBalance.setColor();
+
+//Set monthSelector as open-close box
+
+const monthSelector = new MonthSelector('#opcao-selecionar-mes-ano','#container-seletor-mes-ano', "#for-mes-ano", "#seletor-mes", "#seletor-campo-mes", ".botao-seletor-mes");
+
+monthSelector.initMonthSelector();
+
+//Set transactionForm as open-close box
+
+const transactionForm = new ContextOpenClose('#opcao-registrar-transacao','#caixa-registrar-modal');
+
+transactionForm.initContextOpenClose();
