@@ -42,7 +42,7 @@ if ($id_transacao) {
 
 <link rel="stylesheet" href="/extrato/formulario_registrar.css">
 
-<form id="form-transacao" class="form-cadastrar-editar" action="/app/form_handler/handle_form_transacao.php" method="POST">
+<form id="form-transacao" class="form-cadastrar-editar" action="/app/form_handler/handle_transaction.php" method="POST">
 
   <?php if ($id_transacao) {
     echo "<input class='campo-id-edicao' type='text' name='id_transacao' value='{$id_transacao}' class='input-id' readonly>";
