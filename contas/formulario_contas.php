@@ -31,7 +31,7 @@ if ($id_conta) {
   </div>
 <?php endif; ?>
 
-<form id="form-contas" class="form-cadastrar-editar" action="app\model\handle_account.php" method="POST">
+<form id="form-contas" class="form-cadastrar-editar" action="app\form_handler\handle_account.php" method="POST">
   <?php if ($id_conta) {
     echo "<input class='campo-id-edicao' type='text' name='id_conta' value='{$_GET['id_conta']}' class='input-id' readonly>";
   }
