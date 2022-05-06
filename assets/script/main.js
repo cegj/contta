@@ -4,10 +4,13 @@ import MonthSelector from './monthSelector.js';
 import ContextOpenClose from './contextOpenClose.js';
 import TransactionFormDealer from './transactionForm.js';
 import ShowHide from './showHide.js';
+import { params } from './params.js';
 
-//Fetch and load page
+let actualPage = params.p;
 
-const actualPage = window.location.pathname.split('/').pop().replace(".html", "");
+if (!actualPage){
+    actualPage = 'index';
+}
 
 const page = new Page(actualPage, 'body');
 
