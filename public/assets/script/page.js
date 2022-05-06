@@ -5,7 +5,7 @@ export default class Page{
     }
 
     async fetchPage(){
-        const response = await fetch(`/${this.pageName}.php`);
+        const response = await fetch(`/app/pages/${this.pageName}.php`);
         const page = await response.text();
         return page;    
     }

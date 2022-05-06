@@ -1,10 +1,9 @@
 import ContextOpenClose from "./contextOpenClose.js";
 
 export default class MonthSelector extends ContextOpenClose{
-    constructor(btn, box, form, monthSelector, monthField, monthSelectorBtns){
+    constructor(btn, box, form, monthField, monthSelectorBtns){
         super(btn, box);
         this.form = document.querySelector(form);
-        this.monthSelector = document.querySelector(monthSelector);
         this.monthField = document.querySelector(monthField);
         this.monthSelectorBtns = document.querySelectorAll(monthSelectorBtns);
     }

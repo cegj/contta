@@ -14,7 +14,7 @@
 
   <main class="main-login">
     <div class="box login">
-      <form method="POST" action="handle_login.php">
+      <form method="POST" action="/handle_login.php">
         <label>Usuário:</label><input type="text" name="login" id="login">
         <label>Senha:</label><input type="password" name="senha" id="senha">
         <div class="container-botao-entrar">

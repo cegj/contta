@@ -5,9 +5,6 @@ export default class ContextOpenClose{
     }
 
     openClose(customBtn, customBox) {
-
-        console.log('openclose')
-
         const btn = document.querySelector(customBtn) || this.btn;
         const box = document.querySelector(customBox) || this.box;
 
