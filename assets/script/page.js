@@ -1,13 +1,17 @@
-export default class Page{
-    constructor(pageName, target){
-        this.pageName = pageName;
-        this.target = document.querySelector(target)
-    }
+import runMainScript from "./main.js";
 
-    async fetchPage(){
-        const response = await fetch(`/app/pages/${this.pageName}.php`);
+export default class Page{
+
+    async fetchPage(pageName){
+        const response = await fetch(`/app/pages/${pageName}.php`);
         const page = await response.text();
         return page;    
+    }
+
+    setBrowserPrevNext(){
+        window.addEventListener('popstate', () => {
+            this.load(window.location.search);
+          });          
     }
 
     setPtPageName(pageName){
@@ -31,8 +35,17 @@ export default class Page{
         return this.ptPageName;
     }
 
-    async load(){
-        this.target.innerHTML = await this.fetchPage();
-        document.title = "Contta / " + this.setPtPageName(this.pageName);
+    async load(paramString, target){
+        this.paramString = (paramString !== "") ? paramString : '?p=board';
+        this.params = new URLSearchParams(this.paramString);
+        this.pageName = this.params.get('p');
+        this.target = target ? target : '#main-content';
+        this.target = document.querySelector(this.target);
+
+        this.target.innerHTML = `<div class="loading"><img src="/assets/img/load.gif" alt="Carregando..." /></div>`
+        this.target.innerHTML = await this.fetchPage(this.pageName);
+        document.title = "Contta | " + this.setPtPageName(this.pageName);
+        runMainScript();
+        return this;
     }
 }

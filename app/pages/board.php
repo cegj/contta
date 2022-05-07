@@ -15,7 +15,6 @@ include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
 <head>
   <!-- Informações do head -->
   <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/head.php'); ?>
-  <link rel="stylesheet" href="/contas/contas.css">
 </head>
 
 <body>

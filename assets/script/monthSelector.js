@@ -9,7 +9,6 @@ export default class MonthSelector extends ContextOpenClose{
     }
 
     setMonthAndGo(event){
-        console.log(event.target.value);
         this.monthField.value = event.target.value;
         this.monthField.innerText = event.target.value;
         this.form.submit();

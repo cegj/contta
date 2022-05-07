@@ -8,8 +8,6 @@ export default class ShowHide{
 
         let elements = customClass ? document.querySelector(customClass) : this.classToHide;
 
-        console.log(elements);
-
         elements.forEach((element) => {
             element.style.opacity = 1;
         })
@@ -18,8 +16,6 @@ export default class ShowHide{
         hide(customClass){
 
             let elements = customClass ? document.querySelector(customClass) : this.classToHide;
-    
-            console.log(elements);
     
             elements.forEach((element) => {
                 element.style.opacity = 0;
