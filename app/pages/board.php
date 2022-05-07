@@ -72,10 +72,6 @@ include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
 
     </main>
 
-    <!-- Rodapé -->
-    <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/footer.php') ?>
-
-
     <?php //Caso o usuário não esteja logado, exibe o conteúdo abaixo em vez da página. 
   else :
 
@@ -109,7 +105,3 @@ include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
     <?php endif; ?>
 
   <?php endif; ?>
-
-</body>
-
-</html>
