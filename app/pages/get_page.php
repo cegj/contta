@@ -1,0 +1,60 @@
+<?php
+
+session_start();
+
+include($_SERVER["DOCUMENT_ROOT"] . '/app/bd.php');
+
+date_default_timezone_set('America/Sao_Paulo');
+
+include($_SERVER["DOCUMENT_ROOT"] . '/app/month_year.php');
+
+$url = $_SERVER['REQUEST_URI'];
+
+$urlPath = parse_url($url, PHP_URL_PATH);
+
+$urlQuery = parse_url($url, PHP_URL_QUERY);
+
+if (isset($_SESSION['username'])) {
+    $login_cookie = $_SESSION['username'];
+}
+
+$tudo = false;
+
+if (isset($login_cookie)) :
+
+    include($_SERVER["DOCUMENT_ROOT"] . '/app/pages/' . $_GET['p'] . '.php');
+
+else :
+
+    if (there_is_no_table($bdConexao)) : ?>
+
+        <script language='javascript' type='text/javascript'>
+            Swal.fire({
+                imageUrl: '/img/Contta_logo.png',
+                imageWidth: 300,
+                title: 'Seja bem vindo!',
+                text: 'Para começar a utilizar o Contta, é necessário fazer uma rápida configuração inicial. Vamos começar?',
+                // icon: 'info',
+                confirmButtonText: 'Iniciar configuração',
+                didClose: function() {
+                    window.location.href = '/setup/setup.php';
+                }
+            });
+        </script>
+
+    <?php
+
+        die();
+
+    else : ?>
+
+        <div class='alerta-necessidade-login'>
+            <p>Para continuar, é necessário fazer login.</p>
+        </div>
+
+<?php
+
+        include $_SERVER["DOCUMENT_ROOT"] . '/app/pages/login.php';
+
+    endif;
+endif;

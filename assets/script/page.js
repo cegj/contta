@@ -3,7 +3,7 @@ import runMainScript from "./main.js";
 export default class Page{
 
     async fetchPage(pageName){
-        const response = await fetch(`/app/pages/${pageName}.php`);
+        const response = await fetch(`/app/pages/get_page.php/?p=${pageName}`);
         const page = await response.text();
         return page;    
     }
