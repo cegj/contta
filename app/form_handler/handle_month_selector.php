@@ -1,8 +1,10 @@
 <?php
 
+session_start();
+
 $origin = $_SERVER['HTTP_REFERER'];
 
-setcookie('month', $_POST['mes'], 0, '/');
-setcookie('year', $_POST['ano'], 0, '/');
+$_SESSION['month'] = $_POST['mes'];
+$_SESSION['year'] = $_POST['ano'];
 
 header('Location: ' . $origin);
