@@ -1,12 +1,11 @@
 <?php
 
 session_start();
-
-include($_SERVER["DOCUMENT_ROOT"] . '/app/bd.php');
-
 date_default_timezone_set('America/Sao_Paulo');
 
-include($_SERVER["DOCUMENT_ROOT"] . '/app/month_year.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/bd.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/month_year.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/database/there_is_no_table.php');
 
 $url = $_SERVER['REQUEST_URI'];
 
