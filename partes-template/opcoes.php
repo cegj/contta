@@ -46,7 +46,7 @@
 </div>
 
 <!-- Formulário de mês e ano -->
-<?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/mes_ano.php'); ?>
+<?php include($_SERVER["DOCUMENT_ROOT"] . '/app/pages/modules/month_selector.php'); ?>
 
 <!-- Formulário de registrar transação -->
 

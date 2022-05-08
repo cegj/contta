@@ -2,7 +2,16 @@ export default class ContextOpenClose{
     constructor(btn, box){
         this.btn = document.querySelector(btn);
         this.box = document.querySelector(box);
+        this.body = document.querySelector('body');
     }
+
+    closeByEsc(event){
+          if (event.key === 'Escape') {
+          console.log(this);
+          this.box.classList.remove('exibir');
+          this.btn.classList.remove('botao-sair');
+          this.btn.classList.add('botao-mes-ano');
+      }};
 
     openClose(customBtn, customBox) {
         const btn = document.querySelector(customBtn) || this.btn;
@@ -21,7 +30,8 @@ export default class ContextOpenClose{
       }
 
     addEvent(){
-      this.btn.addEventListener('click', () => this.openClose());     
+      this.btn.addEventListener('click', () => this.openClose());  
+      this.body.addEventListener('keydown', (event) => this.closeByEsc(event));   
     }
 
     bindEventsContextOpenClose(){

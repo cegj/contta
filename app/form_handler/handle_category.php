@@ -5,7 +5,6 @@ include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/category/get_especific_c
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/category/create_category.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/category/delete_category.php');
 
-
 include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
 
 $origin = $_SERVER['HTTP_REFERER'];
@@ -55,3 +54,6 @@ if (isset($_POST['apagar']) && $_POST['apagar'] == true) {
     header('Location: ' . $origin);
     die();
 }
+
+header('Location: ' . $origin);
+die();

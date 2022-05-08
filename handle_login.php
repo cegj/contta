@@ -41,7 +41,7 @@ include($_SERVER["DOCUMENT_ROOT"] . '/setup/funcoes_setup.php');
     else :
 
       setcookie("login", $login);
-      header("Location:index.php");
+      header("Location:index.html");
 
     endif;
   }
