@@ -100,7 +100,7 @@ include_once($_SERVER["DOCUMENT_ROOT"] . './app/function/database/there_is_no_ta
         <p>Para continuar, é necessário fazer login.</p>
       </div>
 
-      <?php include $_SERVER["DOCUMENT_ROOT"] . '/login.php'; ?>
+      <?php include $_SERVER["DOCUMENT_ROOT"] . '/app/pages/login.php'; ?>
 
     <?php endif; ?>
 

@@ -10,8 +10,6 @@ include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/format_value.php')
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/get_days_in_month.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/translate_date_to_br.php');
 
-
-
 include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
 
 $configuracao = filter_input(INPUT_GET, 'configurar', FILTER_VALIDATE_BOOL);

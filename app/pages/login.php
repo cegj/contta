@@ -1,20 +1,6 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <!-- Informações do head -->
-  <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/head.php'); ?>
-  <link rel="stylesheet" href="/setup/login-cadastro-setup.css">
-</head>
-
-<body>
-
-  <!-- Cabeçalho (barra superior) -->
-  <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/header.php') ?>
-
   <main class="main-login">
     <div class="box login">
-      <form method="POST" action="/handle_login.php">
+      <form method="POST" action="/app/form_handler/handle_login.php">
         <label>Usuário:</label><input type="text" name="login" id="login">
         <label>Senha:</label><input type="password" name="senha" id="senha">
         <div class="container-botao-entrar">
@@ -24,6 +10,3 @@
       </form>
     </div>
   </main>
-</body>
-
-</html>
