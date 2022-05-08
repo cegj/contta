@@ -10,189 +10,170 @@ include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/format_value.php')
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/get_days_in_month.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/translate_date_to_br.php');
 
-include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
-
 $configuracao = filter_input(INPUT_GET, 'configurar', FILTER_VALIDATE_BOOL);
 
 $id_cat = filter_input(INPUT_GET, 'id_cat', FILTER_VALIDATE_INT);
 
 ?>
 
-<!DOCTYPE html>
-<html>
+<main class="container-principal">
 
-<head>
-  <!-- Informações do head -->
-  <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/head.php'); ?>
-  <link rel="stylesheet" href="/categorias/categorias.css">
-</head>
+  <!-- Caixas de saldos -->
+  <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/saldos.php'); ?>
 
-<body>
+  <!-- Opções -->
+  <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/opcoes.php'); ?>
 
-  <?php //Valida se o usuário está logado
-  if (isset($login_cookie)) : ?>
+  <div class="container duas-colunas <?php if ($configuracao == false) : ?>com-extrato<?php else : ?>sem-bg<?php endif; ?>">
 
-    <!-- Cabeçalho (barra superior) -->
-    <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/header.php') ?>
-
-    <main class="container-principal">
-
-      <!-- Caixas de saldos -->
-      <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/saldos.php'); ?>
-
-      <!-- Opções -->
-      <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/opcoes.php'); ?>
-
-      <div class="container duas-colunas <?php if ($configuracao == false) : ?>com-extrato<?php else : ?>sem-bg<?php endif; ?>">
-
-        <?php if (table_is_not_empty($bdConexao, 'categorias')) :
-        ?>
-          <div class="item-grid-principal">
+    <?php if (table_is_not_empty($bdConexao, 'categorias')) :
+    ?>
+      <div class="item-grid-principal">
+        <?php if ($configuracao == true) : ?>
+          <h2 class="titulo-container">Configuração das categorias</h2>
+        <?php else : ?>
+          <h2 class="titulo-container">Categorias</h2>
+        <?php endif; ?>
+        <div class="container-tabela">
+          <table class="tabela">
             <?php if ($configuracao == true) : ?>
-              <h2 class="titulo-container">Configuração das categorias</h2>
-            <?php else : ?>
-              <h2 class="titulo-container">Categorias</h2>
-            <?php endif; ?>
-            <div class="container-tabela">
-              <table class="tabela">
-                <?php if ($configuracao == true) : ?>
-                  <thead>
-                    <tr>
-                      <th>Título da categoria</th>
-                      <th class="coluna-acoes">Ações</th>
-                    </tr>
-                  </thead>
-                <?php endif; ?>
+              <thead>
                 <tr>
-                  <?php
-                  $categoriasPrincipais = get_primary_categories($bdConexao);
+                  <th>Título da categoria</th>
+                  <th class="coluna-acoes">Ações</th>
+                </tr>
+              </thead>
+            <?php endif; ?>
+            <tr>
+              <?php
+              $categoriasPrincipais = get_primary_categories($bdConexao);
 
-                  foreach ($categoriasPrincipais as $categoriaPrincipal) :
+              foreach ($categoriasPrincipais as $categoriaPrincipal) :
 
-                    $saldoMesCatPrincipal = format_value(calculate_result($bdConexao, $mes, $ano, 'SSM', null, null,  $categoriaPrincipal['nome_cat']));
+                $saldoMesCatPrincipal = format_value(calculate_result($bdConexao, $mes, $ano, 'SSM', null, null,  $categoriaPrincipal['nome_cat']));
 
 
-                    echo "<tr class='cat-principal'>
+                echo "<tr class='cat-principal'>
           <td class='td-cat-principal'>{$categoriaPrincipal['nome_cat']}</td>";
 
-                    if ($configuracao != true) :
+                if ($configuracao != true) :
 
-                      echo "<td>R$ <span class='money'>{$saldoMesCatPrincipal}</span></td>";
+                  echo "<td>R$ <span class='money'>{$saldoMesCatPrincipal}</span></td>";
 
-                    endif;
+                endif;
 
-                    if ($configuracao == true) {
-                      echo "
+                if ($configuracao == true) {
+                  echo "
                       <td class='coluna-acoes'><a href='?{$urlQuery}&id_cat={$categoriaPrincipal['id_cat']}#header'><img class='icone-editar' alt='Editar' src='/img/icos/editar.svg'/></a>";
-                    }
+                }
 
-                    echo "</tr>";
+                echo "</tr>";
 
-                    $categoriasSecundarias = get_secondary_categories($bdConexao, $categoriaPrincipal);
+                $categoriasSecundarias = get_secondary_categories($bdConexao, $categoriaPrincipal);
 
-                    foreach ($categoriasSecundarias as $categoriaSecundaria) :
+                foreach ($categoriasSecundarias as $categoriaSecundaria) :
 
-                      $saldoMes = format_value(calculate_result($bdConexao, $mes, $ano, 'SSM', null, $categoriaSecundaria['id_cat']));
+                  $saldoMes = format_value(calculate_result($bdConexao, $mes, $ano, 'SSM', null, $categoriaSecundaria['id_cat']));
 
-                      echo "<tr>";
+                  echo "<tr>";
 
-                      if ($configuracao != true) :
-                        echo "<td class='td-cat-secundaria'><a class='filtrar' href='categorias.php?categoria={$categoriaSecundaria['id_cat']}'>{$categoriaSecundaria['nome_cat']} <img class='icone-filtrar' src='/img/icos/filtrar.svg'></a></td>";
+                  if ($configuracao != true) :
+                    echo "<td class='td-cat-secundaria'><a class='filtrar' href='categorias.php?categoria={$categoriaSecundaria['id_cat']}'>{$categoriaSecundaria['nome_cat']} <img class='icone-filtrar' src='/img/icos/filtrar.svg'></a></td>";
 
-                      else :
-                        echo "<td class='td-cat-secundaria'>{$categoriaSecundaria['nome_cat']}</td>";
+                  else :
+                    echo "<td class='td-cat-secundaria'>{$categoriaSecundaria['nome_cat']}</td>";
 
-                      endif;
+                  endif;
 
-                      if ($configuracao != true) :
+                  if ($configuracao != true) :
 
-                        echo "<td>R$ <span class='money'>{$saldoMes}</span></td>";
+                    echo "<td>R$ <span class='money'>{$saldoMes}</span></td>";
 
-                      endif;
+                  endif;
 
-                      if ($configuracao == true) {
-                        echo "
+                  if ($configuracao == true) {
+                    echo "
                             <td class='coluna-acoes'><a href='?{$urlQuery}&id_cat={$categoriaSecundaria['id_cat']}#header'><img class='icone-editar' alt='Editar' src='img/icos/editar.svg'/></a></td>";
-                      }
-                      echo "</tr>";
-                    endforeach;
+                  }
+                  echo "</tr>";
+                endforeach;
 
-                  endforeach;
-                  ?>
-                </tr>
-              </table>
-            </div>
-          <?php else : ?>
-            <div>
-              <p class="info-tabela-vazia">Não há categorias cadastradas</p>
-              <div>
-              <?php endif; ?>
-              </div>
+              endforeach;
+              ?>
+            </tr>
+          </table>
+        </div>
+      <?php else : ?>
+        <div>
+          <p class="info-tabela-vazia">Não há categorias cadastradas</p>
+          <div>
+          <?php endif; ?>
+          </div>
 
-              <?php if ($configuracao != true) : ?>
-                <div class="item-grid-secundario">
-                  <?php if (isset($_GET['categoria']) && isset($mes) && isset($ano)) : ?>
+          <?php if ($configuracao != true) : ?>
+            <div class="item-grid-secundario">
+              <?php if (isset($_GET['categoria']) && isset($mes) && isset($ano)) : ?>
 
-                    <?php $catSelecionada = get_especific_category($bdConexao, $_GET['categoria']);
+                <?php $catSelecionada = get_especific_category($bdConexao, $_GET['categoria']);
 
-                    ?>
-                    <div class="container-titulo-subtitulo">
-                      <h2 class="titulo-container titulo-extrato com-subtitulo">Extrato da categoria</h2>
-                      <h3 class="subtitulo-container"><?php echo $catSelecionada['nome_cat'] ?></h3>
-                    </div>
-                    <div class="container-tabela">
-                      <table class="tabela extrato compacto tabela-responsiva">
-                        <thead>
-                          <tr>
-                            <th>Tipo</th>
-                            <th>Data</th>
-                            <th>Descrição</th>
-                            <th>Valor</th>
-                            <th>Conta</th>
-                            <th>Editar</th>
-                          </tr>
-                        </thead>
-                        <tr>
-                          <?php
+                ?>
+                <div class="container-titulo-subtitulo">
+                  <h2 class="titulo-container titulo-extrato com-subtitulo">Extrato da categoria</h2>
+                  <h3 class="subtitulo-container"><?php echo $catSelecionada['nome_cat'] ?></h3>
+                </div>
+                <div class="container-tabela">
+                  <table class="tabela extrato compacto tabela-responsiva">
+                    <thead>
+                      <tr>
+                        <th>Tipo</th>
+                        <th>Data</th>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                        <th>Conta</th>
+                        <th>Editar</th>
+                      </tr>
+                    </thead>
+                    <tr>
+                      <?php
 
-                          $totalDiasMes = get_days_in_month($mes, $ano);
+                      $totalDiasMes = get_days_in_month($mes, $ano);
 
-                          for ($dia = 1; $dia <= $totalDiasMes; $dia++) :
+                      for ($dia = 1; $dia <= $totalDiasMes; $dia++) :
 
-                            $registros = get_transactions($bdConexao, $dia, $mes, $ano, null, null, $_GET['categoria']);
+                        $registros = get_transactions($bdConexao, $dia, $mes, $ano, null, null, $_GET['categoria']);
 
-                            if (sizeof($registros) != 0) :
+                        if (sizeof($registros) != 0) :
 
-                              $resultadoDia = format_value(calculate_result($bdConexao, $mes, $ano, 'SSM', null, $_GET['categoria'], null, $dia));
+                          $resultadoDia = format_value(calculate_result($bdConexao, $mes, $ano, 'SSM', null, $_GET['categoria'], null, $dia));
 
-                              $resultadoDiaAcumuladoMes = format_value(calculate_result($bdConexao, $mes, $ano, 'SAM', null, $_GET['categoria'], null, $dia, true));
+                          $resultadoDiaAcumuladoMes = format_value(calculate_result($bdConexao, $mes, $ano, 'SAM', null, $_GET['categoria'], null, $dia, true));
 
-                              $resultadoDiaAcumuladoTotal = format_value(calculate_result($bdConexao, $mes, $ano, 'SAM', null, $_GET['categoria'], null, $dia));
+                          $resultadoDiaAcumuladoTotal = format_value(calculate_result($bdConexao, $mes, $ano, 'SAM', null, $_GET['categoria'], null, $dia));
 
-                              foreach ($registros as $registro) :
+                          foreach ($registros as $registro) :
 
-                                $data = translate_date_to_br($registro['data']);
-                                $valor = format_value($registro['valor']);
+                            $data = translate_date_to_br($registro['data']);
+                            $valor = format_value($registro['valor']);
 
-                                echo "<tr class='linha-extrato'>
+                            echo "<tr class='linha-extrato'>
           <td class='linha-extrato-tipo'>{$registro['tipo']}</td>
           <td>{$data}</td>
           <td>{$registro['descricao']}</td>
           <td class='linha-extrato-valor'>R$ <span class='money'>{$valor}</span></td>
           <td>{$registro['conta']}</td>
           <td class='coluna-acoes'>";
-                                if ($registro['tipo'] == 'T' && $registro['valor'] > 0 or $registro['tipo'] == 'SI') {
-                                  echo "";
-                                } else {
-                                  echo "<a href='?{$urlQuery}&id_transacao={$registro['id']}'><img class='icone-editar' alt='Editar' src='/img/icos/editar.svg'/></a>";
-                                  echo "
+                            if ($registro['tipo'] == 'T' && $registro['valor'] > 0 or $registro['tipo'] == 'SI') {
+                              echo "";
+                            } else {
+                              echo "<a href='?{$urlQuery}&id_transacao={$registro['id']}'><img class='icone-editar' alt='Editar' src='/img/icos/editar.svg'/></a>";
+                              echo "
               </td>
               </tr>
           ";
-                                }
-                              endforeach;
+                            }
+                          endforeach;
 
-                              echo "
+                          echo "
               <tr>
                 <td class='linha-resultado-dia-extrato' colspan='6' class='linha-resultado-dia-extrato'>
                   <span class='valor-resultado-dia-extrato'>Resultado diário: R$ <span class='money'>{$resultadoDia}</span></span>
@@ -202,43 +183,30 @@ $id_cat = filter_input(INPUT_GET, 'id_cat', FILTER_VALIDATE_INT);
               </tr>
               ";
 
-                            endif;
+                        endif;
 
-                          endfor;
+                      endfor;
 
-                          ?>
-                        </tr>
-                      </table>
-                    </div>
-                  <?php else : ?>
-                    <p class="instrucao">Escolha uma categoria para ver o seu histórico no mês selecionado.</p>
-                  <?php endif; ?>
+                      ?>
+                    </tr>
+                  </table>
                 </div>
+              <?php else : ?>
+                <p class="instrucao">Escolha uma categoria para ver o seu histórico no mês selecionado.</p>
               <?php endif; ?>
+            </div>
+          <?php endif; ?>
 
-              <?php if ($configuracao == true) : ?>
-                <div class="box formulario" id="box-formulario">
-                  <!-- Formulário -->
-                  <?php include('categorias/formulario_cat.php') ?>
-                </div>
-              <?php endif; ?>
+          <?php if ($configuracao == true) : ?>
+            <div class="box formulario" id="box-formulario">
+              <!-- Formulário -->
+              <?php include('categorias/formulario_cat.php') ?>
+            </div>
+          <?php endif; ?>
 
-    </main>
+</main>
 
-  <?php //Caso o usuário não esteja logado, exibe o conteúdo abaixo em vez da página. 
-  else :
-    echo "
-      <div class='alerta-necessidade-login'>
-      <p>Para continuar, é necessário fazer login.</p>
-      </div>
-      ";
-    include 'login.php';
-  ?>
-  <?php endif ?>
-
-  <script src="/categorias/categorias.js" defer></script>
-
-</body>
+<script src="/categorias/categorias.js" defer></script>
 
 <script type="text/javascript">
   //Pinta o valor conforme o tipo de transação no extrato
@@ -256,5 +224,3 @@ $id_cat = filter_input(INPUT_GET, 'id_cat', FILTER_VALIDATE_INT);
     }
   }
 </script>
-
-</html>
