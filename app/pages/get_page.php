@@ -9,6 +9,8 @@ include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/database/there_is_no_tab
 
 $url = $_SERVER['REQUEST_URI'];
 
+$pageName = filter_input(INPUT_GET, 'p', FILTER_SANITIZE_URL);
+
 $urlPath = parse_url($url, PHP_URL_PATH);
 
 $urlQuery = parse_url($url, PHP_URL_QUERY);

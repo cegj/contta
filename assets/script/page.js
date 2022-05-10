@@ -2,8 +2,8 @@ import runMainScript from "./main.js";
 
 export default class Page{
 
-    async fetchPage(pageName){
-        const response = await fetch(`/app/pages/get_page.php/?p=${pageName}`);
+    async fetchPage(paramString){
+        const response = await fetch(`/app/pages/get_page.php/${paramString}`);
         const page = await response.text();
         return page;    
     }
@@ -39,13 +39,14 @@ export default class Page{
         this.paramString = (paramString !== "") ? paramString : '?p=board';
         this.params = new URLSearchParams(this.paramString);
         this.pageName = this.params.get('p');
+
         this.target = target ? target : '#main-content';
         this.target = document.querySelector(this.target);
 
         this.footer = document.querySelector('footer');
         this.footer.style.display = "none";
         this.target.innerHTML = `<div class="loading"><img src="/assets/img/load.gif" alt="Carregando..." /></div>`
-        this.target.innerHTML = await this.fetchPage(this.pageName);
+        this.target.innerHTML = await this.fetchPage(this.paramString);
         document.title = "Contta | " + this.setPtPageName(this.pageName);
         this.footer.style.display = "block";
         runMainScript();

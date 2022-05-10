@@ -78,7 +78,7 @@ $id_cat = filter_input(INPUT_GET, 'id_cat', FILTER_VALIDATE_INT);
                   echo "<tr>";
 
                   if ($configuracao != true) :
-                    echo "<td class='td-cat-secundaria'><a class='filtrar' href='categorias.php?categoria={$categoriaSecundaria['id_cat']}'>{$categoriaSecundaria['nome_cat']} <img class='icone-filtrar' src='/img/icos/filtrar.svg'></a></td>";
+                    echo "<td class='td-cat-secundaria'><a class='filtrar' href='?p={$pageName}&categoria={$categoriaSecundaria['id_cat']}'>{$categoriaSecundaria['nome_cat']} <img class='icone-filtrar' src='/img/icos/filtrar.svg'></a></td>";
 
                   else :
                     echo "<td class='td-cat-secundaria'>{$categoriaSecundaria['nome_cat']}</td>";
