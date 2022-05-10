@@ -5,7 +5,7 @@
 
 .container-exibir::before {
   content:"";
-  background-image: url(/img/icos/mostrar.svg);
+  background-image: url(/assets/img/ico/mostrar.svg);
   background-repeat: no-repeat;
   background-size:contain;
   background-position: center;

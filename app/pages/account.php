@@ -49,7 +49,7 @@ $id_conta = filter_input(INPUT_GET, 'id_conta', FILTER_VALIDATE_INT);
               }
 
               echo "<tr>
-                        <td class='td-conta'><a class='filtrar' href='?p={$pageName}&conta={$conta['id_con']}'>{$conta['conta']} <img class='icone-filtrar' src='/img/icos/filtrar.svg'></a></td>
+                        <td class='td-conta'><a class='filtrar' href='?p={$pageName}&conta={$conta['id_con']}'>{$conta['conta']} <img class='icone-filtrar' src='/assets/img/ico/filter.svg'></a></td>
                         <td class='td-conta'>R$ <span class='money'>{$saldoAcumulado}</span></td>
                         </tr>
                         ";
@@ -121,7 +121,7 @@ $id_conta = filter_input(INPUT_GET, 'id_conta', FILTER_VALIDATE_INT);
                     if ($registro['tipo'] == 'T' && $registro['valor'] > 0 or $registro['tipo'] == 'SI') {
                       echo "";
                     } else {
-                      echo "<a href='?{$urlQuery}&id_transacao={$registro['id']}'><img class='icone-editar' alt='Editar' src='/img/icos/editar.svg'/></a>";
+                      echo "<a href='?{$urlQuery}&id_transacao={$registro['id']}'><img class='icone-editar' alt='Editar' src='/assets/img/ico/edit.svg'/></a>";
                       echo "
             </td>
             </tr>
@@ -181,7 +181,7 @@ $id_conta = filter_input(INPUT_GET, 'id_conta', FILTER_VALIDATE_INT);
                       <td class='td-conta'>{$conta['tipo_conta']}</td>
                       <td class='td-conta'>R$ <span class='money'>{$saldoInicialFormatado}</span></td>
                       <td class='td-conta'>{$exibir}</td>
-                      <td class='coluna-acoes'><a href='?{$urlQuery}&id_conta={$conta['id_con']}#header'><img class='icone-editar' alt='Editar' src='/img/icos/editar.svg'/></a>
+                      <td class='coluna-acoes'><a href='?{$urlQuery}&id_conta={$conta['id_con']}#header'><img class='icone-editar' alt='Editar' src='/assets/img/ico/edit.svg'/></a>
                       </tr>
                       ";
 

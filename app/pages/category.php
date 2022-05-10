@@ -64,7 +64,7 @@ $id_cat = filter_input(INPUT_GET, 'id_cat', FILTER_VALIDATE_INT);
 
                 if ($configuracao == true) {
                   echo "
-                      <td class='coluna-acoes'><a href='?{$urlQuery}&id_cat={$categoriaPrincipal['id_cat']}#header'><img class='icone-editar' alt='Editar' src='/img/icos/editar.svg'/></a>";
+                      <td class='coluna-acoes'><a href='?{$urlQuery}&id_cat={$categoriaPrincipal['id_cat']}#header'><img class='icone-editar' alt='Editar' src='/assets/img/ico/edit.svg'/></a>";
                 }
 
                 echo "</tr>";
@@ -78,7 +78,7 @@ $id_cat = filter_input(INPUT_GET, 'id_cat', FILTER_VALIDATE_INT);
                   echo "<tr>";
 
                   if ($configuracao != true) :
-                    echo "<td class='td-cat-secundaria'><a class='filtrar' href='?p={$pageName}&categoria={$categoriaSecundaria['id_cat']}'>{$categoriaSecundaria['nome_cat']} <img class='icone-filtrar' src='/img/icos/filtrar.svg'></a></td>";
+                    echo "<td class='td-cat-secundaria'><a class='filtrar' href='?p={$pageName}&categoria={$categoriaSecundaria['id_cat']}'>{$categoriaSecundaria['nome_cat']} <img class='icone-filtrar' src='/assets/img/ico/filter.svg'></a></td>";
 
                   else :
                     echo "<td class='td-cat-secundaria'>{$categoriaSecundaria['nome_cat']}</td>";
@@ -93,7 +93,7 @@ $id_cat = filter_input(INPUT_GET, 'id_cat', FILTER_VALIDATE_INT);
 
                   if ($configuracao == true) {
                     echo "
-                            <td class='coluna-acoes'><a href='?{$urlQuery}&id_cat={$categoriaSecundaria['id_cat']}#header'><img class='icone-editar' alt='Editar' src='img/icos/editar.svg'/></a></td>";
+                            <td class='coluna-acoes'><a href='?{$urlQuery}&id_cat={$categoriaSecundaria['id_cat']}#header'><img class='icone-editar' alt='Editar' src='/assets/img/ico/edit.svg'/></a></td>";
                   }
                   echo "</tr>";
                 endforeach;
@@ -165,7 +165,7 @@ $id_cat = filter_input(INPUT_GET, 'id_cat', FILTER_VALIDATE_INT);
                             if ($registro['tipo'] == 'T' && $registro['valor'] > 0 or $registro['tipo'] == 'SI') {
                               echo "";
                             } else {
-                              echo "<a href='?{$urlQuery}&id_transacao={$registro['id']}'><img class='icone-editar' alt='Editar' src='/img/icos/editar.svg'/></a>";
+                              echo "<a href='?{$urlQuery}&id_transacao={$registro['id']}'><img class='icone-editar' alt='Editar' src='/assets/img/ico/edit.svg'/></a>";
                               echo "
               </td>
               </tr>

@@ -114,7 +114,7 @@ $edicao = false;
         <input style='display: none' type="number" id="campo-categoria" name="campo-categoria" readonly />
         <input style='display: none' type="text" id="campo-mes" name="campo-mes" readonly />
         <input style='display: none' type="text" id="campo-valor-executado" readonly />
-        <img src="/img/icos/editar.svg" class="icone-editar" alt="Editar">
+        <img src="/assets/img/ico/edit.svg" class="icone-editar" alt="Editar">
         <label for="valor">Alterar o valor de <span id="nome-cat-label"></span> no mês de <span id=mes-label></span>:</label>
         <input type="number" step="any" id="campo-valor" name="campo-valor" />
         <button class="botao-acao-secundario confirmar" type="submit">Alterar</button>
@@ -204,7 +204,7 @@ $edicao = false;
 
                 <?php if ($dadoOrcamento['eh_cat_principal'] == false) : ?>
 
-                  <img class='icone-filtrar' src='/img/icos/filtrar.svg'>
+                  <img class='icone-filtrar' src='/assets/img/ico/filter.svg'>
 
                 </a>
 
@@ -428,7 +428,7 @@ $edicao = false;
 
                 <?php if ($dadoOrcamento['eh_cat_principal'] == false) : ?>
 
-                  <img class='icone-filtrar' src='/img/icos/filtrar.svg'>
+                  <img class='icone-filtrar' src='/assets/img/ico/filter.svg'>
 
                 </a>
 

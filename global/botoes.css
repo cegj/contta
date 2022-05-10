@@ -78,7 +78,7 @@
 
 .botao-mes-ano::before {
   content: "";
-  background-image: url(/img/icos/calendario.svg);
+  background-image: url(/assets/img/ico/calendar.svg);
   background-repeat: no-repeat;
   background-size: contain;
   display: inline-block;
@@ -91,7 +91,7 @@
 
 .botao-configurar::before {
   content: "";
-  background-image: url(/img/icos/configuracoes.svg);
+  background-image: url(/assets/img/ico/settings.svg);
   background-repeat: no-repeat;
   background-size: contain;
   display: inline-block;
@@ -104,7 +104,7 @@
 
 .botao-sair::before {
   content: "";
-  background-image: url(/img/icos/cancelar.svg) !important;
+  background-image: url(/assets/img/ico/cancel.svg) !important;
   background-repeat: no-repeat;
   background-size: contain;
   display: inline-block;
@@ -117,7 +117,7 @@
 
 .botao-extrato::before {
   content: "";
-  background-image: url(/img/icos/extrato.svg);
+  background-image: url(/assets/img/ico/statement.svg);
   background-repeat: no-repeat;
   background-size: contain;
   display: inline-block;
@@ -130,7 +130,7 @@
 
 .botao-extrato-outlined::before {
   content: "";
-  background-image: url(/img/icos/extrato_outl.svg);
+  background-image: url(/assets/img/ico/statement_outl.svg);
   background-repeat: no-repeat;
   background-size: contain;
   display: inline-block;
@@ -143,7 +143,7 @@
 
 .botao-exportar::before {
   content: "";
-  background-image: url(/img/icos/exportar.svg);
+  background-image: url(/assets/img/ico/export.svg);
   background-repeat: no-repeat;
   background-size: contain;
   display: inline-block;
@@ -156,7 +156,7 @@
 
 .botao-novo::before {
   content: "";
-  background-image: url(/img/icos/novo.svg);
+  background-image: url(/assets/img/ico/new.svg);
   background-repeat: no-repeat;
   background-size: contain;
   display: inline-block;
@@ -169,7 +169,7 @@
 
 .botao-exibir-ocultar::before {
   content: "";
-  background-image: url(/img/icos/ocultar.svg);
+  background-image: url(/assets/img/ico/hide.svg);
   background-repeat: no-repeat;
   background-size: contain;
   display: inline-block;
@@ -182,7 +182,7 @@
 
 .botao-exibir-ocultar.active::before {
   content: "";
-  background-image: url(/img/icos/exibir.svg);
+  background-image: url(/assets/img/ico/show.svg);
   background-repeat: no-repeat;
   background-size: contain;
   display: inline-block;
@@ -195,7 +195,7 @@
 
 .botao-final-pagina::before {
   content: "";
-  background-image: url(/img/icos/descer.svg);
+  background-image: url(/assets/img/ico/go-down.svg);
   background-repeat: no-repeat;
   background-size: contain;
   display: inline-block;

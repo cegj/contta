@@ -69,13 +69,13 @@ $id_transacao = filter_input(INPUT_GET, 'id_transacao', FILTER_VALIDATE_INT);
             <td>{$data}</td>
             <td>{$transacao['descricao']}</td>
             <td class='linha-extrato-valor'>R$ <span class='money'>{$valorFormatado}</span></td>
-            <td><a class='filtrar' href='/categorias.php?categoria={$transacao['id_categoria']}'>{$transacao['nome_cat']} <img class='icone-filtrar' src='/img/icos/filtrar.svg'></a></td>
-            <td><a class='filtrar' href='/contas.php?conta={$transacao['id_con']}'>{$transacao['conta']} <img class='icone-filtrar' src='/img/icos/filtrar.svg'></a></td>
+            <td><a class='filtrar' href='/categorias.php?categoria={$transacao['id_categoria']}'>{$transacao['nome_cat']} <img class='icone-filtrar' src='/assets/img/ico/filter.svg'></a></td>
+            <td><a class='filtrar' href='/contas.php?conta={$transacao['id_con']}'>{$transacao['conta']} <img class='icone-filtrar' src='/assets/img/ico/filter.svg'></a></td>
             <td class='coluna-acoes'>";
                 if ($transacao['tipo'] == 'T' && $transacao['valor'] > 0 or $transacao['tipo'] == 'SI') {
                   echo "";
                 } else {
-                  echo "<a href='?p={$pageName}&id_transacao={$transacao['id']}'><img class='icone-editar' alt='Editar' src='img/icos/editar.svg'/></a>";
+                  echo "<a href='?p={$pageName}&id_transacao={$transacao['id']}'><img class='icone-editar' alt='Editar' src='/assets/img/ico/edit.svg'/></a>";
                   echo "
                 </td>
                 </tr>
@@ -118,7 +118,7 @@ $id_transacao = filter_input(INPUT_GET, 'id_transacao', FILTER_VALIDATE_INT);
             if ($transacao['tipo'] == 'T' && $transacao['valor'] > 0 or $transacao['tipo'] == 'SI') {
               echo "";
             } else {
-              echo "<a href='extrato.php?id_transacao={$transacao['id']}&editar=true#caixa-registrar'><img class='icone-editar' alt='Editar' src='img/icone-editar.svg'/></a>";
+              echo "<a href='extrato.php?id_transacao={$transacao['id']}&editar=true#caixa-registrar'><img class='icone-editar' alt='Editar' src='/assets/img/ico/edit.svg'/></a>";
               echo "
                           </td>
                   </tr>
