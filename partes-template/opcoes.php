@@ -51,7 +51,7 @@
 <!-- Formulário de registrar transação -->
 
 <div id="caixa-registrar-modal" class="box formulario box-opcoes hide" <?php if (filter_input(INPUT_GET, 'id_transacao', FILTER_VALIDATE_INT)) : ?> style="display: block !important" <?php endif; ?>>
-  <?php include($_SERVER["DOCUMENT_ROOT"] . '/extrato/formulario_registrar.php'); ?>
+  <?php include($_SERVER["DOCUMENT_ROOT"] . '/app/pages/modules/form_transaction.php'); ?>
 
 </div>
 </div>
