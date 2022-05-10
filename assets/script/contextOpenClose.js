@@ -14,8 +14,9 @@ export default class ContextOpenClose{
       }};
 
     openClose(customBtn, customBox) {
-        const btn = document.querySelector(customBtn) || this.btn;
-        const box = document.querySelector(customBox) || this.box;
+      console.log(customBtn)
+        const btn = customBtn ? document.querySelector(customBtn) : this.btn;
+        const box = customBox ? document.querySelector(customBox) : this.box;
 
         btn.classList.toggle('botao-sair');
         box.classList.toggle('show');

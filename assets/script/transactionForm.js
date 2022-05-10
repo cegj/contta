@@ -14,7 +14,7 @@ export default function TransactionFormDealer(transactionForm, choiceConta, choi
 }
 
 if (checkIdTransacaoNaUrl()){
-    transactionForm.openClose(btnRegistrarTransacao, boxRegistrarTransacao)
+    transactionForm.openClose('#'+btnRegistrarTransacao.id, '#'+boxRegistrarTransacao.id)
 }
 
 function handleFixarFormTransacao() {

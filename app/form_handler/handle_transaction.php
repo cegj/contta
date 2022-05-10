@@ -1,12 +1,11 @@
 <?php
 
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/bd.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/transaction/get_especific_transaction.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/format_value.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/translate_currency_to_br.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/transaction/delete_transaction.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/transaction/create_transaction.php');
-
-include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
 
 $origin = $_SERVER['HTTP_REFERER'];
 $origin = explode('?', $origin)[0];

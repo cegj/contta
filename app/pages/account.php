@@ -49,7 +49,7 @@ $id_conta = filter_input(INPUT_GET, 'id_conta', FILTER_VALIDATE_INT);
               }
 
               echo "<tr>
-                        <td class='td-conta'><a class='filtrar' href='?conta={$conta['id_con']}'>{$conta['conta']} <img class='icone-filtrar' src='/img/icos/filtrar.svg'></a></td>
+                        <td class='td-conta'><a class='filtrar' href='?p={$pageName}&conta={$conta['id_con']}'>{$conta['conta']} <img class='icone-filtrar' src='/img/icos/filtrar.svg'></a></td>
                         <td class='td-conta'>R$ <span class='money'>{$saldoAcumulado}</span></td>
                         </tr>
                         ";
