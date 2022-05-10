@@ -6,7 +6,6 @@ include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/account/delete_account.p
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/account/create_account.php');
 
 $origin = $_SERVER['HTTP_REFERER'];
-$origin = explode('?', $origin)[0] . '?configurar=true';
 
 $id_conta = filter_input(INPUT_POST, 'id_conta', FILTER_VALIDATE_INT);
 

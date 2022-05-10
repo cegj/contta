@@ -200,7 +200,7 @@ $id_cat = filter_input(INPUT_GET, 'id_cat', FILTER_VALIDATE_INT);
           <?php if ($configuracao == true) : ?>
             <div class="box formulario" id="box-formulario">
               <!-- Formulário -->
-              <?php include('categorias/formulario_cat.php') ?>
+              <?php include($_SERVER["DOCUMENT_ROOT"] . '/categorias/formulario_cat.php') ?>
             </div>
           <?php endif; ?>
 

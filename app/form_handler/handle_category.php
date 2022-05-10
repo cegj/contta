@@ -7,7 +7,6 @@ include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/category/create_category
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/category/delete_category.php');
 
 $origin = $_SERVER['HTTP_REFERER'];
-$origin = explode('?', $origin)[0] . '?configurar=true';
 
 $id_cat = filter_input(INPUT_POST, 'id_cat', FILTER_VALIDATE_INT);
 
