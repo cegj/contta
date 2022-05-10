@@ -201,7 +201,7 @@ $id_conta = filter_input(INPUT_GET, 'id_conta', FILTER_VALIDATE_INT);
 
 <div class="box formulario" id="box-formulario">
   <!-- Formulário -->
-  <?php include($_SERVER["DOCUMENT_ROOT"] . '/contas/formulario_contas.php') ?>
+  <?php include($_SERVER["DOCUMENT_ROOT"] . '/app/pages/modules/form_account.php') ?>
 </div>
 
 </div>
