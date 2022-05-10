@@ -1,12 +1,9 @@
 <?php 
 
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/bd.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/database/there_is_no_table.php');
-
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/setup/create_tables.php');
-
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/setup/create_initial_categories.php');
-
-include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
 
 ?>
 

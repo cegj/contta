@@ -1,11 +1,10 @@
 <?php
 
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/bd.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/category/get_primary_categories.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/category/get_especific_category.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/category/create_category.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/category/delete_category.php');
-
-include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php');
 
 $origin = $_SERVER['HTTP_REFERER'];
 $origin = explode('?', $origin)[0] . '?configurar=true';
