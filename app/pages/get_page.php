@@ -21,6 +21,10 @@ if (isset($_SESSION['username'])) {
 
 $tudo = false;
 
+$configuracao = false;
+
+// Includes main content
+
 if (isset($login_cookie)) :
 
     include($_SERVER["DOCUMENT_ROOT"] . '/app/pages/' . $_GET['p'] . '.php');

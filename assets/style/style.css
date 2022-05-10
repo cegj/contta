@@ -1,12 +1,6 @@
-html {
-    position: relative;
-    height: 100%;
-}
-
 body {
-    position: relative;
-    height: 100%;
     background-color: #fafafa;
+    min-height: 100%;
 }
 
 .loading {
@@ -21,13 +15,12 @@ body {
 }
 
 footer {
-    display: block;
-    position: relative;
-    bottom: 0;
     height: 100px;
     width: 100%;
     background-color: #f1f1f1;
     padding: 10px 0px;
+    position: absolute;
+    bottom: 0px;
 }
   
 .menu-secundario {

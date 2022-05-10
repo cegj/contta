@@ -26,20 +26,20 @@
   <?php endif; ?>
 
   <!-- Opções de categorias -->
-  <?php if ($urlPath == '/categorias.php') :  ?>
+  <?php if ($pageName == 'category') :  ?>
     <?php if ($configuracao == false) : ?>
-      <a class="botao-opcoes botao-configurar" href="?configurar=true">Configurar categorias</a>
+      <a class="botao-opcoes botao-configurar" href='?p=<?php echo $pageName ?>&configurar=true'>Configurar categorias</a>
     <?php else : ?>
-      <a class="botao-opcoes botao-sair" href="/categorias.php">Sair das configurações</a>
+      <a class="botao-opcoes botao-sair" href="?p=<?php echo $pageName ?>">Sair das configurações</a>
     <?php endif; ?>
   <?php endif; ?>
 
   <!-- Opções de contas -->
-  <?php if ($urlPath == '/contas.php') :  ?>
+  <?php if ($pageName == 'account') :  ?>
     <?php if ($configuracao == false) : ?>
-      <a class="botao-opcoes botao-configurar" href="?configurar=true">Configurar contas</a>
+      <a class="botao-opcoes botao-configurar" href="?p=<?php echo $pageName ?>&configurar=true">Configurar contas</a>
     <?php else : ?>
-      <a class="botao-opcoes botao-sair" href="/contas.php">Sair das configurações</a>
+      <a class="botao-opcoes botao-sair" href="?p=<?php echo $pageName ?>">Sair das configurações</a>
     <?php endif; ?>
   <?php endif; ?>
 
