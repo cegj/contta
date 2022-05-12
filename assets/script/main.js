@@ -4,7 +4,7 @@ import MonthSelector from './monthSelector.js';
 import ContextOpenClose from './contextOpenClose.js';
 import TransactionFormDealer from './transactionForm.js';
 import ShowHide from './showHide.js';
-import NavMenu from './navMenu.js';
+import Link from './link.js';
 
 export default async function runMainScript(){
 
@@ -65,6 +65,12 @@ export default async function runMainScript(){
 
     showHideMoneyBtn.initShowHide();
 
+    page.setBrowserPrevNext();
+
+    const Links = new Link();
+
+    Links.initLink();
+
 }
 
 //Initial page load
@@ -72,9 +78,3 @@ export default async function runMainScript(){
 const page = new Page();
 
 await page.load(window.location.search, '#main-content');
-
-page.setBrowserPrevNext();
-
-const navMenu = new NavMenu('.menu-principal');
-
-navMenu.initNavMenu();
