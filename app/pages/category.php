@@ -64,7 +64,7 @@ $id_cat = filter_input(INPUT_GET, 'id_cat', FILTER_VALIDATE_INT);
 
                 if ($configuracao == true) {
                   echo "
-                      <td class='coluna-acoes'><a href='?{$urlQuery}&id_cat={$categoriaPrincipal['id_cat']}#header'><img class='icone-editar' alt='Editar' src='/assets/img/ico/edit.svg'/></a>";
+                      <td class='coluna-acoes'><a class='edit-btn' href='?{$urlQuery}&id_cat={$categoriaPrincipal['id_cat']}'></a>";
                 }
 
                 echo "</tr>";
@@ -93,7 +93,7 @@ $id_cat = filter_input(INPUT_GET, 'id_cat', FILTER_VALIDATE_INT);
 
                   if ($configuracao == true) {
                     echo "
-                            <td class='coluna-acoes'><a href='?{$urlQuery}&id_cat={$categoriaSecundaria['id_cat']}#header'><img class='icone-editar' alt='Editar' src='/assets/img/ico/edit.svg'/></a></td>";
+                            <td class='coluna-acoes'><a class='edit-btn' href='?{$urlQuery}&id_cat={$categoriaSecundaria['id_cat']}'></a></td>";
                   }
                   echo "</tr>";
                 endforeach;
@@ -165,7 +165,7 @@ $id_cat = filter_input(INPUT_GET, 'id_cat', FILTER_VALIDATE_INT);
                             if ($registro['tipo'] == 'T' && $registro['valor'] > 0 or $registro['tipo'] == 'SI') {
                               echo "";
                             } else {
-                              echo "<a href='?{$urlQuery}&id_transacao={$registro['id']}'><img class='icone-editar' alt='Editar' src='/assets/img/ico/edit.svg'/></a>";
+                              echo "<a class='edit-btn' href='?{$urlQuery}&id_transacao={$registro['id']}'></a>";
                               echo "
               </td>
               </tr>

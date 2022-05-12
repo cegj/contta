@@ -121,7 +121,7 @@ $id_conta = filter_input(INPUT_GET, 'id_conta', FILTER_VALIDATE_INT);
                     if ($registro['tipo'] == 'T' && $registro['valor'] > 0 or $registro['tipo'] == 'SI') {
                       echo "";
                     } else {
-                      echo "<a href='?{$urlQuery}&id_transacao={$registro['id']}'><img class='icone-editar' alt='Editar' src='/assets/img/ico/edit.svg'/></a>";
+                      echo "<a class='edit-btn' href='?{$urlQuery}&id_transacao={$registro['id']}'></a>";
                       echo "
             </td>
             </tr>
@@ -181,7 +181,7 @@ $id_conta = filter_input(INPUT_GET, 'id_conta', FILTER_VALIDATE_INT);
                       <td class='td-conta'>{$conta['tipo_conta']}</td>
                       <td class='td-conta'>R$ <span class='money'>{$saldoInicialFormatado}</span></td>
                       <td class='td-conta'>{$exibir}</td>
-                      <td class='coluna-acoes'><a href='?{$urlQuery}&id_conta={$conta['id_con']}#header'><img class='icone-editar' alt='Editar' src='/assets/img/ico/edit.svg'/></a>
+                      <td class='coluna-acoes'><a class='edit-btn' href='?{$urlQuery}&id_conta={$conta['id_con']}#header'></a>
                       </tr>
                       ";
 

@@ -75,7 +75,7 @@ $id_transacao = filter_input(INPUT_GET, 'id_transacao', FILTER_VALIDATE_INT);
                 if ($transacao['tipo'] == 'T' && $transacao['valor'] > 0 or $transacao['tipo'] == 'SI') {
                   echo "";
                 } else {
-                  echo "<a href='?p={$pageName}&id_transacao={$transacao['id']}'><img class='icone-editar' alt='Editar' src='/assets/img/ico/edit.svg'/></a>";
+                  echo "<a class='edit-btn' href='?p={$pageName}&id_transacao={$transacao['id']}'></a>";
                   echo "
                 </td>
                 </tr>
