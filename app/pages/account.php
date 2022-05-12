@@ -18,11 +18,11 @@ $id_conta = filter_input(INPUT_GET, 'id_conta', FILTER_VALIDATE_INT);
 
 <main class="container-principal">
 
-  <!-- Caixas de saldos -->
-  <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/saldos.php'); ?>
+  <!-- Balance boxes -->
+  <?php include($_SERVER["DOCUMENT_ROOT"] . '/app/pages/modules/balance-boxes.php'); ?>
 
-  <!-- Opções -->
-  <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/opcoes.php'); ?>
+  <!-- Context options bar -->
+  <?php include($_SERVER["DOCUMENT_ROOT"] . '/app/pages/modules/context-options.php'); ?>
 
   <div class="container duas-colunas <?php if ($configuracao == false) : ?>com-extrato<?php else : ?>sem-bg<?php endif; ?>">
 

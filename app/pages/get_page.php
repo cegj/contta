@@ -27,7 +27,9 @@ $configuracao = false;
 
 if (isset($login_cookie)) :
 
+    include($_SERVER["DOCUMENT_ROOT"] . '/app/pages/modules/logged-header.php');
     include($_SERVER["DOCUMENT_ROOT"] . '/app/pages/' . $_GET['p'] . '.php');
+    include($_SERVER["DOCUMENT_ROOT"] . '/app/pages/modules/footer.php');
 
 else :
 

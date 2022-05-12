@@ -9,7 +9,7 @@
   
   .container-edicao-parcelas::before {
     content: "";
-    background-image: url(/img/icos/seguinte.svg);
+    background-image: url(/assets/img/ico/next.svg);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
@@ -52,8 +52,8 @@
   }
   
   :root {
-    --pin: url(/img/icos/pin.svg);
-    --pin-setted: url(/img/icos/pin_setted.svg);
+    --pin: url(/assets/img/ico/pin.svg);
+    --pin-setted: url(/assets/img/ico/pin_setted.svg);
   }
   
   .checkbox-fixar::before {
