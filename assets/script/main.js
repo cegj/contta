@@ -65,8 +65,6 @@ export default async function runMainScript(){
 
     showHideMoneyBtn.initShowHide();
 
-    page.setBrowserPrevNext();
-
     const Links = new Link();
 
     Links.initLink();

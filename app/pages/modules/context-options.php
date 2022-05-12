@@ -13,7 +13,7 @@
   <a class="botao-opcoes botao-final-pagina" id="opcao-fim-pagina" href="#footer">Descer tudo</a>
 
   <!-- Opções de Extrato -->
-  <?php if ($urlPath == '/extrato.php') :  ?>
+  <?php if ($pageName == 'statement') :  ?>
     <?php if ($tudo == true) : ?>
       <a class="botao-opcoes botao-extrato-outlined" href="?">Ver extrato mensal</a>
     <?php else : ?>

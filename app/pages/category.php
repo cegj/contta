@@ -9,10 +9,14 @@ include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/transaction/get_transact
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/format_value.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/get_days_in_month.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/translate_date_to_br.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/remove_url_param.php');
 
 $configuracao = filter_input(INPUT_GET, 'configurar', FILTER_VALIDATE_BOOL);
 
 $id_cat = filter_input(INPUT_GET, 'id_cat', FILTER_VALIDATE_INT);
+
+$queryWithoutIdTransaction = remove_url_param($url, 'id_transacao');
+$queryWithoutIdCat = remove_url_param($url, 'id_cat');
 
 ?>
 
@@ -64,7 +68,7 @@ $id_cat = filter_input(INPUT_GET, 'id_cat', FILTER_VALIDATE_INT);
 
                 if ($configuracao == true) {
                   echo "
-                      <td class='coluna-acoes'><a class='edit-btn' href='?{$urlQuery}&id_cat={$categoriaPrincipal['id_cat']}'></a>";
+                      <td class='coluna-acoes'><a class='edit-btn' href='?{$queryWithoutIdCat}&id_cat={$categoriaPrincipal['id_cat']}'></a>";
                 }
 
                 echo "</tr>";
@@ -93,7 +97,7 @@ $id_cat = filter_input(INPUT_GET, 'id_cat', FILTER_VALIDATE_INT);
 
                   if ($configuracao == true) {
                     echo "
-                            <td class='coluna-acoes'><a class='edit-btn' href='?{$urlQuery}&id_cat={$categoriaSecundaria['id_cat']}'></a></td>";
+                            <td class='coluna-acoes'><a class='edit-btn' href='?{$queryWithoutIdCat}&id_cat={$categoriaSecundaria['id_cat']}'></a></td>";
                   }
                   echo "</tr>";
                 endforeach;
@@ -165,7 +169,7 @@ $id_cat = filter_input(INPUT_GET, 'id_cat', FILTER_VALIDATE_INT);
                             if ($registro['tipo'] == 'T' && $registro['valor'] > 0 or $registro['tipo'] == 'SI') {
                               echo "";
                             } else {
-                              echo "<a class='edit-btn' href='?{$urlQuery}&id_transacao={$registro['id']}'></a>";
+                              echo "<a class='edit-btn' href='?{$queryWithoutIdTransaction}&id_transacao={$registro['id']}'></a>";
                               echo "
               </td>
               </tr>

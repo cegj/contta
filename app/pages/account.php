@@ -9,10 +9,14 @@ include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/get_days_in_month.
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/translate_date_to_br.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/statement/calculate_result.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/transaction/get_transactions.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/remove_url_param.php');
 
 $configuracao = filter_input(INPUT_GET, 'configurar', FILTER_VALIDATE_BOOL);
 
 $id_conta = filter_input(INPUT_GET, 'id_conta', FILTER_VALIDATE_INT);
+
+$queryWithoutIdTransacao = remove_url_param($url, 'id_transacao');
+$queryWithoutIdConta = remove_url_param($url, 'id_conta');
 
 ?>
 
@@ -121,7 +125,7 @@ $id_conta = filter_input(INPUT_GET, 'id_conta', FILTER_VALIDATE_INT);
                     if ($registro['tipo'] == 'T' && $registro['valor'] > 0 or $registro['tipo'] == 'SI') {
                       echo "";
                     } else {
-                      echo "<a class='edit-btn' href='?{$urlQuery}&id_transacao={$registro['id']}'></a>";
+                      echo "<a class='edit-btn' href='?{$queryWithoutIdTransacao}&id_transacao={$registro['id']}'></a>";
                       echo "
             </td>
             </tr>
@@ -181,7 +185,7 @@ $id_conta = filter_input(INPUT_GET, 'id_conta', FILTER_VALIDATE_INT);
                       <td class='td-conta'>{$conta['tipo_conta']}</td>
                       <td class='td-conta'>R$ <span class='money'>{$saldoInicialFormatado}</span></td>
                       <td class='td-conta'>{$exibir}</td>
-                      <td class='coluna-acoes'><a class='edit-btn' href='?{$urlQuery}&id_conta={$conta['id_con']}'></a>
+                      <td class='coluna-acoes'><a class='edit-btn' href='?{$queryWithoutIdConta}&id_conta={$conta['id_con']}'></a>
                       </tr>
                       ";
 

@@ -3,9 +3,6 @@ import Page from "./page.js";
 export default class Link{
     constructor(){
         this.hrefs = Array.from(document.querySelectorAll('[href]'));
-        console.log(this.hrefs)
-
-
         this.hrefs.forEach((href, i) => {
             const hrefValue = href.getAttribute('href'); 
             if (hrefValue.includes('#')){
@@ -13,8 +10,6 @@ export default class Link{
                 this.hrefs.splice(i, 1)
             }
         })
-
-        console.log(this.hrefs)
     }
 
     handleClick(event){

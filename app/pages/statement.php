@@ -6,10 +6,13 @@ include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/transaction/get_transact
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/format_value.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/statement/calculate_result.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/translate_date_to_br.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/remove_url_param.php');
 
 $edicao = filter_input(INPUT_GET, 'editar', FILTER_VALIDATE_BOOL);
 
 $id_transacao = filter_input(INPUT_GET, 'id_transacao', FILTER_VALIDATE_INT);
+
+$queryWithoutIdTransaction = remove_url_param($url, 'id_transacao');
 
 ?>
 <main class="container-principal">
@@ -75,7 +78,7 @@ $id_transacao = filter_input(INPUT_GET, 'id_transacao', FILTER_VALIDATE_INT);
                 if ($transacao['tipo'] == 'T' && $transacao['valor'] > 0 or $transacao['tipo'] == 'SI') {
                   echo "";
                 } else {
-                  echo "<a class='edit-btn' href='?p={$pageName}&id_transacao={$transacao['id']}'></a>";
+                  echo "<a class='edit-btn' href='?{$queryWithoutIdTransaction}&id_transacao={$transacao['id']}'></a>";
                   echo "
                 </td>
                 </tr>

@@ -17,20 +17,22 @@ export default class Page{
     setPtPageName(pageName){
         switch(pageName){
             case 'board':
-                this.ptPageName = 'Painel';
+                this.ptPageName = '| Painel';
                 break;
             case 'statement':
-                this.ptPageName = 'Extrato';
+                this.ptPageName = '| Extrato';
                 break;        
             case 'budget':
-                this.ptPageName = 'Orçamento';
+                this.ptPageName = '| Orçamento';
                 break;
             case 'category':
-                this.ptPageName = 'Categorias';
+                this.ptPageName = '| Categorias';
                 break;
             case 'account':
-                this.ptPageName = 'Contas';
+                this.ptPageName = '| Contas';
                 break;
+            default:
+                this.ptPageName = "";
         }
         return this.ptPageName;
     }
@@ -45,7 +47,8 @@ export default class Page{
 
         // this.target.innerHTML = `<div class="loading"><img src="/assets/img/load.gif" alt="Carregando..." /></div>`
         this.target.innerHTML = await this.fetchPage(this.paramString);
-        document.title = "Contta | " + this.setPtPageName(this.pageName);
+        document.title = "Contta " + this.setPtPageName(this.pageName);
+        this.setBrowserPrevNext();
         runMainScript();
         return this;
     }
