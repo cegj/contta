@@ -43,7 +43,7 @@ export default class Page{
         this.target = target ? target : '#main-content';
         this.target = document.querySelector(this.target);
 
-        this.target.innerHTML = `<div class="loading"><img src="/assets/img/load.gif" alt="Carregando..." /></div>`
+        // this.target.innerHTML = `<div class="loading"><img src="/assets/img/load.gif" alt="Carregando..." /></div>`
         this.target.innerHTML = await this.fetchPage(this.paramString);
         document.title = "Contta | " + this.setPtPageName(this.pageName);
         runMainScript();
