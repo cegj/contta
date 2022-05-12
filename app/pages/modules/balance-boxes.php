@@ -11,13 +11,13 @@ $url = $_SERVER['SCRIPT_NAME']; ?>
     <h3>Saldo do mês</h3>
     <span class="valor">
 
-      <?php if ($url == '/contas.php' && isset($_GET['conta'])) :
+      <?php if ($pageName == 'account' && isset($_GET['conta'])) :
         $resultadoMes = calculate_result($bdConexao, $mes, $ano, 'SSM', $_GET['conta']);
         echo "R$ <span id='valor-mes' class='money'>" . $resultadoMes . "</span>";
 
       else :
 
-        if ($url == '/categorias.php' && isset($_GET['categoria'])) :
+        if ($pageName == 'category' && isset($_GET['categoria'])) :
           $resultadoMes = calculate_result($bdConexao, $mes, $ano, 'SSM', null, $_GET['categoria']);
           echo "R$ <span id='valor-mes' class='money'>" . $resultadoMes . "</span>";
 
@@ -37,13 +37,13 @@ $url = $_SERVER['SCRIPT_NAME']; ?>
     <h3>Saldo acumulado até o mês</h3>
     <span class="valor">
 
-      <?php if ($url == '/contas.php' && isset($_GET['conta'])) :
+      <?php if ($pageName == 'account' && isset($_GET['conta'])) :
         $resultadoAcumulado = calculate_result($bdConexao, $mes, $ano, 'SAM', $_GET['conta']);
         echo "R$ <span id='valor-acumulado' class='money'>" . $resultadoAcumulado . "</span>";
 
       else :
 
-        if ($url == '/categorias.php' && isset($_GET['categoria'])) :
+        if ($pageName == 'category' && isset($_GET['categoria'])) :
           $resultadoAcumulado = calculate_result($bdConexao, $mes, $ano, 'SAM', null, $_GET['categoria']);
           echo "R$ <span id='valor-acumulado' class='money'>" . $resultadoAcumulado . "</span>";
 
@@ -62,13 +62,13 @@ $url = $_SERVER['SCRIPT_NAME']; ?>
     <h3>Saldo acumulado geral</h3>
     <span class="valor">
 
-      <?php if ($url == '/contas.php' && isset($_GET['conta'])) :
+      <?php if ($pageName == 'account' && isset($_GET['conta'])) :
         $resultadoGeral = calculate_result($bdConexao, $mes, $ano, 'SAG', $_GET['conta']);
         echo "R$ <span id='valor-geral' class='money'>" . $resultadoGeral . "</span>";
 
       else :
 
-        if ($url == '/categorias.php' && isset($_GET['categoria'])) :
+        if ($pageName == 'category' && isset($_GET['categoria'])) :
           $resultadoGeral = calculate_result($bdConexao, $mes, $ano, 'SAG', null, $_GET['categoria']);
           echo "R$ <span id='valor-geral' class='money'>" . $resultadoGeral . "</span>";
 
@@ -84,30 +84,3 @@ $url = $_SERVER['SCRIPT_NAME']; ?>
     </span>
   </div>
 </section>
-
-<script>
-  caixaSaldoMes = document.getElementById('saldo-mes')
-  caixaSaldoAcumulado = document.getElementById('saldo-acumulado')
-  caixaSaldoGeral = document.getElementById('saldo-geral')
-  valorMes = document.getElementById('valor-mes')
-  valorAcumulado = document.getElementById('valor-acumulado')
-  valorGeral = document.getElementById('valor-geral')
-
-  if (parseFloat(valorMes.innerText) >= 0) {
-    caixaSaldoMes.classList.add('positivo');
-  } else if (parseFloat(valorMes.innerText) < 0) {
-    caixaSaldoMes.classList.add('negativo');
-  }
-
-  if (parseFloat(valorAcumulado.innerText) >= 0) {
-    caixaSaldoAcumulado.classList.add('positivo');
-  } else if (parseFloat(valorAcumulado.innerText) < 0) {
-    caixaSaldoAcumulado.classList.add('negativo');
-  }
-
-  if (parseFloat(valorGeral.innerText) >= 0) {
-    caixaSaldoGeral.classList.add('positivo');
-  } else if (parseFloat(valorGeral.innerText) < 0) {
-    caixaSaldoGeral.classList.add('negativo');
-  }
-</script>
