@@ -1,0 +1,91 @@
+#caixa-registrar {
+    background-color: #ffeeec;
+  }
+  
+  #form-transacao {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    background-image: linear-gradient(#fffff3, #ffffe3);
+  }
+  
+  .container-edicao-parcelas::before {
+    content: "";
+    background-image: url(/img/icos/seguinte.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    margin-left: 10px;
+    position: relative;
+    top: 2px;
+  }
+  
+  .container-edicao-parcelas {
+    grid-column: 1 / 3;
+  }
+  
+  #valor {
+    background-color: #ad2f1b;
+    color: #fff;
+  }
+  
+  .container-formulario-registrar-transacao-opcoes {
+    position: relative;
+    z-index: 2;
+    display: none;
+  }
+  
+  .box.formulario.oculto .form-cadastrar-editar {
+    padding: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  
+  .opcoes-formulario {
+    grid-column: 1 / 5;
+    justify-self: flex-end;
+  }
+  
+  .checkbox-fixar {
+    display: inline-block;
+    width: unset !important;
+  }
+  
+  :root {
+    --pin: url(/img/icos/pin.svg);
+    --pin-setted: url(/img/icos/pin_setted.svg);
+  }
+  
+  .checkbox-fixar::before {
+    content: "";
+    background-image: var(--pin);
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    position: relative;
+    top: 2px;
+  }
+  
+  .checkbox-fixar.setted::before {
+    background-image: var(--pin-setted);
+  }
+  
+  #form-transacao .container-botao-acao-principal {
+    grid-column: 4;
+    grid-row: 4;
+  }
+  
+  #form-transacao .opcoes-formulario {
+    display: flex;
+    grid-column: 1 / 4;
+    grid-row: 4;
+    align-self: end;
+    justify-self: start;
+    gap: 15px;
+  }
+  
+  #caixa-registrar-modal {
+    border-radius: 0px;
+  }
