@@ -6,7 +6,6 @@ export default class Link{
         this.hrefs.forEach((href, i) => {
             const hrefValue = href.getAttribute('href'); 
             if (hrefValue.includes('#')){
-                console.log(i)
                 this.hrefs.splice(i, 1)
             }
         })

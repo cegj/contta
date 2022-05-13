@@ -7,14 +7,12 @@ export default class ContextOpenClose{
 
     closeByEsc(event){
           if (event.key === 'Escape') {
-          console.log(this);
           this.box.classList.remove('exibir');
           this.btn.classList.remove('botao-sair');
           this.btn.classList.add('botao-mes-ano');
       }};
 
     openClose(customBtn, customBox) {
-      console.log(customBtn)
         const btn = customBtn ? document.querySelector(customBtn) : this.btn;
         const box = customBox ? document.querySelector(customBox) : this.box;
 

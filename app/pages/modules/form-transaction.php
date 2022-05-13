@@ -42,7 +42,7 @@ if ($id_transacao) {
 
 <link rel="stylesheet" href="/global/formulario_registrar.css">
 
-<form id="form-transacao" class="form-cadastrar-editar" action="/app/form_handler/handle_transaction.php" method="POST">
+<form id="form-transaction" class="form-cadastrar-editar" action="/app/form_handler/handle_form-transaction.php" method="POST">
 
   <?php if ($id_transacao) {
     echo "<input class='campo-id-edicao' type='text' name='id_transacao' value='{$id_transacao}' class='input-id' readonly>";
@@ -230,8 +230,8 @@ if ($id_transacao) {
     <?php endif; ?>
   </div>
   <div class="opcoes-formulario">
-    <span id="btn-fixar-form-transacao" class="botao-acao-secundario neutro">Manter aberto</span>
-    <span id="btn-limpar-form-transacao" class="botao-acao-secundario neutro">Limpar fixadores</span>
+    <span id="btn-fixar-form-transaction" class="botao-acao-secundario neutro">Manter aberto</span>
+    <span id="btn-limpar-form-transaction" class="botao-acao-secundario neutro">Limpar fixadores</span>
   </div>
 
 </form>

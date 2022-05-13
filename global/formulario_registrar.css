@@ -2,7 +2,7 @@
     background-color: #ffeeec;
   }
   
-  #form-transacao {
+  #form-transaction {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     background-image: linear-gradient(#fffff3, #ffffe3);
   }
@@ -72,12 +72,12 @@
     background-image: var(--pin-setted);
   }
   
-  #form-transacao .container-botao-acao-principal {
+  #form-transaction .container-botao-acao-principal {
     grid-column: 4;
     grid-row: 4;
   }
   
-  #form-transacao .opcoes-formulario {
+  #form-transaction .opcoes-formulario {
     display: flex;
     grid-column: 1 / 4;
     grid-row: 4;

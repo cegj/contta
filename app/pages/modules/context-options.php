@@ -46,12 +46,12 @@
 </div>
 
 <!-- Formulário de mês e ano -->
-<?php include($_SERVER["DOCUMENT_ROOT"] . '/app/pages/modules/month_selector.php'); ?>
+<?php include($_SERVER["DOCUMENT_ROOT"] . '/app/pages/modules/month-selector.php'); ?>
 
 <!-- Formulário de registrar transação -->
 
 <div id="caixa-registrar-modal" class="box formulario box-opcoes hide" <?php if (filter_input(INPUT_GET, 'id_transacao', FILTER_VALIDATE_INT)) : ?> style="display: block !important" <?php endif; ?>>
-  <?php include($_SERVER["DOCUMENT_ROOT"] . '/app/pages/modules/form_transaction.php'); ?>
+  <?php include($_SERVER["DOCUMENT_ROOT"] . '/app/pages/modules/form-transaction.php'); ?>
 
 </div>
 </div>

@@ -1,7 +1,7 @@
 <div id="container-seletor-mes-ano" class="container-seletor-mes-ano box-opcoes hide">
   <div class="seletor-mes-ano" id="seletor-mes-ano">
-    <form id="for-mes-ano" class="form-mes-ano" action="/app/form_handler/handle_month_selector.php" method="POST">
-      <input id="seletor-campo-mes" class="form-mes-ano-campo-mes" type="number" name="mes" min="1" max="12" value=<?php echo $mes ?> required> / <input class="form-mes-ano-campo-ano" type="number" name="ano" min="1900" value=<?php echo $ano ?> required></input>
+    <form id="month-selector" class="month-selector" action="/app/form_handler/handle_month-selector.php" method="POST">
+      <input id="seletor-campo-mes" class="month-selector-campo-mes" type="number" name="mes" min="1" max="12" value=<?php echo $mes ?> required> / <input class="month-selector-campo-ano" type="number" name="ano" min="1900" value=<?php echo $ano ?> required></input>
       <button class="botao-acao-secundario" type="submit">Selecionar</button>
     </form>
 

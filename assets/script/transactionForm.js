@@ -26,7 +26,7 @@ function handleFixarFormTransacao() {
   }
 }
 
-const btnFixarFormTransacao = document.getElementById('btn-fixar-form-transacao');
+const btnFixarFormTransacao = document.getElementById('btn-fixar-form-transaction');
 
 btnFixarFormTransacao.addEventListener('click', handleFixarFormTransacao);
 
@@ -42,8 +42,8 @@ function checkFormTransacaoFixado() {
 checkFormTransacaoFixado();
 
 const btnFixarValor = document.querySelectorAll('.checkbox-fixar');
-const inputsFormRegistrar = document.querySelectorAll('#form-transacao input');
-const selectsFormRegistrar = document.querySelectorAll('#form-transacao select');
+const inputsFormRegistrar = document.querySelectorAll('#form-transaction input');
+const selectsFormRegistrar = document.querySelectorAll('#form-transaction select');
 const boxFormRegistrarTransacao = document.getElementById('caixa-registrar-modal');
 const campoTipo = document.getElementById('tipo');
 const campoData = document.getElementById('data');
@@ -151,7 +151,7 @@ if (!checkIdTransacaoNaUrl()){
       })
     }
 
-    const btnLimparSelecao = document.getElementById('btn-limpar-form-transacao');
+    const btnLimparSelecao = document.getElementById('btn-limpar-form-transaction');
 
     btnLimparSelecao.addEventListener('click', function(){
       limparSelecao(btnFixarValor);

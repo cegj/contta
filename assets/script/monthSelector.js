@@ -1,21 +1,19 @@
 import ContextOpenClose from "./contextOpenClose.js";
+import Form from './form.js';
 
 export default class MonthSelector extends ContextOpenClose{
-    constructor(btn, box, form, monthField, monthSelectorBtns){
+    constructor(box, formSelector, btn, monthSelectorBtns){
         super(btn, box);
-        this.form = document.querySelector(form);
-        this.monthField = document.querySelector(monthField);
+        this.monthSelector = new Form(formSelector);
         this.monthSelectorBtns = document.querySelectorAll(monthSelectorBtns);
     }
 
     setMonthAndGo(event){
-        this.monthField.value = event.target.value;
-        this.monthField.innerText = event.target.value;
-        this.form.submit();
+        this.monthSelector.form['mes'].value = event.target.value;
+        this.monthSelector.sendForm(event);
     }
 
     addEventToBtns(){
-
         this.monthSelectorBtns.forEach((btn) => {
             btn.addEventListener('click', this.setMonthAndGo);
         })
@@ -29,5 +27,6 @@ export default class MonthSelector extends ContextOpenClose{
         this.initContextOpenClose();
         this.bindEventsMonthSelector();
         this.addEventToBtns();
+        this.monthSelector.initForm();
     }
 }

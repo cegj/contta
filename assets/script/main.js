@@ -5,6 +5,7 @@ import ContextOpenClose from './contextOpenClose.js';
 import TransactionFormDealer from './transactionForm.js';
 import ShowHide from './showHide.js';
 import Link from './link.js';
+import Form from './form.js';
 
 export default async function runMainScript(){
 
@@ -49,7 +50,7 @@ export default async function runMainScript(){
 
     //Set monthSelector as open-close box
 
-    const monthSelector = new MonthSelector('#opcao-selecionar-mes-ano','#container-seletor-mes-ano', "#for-mes-ano", "#seletor-campo-mes", ".botao-seletor-mes");
+    const monthSelector = new MonthSelector('#container-seletor-mes-ano', "#month-selector", '#opcao-selecionar-mes-ano', ".botao-seletor-mes");
 
     monthSelector.initMonthSelector();
 
@@ -69,6 +70,9 @@ export default async function runMainScript(){
 
     Links.initLink();
 
+    const formTransaction = new Form('#form-transaction', {s: 'A transação foi registrada com sucesso!', e: 'Ocorreu um erro ao registrar a transação. Tente novamente!'});
+
+    formTransaction.initForm();
 }
 
 //Initial page load
