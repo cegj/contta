@@ -186,8 +186,8 @@
     display: none;
   }
 
-  #form-contas,
-  #form-categoria {
+  #form-account,
+  #form-category {
     display: flex;
     flex-direction: column;
     padding-top: 15px;

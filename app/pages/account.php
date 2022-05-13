@@ -205,7 +205,7 @@ $queryWithoutIdConta = remove_url_param($url, 'id_conta');
 
 <div class="box formulario" id="box-formulario">
   <!-- Formulário -->
-  <?php include($_SERVER["DOCUMENT_ROOT"] . '/app/pages/modules/form_account.php') ?>
+  <?php include($_SERVER["DOCUMENT_ROOT"] . '/app/pages/modules/form-account.php') ?>
 </div>
 
 </div>

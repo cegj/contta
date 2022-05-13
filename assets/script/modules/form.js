@@ -53,6 +53,7 @@ export default class Form{
 
     sendForm(event){
         event.preventDefault();
+        console.log('Disparou')
 
         const fields = this.form.querySelectorAll("[name]");
         const data = new FormData();

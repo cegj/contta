@@ -36,7 +36,7 @@ if (isset($_POST['apagar'])) {
     delete_account($bdConexao, $id_conta, $_POST['apagar']);
     header('Location: ' . $origin);
     die();
-} else if ($id_conta) {
+} if ($id_conta) {
     create_account($bdConexao, $conta, true, $id_conta);
     header('Location: ' . $origin);
     die();

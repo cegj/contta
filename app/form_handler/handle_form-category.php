@@ -41,16 +41,10 @@ if (isset($_POST['ehcatprincipal'])) {
 
 if (isset($_POST['apagar']) && $_POST['apagar'] == true) {
     delete_category($bdConexao, $id_cat, $cat_edicao_nome, $cat_edicao_cat_principal);
-    header('Location: ' . $origin);
-    die();
 } else if ($id_cat) {
     create_category($bdConexao, $categoria, true, $id_cat, $cat_edicao_nome, $cat_edicao_cat_principal);
-    header('Location: ' . $origin);
-    die();
 } else {
     create_category($bdConexao, $categoria, false, null, null, null);
-    header('Location: ' . $origin);
-    die();
 }
 
 header('Location: ' . $origin);

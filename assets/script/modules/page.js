@@ -1,4 +1,4 @@
-import runMainScript from "./main.js";
+import runMainScript from "../main.js";
 
 export default class Page{
 

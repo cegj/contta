@@ -1,11 +1,13 @@
-import Page from './page.js';
-import balanceBox from './balanceBox.js';
-import MonthSelector from './monthSelector.js';
-import ContextOpenClose from './contextOpenClose.js';
-import TransactionFormDealer from './transactionForm.js';
-import ShowHide from './showHide.js';
-import Link from './link.js';
-import Form from './form.js';
+import Page from './modules/page.js';
+import balanceBox from './modules/balanceBox.js';
+import MonthSelector from './modules/monthSelector.js';
+import ContextOpenClose from './modules/contextOpenClose.js';
+import TransactionFormDealer from './modules/transactionForm.js';
+import ShowHide from './modules/showHide.js';
+import Link from './modules/link.js';
+import Form from './modules/form.js';
+import runCategoryScript from './category.js';
+import runAccountScript from './account.js';
 
 export default async function runMainScript(){
 
@@ -73,6 +75,14 @@ export default async function runMainScript(){
     const formTransaction = new Form('#form-transaction', {s: 'A transação foi registrada com sucesso!', e: 'Ocorreu um erro ao registrar a transação. Tente novamente!'});
 
     formTransaction.initForm();
+
+    if (document.location.search.includes('p=category')){
+        runCategoryScript();
+    }
+
+    if (document.location.search.includes('p=account')){
+        runAccountScript();
+    }
 }
 
 //Initial page load

@@ -28,7 +28,7 @@ if ($id_cat) {
 <?php endif; ?>
 
 
-<form id="form-categoria" class="form-cadastrar-editar" action="/app/form_handler/handle_category.php" method="POST">
+<form id="form-category" class="form-cadastrar-editar" action="/app/form_handler/handle_form-category.php" method="POST">
   <?php if ($id_cat) {
     echo "<input class='campo-id-edicao' type='text' name='id_cat' value='{$id_cat}' class='input-id' readonly>";
   }
