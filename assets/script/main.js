@@ -8,6 +8,7 @@ import Link from './modules/link.js';
 import Form from './modules/form.js';
 import runCategoryScript from './category.js';
 import runAccountScript from './account.js';
+import runBudgetScript from './budget.js';
 
 export default async function runMainScript(){
 
@@ -82,6 +83,10 @@ export default async function runMainScript(){
 
     if (document.location.search.includes('p=account')){
         runAccountScript();
+    }
+
+    if (document.location.search.includes('p=budget')){
+        runBudgetScript();
     }
 }
 
