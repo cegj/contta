@@ -47,6 +47,7 @@ export default class Page{
 
         // this.target.innerHTML = `<div class="loading"><img src="/assets/img/load.gif" alt="Carregando..." /></div>`
         this.target.innerHTML = await this.fetchPage(this.paramString);
+        window.history.pushState(null, null, this.paramString);
         document.title = "Contta " + this.setPtPageName(this.pageName);
         this.setBrowserPrevNext();
         runMainScript();

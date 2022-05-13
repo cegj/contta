@@ -5,6 +5,7 @@ include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/category/get_primary_cat
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/category/get_especific_category.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/category/create_category.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/category/delete_category.php');
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/remove_url_param.php');
 
 $origin = $_SERVER['HTTP_REFERER'];
 

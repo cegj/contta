@@ -38,10 +38,24 @@ export default class Form{
         header.after(msg);
     }
 
+    removeQueryParam(queryString, params){
+        const query = new URLSearchParams(queryString);
+
+        params.forEach((param) => {
+            if (query.has(param)){
+                query.delete(param)
+            }
+        });
+
+        return '?' + query.toString();    
+    }
+
     async formSent(response){
 
+        const url = this.removeQueryParam(window.location.search, ['id_conta', 'id_cat', 'id_transacao']);
+        console.log(url);
         const page = new Page();
-        await page.load(window.location.search, '#main-content');
+        await page.load(url, '#main-content');
         if(this.msgs){
             if (response.ok){
                 this.showMsg('success');
@@ -52,14 +66,19 @@ export default class Form{
     }
 
     sendForm(event){
+        console.log('sendForm')
         event.preventDefault();
-        console.log('Disparou')
-
         const fields = this.form.querySelectorAll("[name]");
         const data = new FormData();
 
         fields.forEach((field) => {
-            data.append(field.name, field.value);
+            if(field.type === "checkbox" || field.type === "radio"){
+                if(field.checked){
+                    data.append(field.name, field.value);
+                }
+            } else {
+                data.append(field.name, field.value);
+            }
         })
 
         fetch(this.formHandlerPath, {
