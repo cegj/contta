@@ -24,11 +24,26 @@ export default class BudgetTable{
         })
     }
 
+    localeCurrency(customSelector, customStyle, customLanguage, customCurrency){
+        const elements = customSelector ? document.querySelectorAll(customSelector) : this.cells;
+        const language = customLanguage ? customLanguage : 'pt-BR';
+        const currency = customCurrency ? customCurrency : 'BRL';
+        const style = customStyle ? customStyle : 'decimal';
+        
+        elements.forEach((e) => {
+            if (!!+e.innerText){
+                const number = +e.innerText;
+                e.innerText = number.toLocaleString(language, { style: style, minimumFractionDigits: 2, maximumFractionDigits: 2, currency: currency});
+            }
+        })
+    }
+
     bindEvents(){
 
     }
 
     initBudgetTable(){
         this.calculateCatResult();
+        this.localeCurrency();
     }
 }

@@ -53,7 +53,6 @@ export default class Form{
     async formSent(response){
 
         const url = this.removeQueryParam(window.location.search, ['id_conta', 'id_cat', 'id_transacao']);
-        console.log(url);
         const page = new Page();
         await page.load(url, '#main-content');
         if(this.msgs){
@@ -66,7 +65,6 @@ export default class Form{
     }
 
     sendForm(event){
-        console.log('sendForm')
         event.preventDefault();
         const fields = this.form.querySelectorAll("[name]");
         const data = new FormData();
