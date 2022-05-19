@@ -1,0 +1,19 @@
+[data-primary-cat]{
+    background: rgba(145, 218, 255, 0.2);   
+}
+
+[data-fixed-column="first"] {
+    position: sticky;
+    left: 0;
+    background-color: white;
+}
+
+[data-fixed-column="second"] {
+    position: sticky;
+    left: 137.5px;
+    background-color: white;
+}
+
+[data-selected="true"] {
+    background-color: rgba(255, 255, 0, 0.096);
+}

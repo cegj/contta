@@ -75,7 +75,7 @@ if ($id_cat) {
   <?php if ($id_cat) {
     echo "
     <div class='div-checkbox container-apagar'>
-    <input type='checkbox' id='apagar' name='apagar' value='true' />
+    <input type='checkbox' id='apagar' name='apagar' />
     <label class='label-apagar' for='apagar'>Apagar categoria</label>
     </div>
     ";

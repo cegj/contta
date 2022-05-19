@@ -1,5 +1,5 @@
 import Page from './modules/page.js';
-import balanceBox from './modules/balanceBox.js';
+import BalanceBox from './modules/balanceBox.js';
 import MonthSelector from './modules/monthSelector.js';
 import ContextOpenClose from './modules/contextOpenClose.js';
 import TransactionFormDealer from './modules/transactionForm.js';
@@ -39,15 +39,15 @@ export default async function runMainScript(){
         
     //Set color of balance boxes according to the value
 
-    const monthBalance = new balanceBox('#saldo-mes', '#valor-mes');
+    const monthBalance = new BalanceBox('#saldo-mes', '#valor-mes');
 
     monthBalance.setColor();
 
-    const acumulatedBalance = new balanceBox('#saldo-acumulado', '#valor-acumulado');
+    const acumulatedBalance = new BalanceBox('#saldo-acumulado', '#valor-acumulado');
 
     acumulatedBalance.setColor();
 
-    const generalBalance = new balanceBox('#saldo-geral', '#valor-geral');
+    const generalBalance = new BalanceBox('#saldo-geral', '#valor-geral');
 
     generalBalance.setColor();
 

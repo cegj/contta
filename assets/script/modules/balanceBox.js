@@ -1,4 +1,4 @@
-export default class balanceBox {
+export default class BalanceBox {
     constructor(box, value) {
         this.box = document.querySelector(box);
         this.value = document.querySelector(value);
