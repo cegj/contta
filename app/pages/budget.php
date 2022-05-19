@@ -43,12 +43,13 @@ $edicao = false;
   // Build table header for each month
   $tableMonthsTitle = "";
   foreach($months as $month){
-    $tableMonthsTitle = $tableMonthsTitle . "<th colspan='2'>{$month}</th>";
+    
+    $tableMonthsTitle = $tableMonthsTitle . "<th data-type='month-title' colspan='2'>{$month}</th>";
   }
 
   $tablePlanExecTitle = "";
   foreach($months as $month){
-    $tablePlanExecTitle = $tablePlanExecTitle . "<th>Prev.</th><th>Exec.</th>";
+    $tablePlanExecTitle = $tablePlanExecTitle . "<th data-prev-exec-month='{$month}'>Prev.</th><th data-prev-exec-month='{$month}'>Exec.</th>";
   }
 
   //Get categories and build html for each of them
@@ -92,6 +93,8 @@ $edicao = false;
         $monthDataSets .= "data-month='{$monthYear}'";
         if (check_selected_month_budget($month, $mes)){
           $monthDataSets .= "data-selected='true'";
+        } else {
+          $monthDataSets .= "data-selected='false'";
         }
 
         ////Planned value
@@ -120,12 +123,20 @@ $edicao = false;
   foreach ($months as $month){
 
     $monthYear = $ano . "_" . $month;
+
+    $monthResultDataSets = "";
+    $monthResultDataSets .= "data-month='{$monthYear}'";
+    if (check_selected_month_budget($month, $mes)){
+      $monthResultDataSets .= "data-selected='true'";
+    } else {
+      $monthResultDataSets .= "data-selected='false'";
+    }
   
     //Planned month result (sum)
-    $budgetLines .= "<td>" . sum_budget_value($bdConexao, $monthYear) . "</td>";
+    $budgetLines .= "<td $monthResultDataSets>" . sum_budget_value($bdConexao, $monthYear) . "</td>";
     
     //Executed month result (sum)
-    $budgetLines .= "<td>" . calculate_result($bdConexao, $month, $ano, 'SSM') . "</td>";
+    $budgetLines .= "<td $monthResultDataSets>" . calculate_result($bdConexao, $month, $ano, 'SSM') . "</td>";
 
   }
 
@@ -139,12 +150,20 @@ $edicao = false;
   foreach ($months as $month){
 
     $monthYear = $ano . "_" . $month;
+
+    $acumulatedResultDataSets = "";
+    $acumulatedResultDataSets .= "data-month='{$monthYear}'";
+    if (check_selected_month_budget($month, $mes)){
+      $acumulatedResultDataSets .= "data-selected='true'";
+    } else {
+      $acumulatedResultDataSets .= "data-selected='false'";
+    }
   
     //Planned month result (sum) !!!!!!!!!!!!!!!!!!!!!!!!!!!!!IT'S NEEDED TO ACUMULATE!!!!!!!!!!!!!!!!!!!!!!
-    $budgetLines .= "<td>" . sum_budget_value($bdConexao, $monthYear) . "</td>";
+    $budgetLines .= "<td $acumulatedResultDataSets>" . sum_budget_value($bdConexao, $monthYear) . "</td>";
     
     //Executed month result (sum)
-    $budgetLines .= "<td>" . calculate_result($bdConexao, $month, $ano, 'SAM') . "</td>";
+    $budgetLines .= "<td $acumulatedResultDataSets>" . calculate_result($bdConexao, $month, $ano, 'SAM') . "</td>";
 
   }
 

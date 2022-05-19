@@ -11,6 +11,25 @@ export default class BudgetTable{
 
     }
 
+    hideUnselectedMonthsOnMobile(){
+        if (screen.width < 640) {
+
+            this.table.querySelectorAll('[data-type="month-title"]').forEach((e) => {
+                e.style.display = "none";
+            })
+
+            const prevExecTitleCells = this.table.querySelectorAll('[data-prev-exec-month]');
+            for (let i = 2; i < prevExecTitleCells.length; i++){
+                prevExecTitleCells[i].style.display = "none";
+            }
+
+            //Hide cells witch not match month selected
+            this.table.querySelectorAll('[data-selected="false"').forEach((e) => {
+                e.style.display = "none";
+            })
+        }     
+    }   
+
     setSelectAsFirst(){
         const referenceTd = this.table.querySelector('[data-selected="true"]');
 
@@ -107,5 +126,6 @@ export default class BudgetTable{
         this.calculateCatResult();
         this.localeCurrency();
         this.setSelectAsFirst();
+        this.hideUnselectedMonthsOnMobile();
     }
 }

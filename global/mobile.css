@@ -1,4 +1,4 @@
-@media (max-width: 410px) {
+@media (max-width: 640px) {
   header {
     flex-direction: column;
     height: unset;
@@ -195,5 +195,10 @@
 
   .opcoes-formulario {
     align-self: center !important;
+  }
+
+  .table-container {
+    display: block;
+    margin: 0 auto;
   }
 }
