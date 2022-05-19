@@ -68,6 +68,7 @@ $edicao = false;
       //Define datasets
       $dataSets = "";
       $dataSets .= "data-cat-id='{$data['id_cat']}'";
+      $dataSets .= "data-cat-name='{$data['nome_cat']}'";
       if ($data['eh_cat_principal']){
         $dataSets .= "data-primary-cat='true'";
       }
@@ -169,17 +170,16 @@ $edicao = false;
 <!-- EDITING BUDGET MODAL -->
 <div class="box formulario" id="container-alteracao-orcamento">
     <div class="container-form-botoes">
-      <form style="display:none" class="form-alteracao-orcamento" id="form-alteracao" method="POST">
+      <form class="form-alteracao-orcamento" id="form-edit-budget" method="POST" action="">
         <input style='display: none' type="number" id="campo-categoria" name="campo-categoria" readonly />
         <input style='display: none' type="text" id="campo-mes" name="campo-mes" readonly />
-        <input style='display: none' type="text" id="campo-valor-executado" readonly />
         <img src="/assets/img/ico/edit.svg" class="icone-editar" alt="Editar">
         <label for="valor">Alterar o valor de <span id="nome-cat-label"></span> no mês de <span id=mes-label></span>:</label>
         <input type="number" step="any" id="campo-valor" name="campo-valor" />
         <button class="botao-acao-secundario confirmar" type="submit">Alterar</button>
       </form>
-      <button onclick="copiarValorExecutado()" class="botao-acao-secundario neutro" id="botao-copiar">Copiar executado</button>
-      <button onclick="fecharEdicao()" class="botao-acao-secundario cancelar" id="botao-cancelar" style="display:none">Cancelar</button>
+      <button class="botao-acao-secundario neutro" id="botao-copiar">Copiar executado</button>
+      <button class="botao-acao-secundario cancelar" id="botao-cancelar">Cancelar</button>
     </div>
     <p><strong>Importante:</strong> a previsão de despesas deve ser informada em valores negativos.</p>
   </div>

@@ -1,8 +1,61 @@
+import Form from "./form.js";
+
 export default class BudgetTable{
-    constructor(tableSelector){
+    constructor(tableSelector, editContainerSelector){
         this.table = document.querySelector(tableSelector);
         this.rows = this.table.querySelectorAll('tr');
         this.cells = this.table.querySelectorAll('td');
+        this.editContainer = document.querySelector(editContainerSelector);
+        this.editForm = this.editContainer.querySelector('form');
+
+    }
+
+    getPtMonthName(monthNumber){
+
+        const months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+
+        return months[monthNumber-1];
+
+    }
+
+    closeEdit(){
+        this.editContainer.style.display = "none";
+    }
+
+    openEdit(event){
+        const catNameSpan = this.editForm.querySelector('#nome-cat-label');
+        const monthNameSpan = this.editForm.querySelector('#mes-label');
+        const monthName = this.getPtMonthName(+(event.target.dataset.month.replace(/\d{4}_(\d+)/g, '$1')));
+
+        catNameSpan.innerText = event.target.dataset.catName;
+        monthNameSpan.innerText = monthName;
+        this.editForm['campo-categoria'].value = event.target.dataset.catId;
+        this.editForm['campo-mes'].value = event.target.dataset.month;
+        this.editForm['campo-valor'].value = event.target.innerText;
+        this.editContainer.style.display = "block";
+
+        this.editContainer.querySelector('#botao-copiar').addEventListener('click', () => {
+            this.editForm['campo-valor'].value = event.target.nextSibling.innerText;
+        });
+        this.editContainer.querySelector('#botao-cancelar').addEventListener('click', this.closeEdit);
+
+        const form = new Form('#' + this.editForm.id, {s: 'Valor alterado com sucesso', e: 'Não foi possível alterar o valor, tente novamente'});
+
+        form.initForm();
+    }
+
+    localeCurrency(customSelector, customStyle, customLanguage, customCurrency){
+        const elements = customSelector ? document.querySelectorAll(customSelector) : this.cells;
+        const language = customLanguage ? customLanguage : 'pt-BR';
+        const currency = customCurrency ? customCurrency : 'BRL';
+        const style = customStyle ? customStyle : 'decimal';
+        
+        elements.forEach((e) => {
+            if (!!+e.innerText){
+                const number = +e.innerText;
+                e.innerText = number.toLocaleString(language, { style: style, minimumFractionDigits: 2, maximumFractionDigits: 2, currency: currency});
+            }
+        })
     }
 
     calculateCatResult(){
@@ -24,25 +77,20 @@ export default class BudgetTable{
         })
     }
 
-    localeCurrency(customSelector, customStyle, customLanguage, customCurrency){
-        const elements = customSelector ? document.querySelectorAll(customSelector) : this.cells;
-        const language = customLanguage ? customLanguage : 'pt-BR';
-        const currency = customCurrency ? customCurrency : 'BRL';
-        const style = customStyle ? customStyle : 'decimal';
-        
-        elements.forEach((e) => {
-            if (!!+e.innerText){
-                const number = +e.innerText;
-                e.innerText = number.toLocaleString(language, { style: style, minimumFractionDigits: 2, maximumFractionDigits: 2, currency: currency});
-            }
+    addEvents(){
+        this.table.querySelectorAll('[data-type="plan"]').forEach((planCell) => {
+            planCell.addEventListener('dblclick', this.openEdit);
         })
     }
 
     bindEvents(){
-
+        this.openEdit = this.openEdit.bind(this);
+        this.closeEdit = this.closeEdit.bind(this);
     }
 
     initBudgetTable(){
+        this.bindEvents();
+        this.addEvents();
         this.calculateCatResult();
         this.localeCurrency();
     }

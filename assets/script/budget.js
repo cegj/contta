@@ -2,7 +2,7 @@ import BudgetTable from "./modules/budgetTable.js";
 
 export default function runBudgetScript(){
     
-  const budget = new BudgetTable('#budget-table');
+  const budget = new BudgetTable('#budget-table', "#container-alteracao-orcamento");
 
   budget.initBudgetTable();
 
