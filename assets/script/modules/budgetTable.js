@@ -1,13 +1,26 @@
 import Form from "./form.js";
 
 export default class BudgetTable{
-    constructor(tableSelector, editContainerSelector){
-        this.table = document.querySelector(tableSelector);
+    constructor(tableContainerSelector, editContainerSelector){
+        this.tableContainer = document.querySelector(tableContainerSelector);
+        this.table = document.querySelector('table');
         this.rows = this.table.querySelectorAll('tr');
         this.cells = this.table.querySelectorAll('td');
         this.editContainer = document.querySelector(editContainerSelector);
         this.editForm = this.editContainer.querySelector('form');
 
+    }
+
+    setSelectAsFirst(){
+        const referenceTd = this.table.querySelector('[data-selected="true"]');
+
+        //It sums fixed column width using first row as reference
+        let fixedColumnsWidth = 0;
+        this.rows[0].querySelectorAll('[data-fixed-column]').forEach((column) => {
+            fixedColumnsWidth += column.offsetWidth;
+        })
+
+        this.tableContainer.scrollTo(referenceTd.offsetLeft - fixedColumnsWidth, 0);
     }
 
     getPtMonthName(monthNumber){
@@ -93,5 +106,6 @@ export default class BudgetTable{
         this.addEvents();
         this.calculateCatResult();
         this.localeCurrency();
+        this.setSelectAsFirst();
     }
 }
