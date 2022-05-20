@@ -15,7 +15,7 @@ export default class Page{
     // }
 
     showMessage(msg, closeBtn){
-        if (!msg) {
+        if (msg === false) {
             document.querySelector('[data-msg]').remove();
         } else {
 
