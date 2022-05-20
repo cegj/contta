@@ -143,6 +143,9 @@ $edicao = false;
   $budgetLines .= "</tr>";  
 
   ////Acumulated result
+
+  $acumulatedPlanned = 0;
+
   $budgetLines .= "<tr>";
   $budgetLines .= "<td data-fixed-column='first'>Resultado acumulado:</td>";
   $budgetLines .= "<td data-fixed-column='second'>R$ 0,00</td>";
@@ -160,7 +163,8 @@ $edicao = false;
     }
   
     //Planned month result (sum) !!!!!!!!!!!!!!!!!!!!!!!!!!!!!IT'S NEEDED TO ACUMULATE!!!!!!!!!!!!!!!!!!!!!!
-    $budgetLines .= "<td $acumulatedResultDataSets>" . sum_budget_value($bdConexao, $monthYear) . "</td>";
+    $acumulatedPlanned += floatval(sum_budget_value($bdConexao, $monthYear));
+    $budgetLines .= "<td $acumulatedResultDataSets>" . $acumulatedPlanned . "</td>";
     
     //Executed month result (sum)
     $budgetLines .= "<td $acumulatedResultDataSets>" . calculate_result($bdConexao, $month, $ano, 'SAM') . "</td>";

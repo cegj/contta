@@ -22,5 +22,7 @@ function sum_budget_value($bdConexao, $mes, $catEspecifica = null, $acumulado = 
 
     $string = 'sum(' . $mes . ')';
 
-    return $soma[$string];
+    // print_r(floatval($soma[0]));
+
+    return floatval($soma[0]);
 }
