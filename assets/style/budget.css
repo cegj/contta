@@ -18,6 +18,112 @@
     background-color: white;
 }
 
-[data-selected="true"] {
-    background-color: rgba(255, 255, 0, 0.096);
+#container-budget-edit-form {
+    display: none;
+    position: fixed;
+    top: 5px;
+    z-index: 10;
+    padding: 20px;
+}
+
+#container-budget-edit-form p {
+    padding-top: 15px;
+    margin: 0px;
+    text-align: center;
+}
+
+.budget-edit-form, .container-budget-edit-form-btns {
+    margin: 0px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+.budget-edit-form label {
+    font-size: 1.2rem;
+
+}
+
+.budget-edit-form span {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.budget-edit-form input {
+    font-size: 1.2rem;
+    padding: 5px;
+    max-width: 100px;
+    background-color: #ffffff;
+    border: 1px solid #ececa6;
+    border-radius: 4px;
+}
+
+.budget-edit-form button {
+    margin-bottom: auto;
+    margin-top: auto;
+}
+
+[data-type="plan"], [data-type="exec"], [data-type="cat-result"], [data-type="month-result-plan"], [data-type="month-result-exec"] {
+    text-align: center;
+}
+
+[data-type="plan"] {
+    color: #8f8f8f;
+    background-color: #fafafa;
+
+}
+
+[data-type="exec"] {
+    color: #6d6d6d;
+    background-color: #f5f5f5;
+
+}
+
+[data-type="plan"][data-selected="true"] {
+    background-color: #fffff2 !important;
+}
+
+[data-type="exec"][data-selected="true"] {
+    background-color: #ffffe8 !important;
+}
+
+[data-primary-cat="true"][data-type="plan"] {
+    background-color: #eeeeee;
+    color: #8f8f8f;
+}
+
+[data-primary-cat="true"][data-type="exec"] {
+    background-color: #e7e7e7;
+    color: #6d6d6d;
+}
+
+[data-primary-cat="true"][data-type="plan"][data-selected="true"] {
+    background-color: #ffffe3 !important;
+}
+
+[data-primary-cat="true"][data-type="exec"][data-selected="true"] {
+    background-color: #fdfdd6 !important;
+}
+
+[data-type="cat-name"][data-primary-cat="true"], [data-type="cat-result"][data-primary-cat="true"]{
+    background-color: #eeeeee;   
+}
+
+[data-type="cat-name"], [data-type="cat-result"]{
+    background-color: #fafafa;
+}
+
+[data-type="month-result-plan"] {
+    background-color: #f7fffe;
+    color: rgb(130, 130, 130);
+}
+  
+[data-type="month-result-exec"] {
+    background-color: #ebffff;
+    color: rgb(100, 100, 100);
+}
+
+[data-type="month-result-title"]{
+    background-color: #f7fffe;
+    color: rgb(130, 130, 130);
 }

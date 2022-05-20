@@ -117,8 +117,8 @@ $edicao = false;
 
   ////Month result
   $budgetLines .= "<tr>";
-  $budgetLines .= "<td data-fixed-column='first'>Resultado mês:</td>";
-  $budgetLines .= "<td data-fixed-column='second'>R$ 0,00</td>";
+  $budgetLines .= "<td data-type='month-result-title' data-fixed-column='first'>Resultado mês:</td>";
+  $budgetLines .= "<td data-type='month-result-title' data-fixed-column='second'>R$ 0,00</td>";
 
   foreach ($months as $month){
 
@@ -133,10 +133,10 @@ $edicao = false;
     }
   
     //Planned month result (sum)
-    $budgetLines .= "<td data-money $monthResultDataSets>" . sum_budget_value($bdConexao, $monthYear) . "</td>";
+    $budgetLines .= "<td data-money data-type='month-result-plan' $monthResultDataSets>" . sum_budget_value($bdConexao, $monthYear) . "</td>";
     
     //Executed month result (sum)
-    $budgetLines .= "<td data-money $monthResultDataSets>" . calculate_result($bdConexao, $month, $ano, 'SSM') . "</td>";
+    $budgetLines .= "<td data-money data-type='month-result-exec' $monthResultDataSets>" . calculate_result($bdConexao, $month, $ano, 'SSM') . "</td>";
 
   }
 
@@ -147,8 +147,8 @@ $edicao = false;
   $acumulatedPlanned = 0;
 
   $budgetLines .= "<tr>";
-  $budgetLines .= "<td data-fixed-column='first'>Resultado acumulado:</td>";
-  $budgetLines .= "<td data-fixed-column='second'>R$ 0,00</td>";
+  $budgetLines .= "<td data-type='month-result-title' data-fixed-column='first'>Resultado acumulado:</td>";
+  $budgetLines .= "<td data-type='month-result-title' data-fixed-column='second'>R$ 0,00</td>";
 
   foreach ($months as $month){
 
@@ -164,10 +164,10 @@ $edicao = false;
   
     //Planned month result (sum)
     $acumulatedPlanned += floatval(sum_budget_value($bdConexao, $monthYear));
-    $budgetLines .= "<td data-money $acumulatedResultDataSets>" . $acumulatedPlanned . "</td>";
+    $budgetLines .= "<td data-money data-type='month-result-plan' $acumulatedResultDataSets>" . $acumulatedPlanned . "</td>";
     
     //Executed month result (sum)
-    $budgetLines .= "<td data-money $acumulatedResultDataSets>" . calculate_result($bdConexao, $month, $ano, 'SAM') . "</td>";
+    $budgetLines .= "<td data-money data-type='month-result-exec' $acumulatedResultDataSets>" . calculate_result($bdConexao, $month, $ano, 'SAM') . "</td>";
 
   }
 
@@ -191,9 +191,9 @@ $edicao = false;
   </style>
 
 <!-- EDITING BUDGET MODAL -->
-<div class="box formulario" id="container-alteracao-orcamento">
-    <div class="container-form-botoes">
-      <form class="form-alteracao-orcamento" id="form-edit-budget" method="POST" action="">
+<div class="box formulario" id="container-budget-edit-form">
+    <div class="container-budget-edit-form-btns">
+      <form class="budget-edit-form" id="form-edit-budget" method="POST" action="">
         <input style='display: none' type="number" id="campo-categoria" name="campo-categoria" readonly />
         <input style='display: none' type="text" id="campo-mes" name="campo-mes" readonly />
         <img src="/assets/img/ico/edit.svg" class="icone-editar" alt="Editar">

@@ -145,24 +145,24 @@
     order: -1;
   }
 
-  .container-form-botoes {
+  .container-budget-edit-form-btns {
     flex-direction: column;
   }
 
-  .form-alteracao-orcamento {
+  .budget-edit-form {
     text-align: center;
   }
 
-  .form-alteracao-orcamento label {
+  .budget-edit-form label {
     display: block;
   }
 
-  .form-alteracao-orcamento input {
+  .budget-edit-form input {
     display: block;
     margin: 15px auto;
   }
 
-  .container-form-botoes .botao-acao-secundario {
+  .container-budget-edit-form-btns .botao-acao-secundario {
     display: block;
     margin: 5px auto;
   }

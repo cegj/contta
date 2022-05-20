@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Open+Sans:ital,wght@0,300;0,400;0,700;1,300&family=Roboto:wght@400;500&family=Ubuntu:wght@300;400&display=swap');
 
+@import url("/assets/style/main.css");
+@import url("/assets/style/extrato.css");
+@import url("/assets/style/categorias.css");
+@import url("/assets/style/contas.css");
+@import url("/assets/style/orcamento.css");
+@import url("/assets/style/budget.css");
+
 @import url("/global/global.css");
 @import url("/global/header.css");
 @import url("/global/saldos.css");
@@ -13,3 +20,6 @@
 @import url("/global/botoes.css");
 @import url("/global/mobile.css");
 @import url("/global/formulario_registrar.css");
+@import url("setup/login-cadastro-setup.css");
+
+@import url("/plugin/choices/assets/styles/choices.css");

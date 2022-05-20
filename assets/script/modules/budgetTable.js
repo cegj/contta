@@ -11,8 +11,20 @@ export default class BudgetTable{
 
     }
 
-    hideUnselectedMonthsOnMobile(){
+    setZeroTransparent(){
+        this.cells.forEach((cell) => {
+            if(+cell.innerText === 0){
+                cell.style.color = "transparent";
+            }
+        })
+    }
+
+    adaptForMobile(){
         if (screen.width < 640) {
+
+            this.table.querySelectorAll('[data-fixed-column]').forEach((e) => {
+                e.dataset.fixedColumn = "";
+            })
 
             this.table.querySelectorAll('[data-type="month-title"]').forEach((e) => {
                 e.style.display = "none";
@@ -125,7 +137,8 @@ export default class BudgetTable{
         this.addEvents();
         this.calculateCatResult();
         this.localeCurrency();
+        this.setZeroTransparent();
         this.setSelectAsFirst();
-        this.hideUnselectedMonthsOnMobile();
+        this.adaptForMobile();
     }
 }
