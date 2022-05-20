@@ -65,7 +65,7 @@ export default async function runMainScript(){
 
     TransactionFormDealer(transactionForm, choiceConta, choiceContaDestino, choiceCategoria);
 
-    const showHideMoneyBtn = new ShowHide('#opcao-exibir-ocultar', '.money');
+    const showHideMoneyBtn = new ShowHide('#opcao-exibir-ocultar', '[data-money]');
 
     showHideMoneyBtn.initShowHide();
 

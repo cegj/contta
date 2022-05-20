@@ -98,13 +98,13 @@ $edicao = false;
         }
 
         ////Planned value
-        $budgetLines .= "<td data-type='plan' $dataSets $monthDataSets>
+        $budgetLines .= "<td data-money data-type='plan' $dataSets $monthDataSets>
                           {$data[$monthYear]}
                         </td>";
 
         ////Executed value
         $monthCatBalance = calculate_result($bdConexao, $month, $ano, 'SSM', null, $data['id_cat']);
-        $budgetLines .= "<td data-type='exec' $dataSets $monthDataSets>
+        $budgetLines .= "<td data-money data-type='exec' $dataSets $monthDataSets>
                           {$monthCatBalance}
                         </td>";
       }
@@ -133,10 +133,10 @@ $edicao = false;
     }
   
     //Planned month result (sum)
-    $budgetLines .= "<td $monthResultDataSets>" . sum_budget_value($bdConexao, $monthYear) . "</td>";
+    $budgetLines .= "<td data-money $monthResultDataSets>" . sum_budget_value($bdConexao, $monthYear) . "</td>";
     
     //Executed month result (sum)
-    $budgetLines .= "<td $monthResultDataSets>" . calculate_result($bdConexao, $month, $ano, 'SSM') . "</td>";
+    $budgetLines .= "<td data-money $monthResultDataSets>" . calculate_result($bdConexao, $month, $ano, 'SSM') . "</td>";
 
   }
 
@@ -162,12 +162,12 @@ $edicao = false;
       $acumulatedResultDataSets .= "data-selected='false'";
     }
   
-    //Planned month result (sum) !!!!!!!!!!!!!!!!!!!!!!!!!!!!!IT'S NEEDED TO ACUMULATE!!!!!!!!!!!!!!!!!!!!!!
+    //Planned month result (sum)
     $acumulatedPlanned += floatval(sum_budget_value($bdConexao, $monthYear));
-    $budgetLines .= "<td $acumulatedResultDataSets>" . $acumulatedPlanned . "</td>";
+    $budgetLines .= "<td data-money $acumulatedResultDataSets>" . $acumulatedPlanned . "</td>";
     
     //Executed month result (sum)
-    $budgetLines .= "<td $acumulatedResultDataSets>" . calculate_result($bdConexao, $month, $ano, 'SAM') . "</td>";
+    $budgetLines .= "<td data-money $acumulatedResultDataSets>" . calculate_result($bdConexao, $month, $ano, 'SAM') . "</td>";
 
   }
 

@@ -37,7 +37,7 @@ include_once($_SERVER["DOCUMENT_ROOT"] . './app/function/database/there_is_no_ta
         </dl>
         <dl>
           <dt>💵 Valor:</dt>
-          <dd>R$ <span class="money"><?php echo format_value($ultimoregistro['valor']) ?></span></dd>
+          <dd>R$ <span data-money><?php echo format_value($ultimoregistro['valor']) ?></span></dd>
         </dl>
         <dl>
           <dt>🏷️ Categoria:</dt>

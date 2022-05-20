@@ -13,18 +13,18 @@ $url = $_SERVER['SCRIPT_NAME']; ?>
 
       <?php if ($pageName == 'account' && isset($_GET['conta'])) :
         $resultadoMes = calculate_result($bdConexao, $mes, $ano, 'SSM', $_GET['conta']);
-        echo "R$ <span id='valor-mes' class='money'>" . $resultadoMes . "</span>";
+        echo "R$ <span id='valor-mes' data-money>" . $resultadoMes . "</span>";
 
       else :
 
         if ($pageName == 'category' && isset($_GET['categoria'])) :
           $resultadoMes = calculate_result($bdConexao, $mes, $ano, 'SSM', null, $_GET['categoria']);
-          echo "R$ <span id='valor-mes' class='money'>" . $resultadoMes . "</span>";
+          echo "R$ <span id='valor-mes' data-money>" . $resultadoMes . "</span>";
 
         else :
 
           $resultadoMes = format_value(calculate_result($bdConexao, $mes, $ano, 'SSM'));
-          echo "R$ <span id='valor-mes' class='money'>" . $resultadoMes . "</span>";
+          echo "R$ <span id='valor-mes' data-money>" . $resultadoMes . "</span>";
 
         endif;
       endif;
@@ -39,18 +39,18 @@ $url = $_SERVER['SCRIPT_NAME']; ?>
 
       <?php if ($pageName == 'account' && isset($_GET['conta'])) :
         $resultadoAcumulado = calculate_result($bdConexao, $mes, $ano, 'SAM', $_GET['conta']);
-        echo "R$ <span id='valor-acumulado' class='money'>" . $resultadoAcumulado . "</span>";
+        echo "R$ <span id='valor-acumulado' data-money>" . $resultadoAcumulado . "</span>";
 
       else :
 
         if ($pageName == 'category' && isset($_GET['categoria'])) :
           $resultadoAcumulado = calculate_result($bdConexao, $mes, $ano, 'SAM', null, $_GET['categoria']);
-          echo "R$ <span id='valor-acumulado' class='money'>" . $resultadoAcumulado . "</span>";
+          echo "R$ <span id='valor-acumulado' data-money>" . $resultadoAcumulado . "</span>";
 
         else :
 
           $resultadoAcumulado = format_value(calculate_result($bdConexao, $mes, $ano, 'SAM'));
-          echo "R$ <span id='valor-acumulado' class='money'>" . $resultadoAcumulado . "</span>";
+          echo "R$ <span id='valor-acumulado' data-money>" . $resultadoAcumulado . "</span>";
 
         endif;
       endif;
@@ -64,18 +64,18 @@ $url = $_SERVER['SCRIPT_NAME']; ?>
 
       <?php if ($pageName == 'account' && isset($_GET['conta'])) :
         $resultadoGeral = calculate_result($bdConexao, $mes, $ano, 'SAG', $_GET['conta']);
-        echo "R$ <span id='valor-geral' class='money'>" . $resultadoGeral . "</span>";
+        echo "R$ <span id='valor-geral' data-money>" . $resultadoGeral . "</span>";
 
       else :
 
         if ($pageName == 'category' && isset($_GET['categoria'])) :
           $resultadoGeral = calculate_result($bdConexao, $mes, $ano, 'SAG', null, $_GET['categoria']);
-          echo "R$ <span id='valor-geral' class='money'>" . $resultadoGeral . "</span>";
+          echo "R$ <span id='valor-geral' data-money>" . $resultadoGeral . "</span>";
 
         else :
 
           $resultadoGeral = format_value(calculate_result($bdConexao, $mes, $ano, 'SAG'));
-          echo "R$ <span id='valor-geral' class='money'>" . $resultadoGeral . "</span>";
+          echo "R$ <span id='valor-geral' data-money>" . $resultadoGeral . "</span>";
 
         endif;
       endif;
