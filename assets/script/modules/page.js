@@ -8,6 +8,11 @@ export default class Page{
         return page;    
     }
 
+    toggleModal(customContainerSelector){
+        const modalContainer = customContainerSelector ? document.querySelector(customContainerSelector) : document.querySelector('.loading-modal-container');
+        modalContainer.classList.toggle('active');
+    }
+
     setBrowserPrevNext(){
         window.addEventListener('popstate', () => {
             this.load(window.location.search);
@@ -46,11 +51,13 @@ export default class Page{
         this.target = document.querySelector(this.target);
 
         // this.target.innerHTML = `<div class="loading"><img src="/assets/img/load.gif" alt="Carregando..." /></div>`
+        this.toggleModal();
         this.target.innerHTML = await this.fetchPage(this.paramString);
         window.history.pushState(null, null, this.paramString);
         document.title = "Contta " + this.setPtPageName(this.pageName);
         this.setBrowserPrevNext();
         runMainScript();
+        this.toggleModal();
         return this;
     }
 }
