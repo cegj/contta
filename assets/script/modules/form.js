@@ -11,7 +11,7 @@ export default class Form{
     createMsgElement(msg){
         const msgElement = document.createElement('span');
         msgElement.innerHTML = `
-        <span data-msg class="msg success">
+        <span data-msg="s">
             <p>${msg}</p>
             <button class="msg-close-btn">X</button>
         </span>
@@ -26,17 +26,13 @@ export default class Form{
     }
 
     showMsg(type){
-        let msg;
 
         if (type === 'success'){
-            msg = this.createMsgElement(this.msgs.s);
+            Page.prototype.showMessage(this.msgs.s, true);
         } else if (type === 'error') {
-            msg = this.createMsgElement(this.msgs.e);
-        }
-
-        const header = document.querySelector('#header');
-        header.after(msg);
-    }
+            Page.prototype.showMessage(this.msgs.e, true);
+        };
+    };
 
     removeQueryParam(queryString, params){
         const query = new URLSearchParams(queryString);

@@ -8,10 +8,39 @@ export default class Page{
         return page;    
     }
 
-    toggleModal(customContainerSelector){
-        const modalContainer = customContainerSelector ? document.querySelector(customContainerSelector) : document.querySelector('.loading-modal-container');
-        modalContainer.classList.toggle('active');
+    // setMessage(customContainerSelector){
+    //     const modalContainer = customContainerSelector ? document.querySelector(customContainerSelector) : document.querySelector('.msg-content');
+    //     modalContainer.innerHTML = '<p>Carregando...</p>';
+    //     modalContainer.classList.toggle('active');
+    // }
+
+    showMessage(msg, closeBtn){
+        if (!msg) {
+            document.querySelector('[data-msg]').remove();
+        } else {
+
+            const msgElement = document.createElement('span');
+            msgElement.dataset.msg = "";
+            
+            let msgContent = "";
+
+            msgContent += `<p>${msg}</p>`;
+            if (closeBtn) msgContent += `<button class="msg-close-btn">X</button>`
+
+            msgElement.innerHTML = msgContent;
+
+            if (closeBtn) {
+                const closeMsgBtn = msgElement.querySelector('.msg-close-btn')
+                closeMsgBtn.addEventListener('click', () => {
+                    msgElement.remove();
+                })
+            };
+            
+            const header = document.querySelector('body');
+            header.after(msgElement);
+        }
     }
+
 
     setBrowserPrevNext(){
         window.addEventListener('popstate', () => {
@@ -51,13 +80,13 @@ export default class Page{
         this.target = document.querySelector(this.target);
 
         // this.target.innerHTML = `<div class="loading"><img src="/assets/img/load.gif" alt="Carregando..." /></div>`
-        this.toggleModal();
+        this.showMessage('Carregando...', false);
         this.target.innerHTML = await this.fetchPage(this.paramString);
         window.history.pushState(null, null, this.paramString);
         document.title = "Contta " + this.setPtPageName(this.pageName);
         this.setBrowserPrevNext();
         runMainScript();
-        this.toggleModal();
+        this.showMessage(false);
         return this;
     }
 }

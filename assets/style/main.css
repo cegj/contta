@@ -30,42 +30,6 @@ footer {
     gap: 50px;
   }
 
-  .msg {
-      display: flex;
-      align-content: center;
-      justify-content: center;
-      gap: 20px;
-      padding: 1rem;
-      margin: 0;
-      color: #004d1d;
-      background-color: #b9d3af;
-  }
-
-  .msg.success {
-    color: #004d1d;
-    background-color: #b9d3af;
-  }
-
-  .msg.error {
-    color: #4d0000;
-    background-color: #d3afaf;
-}
-
-  .msg p, .msg button  {
-      display: inline-block;
-      margin: 0;
-  }
-
-  .msg-close-btn {
-      background-color: #dddddd;
-      color: #808080;
-      border: none;
-      height: 20px;
-      width: 20px;
-      cursor: pointer;
-      padding: 0;
-      margin: 0;
-  }
 
   [data-money] {
       opacity: 0;
@@ -86,14 +50,43 @@ footer {
     display: flex;
   }
 
-  .loading-modal{
-      display: block;
-      margin-top: 30px;
+  [data-msg], .msg-content{
+      display: flex;  
+      position: fixed;
+      top: 30px;
+      left: calc(50% - 150px);
       background-color: white;
       height: 50px;
-      width: 150px;
-      display: flex;
+      width: fit-content;
+      padding: 5px 20px;
+      box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
+      align-content: center;
       align-items: center;
       justify-content: center;
-      box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);  
+      gap: 15px;
   }
+
+[data-msg] p {
+  font-family: Roboto, sans-serif;
+}
+
+[data-msg="s"] {
+  color: #004d1d;
+  background-color: #f3ffee;
+}
+
+[data-msg="e"] {
+  color: #4d0000;
+  background-color: #ffe6e6;
+}
+
+.msg-close-btn {
+    background-color: #dddddd;
+    color: #808080;
+    border: none;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+}
