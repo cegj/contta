@@ -72,8 +72,8 @@ $queryWithoutIdTransaction = remove_url_param($url, 'id_transacao');
             <td>{$data}</td>
             <td>{$transacao['descricao']}</td>
             <td class='linha-extrato-valor'>R$ <span data-money>{$valorFormatado}</span></td>
-            <td><a class='filtrar' href='/categorias.php?categoria={$transacao['id_categoria']}'>{$transacao['nome_cat']} <img class='icone-filtrar' src='/assets/img/ico/filter.svg'></a></td>
-            <td><a class='filtrar' href='/contas.php?conta={$transacao['id_con']}'>{$transacao['conta']} <img class='icone-filtrar' src='/assets/img/ico/filter.svg'></a></td>
+            <td><a class='filtrar' href='?p=category&categoria={$transacao['id_categoria']}'>{$transacao['nome_cat']} <img class='icone-filtrar' src='/assets/img/ico/filter.svg'></a></td>
+            <td><a class='filtrar' href='?p=account&conta={$transacao['id_con']}'>{$transacao['conta']} <img class='icone-filtrar' src='/assets/img/ico/filter.svg'></a></td>
             <td class='coluna-acoes'>";
                 if ($transacao['tipo'] == 'T' && $transacao['valor'] > 0 or $transacao['tipo'] == 'SI') {
                   echo "";

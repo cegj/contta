@@ -164,7 +164,7 @@ $queryWithoutIdCat = remove_url_param($url, 'id_cat');
           <td>{$data}</td>
           <td>{$registro['descricao']}</td>
           <td class='linha-extrato-valor'>R$ <span data-money>{$valor}</span></td>
-          <td>{$registro['conta']}</td>
+          <td ><a class='filtrar' href='?p=account&conta={$registro['id_con']}'>{$registro['conta']}</a></td>
           <td class='coluna-acoes'>";
                             if ($registro['tipo'] == 'T' && $registro['valor'] > 0 or $registro['tipo'] == 'SI') {
                               echo "";
