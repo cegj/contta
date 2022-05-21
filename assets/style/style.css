@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Open+Sans:ital,wght@0,300;0,400;0,700;1,300&family=Roboto:wght@400;500&family=Ubuntu:wght@300;400&display=swap');
+
+@import url("main.css");
+@import url("extrato.css");
+@import url("categorias.css");
+@import url("contas.css");
+@import url("orcamento.css");
+@import url("budget.css");
+
+/* TO REFACTOR */
+@import url("global.css");
+@import url("header.css");
+@import url("saldos.css");
+@import url("opcoes.css");
+@import url("month-selector.css");
+@import url("tabelas.css");
+@import url("icones.css");
+@import url("titulos.css");
+@import url("footer.css");
+@import url("formularios.css");
+@import url("botoes.css");
+@import url("mobile.css");
+@import url("formulario_registrar.css");
+@import url("setup/login-cadastro-setup.css");
+
+@import url("/plugin/choices/assets/styles/choices.css");
