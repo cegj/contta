@@ -95,3 +95,4 @@ export default async function runMainScript(){
 const page = new Page();
 
 await page.load(window.location.search, '#main-content');
+page.setBrowserPrevNext();

@@ -71,20 +71,15 @@ export default class Page{
         return this.ptPageName;
     }
 
-    async load(paramString, target){
-        this.paramString = (paramString !== "") ? paramString : '?p=board';
-        this.params = new URLSearchParams(this.paramString);
-        this.pageName = this.params.get('p');
+    async load(customParamString, customTarget){
+        const paramString = (customParamString !== "") ? customParamString : '?p=board';
+        const params = new URLSearchParams(paramString);
+        const pageName = params.get('p');
+        const target = customTarget ? document.querySelector(customTarget) : document.querySelector('#main-content');
 
-        this.target = target ? target : '#main-content';
-        this.target = document.querySelector(this.target);
-
-        // this.target.innerHTML = `<div class="loading"><img src="/assets/img/load.gif" alt="Carregando..." /></div>`
         this.showMessage('Carregando...', false);
-        this.target.innerHTML = await this.fetchPage(this.paramString);
-        window.history.pushState(null, null, this.paramString);
-        document.title = "Contta " + this.setPtPageName(this.pageName);
-        this.setBrowserPrevNext();
+        target.innerHTML = await this.fetchPage(paramString);
+        document.title = "Contta " + this.setPtPageName(pageName);
         runMainScript();
         this.showMessage(false);
         return this;
