@@ -73,7 +73,7 @@ export default async function runMainScript(){
 
     Links.initLink();
 
-    const formTransaction = new Form('#form-transaction', {s: 'A transação foi registrada com sucesso!', e: 'Ocorreu um erro ao registrar a transação. Tente novamente!'});
+    const formTransaction = new Form('#form-transaction', {s: 'A transação foi registrada ou alterada com sucesso!', e: 'Ocorreu um erro ao registrar a transação. Tente novamente!'});
 
     formTransaction.initForm();
 

@@ -1,4 +1,5 @@
 import runMainScript from "../main.js";
+import Message from "./message.js";
 
 export default class Page{
 
@@ -13,34 +14,6 @@ export default class Page{
     //     modalContainer.innerHTML = '<p>Carregando...</p>';
     //     modalContainer.classList.toggle('active');
     // }
-
-    showMessage(msg, closeBtn){
-        if (msg === false) {
-            document.querySelector('[data-msg]').remove();
-        } else {
-
-            const msgElement = document.createElement('span');
-            msgElement.dataset.msg = "";
-            
-            let msgContent = "";
-
-            msgContent += `<p>${msg}</p>`;
-            if (closeBtn) msgContent += `<button class="msg-close-btn">X</button>`
-
-            msgElement.innerHTML = msgContent;
-
-            if (closeBtn) {
-                const closeMsgBtn = msgElement.querySelector('.msg-close-btn')
-                closeMsgBtn.addEventListener('click', () => {
-                    msgElement.remove();
-                })
-            };
-            
-            const header = document.querySelector('body');
-            header.after(msgElement);
-        }
-    }
-
 
     setBrowserPrevNext(){
         window.addEventListener('popstate', () => {
@@ -77,11 +50,12 @@ export default class Page{
         const pageName = params.get('p');
         const target = customTarget ? document.querySelector(customTarget) : document.querySelector('#main-content');
 
-        this.showMessage('Carregando...', false);
+        const loadingMsg = new Message('Carregando...');
+        loadingMsg.show();
         target.innerHTML = await this.fetchPage(paramString);
         document.title = "Contta " + this.setPtPageName(pageName);
         runMainScript();
-        this.showMessage(false);
+        loadingMsg.close();
         return this;
     }
 }

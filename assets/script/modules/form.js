@@ -1,4 +1,5 @@
-import Page from './page.js';
+import Page from "./page.js";
+import Message from "./message.js";
 
 export default class Form{
     constructor(formSelector, msgs){
@@ -8,29 +9,15 @@ export default class Form{
         if (msgs) this.msgs = msgs;
     }
 
-    createMsgElement(msg){
-        const msgElement = document.createElement('span');
-        msgElement.innerHTML = `
-        <span data-msg="s">
-            <p>${msg}</p>
-            <button class="msg-close-btn">X</button>
-        </span>
-        `
-
-        const closeMsgBtn = msgElement.querySelector('.msg-close-btn')
-        closeMsgBtn.addEventListener('click', () => {
-            msgElement.remove();
-        })
-        
-        return msgElement;
-    }
 
     showMsg(type){
 
         if (type === 'success'){
-            Page.prototype.showMessage(this.msgs.s, true);
+            const msg = new Message(this.msgs.s);
+            msg.show(true, 10000);
         } else if (type === 'error') {
-            Page.prototype.showMessage(this.msgs.e, true);
+            const msg = new Message(this.msgs.e);
+            msg.show(true, 10000);
         };
     };
 

@@ -40,8 +40,6 @@ if ($id_transacao) {
 
 ?>
 
-<link rel="stylesheet" href="/global/formulario_registrar.css">
-
 <form id="form-transaction" class="form-cadastrar-editar" action="/app/form_handler/handle_form-transaction.php" method="POST">
 
   <?php if ($id_transacao) {
