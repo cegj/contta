@@ -10,15 +10,153 @@ include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/format_value.php')
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/statement/calculate_result.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/database/there_is_no_table.php');
 
-$edicao = false;
+$months = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
+
+// Build table header for each month
+$tableMonthsTitle = "";
+foreach($months as $month){
+  
+  $tableMonthsTitle = $tableMonthsTitle . "<th data-type='month-title' colspan='2'>{$month}</th>";
+}
+
+$tablePlanExecTitle = "";
+foreach($months as $month){
+  $tablePlanExecTitle = $tablePlanExecTitle . "<th data-prev-exec-month='{$month}'>Prev.</th><th data-prev-exec-month='{$month}'>Exec.</th>";
+}
+
+//Get categories and build html for each of them
+
+$primaryCategories = get_primary_categories($bdConexao);
+
+$budgetLines = "";
+
+foreach ($primaryCategories as $primaryCategory){
+
+  $budgetData = get_budget($bdConexao, $primaryCategory['nome_cat']);
+
+  foreach ($budgetData as $data){
+
+    $budgetLines .= "<tr>";
+
+    //Define datasets
+    $dataSets = "";
+    $dataSets .= "data-cat-id='{$data['id_cat']}'";
+    $dataSets .= "data-cat-name='{$data['nome_cat']}'";
+    if ($data['eh_cat_principal']){
+      $dataSets .= "data-primary-cat='true'";
+    }
+
+    //Create cell (td) elements
+    ////Category name
+    $budgetLines .= "<td data-type='cat-name' data-fixed-column='first' $dataSets>
+                      {$data['nome_cat']}
+                    </td>";
+
+    ////Category result
+    $budgetLines .= "<td data-type='cat-result' data-fixed-column='second' $dataSets>
+                    </td>";
+
+    foreach ($months as $month){
+
+      $monthYear = $ano . "_" . $month;
+
+      $monthDataSets = "";
+
+      $monthDataSets .= "data-month='{$monthYear}'";
+      if (check_selected_month_budget($month, $mes)){
+        $monthDataSets .= "data-selected='true'";
+      } else {
+        $monthDataSets .= "data-selected='false'";
+      }
+
+      ////Planned value
+
+      if ($data['eh_cat_principal']){
+        $monthCatPlanSum = sum_budget_value($bdConexao, $monthYear, $data['nome_cat']);
+      } else {
+        $monthCatPlanSum = $data[$monthYear];
+      }
+      $budgetLines .= "<td data-money data-type='plan' $dataSets $monthDataSets>
+                        {$monthCatPlanSum}
+                      </td>";
+
+      ////Executed value
+      if ($data['eh_cat_principal']){
+        $monthCatExecSun = calculate_result($bdConexao, $month, $ano, 'SSM', null, null, $data['nome_cat']);
+      } else {
+        $monthCatExecSun = calculate_result($bdConexao, $month, $ano, 'SSM', null, $data['id_cat']);
+      }
+      $budgetLines .= "<td data-money data-type='exec' $dataSets $monthDataSets>
+                        {$monthCatExecSun}
+                      </td>";
+    }
+
+    $budgetLines .= "</tr>";
+
+  }
+
+}
+
+////Month result
+$budgetLines .= "<tr>";
+$budgetLines .= "<td data-type='month-result-title' data-fixed-column='first'>Resultado mês:</td>";
+$budgetLines .= "<td data-type='month-result-title' data-fixed-column='second'>R$ 0,00</td>";
+
+foreach ($months as $month){
+
+  $monthYear = $ano . "_" . $month;
+
+  $monthResultDataSets = "";
+  $monthResultDataSets .= "data-month='{$monthYear}'";
+  if (check_selected_month_budget($month, $mes)){
+    $monthResultDataSets .= "data-selected='true'";
+  } else {
+    $monthResultDataSets .= "data-selected='false'";
+  }
+
+  //Planned month result (sum)
+  $budgetLines .= "<td data-money data-type='month-result-plan' $monthResultDataSets>" . sum_budget_value($bdConexao, $monthYear) . "</td>";
+  
+  //Executed month result (sum)
+  $budgetLines .= "<td data-money data-type='month-result-exec' $monthResultDataSets>" . calculate_result($bdConexao, $month, $ano, 'SSM') . "</td>";
+
+}
+
+$budgetLines .= "</tr>";  
+
+////Acumulated result
+
+$acumulatedPlanned = 0;
+
+$budgetLines .= "<tr>";
+$budgetLines .= "<td data-type='month-result-title' data-fixed-column='first'>Resultado acumulado:</td>";
+$budgetLines .= "<td data-type='month-result-title' data-fixed-column='second'>R$ 0,00</td>";
+
+foreach ($months as $month){
+
+  $monthYear = $ano . "_" . $month;
+
+  $acumulatedResultDataSets = "";
+  $acumulatedResultDataSets .= "data-month='{$monthYear}'";
+  if (check_selected_month_budget($month, $mes)){
+    $acumulatedResultDataSets .= "data-selected='true'";
+  } else {
+    $acumulatedResultDataSets .= "data-selected='false'";
+  }
+
+  //Planned month result (sum)
+  $acumulatedPlanned += floatval(sum_budget_value($bdConexao, $monthYear));
+  $budgetLines .= "<td data-money data-type='month-result-plan' $acumulatedResultDataSets>" . $acumulatedPlanned . "</td>";
+  
+  //Executed month result (sum)
+  $budgetLines .= "<td data-money data-type='month-result-exec' $acumulatedResultDataSets>" . calculate_result($bdConexao, $month, $ano, 'SAM') . "</td>";
+
+}
+
+$budgetLines .= "</tr>";  
 
 ?>
 
-<!-- <script>
-  if (screen.width < 640) {
-    window.location.href = '/orcamento-m.php';
-  }
-</script> -->
 
 <main class="container-principal">
 
@@ -27,155 +165,6 @@ $edicao = false;
 
   <!-- Context options bar -->
   <?php include($_SERVER["DOCUMENT_ROOT"] . '/app/pages/modules/context-options.php'); ?>
-
-  <?php
-
-  if (isset($_POST['campo-categoria']) && isset($_POST['campo-mes']) && isset($_POST['campo-valor'])) {
-    $catEmEdicao = $_POST['campo-categoria'];
-    $mesEmEdicao = $_POST['campo-mes'];
-    $novoValor = $_POST['campo-valor'];
-
-    update_budget_value($bdConexao, $catEmEdicao, $mesEmEdicao, $novoValor);
-  }
-
-  $months = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
-
-  // Build table header for each month
-  $tableMonthsTitle = "";
-  foreach($months as $month){
-    
-    $tableMonthsTitle = $tableMonthsTitle . "<th data-type='month-title' colspan='2'>{$month}</th>";
-  }
-
-  $tablePlanExecTitle = "";
-  foreach($months as $month){
-    $tablePlanExecTitle = $tablePlanExecTitle . "<th data-prev-exec-month='{$month}'>Prev.</th><th data-prev-exec-month='{$month}'>Exec.</th>";
-  }
-
-  //Get categories and build html for each of them
-
-  $primaryCategories = get_primary_categories($bdConexao);
-
-  $budgetLines = "";
-
-  foreach ($primaryCategories as $primaryCategory){
-
-    $budgetData = get_budget($bdConexao, $primaryCategory['nome_cat']);
-
-    foreach ($budgetData as $data){
-
-      $budgetLines .= "<tr>";
-
-      //Define datasets
-      $dataSets = "";
-      $dataSets .= "data-cat-id='{$data['id_cat']}'";
-      $dataSets .= "data-cat-name='{$data['nome_cat']}'";
-      if ($data['eh_cat_principal']){
-        $dataSets .= "data-primary-cat='true'";
-      }
-
-      //Create cell (td) elements
-      ////Category name
-      $budgetLines .= "<td data-type='cat-name' data-fixed-column='first' $dataSets>
-                        {$data['nome_cat']}
-                      </td>";
-
-      ////Category result
-      $budgetLines .= "<td data-type='cat-result' data-fixed-column='second' $dataSets>
-                      </td>";
-
-      foreach ($months as $month){
-
-        $monthYear = $ano . "_" . $month;
-
-        $monthDataSets = "";
-
-        $monthDataSets .= "data-month='{$monthYear}'";
-        if (check_selected_month_budget($month, $mes)){
-          $monthDataSets .= "data-selected='true'";
-        } else {
-          $monthDataSets .= "data-selected='false'";
-        }
-
-        ////Planned value
-        $budgetLines .= "<td data-money data-type='plan' $dataSets $monthDataSets>
-                          {$data[$monthYear]}
-                        </td>";
-
-        ////Executed value
-        $monthCatBalance = calculate_result($bdConexao, $month, $ano, 'SSM', null, $data['id_cat']);
-        $budgetLines .= "<td data-money data-type='exec' $dataSets $monthDataSets>
-                          {$monthCatBalance}
-                        </td>";
-      }
-
-      $budgetLines .= "</tr>";
-
-    }
-
-  }
-
-  ////Month result
-  $budgetLines .= "<tr>";
-  $budgetLines .= "<td data-type='month-result-title' data-fixed-column='first'>Resultado mês:</td>";
-  $budgetLines .= "<td data-type='month-result-title' data-fixed-column='second'>R$ 0,00</td>";
-
-  foreach ($months as $month){
-
-    $monthYear = $ano . "_" . $month;
-
-    $monthResultDataSets = "";
-    $monthResultDataSets .= "data-month='{$monthYear}'";
-    if (check_selected_month_budget($month, $mes)){
-      $monthResultDataSets .= "data-selected='true'";
-    } else {
-      $monthResultDataSets .= "data-selected='false'";
-    }
-  
-    //Planned month result (sum)
-    $budgetLines .= "<td data-money data-type='month-result-plan' $monthResultDataSets>" . sum_budget_value($bdConexao, $monthYear) . "</td>";
-    
-    //Executed month result (sum)
-    $budgetLines .= "<td data-money data-type='month-result-exec' $monthResultDataSets>" . calculate_result($bdConexao, $month, $ano, 'SSM') . "</td>";
-
-  }
-
-  $budgetLines .= "</tr>";  
-
-  ////Acumulated result
-
-  $acumulatedPlanned = 0;
-
-  $budgetLines .= "<tr>";
-  $budgetLines .= "<td data-type='month-result-title' data-fixed-column='first'>Resultado acumulado:</td>";
-  $budgetLines .= "<td data-type='month-result-title' data-fixed-column='second'>R$ 0,00</td>";
-
-  foreach ($months as $month){
-
-    $monthYear = $ano . "_" . $month;
-
-    $acumulatedResultDataSets = "";
-    $acumulatedResultDataSets .= "data-month='{$monthYear}'";
-    if (check_selected_month_budget($month, $mes)){
-      $acumulatedResultDataSets .= "data-selected='true'";
-    } else {
-      $acumulatedResultDataSets .= "data-selected='false'";
-    }
-  
-    //Planned month result (sum)
-    $acumulatedPlanned += floatval(sum_budget_value($bdConexao, $monthYear));
-    $budgetLines .= "<td data-money data-type='month-result-plan' $acumulatedResultDataSets>" . $acumulatedPlanned . "</td>";
-    
-    //Executed month result (sum)
-    $budgetLines .= "<td data-money data-type='month-result-exec' $acumulatedResultDataSets>" . calculate_result($bdConexao, $month, $ano, 'SAM') . "</td>";
-
-  }
-
-  $budgetLines .= "</tr>";  
-
-
-
-  ?>
 
   <style>
     .table-container {

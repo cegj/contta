@@ -4,7 +4,6 @@
 @import url("extrato.css");
 @import url("categorias.css");
 @import url("contas.css");
-@import url("orcamento.css");
 @import url("budget.css");
 
 /* TO REFACTOR */
@@ -21,6 +20,6 @@
 @import url("botoes.css");
 @import url("mobile.css");
 @import url("formulario_registrar.css");
-@import url("setup/login-cadastro-setup.css");
+@import url("login-cadastro-setup.css");
 
 @import url("/plugin/choices/assets/styles/choices.css");
