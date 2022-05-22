@@ -4,6 +4,18 @@ export default class Value{
         this.setColor = setColor;
     }
 
+    showHideMoney(){
+        // Move show-hide (showhide.js) into here
+    }
+
+    localeCurrency(){
+        // Move localecurrency (budgetTable.js) into here
+    }
+
+    setColor(){
+        // Refactor setValueColor here
+    }
+
     setValueColor(customValueElement){
 
         const element = customValueElement ? document.querySelector(customValueElement) : this.valueElement;
