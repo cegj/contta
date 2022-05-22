@@ -63,7 +63,7 @@
     margin-top: auto;
 }
 
-[data-type="plan"], [data-type="exec"], [data-type="cat-result"], [data-type="month-result-plan"], [data-type="month-result-exec"] {
+[data-type="plan"], [data-type="exec"], [data-type="selected-result"], [data-type="month-selected-result"], [data-type="month-result-plan"], [data-type="month-result-exec"] {
     text-align: center;
 }
 
@@ -105,15 +105,15 @@
     background-color: #fdfdd6 !important;
 }
 
-[data-type="cat-name"][data-primary-cat="true"], [data-type="cat-result"][data-primary-cat="true"]{
+[data-type="cat-name"][data-primary-cat="true"], [data-type="selected-result"][data-primary-cat="true"]{
     background-color: #eeeeee;   
 }
 
-[data-type="cat-name"], [data-type="cat-result"]{
+[data-type="cat-name"], [data-type="selected-result"]{
     background-color: #fafafa;
 }
 
-[data-type="month-result-plan"] {
+[data-type="month-selected-result"], [data-type="month-result-plan"] {
     background-color: #f7fffe;
     color: rgb(130, 130, 130);
 }

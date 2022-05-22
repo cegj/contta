@@ -90,3 +90,11 @@ footer {
     padding: 0;
     margin: 0;
 }
+
+[data-value-color="positive"]{
+  color: #268f4e !important;
+}
+
+[data-value-color="negative"]{
+  color: #d13434 !important;
+}

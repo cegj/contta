@@ -53,7 +53,7 @@ foreach ($primaryCategories as $primaryCategory){
                     </td>";
 
     ////Category result
-    $budgetLines .= "<td data-type='cat-result' data-fixed-column='second' $dataSets>
+    $budgetLines .= "<td data-money='' data-type='selected-result' data-fixed-column='second' $dataSets>
                     </td>";
 
     foreach ($months as $month){
@@ -100,7 +100,7 @@ foreach ($primaryCategories as $primaryCategory){
 ////Month result
 $budgetLines .= "<tr>";
 $budgetLines .= "<td data-type='month-result-title' data-fixed-column='first'>Resultado mês:</td>";
-$budgetLines .= "<td data-type='month-result-title' data-fixed-column='second'>R$ 0,00</td>";
+$budgetLines .= "<td data-type='month-selected-result' data-fixed-column='second'></td>";
 
 foreach ($months as $month){
 
@@ -130,7 +130,7 @@ $acumulatedPlanned = 0;
 
 $budgetLines .= "<tr>";
 $budgetLines .= "<td data-type='month-result-title' data-fixed-column='first'>Resultado acumulado:</td>";
-$budgetLines .= "<td data-type='month-result-title' data-fixed-column='second'>R$ 0,00</td>";
+$budgetLines .= "<td data-type='month-selected-result' data-fixed-column='second'>R$ 0,00</td>";
 
 foreach ($months as $month){
 
