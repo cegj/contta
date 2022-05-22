@@ -18,6 +18,7 @@ include_once($_SERVER["DOCUMENT_ROOT"] . './app/function/database/there_is_no_ta
   <div class="container duas-colunas sem-bg">
 
     <div class="box informacoes">
+      
       <?php $buscaUltimoRegistro = get_transactions($bdConexao, null, $mes, $ano, false, true);
 
       if ($buscaUltimoRegistro != null) :

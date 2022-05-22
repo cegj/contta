@@ -71,7 +71,6 @@ export default class BudgetTable{
         const monthNameSpan = this.editForm.querySelector('#mes-label');
         const monthName = this.getPtMonthName(+(event.target.dataset.month.replace(/\d{4}_(\d+)/g, '$1')));
 
-        event.target.style.backgroundColor = "lightgray";
         catNameSpan.innerText = event.target.dataset.catName;
         this.editForm['campo-categoria'].value = event.target.dataset.catId;
         this.editForm['campo-mes'].value = event.target.dataset.month;
@@ -123,7 +122,9 @@ export default class BudgetTable{
 
     addEvents(){
         this.table.querySelectorAll('[data-type="plan"]').forEach((planCell) => {
-            planCell.addEventListener('dblclick', this.openEdit);
+            if (!planCell.dataset.primaryCat){
+                planCell.addEventListener('dblclick', this.openEdit);
+            }
         })
     }
 
