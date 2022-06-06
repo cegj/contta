@@ -1,6 +1,7 @@
 <?php
 
 function create_tables($bdConexao){
+
     $tabelaUsuarios = "
   CREATE TABLE usuarios (
     ID Int UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT,
@@ -50,22 +51,24 @@ function create_tables($bdConexao){
     );";
   
    mysqli_query($bdConexao, $tabelaExtrato);
+
+   $year = date('Y');
   
    $tabelaOrcamento = "
    CREATE TABLE orcamento (
      id_categoria Int(11),
-     janeiro decimal(15,2) DEFAULT 0.00,
-     fevereiro decimal(15,2) DEFAULT 0.00,
-     março decimal(15,2) DEFAULT 0.00,
-     abril decimal(15,2) DEFAULT 0.00,
-     maio decimal(15,2) DEFAULT 0.00,
-     junho decimal(15,2) DEFAULT 0.00,
-     julho decimal(15,2) DEFAULT 0.00,
-     agosto decimal(15,2) DEFAULT 0.00,
-     setembro decimal(15,2) DEFAULT 0.00,
-     outubro decimal(15,2) DEFAULT 0.00,
-     novembro decimal(15,2) DEFAULT 0.00,
-     dezembro decimal(15,2) DEFAULT 0.00
+     ${year}_1 decimal(15,2) DEFAULT 0.00,
+     ${year}_2 decimal(15,2) DEFAULT 0.00,
+     ${year}_3 decimal(15,2) DEFAULT 0.00,
+     ${year}_4 decimal(15,2) DEFAULT 0.00,
+     ${year}_5 decimal(15,2) DEFAULT 0.00,
+     ${year}_6 decimal(15,2) DEFAULT 0.00,
+     ${year}_7 decimal(15,2) DEFAULT 0.00,
+     ${year}_8 decimal(15,2) DEFAULT 0.00,
+     ${year}_9 decimal(15,2) DEFAULT 0.00,
+     ${year}_10 decimal(15,2) DEFAULT 0.00,
+     ${year}_11 decimal(15,2) DEFAULT 0.00,
+     ${year}_12 decimal(15,2) DEFAULT 0.00
     );";
       
   mysqli_query($bdConexao, $tabelaOrcamento);

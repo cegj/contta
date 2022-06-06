@@ -1,18 +1,17 @@
 <?php
 
-function there_is_no_table($bdConexao)
-{
-    $bdBuscar = "
-    SHOW TABLES;
-    ";
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/bd.php');
 
-    $resultado = mysqli_query($bdConexao, $bdBuscar);
+$bdBuscar = "
+SHOW TABLES;
+";
 
-    $NumTabelas = mysqli_num_rows($resultado);
+$resultado = mysqli_query($bdConexao, $bdBuscar);
 
-    if (($NumTabelas) == 0) {
-        return true;
-    } else {
-        return false;
-    }
+$NumTabelas = mysqli_num_rows($resultado);
+
+if (($NumTabelas) == 0) {
+    echo 'true';
+} else {
+    echo 'false';
 }

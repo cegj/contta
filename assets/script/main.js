@@ -92,7 +92,16 @@ export default async function runMainScript(){
 
 //Initial page load
 
-const page = new Page();
-
-await page.load(window.location.search, '#main-content');
-page.setBrowserPrevNext();
+fetch('/app/function/database/there_is_no_table.php')
+.then(res => res.text())
+.then(there_is_no_table => {
+    if (there_is_no_table === 'true'){
+        window.location.href = '/app/setup/setup.php'
+    } else {
+        (async function firstload(){
+            const page = new Page();
+            await page.load(window.location.search, '#main-content');
+            page.setBrowserPrevNext();    
+        })();
+    }
+})

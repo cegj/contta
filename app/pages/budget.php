@@ -8,7 +8,6 @@ include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/category/get_primary_cat
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/category/get_secondary_categories.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/format_value.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/statement/calculate_result.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/database/there_is_no_table.php');
 
 $months = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
 

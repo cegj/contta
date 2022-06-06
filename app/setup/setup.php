@@ -1,31 +1,36 @@
 <?php 
 
-  include_once($_SERVER["DOCUMENT_ROOT"] . '../app/function/database/there_is_no_table.php');
-
-  include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/includesiniciais.php'); 
+  include_once($_SERVER["DOCUMENT_ROOT"] . '/app/bd.php');
 
 ?>
 
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <!-- Informações do head -->
-  <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/head.php'); ?>
-  <link rel="stylesheet" href="/setup/login-cadastro-setup.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/assets/style/style.css">
+  <link rel="stylesheet" href="/assets/style/login-cadastro-setup.css">
   <script src="/plugin/sweetalert2/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+  <title>Contta | Configuração inicial</title>
 </head>
-
 <body>
-<?php
 
-if (there_is_no_table($bdConexao)) :
-
-?>
+<?php include($_SERVER["DOCUMENT_ROOT"] . '/app/pages/modules/unlogged-header.php'); ?>
 
 
-<!-- Cabeçalho (barra superior) -->
-<?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/header.php') ?>
+<script language='javascript' type='text/javascript'>
+            Swal.fire({
+                imageUrl: '/assets/img/Contta_logo.png',
+                imageWidth: 300,
+                title: 'Seja bem vindo!',
+                text: 'Para começar a utilizar o Contta, é necessário fazer uma rápida configuração inicial. Vamos começar?',
+                // icon: 'info',
+                confirmButtonText: 'Iniciar configuração'
+            });
+        </script>
+
 
     <main class="main-cadastro">
     <div class="box login">
@@ -37,7 +42,7 @@ if (there_is_no_table($bdConexao)) :
         <label>Código de autorização:</label><input type="password" name="cod_autorizacao" id="cod_autorizacao">
         <div class='div-checkbox input-lista-padrao-categorias'>
           <input type='checkbox' name='preConfigurarCats' id="preConfigurarCats" value='true'>
-          <label for='preConfigurarCats'>Pré-configurar lista de categorias <a href="">(entenda)</a></label>
+          <label for='preConfigurarCats'>Pré-configurar lista de categorias</label>
         </div>
         <div class="container-botao-entrar">
         <input class="botao-acao-principal entrar" type="submit" value="Cadastrar" id="cadastrar" name="cadastrar">
@@ -45,29 +50,10 @@ if (there_is_no_table($bdConexao)) :
       </form>
     </div>
     <div class="info-box">
-      <p>Para que outras pessoas possam criar uma conta no seu Contta e efetuar registros e consultas, você deve fornecer a elas o <b>código de autorização</b> que será criado agora. Guarde esse código com cuidado, pois qualquer pessoa que tenha acesso a ele poderá criar uma conta e visualizar as suas informações.</p>
+      <p>Para que outras pessoas possam criar uma conta e efetuar registros e consultas, você deve fornecer a elas o <b>código de autorização</b> que será criado agora. Guarde esse código com cuidado, pois qualquer pessoa que tenha acesso a ele poderá criar uma conta e visualizar as suas informações.</p>
     </div>
 </main>
   
-
-<?php else : ?>
-
-  <script language='javascript' type='text/javascript'>
-  Swal.fire({
-    title: 'Não foi possível iniciar a configuração inicial',
-    text: 'Já existem tabelas no Banco de Dados. Para realizar uma nova instalação, apague todas as tabelas existentes.',
-    icon: 'error',
-    confirmButtonText: 'Sair',
-    didClose: function(){
-      window.location.href='/index.php';
-      }
-  });
-  </script>
-
-<?php die();
-endif;
-?>
-
 <script language='javascript' type='text/javascript'>
 
   botaoCadastrar = document.getElementById('cadastrar');
