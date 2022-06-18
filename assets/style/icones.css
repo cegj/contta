@@ -1,4 +1,5 @@
-.icone-editar, .icone-filtrar {
+.icone-editar,
+.icone-filtrar {
   height: 20px;
 }
 
@@ -16,7 +17,7 @@
 }
 
 .filtrar:hover {
-  color:#00314d;
+  color: #00314d;
 }
 
 .filtrar:hover .icone-filtrar {
@@ -24,10 +25,10 @@
 }
 
 .filtrar-titulo::after {
-  content:"";
+  content: "";
   background-image: url(/assets/img/ico/filter.svg);
   background-repeat: no-repeat;
-  background-size:contain;
+  background-size: contain;
   display: inline-block;
   width: 30px;
   height: 20px;

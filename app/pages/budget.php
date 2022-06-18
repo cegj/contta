@@ -48,7 +48,7 @@ foreach ($primaryCategories as $primaryCategory){
     //Create cell (td) elements
     ////Category name
     $budgetLines .= "<td data-type='cat-name' data-fixed-column='first' $dataSets>
-                      {$data['nome_cat']}
+                      <a class='filtrar' href='?p=category&categoria={$data['id_cat']}'>{$data['nome_cat']}</a>
                     </td>";
 
     ////Category result
