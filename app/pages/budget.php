@@ -157,7 +157,7 @@ $budgetLines .= "</tr>";
 ?>
 
 
-<main class="container-principal">
+<main class="container-principal" data-page-name="Orçamento">
 
   <!-- Balance boxes -->
   <?php include($_SERVER["DOCUMENT_ROOT"] . '/app/pages/modules/balance-boxes.php'); ?>

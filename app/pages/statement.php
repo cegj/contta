@@ -15,7 +15,7 @@ $id_transacao = filter_input(INPUT_GET, 'id_transacao', FILTER_VALIDATE_INT);
 $queryWithoutIdTransaction = remove_url_param($url, 'id_transacao');
 
 ?>
-<main class="container-principal">
+<main class="container-principal" data-page-name="Extrato">
 
   <!-- Balance boxes -->
   <?php include($_SERVER["DOCUMENT_ROOT"] . '/app/pages/modules/balance-boxes.php'); ?>

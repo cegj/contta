@@ -6,7 +6,7 @@ include_once($_SERVER["DOCUMENT_ROOT"] . './app/function/utils/format_value.php'
 
 ?>
 
-<main class="container-principal">
+<main class="container-principal" data-page-name="Painel">
 
   <!-- Balance boxes -->
   <?php include($_SERVER["DOCUMENT_ROOT"] . '/app/pages/modules/balance-boxes.php'); ?>

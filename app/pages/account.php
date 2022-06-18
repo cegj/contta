@@ -20,7 +20,7 @@ $queryWithoutIdConta = remove_url_param($url, 'id_conta');
 
 ?>
 
-<main class="container-principal">
+<main class="container-principal" data-page-name="Contas">
 
   <!-- Balance boxes -->
   <?php include($_SERVER["DOCUMENT_ROOT"] . '/app/pages/modules/balance-boxes.php'); ?>
