@@ -3,8 +3,8 @@
 //Conexão com o banco de dados
 
 $dbServer = '127.0.0.1';
-$dbUser = '';
+$dbUser = 'root';
 $dbPassword = '';
-$dbName = '';
+$dbName = 'bdcontta';
 
 $bdConexao = mysqli_connect($dbServer, $dbUser, $dbPassword, $dbName);

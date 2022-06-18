@@ -1,16 +1,22 @@
-<?php include($_SERVER["DOCUMENT_ROOT"].'/partes-template/includesiniciais.php'); 
-      include ($_SERVER["DOCUMENT_ROOT"].'/setup/funcoes_setup.php');
-      ?>
+<?php 
+
+include_once($_SERVER["DOCUMENT_ROOT"] . '/app/bd.php');
+      
+?>
 
 <html>
 
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
-  <!-- Informações do head -->
-  <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/head.php'); ?>
-  <link rel="stylesheet" href="/setup/login-cadastro-setup.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/assets/style/style.css">
+  <link rel="stylesheet" href="/assets/style/login-cadastro-setup.css">
   <script src="/plugin/sweetalert2/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+  <title>Contta | Cadastro</title>
 </head>
-
 <body>
 
 <?php
@@ -56,7 +62,7 @@ $logarray = $array['login'];
       icon: 'error',
       confirmButtonText: 'Tentar novamente',
       didClose: function(){
-        window.location.href='/cadastro.php';
+        window.location.href='/app/setup/signup.php';
         }
     });
     </script>
@@ -73,7 +79,7 @@ $logarray = $array['login'];
           icon: 'error',
           confirmButtonText: 'Tentar novamente',
           didClose: function(){
-            window.location.href='/cadastro.php';
+            window.location.href='/app/setup/signup.php';
             }
         });
         </script>
@@ -94,7 +100,7 @@ $logarray = $array['login'];
             icon: 'error',
             confirmButtonText: 'Tentar novamente',
             didClose: function(){
-              window.location.href='/cadastro.php';
+              window.location.href='/app/setup/signup.php';
               }
           });
           </script>
@@ -110,7 +116,7 @@ $logarray = $array['login'];
             icon: 'error',
             confirmButtonText: 'Tentar novamente',
             didClose: function(){
-              window.location.href='/cadastro.php';
+              window.location.href='/app/setup/signup.php';
               }
           });
           </script>
@@ -133,7 +139,7 @@ $logarray = $array['login'];
             icon: 'success',
             confirmButtonText: 'Fazer login',
             didClose: function(){
-              window.location.href='/index.php';
+              window.location.href='/';
               }
           });
           </script>
@@ -149,7 +155,7 @@ $logarray = $array['login'];
             icon: 'error',
             confirmButtonText: 'Tentar novamente',
             didClose: function(){
-              window.location.href='/cadastro.php';
+              window.location.href='/app/setup/signup.php';
               }
           });
           </script>
@@ -168,7 +174,7 @@ $logarray = $array['login'];
       icon: 'error',
       confirmButtonText: 'Tentar novamente',
       didClose: function(){
-        window.location.href='/cadastro.php';
+        window.location.href='/app/setup/signup.php';
         }
     });
     </script>

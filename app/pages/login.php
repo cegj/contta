@@ -12,7 +12,7 @@ include($_SERVER["DOCUMENT_ROOT"] . '/app/pages/modules/unlogged-header.php');
       <div class="container-botao-entrar">
         <input class="botao-acao-principal entrar" type="submit" value="Entrar" id="entrar" name="entrar"><br>
       </div>
-      <p class="text-cadastro"><a href="/cadastro.php">Tem um código de autorização? Cadastre-se.</a></p>
+      <p class="text-cadastro"><a href="/app/setup/signup.php">Tem um código de autorização? Cadastre-se.</a></p>
     </form>
   </div>
 </main>

@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html>
 
+<!DOCTYPE html>
+<html lang="pt-BT">
 <head>
-  <!-- Informações do head -->
-  <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/head.php'); ?>
-  <link rel="stylesheet" href="/setup/login-cadastro-setup.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/assets/style/style.css">
+  <link rel="stylesheet" href="/assets/style/login-cadastro-setup.css">
+  <script src="/plugin/sweetalert2/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+  <title>Contta | Cadastro</title>
 </head>
-
-
-<body>p
+<body>
   <!-- Cabeçalho (barra superior) -->
-  <?php include($_SERVER["DOCUMENT_ROOT"] . '/partes-template/header.php') ?>
+  <?php include($_SERVER["DOCUMENT_ROOT"] . '/app/pages/modules/unlogged-header.php'); ?>
 
   <main class="main-cadastro">
     <div class="box login">
-      <form method="POST" action="cadastro_valida.php">
+      <form method="POST" action="/app/form_handler/handle_signup.php">
         <label>Usuário:</label><input type="text" name="login" id="login">
         <label>Senha:</label><input type="password" name="senha" id="senha">
         <label>Código de autorização:</label><input type="password" name="cod_autorizacao" id="cod_autorizacao">
         <div class="container-botao-entrar">
           <input class="botao-acao-principal entrar" type="submit" value="Cadastrar" id="cadastrar" name="cadastrar">
         </div>
-        <p class="text-cadastro"><a href="/login.php">Já tem um cadastro? Faça login.</a></p>
+        <p class="text-cadastro"><a href="/">Já tem um cadastro? Faça login.</a></p>
       </form>
     </div>
     <div class="info-box">
