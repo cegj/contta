@@ -1,4 +1,5 @@
-.main-login, .main-cadastro{
+.main-login,
+.main-cadastro {
   display: flex;
   max-width: 800px;
   margin: 0 auto;
@@ -12,7 +13,7 @@
 
 .login {
   max-width: 400px;
-  background-image: linear-gradient(#ffffff, #e0ffcd);
+  background-image: linear-gradient(#f2ffea, #ddffc7);
 }
 
 .login form {
