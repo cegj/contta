@@ -62,7 +62,7 @@ $queryWithoutIdCat = remove_url_param($url, 'id_cat');
 
                 if ($configuracao != true) :
 
-                  echo "<td>R$ <span data-money>{$saldoMesCatPrincipal}</span></td>";
+                  echo "<td>R$ <span data-showhide>{$saldoMesCatPrincipal}</span></td>";
 
                 endif;
 
@@ -91,7 +91,7 @@ $queryWithoutIdCat = remove_url_param($url, 'id_cat');
 
                   if ($configuracao != true) :
 
-                    echo "<td>R$ <span data-money>{$saldoMes}</span></td>";
+                    echo "<td>R$ <span data-showhide>{$saldoMes}</span></td>";
 
                   endif;
 
@@ -163,7 +163,7 @@ $queryWithoutIdCat = remove_url_param($url, 'id_cat');
           <td class='linha-extrato-tipo'>{$registro['tipo']}</td>
           <td>{$data}</td>
           <td>{$registro['descricao']}</td>
-          <td class='linha-extrato-valor'>R$ <span data-money>{$valor}</span></td>
+          <td class='linha-extrato-valor'>R$ <span data-showhide>{$valor}</span></td>
           <td ><a class='filtrar' href='?p=account&conta={$registro['id_con']}'>{$registro['conta']}</a></td>
           <td class='coluna-acoes'>";
                             if ($registro['tipo'] == 'T' && $registro['valor'] > 0 or $registro['tipo'] == 'SI') {
@@ -180,9 +180,9 @@ $queryWithoutIdCat = remove_url_param($url, 'id_cat');
                           echo "
               <tr>
                 <td class='linha-resultado-dia-extrato' colspan='6' class='linha-resultado-dia-extrato'>
-                  <span class='valor-resultado-dia-extrato'>Resultado diário: R$ <span data-money>{$resultadoDia}</span></span>
-                  <span class='valor-resultado-dia-extrato'>Acumulado mês: R$ <span data-money>{$resultadoDiaAcumuladoMes}</span></span>
-                  <span class='valor-resultado-dia-extrato'>Acumulado total: R$ <span data-money>{$resultadoDiaAcumuladoTotal}</span></span>
+                  <span class='valor-resultado-dia-extrato'>Resultado diário: R$ <span data-showhide>{$resultadoDia}</span></span>
+                  <span class='valor-resultado-dia-extrato'>Acumulado mês: R$ <span data-showhide>{$resultadoDiaAcumuladoMes}</span></span>
+                  <span class='valor-resultado-dia-extrato'>Acumulado total: R$ <span data-showhide>{$resultadoDiaAcumuladoTotal}</span></span>
                 </td>
               </tr>
               ";

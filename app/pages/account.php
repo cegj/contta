@@ -54,7 +54,7 @@ $queryWithoutIdConta = remove_url_param($url, 'id_conta');
 
               echo "<tr>
                         <td class='td-conta'><a class='filtrar' href='?p={$pageName}&conta={$conta['id_con']}'>{$conta['conta']} <img class='icone-filtrar' src='/assets/img/ico/filter.svg'></a></td>
-                        <td class='td-conta'>R$ <span data-money>{$saldoAcumulado}</span></td>
+                        <td class='td-conta'>R$ <span data-showhide>{$saldoAcumulado}</span></td>
                         </tr>
                         ";
 
@@ -119,7 +119,7 @@ $queryWithoutIdConta = remove_url_param($url, 'id_conta');
             <td class='linha-extrato-tipo'>{$registro['tipo']}</td>
             <td>{$data}</td>
             <td>{$registro['descricao']}</td>
-            <td class='linha-extrato-valor'>R$ <span data-money>{$valor}</span></td>
+            <td class='linha-extrato-valor'>R$ <span data-showhide>{$valor}</span></td>
             <td><a class='filtrar' href='?p=category&categoria={$registro['id_categoria']}'>{$registro['nome_cat']}</a></td>
             <td class='coluna-acoes'>";
                     if ($registro['tipo'] == 'T' && $registro['valor'] > 0 or $registro['tipo'] == 'SI') {
@@ -136,9 +136,9 @@ $queryWithoutIdConta = remove_url_param($url, 'id_conta');
                   echo "
             <tr>
              <td class='linha-resultado-dia-extrato' colspan='6'>
-                <span class='valor-resultado-dia-extrato'>Resultado diário: R$ <span data-money>{$resultadoDia}</span></span>
-                <span class='valor-resultado-dia-extrato'>Acumulado mês: R$ <span data-money>{$resultadoDiaAcumuladoMes}</span></span>
-                <span class='valor-resultado-dia-extrato'>Acumulado total: R$ <span data-money>{$resultadoDiaAcumuladoTotal}</span></span>
+                <span class='valor-resultado-dia-extrato'>Resultado diário: R$ <span data-showhide>{$resultadoDia}</span></span>
+                <span class='valor-resultado-dia-extrato'>Acumulado mês: R$ <span data-showhide>{$resultadoDiaAcumuladoMes}</span></span>
+                <span class='valor-resultado-dia-extrato'>Acumulado total: R$ <span data-showhide>{$resultadoDiaAcumuladoTotal}</span></span>
               </td>
             </tr>
             ";
@@ -183,7 +183,7 @@ $queryWithoutIdConta = remove_url_param($url, 'id_conta');
                 echo "<tr>
                       <td class='td-conta'>{$conta['conta']}</td>
                       <td class='td-conta'>{$conta['tipo_conta']}</td>
-                      <td class='td-conta'>R$ <span data-money>{$saldoInicialFormatado}</span></td>
+                      <td class='td-conta'>R$ <span data-showhide>{$saldoInicialFormatado}</span></td>
                       <td class='td-conta'>{$exibir}</td>
                       <td class='coluna-acoes'><a class='edit-btn' href='?{$queryWithoutIdConta}&id_conta={$conta['id_con']}'></a>
                       </tr>

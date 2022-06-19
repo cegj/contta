@@ -71,7 +71,7 @@ $queryWithoutIdTransaction = remove_url_param($url, 'id_transacao');
             <td class='linha-extrato-tipo'>{$transacao['tipo']}</td>
             <td>{$data}</td>
             <td>{$transacao['descricao']}</td>
-            <td class='linha-extrato-valor'>R$ <span data-money>{$valorFormatado}</span></td>
+            <td class='linha-extrato-valor'>R$ <span data-showhide>{$valorFormatado}</span></td>
             <td><a class='filtrar' href='?p=category&categoria={$transacao['id_categoria']}'>{$transacao['nome_cat']} <img class='icone-filtrar' src='/assets/img/ico/filter.svg'></a></td>
             <td><a class='filtrar' href='?p=account&conta={$transacao['id_con']}'>{$transacao['conta']} <img class='icone-filtrar' src='/assets/img/ico/filter.svg'></a></td>
             <td class='coluna-acoes'>";
@@ -88,9 +88,9 @@ $queryWithoutIdTransaction = remove_url_param($url, 'id_transacao');
               echo "
                   <tr>
                     <td class='linha-resultado-dia-extrato' colspan='7'>
-                      <span class='valor-resultado-dia-extrato'>Resultado diário: R$ <span data-money>{$resultadoDia}</span></span>
-                      <span class='valor-resultado-dia-extrato'>Acumulado mês: R$ <span data-money>{$resultadoDiaAcumuladoMes}</span></span>
-                      <span class='valor-resultado-dia-extrato'>Acumulado total: R$ <span data-money>{$resultadoDiaAcumuladoTotal}</span></span>
+                      <span class='valor-resultado-dia-extrato'>Resultado diário: R$ <span data-showhide>{$resultadoDia}</span></span>
+                      <span class='valor-resultado-dia-extrato'>Acumulado mês: R$ <span data-showhide>{$resultadoDiaAcumuladoMes}</span></span>
+                      <span class='valor-resultado-dia-extrato'>Acumulado total: R$ <span data-showhide>{$resultadoDiaAcumuladoTotal}</span></span>
                     </td>
                   </tr>
                   ";
@@ -114,7 +114,7 @@ $queryWithoutIdTransaction = remove_url_param($url, 'id_transacao');
                     <td class='linha-extrato-tipo'>{$transacao['tipo']}</td>
                     <td>{$data}</td>
                     <td>{$transacao['descricao']}</td>
-                    <td class='linha-extrato-valor'>R$ <span data-money>{$valorFormatado}</span></td>
+                    <td class='linha-extrato-valor'>R$ <span data-showhide>{$valorFormatado}</span></td>
                     <td><a href='/categorias.php?categoria={$transacao['id_categoria']}'>{$transacao['nome_cat']}</a></td>
                     <td><a href='/contas.php?conta={$transacao['id_con']}'>{$transacao['conta']}</a></td>
                     <td>";

@@ -37,7 +37,7 @@ include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/format_value.php')
         </dl>
         <dl>
           <dt>💵 Valor:</dt>
-          <dd>R$ <span data-money><?php echo format_value($ultimoregistro['valor']) ?></span></dd>
+          <dd><span data-showhide><?php echo $ultimoregistro['valor'] ?></span></dd>
         </dl>
         <dl>
           <dt>🏷️ Categoria:</dt>

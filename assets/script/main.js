@@ -10,22 +10,22 @@ import runCategoryScript from './category.js';
 import runAccountScript from './account.js';
 import runBudgetScript from './budget.js';
 
-export default async function runMainScript(){
+export default async function runMainScript() {
 
     //Choices.js plugin to searchable select inputs
 
     let choiceConta = new Choices('#conta', {
         searchPlaceholderValue: "Digite para buscar um conta",
         allowHTML: true
-        });
+    });
     let choiceContaDestino = new Choices('#contadestino', {
         searchPlaceholderValue: "Digite para buscar conta",
         allowHTML: true
-        });
+    });
     let choiceCategoria = new Choices('#categoria', {
         searchPlaceholderValue: "Digite para buscar um categoria",
         allowHTML: true
-        });
+    });
 
 
     //VMasker plugin to mask monetary numbers at imput fields
@@ -35,8 +35,8 @@ export default async function runMainScript(){
         separator: ',',
         delimiter: '.',
         unit: 'R$',
-        });
-        
+    });
+
     //Set color of balance boxes according to the value
 
     const monthBalance = new BalanceBox('#saldo-mes', '#valor-mes');
@@ -59,13 +59,13 @@ export default async function runMainScript(){
 
     //Set transactionForm as open-close box
 
-    const transactionForm = new ContextOpenClose('#opcao-registrar-transacao','#caixa-registrar-modal');
+    const transactionForm = new ContextOpenClose('#opcao-registrar-transacao', '#caixa-registrar-modal');
 
     transactionForm.initContextOpenClose();
 
     TransactionFormDealer(transactionForm, choiceConta, choiceContaDestino, choiceCategoria);
 
-    const showHideMoneyBtn = new ShowHide('#opcao-exibir-ocultar', '[data-money]');
+    const showHideMoneyBtn = new ShowHide('#opcao-exibir-ocultar', '[data-showhide]');
 
     showHideMoneyBtn.initShowHide();
 
@@ -73,19 +73,19 @@ export default async function runMainScript(){
 
     Links.initLink();
 
-    const formTransaction = new Form('#form-transaction', {s: 'A transação foi registrada ou alterada com sucesso!', e: 'Ocorreu um erro ao registrar a transação. Tente novamente!'});
+    const formTransaction = new Form('#form-transaction', { s: 'A transação foi registrada ou alterada com sucesso!', e: 'Ocorreu um erro ao registrar a transação. Tente novamente!' });
 
     formTransaction.initForm();
 
-    if (document.location.search.includes('p=category')){
+    if (document.location.search.includes('p=category')) {
         runCategoryScript();
     }
 
-    if (document.location.search.includes('p=account')){
+    if (document.location.search.includes('p=account')) {
         runAccountScript();
     }
 
-    if (document.location.search.includes('p=budget')){
+    if (document.location.search.includes('p=budget')) {
         runBudgetScript();
     }
 }
@@ -93,15 +93,15 @@ export default async function runMainScript(){
 //Initial page load
 
 fetch('/app/function/database/there_is_no_table.php')
-.then(res => res.text())
-.then(there_is_no_table => {
-    if (there_is_no_table === 'true'){
-        window.location.href = '/app/setup/setup.php'
-    } else {
-        (async function firstload(){
-            const page = new Page();
-            await page.load(window.location.search, '#main-content');
-            page.setBrowserPrevNext();    
-        })();
-    }
-})
+    .then(res => res.text())
+    .then(there_is_no_table => {
+        if (there_is_no_table === 'true') {
+            window.location.href = '/app/setup/setup.php'
+        } else {
+            (async function firstload() {
+                const page = new Page();
+                await page.load(window.location.search, '#main-content');
+                page.setBrowserPrevNext();
+            })();
+        }
+    })

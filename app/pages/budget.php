@@ -52,7 +52,7 @@ foreach ($primaryCategories as $primaryCategory){
                     </td>";
 
     ////Category result
-    $budgetLines .= "<td data-money='' data-type='selected-result' data-fixed-column='second' $dataSets>
+    $budgetLines .= "<td data-showhide='' data-type='selected-result' data-fixed-column='second' $dataSets>
                     </td>";
 
     foreach ($months as $month){
@@ -75,7 +75,7 @@ foreach ($primaryCategories as $primaryCategory){
       } else {
         $monthCatPlanSum = $data[$monthYear];
       }
-      $budgetLines .= "<td data-money data-type='plan' $dataSets $monthDataSets>
+      $budgetLines .= "<td data-showhide data-type='plan' $dataSets $monthDataSets>
                         {$monthCatPlanSum}
                       </td>";
 
@@ -85,7 +85,7 @@ foreach ($primaryCategories as $primaryCategory){
       } else {
         $monthCatExecSun = calculate_result($bdConexao, $month, $ano, 'SSM', null, $data['id_cat']);
       }
-      $budgetLines .= "<td data-money data-type='exec' $dataSets $monthDataSets>
+      $budgetLines .= "<td data-showhide data-type='exec' $dataSets $monthDataSets>
                         {$monthCatExecSun}
                       </td>";
     }
@@ -99,7 +99,7 @@ foreach ($primaryCategories as $primaryCategory){
 ////Month result
 $budgetLines .= "<tr>";
 $budgetLines .= "<td data-type='month-result-title' data-fixed-column='first'>Resultado mês:</td>";
-$budgetLines .= "<td data-type='month-selected-result' data-fixed-column='second'></td>";
+$budgetLines .= "<td data-showhide data-type='month-selected-result' data-fixed-column='second'></td>";
 
 foreach ($months as $month){
 
@@ -114,10 +114,10 @@ foreach ($months as $month){
   }
 
   //Planned month result (sum)
-  $budgetLines .= "<td data-money data-type='month-result-plan' $monthResultDataSets>" . sum_budget_value($bdConexao, $monthYear) . "</td>";
+  $budgetLines .= "<td data-showhide data-type='month-result-plan' $monthResultDataSets>" . sum_budget_value($bdConexao, $monthYear) . "</td>";
   
   //Executed month result (sum)
-  $budgetLines .= "<td data-money data-type='month-result-exec' $monthResultDataSets>" . calculate_result($bdConexao, $month, $ano, 'SSM') . "</td>";
+  $budgetLines .= "<td data-showhide data-type='month-result-exec' $monthResultDataSets>" . calculate_result($bdConexao, $month, $ano, 'SSM') . "</td>";
 
 }
 
@@ -129,7 +129,7 @@ $acumulatedPlanned = 0;
 
 $budgetLines .= "<tr>";
 $budgetLines .= "<td data-type='month-result-title' data-fixed-column='first'>Resultado acumulado:</td>";
-$budgetLines .= "<td data-type='month-selected-result' data-fixed-column='second'>R$ 0,00</td>";
+$budgetLines .= "<td data-showhide data-type='month-selected-result' data-fixed-column='second'>R$ 0,00</td>";
 
 foreach ($months as $month){
 
@@ -145,10 +145,10 @@ foreach ($months as $month){
 
   //Planned month result (sum)
   $acumulatedPlanned += floatval(sum_budget_value($bdConexao, $monthYear));
-  $budgetLines .= "<td data-money data-type='month-result-plan' $acumulatedResultDataSets>" . $acumulatedPlanned . "</td>";
+  $budgetLines .= "<td data-showhide data-type='month-result-plan' $acumulatedResultDataSets>" . $acumulatedPlanned . "</td>";
   
   //Executed month result (sum)
-  $budgetLines .= "<td data-money data-type='month-result-exec' $acumulatedResultDataSets>" . calculate_result($bdConexao, $month, $ano, 'SAM') . "</td>";
+  $budgetLines .= "<td data-showhide data-type='month-result-exec' $acumulatedResultDataSets>" . calculate_result($bdConexao, $month, $ano, 'SAM') . "</td>";
 
 }
 

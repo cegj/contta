@@ -20,7 +20,7 @@ footer {
   }
 
 
-  [data-money] {
+  [data-showhide] {
       opacity: 0;
   }
 
