@@ -1,5 +1,6 @@
 import Form from './modules/form.js';
 import Money from './modules/money.js';
+import StatementTable from './modules/StatementTable.js';
 
 export default function runCategoryScript() {
   if (document.location.search.includes('configurar=true')) {
@@ -26,6 +27,10 @@ export default function runCategoryScript() {
         }
       })
     }
+  }
+
+  if (document.location.search.includes('categoria=')) {
+    const statement = new StatementTable(".linha-extrato-valor", ".valor-resultado-dia-extrato", ".linha-extrato-tipo");
   }
 
   document.querySelectorAll('.td-cat-principal').forEach((mainCatNameCell) => {
