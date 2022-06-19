@@ -1,8 +1,8 @@
 import Form from "./form.js";
-import Value from "./value.js";
+import Money from "./money.js";
 
-export default class BudgetTable{
-    constructor(tableContainerSelector, editContainerSelector){
+export default class BudgetTable {
+    constructor(tableContainerSelector, editContainerSelector) {
         this.tableContainer = document.querySelector(tableContainerSelector);
         this.table = document.querySelector('table');
         this.rows = this.table.querySelectorAll('tr');
@@ -12,15 +12,15 @@ export default class BudgetTable{
 
     }
 
-    setZeroTransparent(){
+    setZeroTransparent() {
         this.cells.forEach((cell) => {
-            if(+cell.innerText === 0){
+            if (+cell.innerText === 0) {
                 cell.style.color = "transparent";
             }
         })
     }
 
-    adaptForMobile(){
+    adaptForMobile() {
         if (screen.width < 640) {
 
             this.table.querySelectorAll('[data-fixed-column]').forEach((e) => {
@@ -32,7 +32,7 @@ export default class BudgetTable{
             })
 
             const prevExecTitleCells = this.table.querySelectorAll('[data-prev-exec-month]');
-            for (let i = 2; i < prevExecTitleCells.length; i++){
+            for (let i = 2; i < prevExecTitleCells.length; i++) {
                 prevExecTitleCells[i].style.display = "none";
             }
 
@@ -40,10 +40,10 @@ export default class BudgetTable{
             this.table.querySelectorAll('[data-selected="false"').forEach((e) => {
                 e.style.display = "none";
             })
-        }     
-    }   
+        }
+    }
 
-    setSelectAsFirst(){
+    setSelectAsFirst() {
         const referenceTd = this.table.querySelector('[data-selected="true"]');
 
         //It sums fixed column width using first row as reference
@@ -55,19 +55,19 @@ export default class BudgetTable{
         this.tableContainer.scrollTo(referenceTd.offsetLeft - fixedColumnsWidth, 0);
     }
 
-    getPtMonthName(monthNumber){
+    getPtMonthName(monthNumber) {
 
         const months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
 
-        return months[monthNumber-1];
+        return months[monthNumber - 1];
 
     }
 
-    closeEdit(){
+    closeEdit() {
         this.editContainer.style.display = "none";
     }
 
-    openEdit(event){
+    openEdit(event) {
         const catNameSpan = this.editForm.querySelector('#nome-cat-label');
         const monthNameSpan = this.editForm.querySelector('#mes-label');
         const monthName = this.getPtMonthName(+(event.target.dataset.month.replace(/\d{4}_(\d+)/g, '$1')));
@@ -83,64 +83,62 @@ export default class BudgetTable{
         });
         this.editContainer.querySelector('#botao-cancelar').addEventListener('click', this.closeEdit);
 
-        const form = new Form('#' + this.editForm.id, {s: 'Valor alterado com sucesso', e: 'Não foi possível alterar o valor, tente novamente'});
+        const form = new Form('#' + this.editForm.id, { s: 'Valor alterado com sucesso', e: 'Não foi possível alterar o valor, tente novamente' });
 
         form.initForm();
     }
 
-    localeCurrency(customSelector, customStyle, customLanguage, customCurrency){
+    setMoney(customSelector, customStyle, customLanguage, customCurrency) {
         const elements = customSelector ? document.querySelectorAll(customSelector) : this.cells;
         const language = customLanguage ? customLanguage : 'pt-BR';
         const currency = customCurrency ? customCurrency : 'BRL';
         const style = customStyle ? customStyle : 'decimal';
-        
+
         elements.forEach((e) => {
-            if (!!+e.innerText){
-                const number = +e.innerText;
-                e.innerText = number.toLocaleString(language, { style: style, minimumFractionDigits: 2, maximumFractionDigits: 2, currency: currency});
+            if (!!+e.innerText) {
+                const number = new Money(e, { localeCurrency: [true, null, null, "decimal"] });
             }
         })
     }
 
-    calculateCatResult(){
+    calculateCatResult() {
         this.rows.forEach((row) => {
             let planValue;
-            let execValue;                
+            let execValue;
             const resultCell = row.querySelector('[data-type="selected-result"], [data-type="month-selected-result"]');
             const selectedCells = row.querySelectorAll('[data-selected="true"]');
 
             selectedCells.forEach((cell) => {
-                    if (cell.dataset.type === "plan" || cell.dataset.type === "month-result-plan") planValue = +cell.innerText;
-                    if (cell.dataset.type === "exec" || cell.dataset.type === "month-result-exec") execValue = +cell.innerText;
-            }            
+                if (cell.dataset.type === "plan" || cell.dataset.type === "month-result-plan") planValue = +cell.innerText;
+                if (cell.dataset.type === "exec" || cell.dataset.type === "month-result-exec") execValue = +cell.innerText;
+            }
             )
 
-            if (resultCell !== null){
-                resultCell.innerText = (execValue - planValue).toFixed(2); 
-                const resultCellObj = new Value(resultCell, true);
-                resultCellObj.initValue();
+            if (resultCell !== null) {
+                resultCell.innerText = (execValue - planValue).toFixed(2);
+                const resultCellObj = new Money(resultCell, { setColor: true, localeCurrency: [true, null, null, "decimal"] });
             }
         })
     }
 
-    addEvents(){
+    addEvents() {
         this.table.querySelectorAll('[data-type="plan"]').forEach((planCell) => {
-            if (!planCell.dataset.primaryCat){
+            if (!planCell.dataset.primaryCat) {
                 planCell.addEventListener('dblclick', this.openEdit);
             }
         })
     }
 
-    bindEvents(){
+    bindEvents() {
         this.openEdit = this.openEdit.bind(this);
         this.closeEdit = this.closeEdit.bind(this);
     }
 
-    initBudgetTable(){
+    initBudgetTable() {
         this.bindEvents();
         this.addEvents();
         this.calculateCatResult();
-        this.localeCurrency();
+        this.setMoney();
         this.setZeroTransparent();
         this.setSelectAsFirst();
         this.adaptForMobile();
