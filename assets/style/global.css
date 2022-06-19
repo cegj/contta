@@ -31,6 +31,7 @@ input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
 input[type="number"] {
   -moz-appearance: textfield;
 }
@@ -95,6 +96,11 @@ dd {
 
 .container.com-extrato {
   grid-template-columns: 0.7fr 1.3fr;
+}
+
+.container-board {
+  grid-template-columns: 2fr 1fr !important;
+  gap: 10px !important;
 }
 
 .item-grid-principal {

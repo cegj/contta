@@ -91,3 +91,25 @@ footer {
 [data-value-color="zero"] {
   color: #585858 !important;
 }
+
+#chart-form {
+  padding: 5px;
+  color: #535353;
+  font-size: 0.9rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+#chart-form select,
+#chart-form button {
+  border-radius: 4px;
+  border: none;
+  color: #535353;
+  background-color: #e7e7e7;
+  padding: 3px;
+}
+
+#chart-form button {
+  padding: 3px 13px;
+}

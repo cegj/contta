@@ -35,6 +35,19 @@ h3 {
   padding-left: 5px;
 }
 
+.titulo-box.grafico::before {
+  content: "";
+  background-image: url(/assets/img/ico/chart.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: inline-flex;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  top: 6px;
+  padding-left: 5px;
+}
+
 .titulo-container {
   padding-left: 10px;
   padding-bottom: 15px;

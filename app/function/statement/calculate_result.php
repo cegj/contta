@@ -1,6 +1,6 @@
 <?php
 
-function calculate_result($bdConexao, $mes, $ano, $tipo, $conta = null, $categoriaSecundaria = null, $categoriaPrincipal = null, $dia = null, $soMesAtual = false)
+function calculate_result($bdConexao, $mes = null, $ano, $tipo, $conta = null, $categoriaSecundaria = null, $categoriaPrincipal = null, $dia = null, $soMesAtual = false, $tipoTransacao = null)
 {
 
     // TIPOS: SSM (saldo só mês), SAM (saldo acumulado até o mês) e SAG (saldo acumulado geral)
@@ -40,6 +40,13 @@ function calculate_result($bdConexao, $mes, $ano, $tipo, $conta = null, $categor
         $filtraDia = '';
     }
 
+    //Recebe o nome da cat. principal
+    if (isset($tipoTransacao)) {
+        $filtraTipoTransacao = "and tipo = '{$tipoTransacao}'";
+    } else {
+        $filtraTipoTransacao = "";
+    }
+
     // Se o valor acumulado deve considerar só o mês atual no cálculo do tipo SAM (saldo acumulado mês)
     if ($soMesAtual == true) {
         $filtraMesAcum = "MONTH(data) = '{$mes}'";
@@ -61,6 +68,7 @@ function calculate_result($bdConexao, $mes, $ano, $tipo, $conta = null, $categor
                 and {$filtraConta}
                 {$filtraCategoriaSec}
                 {$filtraCategoriaPri}
+                {$filtraTipoTransacao}
         ORDER BY data ASC;
         ";
     }
@@ -79,6 +87,7 @@ function calculate_result($bdConexao, $mes, $ano, $tipo, $conta = null, $categor
                 and {$filtraConta}
                 {$filtraCategoriaSec}
                 {$filtraCategoriaPri}
+                {$filtraTipoTransacao}
         ORDER BY data ASC;
         ";
     }
@@ -94,6 +103,7 @@ function calculate_result($bdConexao, $mes, $ano, $tipo, $conta = null, $categor
         WHERE {$filtraConta}
             {$filtraCategoriaSec}
             {$filtraCategoriaPri}
+            {$filtraTipoTransacao}
         ORDER BY data ASC;
         ";
     }
