@@ -2,7 +2,6 @@
 
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/transaction/get_transactions.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/translate_date_to_br.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/format_value.php');
 
 ?>
 
