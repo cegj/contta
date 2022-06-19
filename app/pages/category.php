@@ -6,7 +6,6 @@ include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/category/get_secondary_c
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/category/get_especific_category.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/statement/calculate_result.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/transaction/get_transactions.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/format_value.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/get_days_in_month.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/translate_date_to_br.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/remove_url_param.php');
@@ -54,7 +53,7 @@ $queryWithoutIdCat = remove_url_param($url, 'id_cat');
 
               foreach ($categoriasPrincipais as $categoriaPrincipal) :
 
-                $saldoMesCatPrincipal = format_value(calculate_result($bdConexao, $mes, $ano, 'SSM', null, null,  $categoriaPrincipal['nome_cat']));
+                $saldoMesCatPrincipal = calculate_result($bdConexao, $mes, $ano, 'SSM', null, null,  $categoriaPrincipal['nome_cat']);
 
 
                 echo "<tr class='cat-principal'>
@@ -62,7 +61,7 @@ $queryWithoutIdCat = remove_url_param($url, 'id_cat');
 
                 if ($configuracao != true) :
 
-                  echo "<td>R$ <span data-showhide>{$saldoMesCatPrincipal}</span></td>";
+                  echo "<td><span data-showhide>{$saldoMesCatPrincipal}</span></td>";
 
                 endif;
 
@@ -77,7 +76,7 @@ $queryWithoutIdCat = remove_url_param($url, 'id_cat');
 
                 foreach ($categoriasSecundarias as $categoriaSecundaria) :
 
-                  $saldoMes = format_value(calculate_result($bdConexao, $mes, $ano, 'SSM', null, $categoriaSecundaria['id_cat']));
+                  $saldoMes = calculate_result($bdConexao, $mes, $ano, 'SSM', null, $categoriaSecundaria['id_cat']);
 
                   echo "<tr>";
 
@@ -91,7 +90,7 @@ $queryWithoutIdCat = remove_url_param($url, 'id_cat');
 
                   if ($configuracao != true) :
 
-                    echo "<td>R$ <span data-showhide>{$saldoMes}</span></td>";
+                    echo "<td><span data-showhide>{$saldoMes}</span></td>";
 
                   endif;
 
@@ -148,22 +147,22 @@ $queryWithoutIdCat = remove_url_param($url, 'id_cat');
 
                         if (sizeof($registros) != 0) :
 
-                          $resultadoDia = format_value(calculate_result($bdConexao, $mes, $ano, 'SSM', null, $_GET['categoria'], null, $dia));
+                          $resultadoDia = calculate_result($bdConexao, $mes, $ano, 'SSM', null, $_GET['categoria'], null, $dia);
 
-                          $resultadoDiaAcumuladoMes = format_value(calculate_result($bdConexao, $mes, $ano, 'SAM', null, $_GET['categoria'], null, $dia, true));
+                          $resultadoDiaAcumuladoMes = calculate_result($bdConexao, $mes, $ano, 'SAM', null, $_GET['categoria'], null, $dia, true);
 
-                          $resultadoDiaAcumuladoTotal = format_value(calculate_result($bdConexao, $mes, $ano, 'SAM', null, $_GET['categoria'], null, $dia));
+                          $resultadoDiaAcumuladoTotal = calculate_result($bdConexao, $mes, $ano, 'SAM', null, $_GET['categoria'], null, $dia);
 
                           foreach ($registros as $registro) :
 
                             $data = translate_date_to_br($registro['data']);
-                            $valor = format_value($registro['valor']);
+                            $valor = $registro['valor'];
 
                             echo "<tr class='linha-extrato'>
           <td class='linha-extrato-tipo'>{$registro['tipo']}</td>
           <td>{$data}</td>
           <td>{$registro['descricao']}</td>
-          <td class='linha-extrato-valor'>R$ <span data-showhide>{$valor}</span></td>
+          <td class='linha-extrato-valor'><span data-showhide>{$valor}</span></td>
           <td ><a class='filtrar' href='?p=account&conta={$registro['id_con']}'>{$registro['conta']}</a></td>
           <td class='coluna-acoes'>";
                             if ($registro['tipo'] == 'T' && $registro['valor'] > 0 or $registro['tipo'] == 'SI') {
@@ -180,9 +179,9 @@ $queryWithoutIdCat = remove_url_param($url, 'id_cat');
                           echo "
               <tr>
                 <td class='linha-resultado-dia-extrato' colspan='6' class='linha-resultado-dia-extrato'>
-                  <span class='valor-resultado-dia-extrato'>Resultado diário: R$ <span data-showhide>{$resultadoDia}</span></span>
-                  <span class='valor-resultado-dia-extrato'>Acumulado mês: R$ <span data-showhide>{$resultadoDiaAcumuladoMes}</span></span>
-                  <span class='valor-resultado-dia-extrato'>Acumulado total: R$ <span data-showhide>{$resultadoDiaAcumuladoTotal}</span></span>
+                  <span class='valor-resultado-dia-extrato'>Resultado diário: <span data-showhide>{$resultadoDia}</span></span>
+                  <span class='valor-resultado-dia-extrato'>Acumulado mês: <span data-showhide>{$resultadoDiaAcumuladoMes}</span></span>
+                  <span class='valor-resultado-dia-extrato'>Acumulado total: <span data-showhide>{$resultadoDiaAcumuladoTotal}</span></span>
                 </td>
               </tr>
               ";

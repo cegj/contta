@@ -1,8 +1,6 @@
 <?php
 
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/statement/calculate_result.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/format_value.php');
-
 
 $url = $_SERVER['SCRIPT_NAME']; ?>
 
@@ -13,18 +11,18 @@ $url = $_SERVER['SCRIPT_NAME']; ?>
 
       <?php if ($pageName == 'account' && isset($_GET['conta'])) :
         $resultadoMes = calculate_result($bdConexao, $mes, $ano, 'SSM', $_GET['conta']);
-        echo "R$ <span id='valor-mes' data-showhide>" . $resultadoMes . "</span>";
+        echo "<span id='valor-mes' data-showhide>" . $resultadoMes . "</span>";
 
       else :
 
         if ($pageName == 'category' && isset($_GET['categoria'])) :
           $resultadoMes = calculate_result($bdConexao, $mes, $ano, 'SSM', null, $_GET['categoria']);
-          echo "R$ <span id='valor-mes' data-showhide>" . $resultadoMes . "</span>";
+          echo "<span id='valor-mes' data-showhide>" . $resultadoMes . "</span>";
 
         else :
 
-          $resultadoMes = format_value(calculate_result($bdConexao, $mes, $ano, 'SSM'));
-          echo "R$ <span id='valor-mes' data-showhide>" . $resultadoMes . "</span>";
+          $resultadoMes = calculate_result($bdConexao, $mes, $ano, 'SSM');
+          echo "<span id='valor-mes' data-showhide>" . $resultadoMes . "</span>";
 
         endif;
       endif;
@@ -39,18 +37,18 @@ $url = $_SERVER['SCRIPT_NAME']; ?>
 
       <?php if ($pageName == 'account' && isset($_GET['conta'])) :
         $resultadoAcumulado = calculate_result($bdConexao, $mes, $ano, 'SAM', $_GET['conta']);
-        echo "R$ <span id='valor-acumulado' data-showhide>" . $resultadoAcumulado . "</span>";
+        echo "<span id='valor-acumulado' data-showhide>" . $resultadoAcumulado . "</span>";
 
       else :
 
         if ($pageName == 'category' && isset($_GET['categoria'])) :
           $resultadoAcumulado = calculate_result($bdConexao, $mes, $ano, 'SAM', null, $_GET['categoria']);
-          echo "R$ <span id='valor-acumulado' data-showhide>" . $resultadoAcumulado . "</span>";
+          echo "<span id='valor-acumulado' data-showhide>" . $resultadoAcumulado . "</span>";
 
         else :
 
-          $resultadoAcumulado = format_value(calculate_result($bdConexao, $mes, $ano, 'SAM'));
-          echo "R$ <span id='valor-acumulado' data-showhide>" . $resultadoAcumulado . "</span>";
+          $resultadoAcumulado = calculate_result($bdConexao, $mes, $ano, 'SAM');
+          echo "<span id='valor-acumulado' data-showhide>" . $resultadoAcumulado . "</span>";
 
         endif;
       endif;
@@ -64,18 +62,18 @@ $url = $_SERVER['SCRIPT_NAME']; ?>
 
       <?php if ($pageName == 'account' && isset($_GET['conta'])) :
         $resultadoGeral = calculate_result($bdConexao, $mes, $ano, 'SAG', $_GET['conta']);
-        echo "R$ <span id='valor-geral' data-showhide>" . $resultadoGeral . "</span>";
+        echo "<span id='valor-geral' data-showhide>" . $resultadoGeral . "</span>";
 
       else :
 
         if ($pageName == 'category' && isset($_GET['categoria'])) :
           $resultadoGeral = calculate_result($bdConexao, $mes, $ano, 'SAG', null, $_GET['categoria']);
-          echo "R$ <span id='valor-geral' data-showhide>" . $resultadoGeral . "</span>";
+          echo "<span id='valor-geral' data-showhide>" . $resultadoGeral . "</span>";
 
         else :
 
-          $resultadoGeral = format_value(calculate_result($bdConexao, $mes, $ano, 'SAG'));
-          echo "R$ <span id='valor-geral' data-showhide>" . $resultadoGeral . "</span>";
+          $resultadoGeral = calculate_result($bdConexao, $mes, $ano, 'SAG');
+          echo "<span id='valor-geral' data-showhide>" . $resultadoGeral . "</span>";
 
         endif;
       endif;

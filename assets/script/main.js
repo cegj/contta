@@ -6,6 +6,8 @@ import TransactionFormDealer from './modules/transactionForm.js';
 import ShowHide from './modules/showHide.js';
 import Link from './modules/link.js';
 import Form from './modules/form.js';
+import runBoardScript from './board.js';
+import runStatementScript from './statement.js';
 import runCategoryScript from './category.js';
 import runAccountScript from './account.js';
 import runBudgetScript from './budget.js';
@@ -41,15 +43,9 @@ export default async function runMainScript() {
 
     const monthBalance = new BalanceBox('#saldo-mes', '#valor-mes');
 
-    monthBalance.setColor();
-
     const acumulatedBalance = new BalanceBox('#saldo-acumulado', '#valor-acumulado');
 
-    acumulatedBalance.setColor();
-
     const generalBalance = new BalanceBox('#saldo-geral', '#valor-geral');
-
-    generalBalance.setColor();
 
     //Set monthSelector as open-close box
 
@@ -76,6 +72,14 @@ export default async function runMainScript() {
     const formTransaction = new Form('#form-transaction', { s: 'A transação foi registrada ou alterada com sucesso!', e: 'Ocorreu um erro ao registrar a transação. Tente novamente!' });
 
     formTransaction.initForm();
+
+    if (document.location.search.includes('p=board') || !document.location.search) {
+        runBoardScript();
+    }
+
+    if (document.location.search.includes('p=statement')) {
+        runStatementScript();
+    }
 
     if (document.location.search.includes('p=category')) {
         runCategoryScript();

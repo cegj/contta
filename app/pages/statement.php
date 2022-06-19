@@ -3,7 +3,6 @@
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/database/table_is_not_empty.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/get_days_in_month.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/transaction/get_transactions.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/format_value.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/statement/calculate_result.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/translate_date_to_br.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/remove_url_param.php');
@@ -55,23 +54,23 @@ $queryWithoutIdTransaction = remove_url_param($url, 'id_transacao');
 
             if (sizeof($transacoes) != 0) :
 
-              $resultadoDia = format_value(calculate_result($bdConexao, $mes, $ano, 'SSM', null, null, null, $dia));
+              $resultadoDia = calculate_result($bdConexao, $mes, $ano, 'SSM', null, null, null, $dia);
 
-              $resultadoDiaAcumuladoMes = format_value(calculate_result($bdConexao, $mes, $ano, 'SAM', null, null, null, $dia, true));
+              $resultadoDiaAcumuladoMes = calculate_result($bdConexao, $mes, $ano, 'SAM', null, null, null, $dia, true);
 
-              $resultadoDiaAcumuladoTotal = format_value(calculate_result($bdConexao, $mes, $ano, 'SAM', null, null, null, $dia));
+              $resultadoDiaAcumuladoTotal = calculate_result($bdConexao, $mes, $ano, 'SAM', null, null, null, $dia);
 
               foreach ($transacoes as $transacao) :
 
                 $data = translate_date_to_br($transacao['data']);
 
-                $valorFormatado = format_value($transacao['valor']);
+                $valorFormatado = $transacao['valor'];
 
                 echo "<tr class='linha-extrato'>
             <td class='linha-extrato-tipo'>{$transacao['tipo']}</td>
             <td>{$data}</td>
             <td>{$transacao['descricao']}</td>
-            <td class='linha-extrato-valor'>R$ <span data-showhide>{$valorFormatado}</span></td>
+            <td class='linha-extrato-valor'><span data-showhide>{$valorFormatado}</span></td>
             <td><a class='filtrar' href='?p=category&categoria={$transacao['id_categoria']}'>{$transacao['nome_cat']} <img class='icone-filtrar' src='/assets/img/ico/filter.svg'></a></td>
             <td><a class='filtrar' href='?p=account&conta={$transacao['id_con']}'>{$transacao['conta']} <img class='icone-filtrar' src='/assets/img/ico/filter.svg'></a></td>
             <td class='coluna-acoes'>";
@@ -88,9 +87,9 @@ $queryWithoutIdTransaction = remove_url_param($url, 'id_transacao');
               echo "
                   <tr>
                     <td class='linha-resultado-dia-extrato' colspan='7'>
-                      <span class='valor-resultado-dia-extrato'>Resultado diário: R$ <span data-showhide>{$resultadoDia}</span></span>
-                      <span class='valor-resultado-dia-extrato'>Acumulado mês: R$ <span data-showhide>{$resultadoDiaAcumuladoMes}</span></span>
-                      <span class='valor-resultado-dia-extrato'>Acumulado total: R$ <span data-showhide>{$resultadoDiaAcumuladoTotal}</span></span>
+                      <span class='valor-resultado-dia-extrato'>Resultado diário: <span data-showhide>{$resultadoDia}</span></span>
+                      <span class='valor-resultado-dia-extrato'>Acumulado mês: <span data-showhide>{$resultadoDiaAcumuladoMes}</span></span>
+                      <span class='valor-resultado-dia-extrato'>Acumulado total: <span data-showhide>{$resultadoDiaAcumuladoTotal}</span></span>
                     </td>
                   </tr>
                   ";
@@ -107,14 +106,14 @@ $queryWithoutIdTransaction = remove_url_param($url, 'id_transacao');
 
             $data = translate_date_to_br($transacao['data']);
 
-            $valorFormatado = format_value($transacao['valor']);
+            $valorFormatado = $transacao['valor'];
 
             echo "
                   <tr class='linha-extrato'>
                     <td class='linha-extrato-tipo'>{$transacao['tipo']}</td>
                     <td>{$data}</td>
                     <td>{$transacao['descricao']}</td>
-                    <td class='linha-extrato-valor'>R$ <span data-showhide>{$valorFormatado}</span></td>
+                    <td class='linha-extrato-valor'><span data-showhide>{$valorFormatado}</span></td>
                     <td><a href='/categorias.php?categoria={$transacao['id_categoria']}'>{$transacao['nome_cat']}</a></td>
                     <td><a href='/contas.php?conta={$transacao['id_con']}'>{$transacao['conta']}</a></td>
                     <td>";

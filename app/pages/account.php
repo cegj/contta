@@ -4,7 +4,6 @@ include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/database/table_is_not_em
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/account/get_accounts.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/account/get_especific_account.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/parse_boolean.php');
-include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/format_value.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/get_days_in_month.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/translate_date_to_br.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/statement/calculate_result.php');
@@ -42,19 +41,19 @@ $queryWithoutIdConta = remove_url_param($url, 'id_conta');
 
             foreach ($contas as $conta) :
               $exibir = parse_boolean($conta['exibir'], 'Sim', 'Não');
-              $saldoMes = format_value(calculate_result($bdConexao, $mes, $ano, 'SSM', $conta['id_con']));
-              $saldoAcumulado = format_value(calculate_result($bdConexao, $mes, $ano, 'SAM', $conta['id_con']));
+              $saldoMes = calculate_result($bdConexao, $mes, $ano, 'SSM', $conta['id_con']);
+              $saldoAcumulado = calculate_result($bdConexao, $mes, $ano, 'SAM', $conta['id_con']);
 
               if ($saldoMes == 0) {
-                $saldoMes = "0,00";
+                $saldoMes = "0.00";
               }
               if ($saldoAcumulado == 0) {
-                $saldoAcumulado = "0,00";
+                $saldoAcumulado = "0.00";
               }
 
               echo "<tr>
                         <td class='td-conta'><a class='filtrar' href='?p={$pageName}&conta={$conta['id_con']}'>{$conta['conta']} <img class='icone-filtrar' src='/assets/img/ico/filter.svg'></a></td>
-                        <td class='td-conta'>R$ <span data-showhide>{$saldoAcumulado}</span></td>
+                        <td class='td-conta'><span data-showhide>{$saldoAcumulado}</span></td>
                         </tr>
                         ";
 
@@ -103,23 +102,23 @@ $queryWithoutIdConta = remove_url_param($url, 'id_conta');
 
                 if (sizeof($registros) != 0) :
 
-                  $resultadoDia = format_value(calculate_result($bdConexao, $mes, $ano, 'SSM', $_GET['conta'], null, null, $dia));
+                  $resultadoDia = calculate_result($bdConexao, $mes, $ano, 'SSM', $_GET['conta'], null, null, $dia);
 
-                  $resultadoDiaAcumuladoMes = format_value(calculate_result($bdConexao, $mes, $ano, 'SAM', $_GET['conta'], null, null, $dia, true));
+                  $resultadoDiaAcumuladoMes = calculate_result($bdConexao, $mes, $ano, 'SAM', $_GET['conta'], null, null, $dia, true);
 
-                  $resultadoDiaAcumuladoTotal = format_value(calculate_result($bdConexao, $mes, $ano, 'SAM', $_GET['conta'], null, null, $dia));
+                  $resultadoDiaAcumuladoTotal = calculate_result($bdConexao, $mes, $ano, 'SAM', $_GET['conta'], null, null, $dia);
 
 
                   foreach ($registros as $registro) :
 
                     $data = translate_date_to_br($registro['data']);
-                    $valor = format_value($registro['valor']);
+                    $valor = $registro['valor'];
 
                     echo "<tr class='linha-extrato'>
             <td class='linha-extrato-tipo'>{$registro['tipo']}</td>
             <td>{$data}</td>
             <td>{$registro['descricao']}</td>
-            <td class='linha-extrato-valor'>R$ <span data-showhide>{$valor}</span></td>
+            <td class='linha-extrato-valor'><span data-showhide>{$valor}</span></td>
             <td><a class='filtrar' href='?p=category&categoria={$registro['id_categoria']}'>{$registro['nome_cat']}</a></td>
             <td class='coluna-acoes'>";
                     if ($registro['tipo'] == 'T' && $registro['valor'] > 0 or $registro['tipo'] == 'SI') {
@@ -136,9 +135,9 @@ $queryWithoutIdConta = remove_url_param($url, 'id_conta');
                   echo "
             <tr>
              <td class='linha-resultado-dia-extrato' colspan='6'>
-                <span class='valor-resultado-dia-extrato'>Resultado diário: R$ <span data-showhide>{$resultadoDia}</span></span>
-                <span class='valor-resultado-dia-extrato'>Acumulado mês: R$ <span data-showhide>{$resultadoDiaAcumuladoMes}</span></span>
-                <span class='valor-resultado-dia-extrato'>Acumulado total: R$ <span data-showhide>{$resultadoDiaAcumuladoTotal}</span></span>
+                <span class='valor-resultado-dia-extrato'>Resultado diário: <span data-showhide>{$resultadoDia}</span></span>
+                <span class='valor-resultado-dia-extrato'>Acumulado mês: <span data-showhide>{$resultadoDiaAcumuladoMes}</span></span>
+                <span class='valor-resultado-dia-extrato'>Acumulado total: <span data-showhide>{$resultadoDiaAcumuladoTotal}</span></span>
               </td>
             </tr>
             ";
@@ -178,12 +177,12 @@ $queryWithoutIdConta = remove_url_param($url, 'id_conta');
 
               foreach ($contas as $conta) :
                 $exibir = parse_boolean($conta['exibir'], 'Sim', 'Não');
-                $saldoInicialFormatado = format_value($conta['saldo_inicial']);
+                $saldoInicialFormatado = $conta['saldo_inicial'];
 
                 echo "<tr>
                       <td class='td-conta'>{$conta['conta']}</td>
                       <td class='td-conta'>{$conta['tipo_conta']}</td>
-                      <td class='td-conta'>R$ <span data-showhide>{$saldoInicialFormatado}</span></td>
+                      <td class='td-conta'><span data-showhide>{$saldoInicialFormatado}</span></td>
                       <td class='td-conta'>{$exibir}</td>
                       <td class='coluna-acoes'><a class='edit-btn' href='?{$queryWithoutIdConta}&id_conta={$conta['id_con']}'></a>
                       </tr>
