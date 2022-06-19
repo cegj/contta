@@ -1,26 +1,26 @@
-export default class Value{
-    constructor(valueElement, setColor){
+export default class Value {
+    constructor(valueElement, setColor) {
         this.valueElement = valueElement;
         this.setColor = setColor;
     }
 
-    showHideMoney(){
+    showHideMoney() {
         // Move show-hide (showhide.js) into here
     }
 
-    localeCurrency(){
+    localeCurrency() {
         // Move localecurrency (budgetTable.js) into here
     }
 
-    setColor(){
+    setColor() {
         // Refactor setValueColor here
     }
 
-    setValueColor(customValueElement){
+    setValueColor(customValueElement) {
 
         const element = customValueElement ? document.querySelector(customValueElement) : this.valueElement;
 
-        if (element.innerText > 0){
+        if (element.innerText > 0) {
             element.dataset.valueColor = "positive";
         } else if (element.innerText < 0) {
             element.dataset.valueColor = "negative";
@@ -29,8 +29,8 @@ export default class Value{
         }
     }
 
-    initValue(){
-        if (this.setColor){
+    initValue() {
+        if (this.setColor) {
             this.setValueColor();
         }
     }
