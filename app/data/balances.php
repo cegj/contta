@@ -6,7 +6,7 @@ include($_SERVER["DOCUMENT_ROOT"] . '/app/function/statement/calculate_result.ph
 $account = filter_input(INPUT_GET, 'account', FILTER_SANITIZE_NUMBER_INT);
 
 // Specific category 
-if (isset($_GET['mainCat']) && $_GET['mainCat'] === true){
+if (isset($_GET['mainCat']) && $_GET['mainCat'] === 'true'){
     $mainCat = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
     $secCat = null;
 } else {
@@ -14,22 +14,54 @@ if (isset($_GET['mainCat']) && $_GET['mainCat'] === true){
     $mainCat = null;
 }
 
-//Get data
-$data = [];
-
-if (isset($_GET['month'])) {
-    $month = $_GET['month'];
-    $maxMonth = $_GET['month'];
+// Specific month
+if (isset($_GET['month'])){
+    if ($_GET['month'] === 'current') {
+        $month = $mes;
+        $maxMonth = $mes;   
+    } else {
+        $month = $_GET['month'];
+        $maxMonth = $_GET['month'];    
+    }
 } else {
     $month = 1;
     $maxMonth = 12;
 }
 
+// Specific year
+if (isset($_GET['year'])) {
+    $year = $_GET['month'];
+} else {
+    $year = $ano;
+}
+
+//Get data and send
+$data = [];
+
 for ($month; $month <= $maxMonth; $month++){
 
-    $data[$month]["incomes"] = calculate_result($bdConexao, $month, $ano, "SSM", $account, $secCat, $mainCat, null, true, "R");
+    $incomes = floatval(calculate_result($bdConexao, $month, $year, "SSM", $account, $secCat, $mainCat, null, true, "R"));
+    $expenses = floatval(calculate_result($bdConexao, $month, $year, "SSM", $account, $secCat, $mainCat, null, true, "D"));
 
-    $data[$month]["expenses"] = calculate_result($bdConexao, $month, $ano, "SSM", $account, $secCat, $mainCat, null, true, "D");
+    if ($mainCat){
+        $category = $mainCat;
+    } else {
+        $category = $secCat;
+    }
+
+    $balance = floatval(number_format($incomes + $expenses, 2, ".", ""));
+
+    $object = [
+        'month' => intval($month),
+        'year' => intval($year),
+        'account' => $account,
+        'category' => $category,
+        'incomes' => $incomes,
+        'expenses' => $expenses,
+        'balance' => $balance
+    ];
+
+    array_push($data, $object);
     }
 
 $response = json_encode($data, JSON_UNESCAPED_UNICODE);

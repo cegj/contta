@@ -1,6 +1,6 @@
 import ApexCharts from '/plugin/apexcharts-bundle/dist/apexcharts.esm.js';
 
-export default class Chart {
+export default class YearlyChart {
     constructor(targetSelector, accountSelectSelector, catSelectSelector, cleanBtnSelector) {
         this.target = document.querySelector(targetSelector);
         this.accountSelect = document.querySelector(accountSelectSelector);
@@ -38,11 +38,11 @@ export default class Chart {
             expenses: []
         }
 
-        for (let i = 1; i <= 12; i++) {
-            chartData.months.push(i);
-            chartData.incomes.push(data[i].incomes);
-            chartData.expenses.push(-data[i].expenses);
-        }
+        data.forEach((d) => {
+            chartData.months.push(d.month);
+            chartData.incomes.push(d.incomes);
+            chartData.expenses.push(-d.expenses);
+        })
 
         this.updateChart(chartData);
     }
@@ -57,11 +57,11 @@ export default class Chart {
             expenses: []
         }
 
-        for (let i = 1; i <= 12; i++) {
-            chartData.months.push(i);
-            chartData.incomes.push(data[i].incomes);
-            chartData.expenses.push(-data[i].expenses);
-        }
+        data.forEach((d) => {
+            chartData.months.push(d.month);
+            chartData.incomes.push(d.incomes);
+            chartData.expenses.push(-d.expenses);
+        })
 
         this.updateChart(chartData);
     }
@@ -75,11 +75,12 @@ export default class Chart {
             incomes: [],
             expenses: []
         }
-        for (let i = 1; i <= 12; i++) {
-            chartData.months.push(i);
-            chartData.incomes.push(data[i].incomes);
-            chartData.expenses.push(-data[i].expenses);
-        }
+
+        data.forEach((d) => {
+            chartData.months.push(d.month);
+            chartData.incomes.push(d.incomes);
+            chartData.expenses.push(-d.expenses);
+        })
 
         this.updateChart(chartData);
     }
@@ -117,38 +118,37 @@ export default class Chart {
     }
 
     async loadCategories() {
-        let data = await fetch("/app/data/get_data.php?d=categories");
-        data = await data.json();
+        let response = await fetch("/app/data/get_data.php?d=categories");
+        let categories = await response.json();
+        this.categories = categories;
 
-        for (let cat of data['categories']) {
+        categories.forEach((mainCat) => {
             const option = document.createElement('option');
-            option.value = cat.nome_cat + `&mainCat=true`;
-            option.innerText = '--- ' + cat.nome_cat;
+            option.value = mainCat.nome_cat + `&mainCat=true`;
+            option.innerText = '--- ' + mainCat.nome_cat;
             this.catSelect.appendChild(option);
 
-            for (let secCat of cat.sec) {
+            mainCat.secondaries.forEach((secCat) => {
                 const option = document.createElement('option');
                 option.classList.add('secCatSelect');
                 option.value = secCat.id_cat;
                 option.innerText = secCat.nome_cat;
                 this.catSelect.appendChild(option);
-            }
-        }
+            })
+        })
     }
 
     async loadAccounts() {
-        let data = await fetch("/app/data/get_data.php?d=accounts");
-        data = await data.json();
+        let response = await fetch("/app/data/get_data.php?d=accounts");
+        let accounts = await response.json();
+        this.accounts = accounts;
 
-        this.accounts = data['accounts'];
-
-        for (let account of data['accounts']) {
+        accounts.forEach((account) => {
             const option = document.createElement('option')
             option.value = account.id_con;
             option.innerText = account.conta;
             this.accountSelect.appendChild(option);
-        }
-
+        })
     }
 
     updateChart(chartData) {

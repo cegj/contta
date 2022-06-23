@@ -15,7 +15,7 @@ include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/translate_date_to_
 
   <div class="container duas-colunas sem-bg container-board">
 
-    <div class="box informacoes">
+    <div id="yearlyChartContainer" class="box informacoes">
       <h2 class="titulo-box grafico">Gráfico anual</h2>
       <form id="chart-form">
         <div>
@@ -34,10 +34,14 @@ include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/translate_date_to_
           <button id="cleanChartBtn">Limpar</button>
         </div>
       </form>
-      <div id="chart"></div>
+      <div id="yearlyChart"></div>
+    </div>
+    <div id="monthlyChartContainer" class="box informacoes">
+      <h2 class="titulo-box grafico">Gráfico mensal</h2>
+      <div id="monthlyChart"></div>
     </div>
 
-    <div class="box informacoes">
+    <div id="lastTransactionContainer" class="box informacoes">
       
       <?php $buscaUltimoRegistro = get_transactions($bdConexao, null, $mes, $ano, false, true);
 

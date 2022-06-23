@@ -113,3 +113,16 @@ footer {
 #chart-form button {
   padding: 3px 13px;
 }
+
+#monthlyChartContainer {
+  grid-column: 1;
+}
+
+#yearlyChartContainer {
+  grid-column: 1;
+}
+
+#lastTransactionContainer {
+  grid-column: 2;
+  grid-row: 1;
+}

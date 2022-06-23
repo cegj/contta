@@ -2,13 +2,13 @@
 
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/account/get_accounts.php');
 
-$data['accounts'] = [];
+$data = [];
 
 $accounts = get_accounts($bdConexao);
 
 foreach ($accounts as $account){
 
-    array_push($data['accounts'], $account);
+    array_push($data, $account);
 
 }
 

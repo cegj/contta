@@ -3,24 +3,36 @@
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/category/get_primary_categories.php');
 include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/category/get_secondary_categories.php');
 
-$data['categories'] = [];
+$data = [];
 
-$categoriasPrincipais = get_primary_categories($bdConexao);
+$primaryCategories = get_primary_categories($bdConexao);
 
-$i = 0;
-foreach ($categoriasPrincipais as $categoriaPrincipal){
+foreach ($primaryCategories as $primaryCategory){
 
-    array_push($data['categories'], $categoriaPrincipal);
+    $categoryArray = [
+        'id_cat' => intval($primaryCategory['id_cat']),
+        'nome_cat' => $primaryCategory['nome_cat'],
+        'eh_cat_principal' => intval($primaryCategory['eh_cat_principal']),
+        'cat_principal' => $primaryCategory['cat_principal'],
+        'secondaries' => []
+    ];
 
-    $categoriasSecundarias = get_secondary_categories($bdConexao, $categoriaPrincipal);
-    $data['categories'][$i]['sec'] = [];
+    $secondaryCategories = get_secondary_categories($bdConexao, $primaryCategory);
 
-    foreach ($categoriasSecundarias as $categoriaSecundaria){
+    foreach ($secondaryCategories as $secondaryCategory){
 
-        array_push($data['categories'][$i]['sec'], $categoriaSecundaria);
+        $secCatArray = [
+            'id_cat' => $secondaryCategory['id_cat'],
+            'nome_cat' => $secondaryCategory['nome_cat'],
+            'eh_cat_principal' => $secondaryCategory['eh_cat_principal'],
+            'cat_principal' => $secondaryCategory['cat_principal']
+        ];
+
+        array_push($categoryArray['secondaries'], $secCatArray);
     }
     
-    $i++;
+    array_push($data, $categoryArray);
+
 }
 
 $response = json_encode($data, JSON_UNESCAPED_UNICODE);
