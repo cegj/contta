@@ -114,7 +114,7 @@ footer {
   padding: 3px 13px;
 }
 
-#monthlyChartContainer {
+/* #monthlyChartContainer {
   grid-column: 1;
 }
 
@@ -125,4 +125,4 @@ footer {
 #lastTransactionContainer {
   grid-column: 2;
   grid-row: 1;
-}
+} */
