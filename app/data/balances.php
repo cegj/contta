@@ -4,7 +4,7 @@ include($_SERVER["DOCUMENT_ROOT"] . '/app/function/statement/calculate_result.ph
 
 $account = filter_input(INPUT_GET, 'account', FILTER_SANITIZE_NUMBER_INT);
 
-if ($_GET['mainCat']){
+if (isset($_GET['mainCat']) && $_GET['mainCat'] === true){
     $mainCat = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
     $secCat = null;
 } else {
