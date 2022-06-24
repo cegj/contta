@@ -14,10 +14,10 @@ export default class CategoriesChart {
         text: 'Carregando...'
       },
       responsive: [{
-        breakpoint: 480,
+        breakpoint: 640,
         options: {
           chart: {
-            width: 200
+            height: 400
           },
           legend: {
             position: 'bottom'

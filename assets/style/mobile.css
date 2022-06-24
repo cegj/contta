@@ -68,8 +68,15 @@
     align-items: center;
   }
 
+  #chartsContainer, #chartsContainer>div, #lastTransactionContainer{
+    width: -moz-available;          /* For Mozzila */
+    width: -webkit-fill-available;  /* For Chrome */
+    width: stretch;                 /* Unprefixed */
+    }
+
   #lastTransactionContainer {
     flex-direction: column;
+    gap: unset;
   }
 
   .container.duas-colunas.com-extrato {
