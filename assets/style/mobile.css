@@ -61,11 +61,15 @@
     font-size: 0.8rem;
   }
 
-  .container.duas-colunas {
+  .container.duas-colunas, #chartsContainer {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: unset;
     align-items: center;
+  }
+
+  #lastTransactionContainer {
+    flex-direction: column;
   }
 
   .container.duas-colunas.com-extrato {
