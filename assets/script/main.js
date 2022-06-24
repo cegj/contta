@@ -41,11 +41,11 @@ export default async function runMainScript() {
 
     //Set color of balance boxes according to the value
 
-    const monthBalance = new BalanceBox('#saldo-mes', '#valor-mes');
+    const monthBalance = new BalanceBox('#saldo-mes', '#valor-mes','ofmonth');
 
-    const acumulatedBalance = new BalanceBox('#saldo-acumulado', '#valor-acumulado');
+    const acumulatedBalance = new BalanceBox('#saldo-acumulado', '#valor-acumulado', 'ofall');
 
-    const generalBalance = new BalanceBox('#saldo-geral', '#valor-geral');
+    const generalBalance = new BalanceBox('#saldo-geral', '#valor-geral', 'general');
 
     //Set monthSelector as open-close box
 

@@ -156,3 +156,9 @@ footer {
   margin-bottom: 0.5em;
   color: #636363;
 }
+
+.loading {
+  display: inline;
+  width:30px;
+  height: 30px;
+}

@@ -31,7 +31,7 @@ if (isset($_GET['month'])){
 
 // Specific year
 if (isset($_GET['year'])) {
-    $year = $_GET['month'];
+    $year = $_GET['year'];
 } else {
     $year = $ano;
 }

@@ -57,7 +57,6 @@ export default class CategoriesChart {
 
             data.forEach((d) => {          
                 if (d.category !== 'Receitas' || d.category !== 'Categorias-padrão'){
-                  console.log(d)
                   chartData.category.push(d.category);
                   chartData.balance.push((d.ofmonth.balance === 0) ? 0 : -(d.ofmonth.balance));  
                 }
