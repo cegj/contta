@@ -38,9 +38,9 @@ if (isset($_GET['year'])) {
 
 // Specific day
 $days = [];
-if (isset($_GET['day']) && isset($_GET['month'])){
+if (isset($_GET['day'])){
     if ($_GET['day'] === 'all'){
-        $daysInMonth = get_days_in_month($_GET['month'], $year);
+        $daysInMonth = get_days_in_month($month, $year);
         for ($d = 1; $d <= $daysInMonth; $d++){
             array_push($days, $d);
         }

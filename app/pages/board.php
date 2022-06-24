@@ -36,9 +36,30 @@ include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/translate_date_to_
         </form>
         <div id="yearlyChart"></div>
       </div>
-      <div id="monthlyChartContainer" class="box informacoes">
+      <div id="categoriesChartContainer" class="box informacoes">
         <h2 class="titulo-box grafico">Categorias no mês</h2>
         <div id="categoriesChart"></div>
+      </div>
+      <div id="monthlyChartContainer" class="box informacoes">
+        <h2 class="titulo-box grafico">Histórico mensal</h2>
+        <form id="chart-form">
+          <div>
+            <label for="">Categorias:</label>
+            <select id="catSelectM">
+              <option value="false">Nenhuma</option>
+            </select>
+          </div>
+          <div>
+            <label for="">Contas:</label>
+            <select id="accountSelectM">
+              <option value="false">Nenhuma</option>
+            </select>
+          </div>
+          <div>
+            <button id="cleanChartBtnM">Limpar</button>
+          </div>
+        </form>
+        <div id="monthlyChart"></div>
       </div>
     </div>
 

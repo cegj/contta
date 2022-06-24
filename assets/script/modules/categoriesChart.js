@@ -60,7 +60,6 @@ export default class CategoriesChart {
                   return
                 } else {
                   chartData.category.push(d.category);
-                  console.log(d.category, ' - ', -(d.balance))
                   chartData.balance.push((d.balance === 0) ? 0 : -(d.balance));  
                 }
             })
