@@ -55,9 +55,14 @@ export default class CategoriesChart {
             let response = await fetch(`/app/data/get_data.php?d=balances&category=${cat.nome_cat}&mainCat=true&month=current`)
             const data = await response.json();
 
-            data.forEach((d) => {              
-                chartData.category.push(d.category);
-                chartData.balance.push((d.balance === 0) ? 0 : -(d.balance));
+            data.forEach((d) => {          
+                if (d.category === 'Receitas' || d.category === 'Categorias-padrão'){
+                  return
+                } else {
+                  chartData.category.push(d.category);
+                  console.log(d.category, ' - ', -(d.balance))
+                  chartData.balance.push((d.balance === 0) ? 0 : -(d.balance));  
+                }
             })
         })
 

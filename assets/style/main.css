@@ -123,12 +123,3 @@ footer {
 #yearlyChartContainer {
   grid-column: 1 / -1;
 }
-
-/* #monthlyChartContainer {
-  grid-column: 1;
-}
-
-
-#lastTransactionContainer {
-  grid-column: 2;
-} */

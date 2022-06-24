@@ -1,6 +1,7 @@
 <?php
 
 include($_SERVER["DOCUMENT_ROOT"] . '/app/function/statement/calculate_result.php');
+include($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/get_days_in_month.php');
 
 // Specific account
 $account = filter_input(INPUT_GET, 'account', FILTER_SANITIZE_NUMBER_INT);
@@ -35,13 +36,25 @@ if (isset($_GET['year'])) {
     $year = $ano;
 }
 
+// Specific day
+$days = [];
+if (isset($_GET['day']) && isset($_GET['month'])){
+    if ($_GET['day'] === 'all'){
+        $daysInMonth = get_days_in_month($_GET['month'], $year);
+        for ($d = 1; $d <= $daysInMonth; $d++){
+            array_push($days, $d);
+        }
+    } else {
+        $days = [$_GET['day']];
+    }
+}
+
 //Get data and send
 $data = [];
 
 for ($month; $month <= $maxMonth; $month++){
 
-    $incomes = floatval(calculate_result($bdConexao, $month, $year, "SSM", $account, $secCat, $mainCat, null, true, "R"));
-    $expenses = floatval(calculate_result($bdConexao, $month, $year, "SSM", $account, $secCat, $mainCat, null, true, "D"));
+    $object = [];
 
     if ($mainCat){
         $category = $mainCat;
@@ -49,20 +62,65 @@ for ($month; $month <= $maxMonth; $month++){
         $category = $secCat;
     }
 
-    $balance = floatval(number_format($incomes + $expenses, 2, ".", ""));
+    if (sizeof($days) !== 0){
 
-    $object = [
-        'month' => intval($month),
-        'year' => intval($year),
-        'account' => $account,
-        'category' => $category,
-        'incomes' => $incomes,
-        'expenses' => $expenses,
-        'balance' => $balance
-    ];
+        foreach($days as $day){
+            $ofDayIncomes = floatval(calculate_result($bdConexao, $month, $year, "SSM", $account, $secCat, $mainCat, $day, false, "R"));
+            $ofDayExpenses = floatval(calculate_result($bdConexao, $month, $year, "SSM", $account, $secCat, $mainCat, $day, false, "D"));        
+            $ofDayBalance = floatval(calculate_result($bdConexao, $month, $year, "SSM", $account, $secCat, $mainCat, $day, false));
+            $ofMonthIncomes = floatval(calculate_result($bdConexao, $month, $year, "SAM", $account, $secCat, $mainCat, $day, true, "R"));
+            $ofMonthExpenses = floatval(calculate_result($bdConexao, $month, $year, "SAM", $account, $secCat, $mainCat, $day, true, "D"));        
+            $ofMonthBalance = floatval(calculate_result($bdConexao, $month, $year, "SAM", $account, $secCat, $mainCat, $day, true)); 
+            $ofAllIncomes = floatval(calculate_result($bdConexao, $month, $year, "SAM", $account, $secCat, $mainCat, $day, false, "R"));
+            $ofAllExpenses = floatval(calculate_result($bdConexao, $month, $year, "SAM", $account, $secCat, $mainCat, $day, false, "D"));        
+            $ofAllBalance = floatval(calculate_result($bdConexao, $month, $year, "SAM", $account, $secCat, $mainCat, $day, false));  
 
-    array_push($data, $object);
+
+            $object = [
+                'day' => intval($day),
+                'month' => intval($month),
+                'year' => intval($year),
+                'account' => $account,
+                'category' => $category,
+                'ofday' => [
+                    'incomes' => $ofDayIncomes,
+                    'expenses' => $ofDayExpenses,
+                    'balance' => $ofDayBalance    
+                ],
+                'ofmonth' => [
+                    'incomes' => $ofMonthIncomes,
+                    'expenses' => $ofMonthExpenses,
+                    'balance' => $ofMonthBalance    
+                ],
+                'ofall' => [
+                    'incomes' => $ofAllIncomes,
+                    'expenses' => $ofAllExpenses,
+                    'balance' => $ofAllBalance    
+                ]
+            ];
+        
+            array_push($data, $object);
+        } 
+    } else {
+        $incomes = floatval(calculate_result($bdConexao, $month, $year, "SSM", $account, $secCat, $mainCat, null, true, "R"));
+        $expenses = floatval(calculate_result($bdConexao, $month, $year, "SSM", $account, $secCat, $mainCat, null, true, "D"));    
+        $balance = floatval(calculate_result($bdConexao, $month, $year, "SSM", $account, $secCat, $mainCat, null, true));    
+    
+        $object = [
+            'month' => intval($month),
+            'year' => intval($year),
+            'account' => $account,
+            'category' => $category,
+            'incomes' => $incomes,
+            'expenses' => $expenses,
+            'balance' => $balance
+        ];
+    
+        array_push($data, $object);
+    
     }
+
+}
 
 $response = json_encode($data, JSON_UNESCAPED_UNICODE);
 
