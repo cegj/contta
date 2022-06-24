@@ -56,11 +56,10 @@ export default class CategoriesChart {
             const data = await response.json();
 
             data.forEach((d) => {          
-                if (d.category === 'Receitas' || d.category === 'Categorias-padrão'){
-                  return
-                } else {
+                if (d.category !== 'Receitas' || d.category !== 'Categorias-padrão'){
+                  console.log(d)
                   chartData.category.push(d.category);
-                  chartData.balance.push((d.balance === 0) ? 0 : -(d.balance));  
+                  chartData.balance.push((d.ofmonth.balance === 0) ? 0 : -(d.ofmonth.balance));  
                 }
             })
         })
