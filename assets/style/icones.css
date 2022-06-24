@@ -38,13 +38,13 @@
 }
 
 
-/* [data-loading="true"]::after {
+[data-loading="true"]::before {
   content: "";
   background-image: url(/assets/img/loading.svg);
   background-repeat: no-repeat;
   background-size: contain;
   display: block;
-  width: 100%;
-  height: 100%;
+  width: 70%;
+  height: 70%;
   position: relative;
-} */
+}

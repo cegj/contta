@@ -6,7 +6,10 @@
 }
 
 .caixa-saldo {
+  display: block;
+  background: linear-gradient(#a8a8a8, #818181);
   width: 250px;
+  height: 60px;
   padding: 12px 20px;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.15);
   border-radius: 4px;

@@ -21,11 +21,21 @@ export default class BalanceBox {
         }
     }
 
-    setValue(){
+    fetchValue(){
         fetch(`/app/data/get_data.php?d=monthYear`)
         .then(response => response.json())
         .then((monthYear) => {
-            fetch(`/app/data/get_data.php?d=balances&month=${+monthYear.month}&year=${+monthYear.year}`)
+            let fetchQuery = `d=balances&month=${+monthYear.month}&year=${+monthYear.year}`;
+
+            if (this.params.get('categoria')){
+                fetchQuery += `&category=${this.params.get('categoria')}`
+            }
+
+            if (this.params.get('conta')){
+                fetchQuery += `&account=${this.params.get('conta')}`
+            }
+
+            fetch(`/app/data/get_data.php?${fetchQuery}`)
             .then((response) => response.json())
             .then((data) => {
                 this.value.innerText = data[0][this.type].balance;
@@ -36,6 +46,6 @@ export default class BalanceBox {
        }
 
     init() {
-        this.setValue();
+        this.fetchValue();
     }
 }
