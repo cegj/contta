@@ -40,8 +40,8 @@ export default class YearlyChart {
 
         data.forEach((d) => {
             chartData.months.push(d.month);
-            chartData.incomes.push(d.incomes);
-            chartData.expenses.push(-d.expenses);
+            chartData.incomes.push(d.ofmonth.incomes);
+            chartData.expenses.push(-d.ofmonth.expenses);
         })
 
         this.updateChart(chartData);
@@ -59,8 +59,8 @@ export default class YearlyChart {
 
         data.forEach((d) => {
             chartData.months.push(d.month);
-            chartData.incomes.push(d.incomes);
-            chartData.expenses.push(-d.expenses);
+            chartData.incomes.push(d.ofmonth.incomes);
+            chartData.expenses.push(-d.ofmonth.expenses);
         })
 
         this.updateChart(chartData);
@@ -78,8 +78,8 @@ export default class YearlyChart {
 
         data.forEach((d) => {
             chartData.months.push(d.month);
-            chartData.incomes.push(d.incomes);
-            chartData.expenses.push(-d.expenses);
+            chartData.incomes.push(d.ofmonth.incomes);
+            chartData.expenses.push(-d.ofmonth.expenses);
         })
 
         this.updateChart(chartData);

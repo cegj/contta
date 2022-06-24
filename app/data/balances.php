@@ -102,19 +102,45 @@ for ($month; $month <= $maxMonth; $month++){
             array_push($data, $object);
         } 
     } else {
-        $incomes = floatval(calculate_result($bdConexao, $month, $year, "SSM", $account, $secCat, $mainCat, null, true, "R"));
-        $expenses = floatval(calculate_result($bdConexao, $month, $year, "SSM", $account, $secCat, $mainCat, null, true, "D"));    
-        $balance = floatval(calculate_result($bdConexao, $month, $year, "SSM", $account, $secCat, $mainCat, null, true));    
+
+        $ofMonthIncomes = floatval(calculate_result($bdConexao, $month, $year, "SAM", $account, $secCat, $mainCat, null, true, "R"));
+        $ofMonthExpenses = floatval(calculate_result($bdConexao, $month, $year, "SAM", $account, $secCat, $mainCat, null, true, "D"));        
+        $ofMonthBalance = floatval(calculate_result($bdConexao, $month, $year, "SAM", $account, $secCat, $mainCat, null, true)); 
+
+        $ofAllIncomes = floatval(calculate_result($bdConexao, $month, $year, "SAM", $account, $secCat, $mainCat, null, false, "R"));
+        $ofAllExpenses = floatval(calculate_result($bdConexao, $month, $year, "SAM", $account, $secCat, $mainCat, null, false, "D"));        
+        $ofAllBalance = floatval(calculate_result($bdConexao, $month, $year, "SAM", $account, $secCat, $mainCat, null, false));
+
+        $generalIncomes = floatval(calculate_result($bdConexao, $month, $year, "SAG", $account, $secCat, $mainCat, null, false, "R"));
+        $generalExpenses = floatval(calculate_result($bdConexao, $month, $year, "SAG", $account, $secCat, $mainCat, null, false, "R"));
+        $generalBalance = floatval(calculate_result($bdConexao, $month, $year, "SAG", $account, $secCat, $mainCat, null, false));
+        
+
+        // $incomes = floatval(calculate_result($bdConexao, $month, $year, "SSM", $account, $secCat, $mainCat, null, true, "R"));
+        // $expenses = floatval(calculate_result($bdConexao, $month, $year, "SSM", $account, $secCat, $mainCat, null, true, "D"));    
+        // $balance = floatval(calculate_result($bdConexao, $month, $year, "SSM", $account, $secCat, $mainCat, null, true));    
     
         $object = [
             'month' => intval($month),
             'year' => intval($year),
             'account' => $account,
             'category' => $category,
-            'incomes' => $incomes,
-            'expenses' => $expenses,
-            'balance' => $balance
-        ];
+            'ofmonth' => [
+                'incomes' => $ofMonthIncomes,
+                'expenses' => $ofMonthExpenses,
+                'balance' => $ofMonthBalance    
+            ],
+            'ofall' => [
+                'incomes' => $ofAllIncomes,
+                'expenses' => $ofAllExpenses,
+                'balance' => $ofAllBalance    
+            ],
+            'general' => [
+                'incomes' => $generalIncomes,
+                'expenses' => $generalExpenses,
+                'balance' => $generalBalance    
+            ]
+            ];
     
         array_push($data, $object);
     

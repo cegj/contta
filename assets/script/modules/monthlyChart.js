@@ -65,7 +65,6 @@ export default class MonthlyChart {
     async mainChart() {
         let data = await fetch(`/app/data/get_data.php?d=balances&day=all&month=current`);
         data = await data.json();
-        console.log(data)
 
         const chartData = {
             days: [],
