@@ -14,31 +14,32 @@ include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/translate_date_to_
   <?php include($_SERVER["DOCUMENT_ROOT"] . '/app/pages/modules/context-options.php'); ?>
 
   <div class="container duas-colunas sem-bg container-board">
-
-    <div id="yearlyChartContainer" class="box informacoes">
-      <h2 class="titulo-box grafico">Gráfico anual</h2>
-      <form id="chart-form">
-        <div>
-          <label for="">Categorias:</label>
-          <select id="catSelect">
-            <option value="false">Nenhuma</option>
-          </select>
-        </div>
-        <div>
-          <label for="">Contas:</label>
-          <select id="accountSelect">
-            <option value="false">Nenhuma</option>
-          </select>
-        </div>
-        <div>
-          <button id="cleanChartBtn">Limpar</button>
-        </div>
-      </form>
-      <div id="yearlyChart"></div>
-    </div>
-    <div id="monthlyChartContainer" class="box informacoes">
-      <h2 class="titulo-box grafico">Gráfico mensal</h2>
-      <div id="monthlyChart"></div>
+    <div id="chartsContainer">
+      <div id="yearlyChartContainer" class="box informacoes">
+        <h2 class="titulo-box grafico">Histórico anual</h2>
+        <form id="chart-form">
+          <div>
+            <label for="">Categorias:</label>
+            <select id="catSelect">
+              <option value="false">Nenhuma</option>
+            </select>
+          </div>
+          <div>
+            <label for="">Contas:</label>
+            <select id="accountSelect">
+              <option value="false">Nenhuma</option>
+            </select>
+          </div>
+          <div>
+            <button id="cleanChartBtn">Limpar</button>
+          </div>
+        </form>
+        <div id="yearlyChart"></div>
+      </div>
+      <div id="monthlyChartContainer" class="box informacoes">
+        <h2 class="titulo-box grafico">Categorias no mês</h2>
+        <div id="categoriesChart"></div>
+      </div>
     </div>
 
     <div id="lastTransactionContainer" class="box informacoes">

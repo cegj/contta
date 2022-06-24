@@ -1,6 +1,6 @@
 import Money from "./modules/money.js";
 import YearlyChart from "./modules/yearlyChart.js";
-import MonthlyChart from "./modules/monthlyChart.js";
+import CategoriesChart from "./modules/categoriesChart.js";
 
 export default function runBoardScript() {
     const lastTransactionValue = new Money(document.querySelector('#lastTransactionValue'), { setColor: true, localeCurrency: true })
@@ -8,6 +8,6 @@ export default function runBoardScript() {
     const yearlyChart = new YearlyChart('#yearlyChart', '#accountSelect', '#catSelect', '#cleanChartBtn');
     yearlyChart.init();
 
-    const monthlyChart = new MonthlyChart('#monthlyChart', '#accountSelect', '#catSelect', '#cleanChartBtn');
-    monthlyChart.init();
+    const categoriesChart = new CategoriesChart('#categoriesChart');
+    categoriesChart.init();
 }

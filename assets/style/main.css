@@ -114,15 +114,21 @@ footer {
   padding: 3px 13px;
 }
 
+#chartsContainer {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#yearlyChartContainer {
+  grid-column: 1 / -1;
+}
+
 /* #monthlyChartContainer {
   grid-column: 1;
 }
 
-#yearlyChartContainer {
-  grid-column: 1;
-}
 
 #lastTransactionContainer {
   grid-column: 2;
-  grid-row: 1;
 } */
