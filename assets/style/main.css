@@ -92,6 +92,10 @@ footer {
   color: #585858 !important;
 }
 
+.container-board {
+  gap: unset !important;
+}
+
 #chart-form {
   padding: 5px;
   color: #535353;
@@ -120,6 +124,35 @@ footer {
   grid-template-columns: 1fr 1fr;
 }
 
+#chartsContainer>div {
+  height: fit-content;
+}
+
 #yearlyChartContainer {
   grid-column: 1 / -1;
+}
+
+#lastTransactionContainer {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+#lastTransactionContainer h2 {
+  margin: 0;
+  padding: 0;
+  min-width: fit-content;
+}
+
+#lastTransactionContainer dl {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+#lastTransactionContainer dt {
+  margin-bottom: 0.5em;
+  color: #636363;
 }

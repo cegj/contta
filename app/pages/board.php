@@ -75,23 +75,23 @@ include_once($_SERVER["DOCUMENT_ROOT"] . '/app/function/utils/translate_date_to_
       ?>
         <h2 class="titulo-box ultimo">Último registro</h2>
         <dl>
-          <dt>📝 Descrição:</dt>
+          <dt>Descrição:</dt>
           <dd><?php echo $ultimoregistro['descricao'] ?></dd>
         </dl>
         <dl>
-          <dt>📅 Data:</dt>
+          <dt>Data:</dt>
           <dd><?php echo translate_date_to_br($ultimoregistro['data']) ?></dd>
         </dl>
         <dl>
-          <dt>💵 Valor:</dt>
+          <dt>Valor:</dt>
           <dd><span id="lastTransactionValue" data-showhide><?php echo $ultimoregistro['valor'] ?></span></dd>
         </dl>
         <dl>
-          <dt>🏷️ Categoria:</dt>
+          <dt>Categoria:</dt>
           <dd><?php echo $ultimoregistro['nome_cat'] ?></dd>
         </dl>
         <dl>
-          <dt>🏦 Conta:</dt>
+          <dt>Conta:</dt>
           <dd><?php echo $ultimoregistro['conta'] ?></dd>
         </dl>
       <?php else : ?>
