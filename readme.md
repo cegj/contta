@@ -2,12 +2,23 @@
 
 # Contta - Gestão de finanças pessoais
 
-**_Beta_** - Created for leaning purposes
+Created for learning purposes.
 
 <p align="center">
-    <img src="https://i.imgur.com/k6izPqU.png" alt="Contta" height="70"/>
-    <img src="https://i.imgur.com/QYx8Jsd.gif" alt="Contta demo"/>
+    <img style="background-color: white; padding: 10px" src="https://i.imgur.com/k6izPqU.png" alt="Contta" height="50"/>
 </p>
+
+<div align="center">
+    <img src="https://i.imgur.com/IR0TQpK.png" title="Board / Painel" alt="" width="70%">
+    <img src="https://i.imgur.com/CBUWca3.png" title="Transaction form / Cadastro de transação" alt="" width="70%">
+    <img src="https://i.imgur.com/PIYoKP9.png" title="Statement / Extrato" alt="" width="70%">
+    <img src="https://i.imgur.com/x68XJWH.png" title="Budget / Orçamento" alt="" width="70%">
+    <img src="https://i.imgur.com/MVfdqy6.png" title="Categories / Categorias" alt="" width="70%">
+    <img src="https://i.imgur.com/qDEf11l.png" title="Accounts / Contas" alt="" width="70%">
+    <img src="https://i.imgur.com/jGRnwDs.png" title="Account config / Configuração de contas" alt="" width="70%">
+    <img src="https://i.imgur.com/j2RB64j.png" title="Login / Entrar" alt="" width="70%">
+
+</div>
 
 ---
 
@@ -99,6 +110,8 @@ Contta is a project of a beginning developer. It means that some bugs can happen
 ---
 
 [ BRAZILIAN PORTUGUESE ]
+
+Criado para fins de aprendizado.
 
 ## O que é?
 
