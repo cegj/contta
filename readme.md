@@ -1,9 +1,9 @@
-# Contta - Personal finance management / Gestão de finanças pessoais 
-Created for learning purposes.
-
 <p align="center">
     <img style="background-color: white; padding: 10px; border-radius: 4px;" src="https://i.imgur.com/k6izPqU.png" alt="Contta" height="50"/>
 </p>
+
+# Contta - Personal finance management / Gestão de finanças pessoais 
+Created for learning purposes / Criado para fins de aprendizado.
 
 <div align="center">
     <img src="https://i.imgur.com/IR0TQpK.png" title="Board / Painel" alt="" width="70%">
@@ -115,8 +115,6 @@ Contta is a project of a beginning developer. It means that some bugs can happen
 ---
 
 [ BRAZILIAN PORTUGUESE ]
-
-Criado para fins de aprendizado.
 
 ## O que é?
 
