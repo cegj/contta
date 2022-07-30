@@ -1,22 +1,27 @@
-# Contta - Personal finance management
-
-# Contta - Gestão de finanças pessoais
-
+# Contta - Personal finance management / Gestão de finanças pessoais 
 Created for learning purposes.
 
 <p align="center">
-    <img style="background-color: white; padding: 10px" src="https://i.imgur.com/k6izPqU.png" alt="Contta" height="50"/>
+    <img style="background-color: white; padding: 10px; border-radius: 4px;" src="https://i.imgur.com/k6izPqU.png" alt="Contta" height="50"/>
 </p>
 
 <div align="center">
     <img src="https://i.imgur.com/IR0TQpK.png" title="Board / Painel" alt="" width="70%">
+    <p style="font-size: 0.9rem">Board / Painel</p>
     <img src="https://i.imgur.com/CBUWca3.png" title="Transaction form / Cadastro de transação" alt="" width="70%">
+    <p style="font-size: 0.9rem">Transaction form / Cadastro de transação</p>
     <img src="https://i.imgur.com/PIYoKP9.png" title="Statement / Extrato" alt="" width="70%">
+    <p style="font-size: 0.9rem">Statement / Extrato</p>
     <img src="https://i.imgur.com/x68XJWH.png" title="Budget / Orçamento" alt="" width="70%">
+    <p style="font-size: 0.9rem">Budget table / Tabela de orçamento</p>
     <img src="https://i.imgur.com/MVfdqy6.png" title="Categories / Categorias" alt="" width="70%">
+    <p style="font-size: 0.9rem">Categories / Categorias</p>
     <img src="https://i.imgur.com/qDEf11l.png" title="Accounts / Contas" alt="" width="70%">
+    <p style="font-size: 0.9rem">Accounts / Contas</p>
     <img src="https://i.imgur.com/jGRnwDs.png" title="Account config / Configuração de contas" alt="" width="70%">
+    <p style="font-size: 0.9rem">Accounts config / Configuração de contas</p>
     <img src="https://i.imgur.com/j2RB64j.png" title="Login / Entrar" alt="" width="70%">
+    <p style="font-size: 0.9rem">Login</p>
 
 </div>
 
