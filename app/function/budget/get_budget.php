@@ -1,9 +1,9 @@
 <?php
 
-function get_budget($bdConexao, $categoriaPrincipal)
+function get_budget($bdConexao, $categoriaPrincipal, $ano)
 {
     $bdBuscar = "
-    SELECT id_cat, nome_cat, eh_cat_principal, 2022_1, 2022_2, 2022_3, 2022_4, 2022_5, 2022_6, 2022_7, 2022_8, 2022_9, 2022_10, 2022_11, 2022_12 FROM orcamento
+    SELECT id_cat, nome_cat, eh_cat_principal, {$ano}_1, {$ano}_2, {$ano}_3, {$ano}_4, {$ano}_5, {$ano}_6, {$ano}_7, {$ano}_8, {$ano}_9, {$ano}_10, {$ano}_11, {$ano}_12 FROM orcamento
     INNER JOIN categorias ON orcamento.id_categoria = categorias.id_cat
     WHERE categorias.cat_principal = '{$categoriaPrincipal}' OR categorias.nome_cat = '{$categoriaPrincipal}'
     ORDER BY eh_cat_principal DESC, nome_cat ASC;

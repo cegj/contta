@@ -30,7 +30,7 @@ $budgetLines = "";
 
 foreach ($primaryCategories as $primaryCategory){
 
-  $budgetData = get_budget($bdConexao, $primaryCategory['nome_cat']);
+  $budgetData = get_budget($bdConexao, $primaryCategory['nome_cat'], $ano);
 
   foreach ($budgetData as $data){
 
